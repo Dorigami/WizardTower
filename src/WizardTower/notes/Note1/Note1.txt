@@ -1,0 +1,35 @@
+WIZARD TOWER PROTOTYPING
+
+THINGS TO BUILD & THEIR PRIORITY
+
+1) game object that initializes display and grid space
+2) copy unit selection code from previous projects (buildings cannot be selected, for simplicity's sake)
+3) create a pEntity which will have child parents pUnit, pBuilding, & pResource  // to be used by the player's units as well as enemy units
+4) add the wizard unit that allows for selection (give parent a bool indicating selectability).  Do Not Animate!
+5) create a building parent
+6) add the nexus & the hut building in order to spawn the wizards.  Do Not Animate!
+7) implement A* pathing from that tutorial
+8) enforce minimum distance between wizards
+9) create the "imp" enemy that moves toward the nexus, but attacks wizards that get too close.  Do Not Animate!
+10) add trees that grow over time and can be exploited for mana by the wizards
+11) add attacks & damage dealing for the wizards and imps
+12) add placeholders for the other buildings available to the player
+13) add button/hotkey to command selected wizards to conjure specified buildings
+14) add placeholders for the enemies available to spawn
+15) add the spawn beacon object that will define enemy spawn locations for each map
+16) make sound effects for commanding, building, attacking (i will also need a generic "puff" sound)
+17) make a senario editor to set enemy spawns and spawn locations. as well as starting buildings and mana for the player
+18) tilemap setup to set terrain penalties (maybe)
+
+pEntity = {
+	immortal = false;
+	selectable = false;
+	path = -1;
+	stats = {
+		health : 1,
+		mspeed : 1, // move speed 
+		aspeed : 1, // attack speed
+		power : 1
+	}
+	hp = stats.health;
+}
