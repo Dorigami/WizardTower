@@ -1,6 +1,14 @@
 {
   "resources": [
+    {"id":{"name":"oFollower2","path":"objects/oFollower2/oFollower2.yy",},"order":2,},
+    {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},"order":6,},
     {"id":{"name":"o","path":"objects/o/o.yy",},"order":0,},
+    {"id":{"name":"oGlobal","path":"objects/oGlobal/oGlobal.yy",},"order":1,},
+    {"id":{"name":"oController2","path":"objects/oController2/oController2.yy",},"order":3,},
+    {"id":{"name":"sFollower2","path":"sprites/sFollower2/sFollower2.yy",},"order":0,},
+    {"id":{"name":"oGame","path":"objects/oGame/oGame.yy",},"order":5,},
+    {"id":{"name":"Note1","path":"notes/Note1/Note1.yy",},"order":0,},
+    {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},"order":4,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],
   "Options": [
@@ -44,7 +52,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2.3.5.589",
+    "IDEVersion": "2.3.6.595",
   },
   "resourceVersion": "1.4",
   "name": "WizardTower",
