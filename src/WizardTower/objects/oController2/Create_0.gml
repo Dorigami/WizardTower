@@ -12,8 +12,6 @@ global.controller = id;
 pathHeap = new NodeHeap();
 pathQueue = ds_queue_create();
 
-cellToggleList = ds_list_create();
-
 
 for(var i=0;i<GRID_WIDTH;i++)
 {

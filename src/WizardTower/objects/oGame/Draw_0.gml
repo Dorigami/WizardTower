@@ -4,25 +4,45 @@ draw_rectangle(0,0,room_width,room_height,true)
 
 if(room != rStartMenu)
 {
-	// draw the grid cells
-	var _width = ds_grid_width(global.gridSpace);
-	var _height = ds_grid_height(global.gridSpace);
-	for(var i=0;i<_width;i++)
+	for(var i=0;i<GRID_WIDTH;i++)
 	{
-	for(var j=0;j<_height;j++)
+	for(var j=0;j<GRID_HEIGHT;j++)
 	{
-		var _node = global.gridSpace[# i, j];
-		if(_node.enabled)
+	    var _node = global.gridSpace[# i, j];
+	    if(!_node.walkable) 
 		{
-			// show node data
-			draw_set_font(fText);
-			draw_set_valign(fa_middle);
-			draw_set_halign(fa_center);
-			draw_text(_node.center[1], _node.center[2], string(_node.timer));
+			draw_set_alpha(0.7);
+			draw_set_color(c_yellow);
+		} else {
+			draw_set_alpha(0.1);
+			draw_set_color(c_white);
 		}
+	
+	    draw_rectangle(i*CELL_SIZE, j*CELL_SIZE, i*CELL_SIZE + CELL_SIZE-1, j*CELL_SIZE + CELL_SIZE-1, false);
+
+	    //draw_set_font(fText);
+	    //draw_set_alpha(1);
+	    //// east density
+	    //draw_set_halign(fa_right);
+	    //draw_set_valign(fa_middle);
+	    //draw_text(_node.center[1]+0.45*CELL_SIZE, _node.center[2], string(_node.density[EAST]));
+	    //// north density
+	    //draw_set_halign(fa_center);
+	    //draw_set_valign(fa_top);
+	    //draw_text(_node.center[1], _node.center[2]-0.45*CELL_SIZE, string(_node.density[NORTH]));
+	    //// west density
+	    //draw_set_halign(fa_left);
+	    //draw_set_valign(fa_middle);
+	    //draw_text(_node.center[1]-0.45*CELL_SIZE, _node.center[2], string(_node.density[WEST]));
+	    //// south density
+	    //draw_set_halign(fa_center);
+	    //draw_set_valign(fa_bottom);
+	    //draw_text(_node.center[1], _node.center[2]+0.45*CELL_SIZE, string(_node.density[SOUTH]));
+		//// cell
+		//draw_set_halign(fa_center);
+	    //draw_set_valign(fa_middle);
+	    //draw_text(_node.center[1], _node.center[2], "["+string(_node.cell[1])+" "+string(_node.cell[2])+"]");
 	}
 	}
-	draw_set_alpha(1);
-	draw_set_color(c_white);
 }
 

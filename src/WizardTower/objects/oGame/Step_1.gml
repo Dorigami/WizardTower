@@ -1,87 +1,42 @@
-/// @description active timers
+/// @description reset gridSpace values
 
+var i,j;
+var _node = undefined;
+var _valid = false;
+var _dist = 0;
+var _dir = 0;
+var _x = 0;
+var _y = 0;
+var _xCell = 0;
+var _yCell = 0;
+var _max = 0;
+var _densityWeight = 0.1;
 
-// loop through list to increment timers (MOVE-BASED TIME)
-if(global.playerMoveCounter != moveCountCheck)
+for(i=0;i<GRID_WIDTH;i++)
 {
-	var _indOffset = 0;
-	var _size = ds_list_size(nodeActiveTimers);
-	var _diff = global.playerMoveCounter - moveCountCheck;
-	moveCountCheck = global.playerMoveCounter;
-	
-	if(_size > 0) { for(var i=0; i<_size; i++)
-	{
-	    var _node = nodeActiveTimers[| i-_indOffset];
-		_node.timer = max(_node.timer - _diff, 0);
-	    var _trigger = (_node.timer == 0);
-	    if(_trigger)
-	    {
-	        // set timer to -1 
-	        _node.timer = -1;
-	        // perform an action
-	        switch(_node.state)
-	        {
-	            case NODE.SOLID:
-	                _node.state = NODE.BROKEN;
-	                _node.timer = _node.refreshTime;
-	                break;
-	            case NODE.SINGLESOLID:
-	                _node.state = NODE.PBROKEN;
-	                break;
-	            case NODE.BROKEN:
-	                _node.state = NODE.SOLID;
-	                break;
-	            default:
-	                // do nothing
-	                break;
-	        }
-			_node.SetTile();
-	        // then remove from the active timers 
-	        if(_node.timer == -1)
-	        {
-	            ds_list_delete(nodeActiveTimers, i-_indOffset);
-	            _indOffset++;
-	        }
-	    }
-	}}
+for(j=0;j<GRID_HEIGHT;j++)
+{
+	_node = global.gridSpace[# i,j];
+	_node.discomfort = 0; // g = discomfort
+    _node.density = [0,0,0,0]; // rho = density
+}
 }
 
-/*
+//with(oFollower2)
+//{
+//	_xCell = (x div CELL_SIZE);
+//	_yCell = (y div CELL_SIZE);
+//	for(var xx=-1;xx<=1;xx++)
+//	{
+//	for(var yy=-1;yy<=1;yy++)
+//	{
+//		if(_xCell+xx < 0) || (_xCell+xx >= GRID_WIDTH) || (_yCell+yy < 0) || (_yCell+yy >= GRID_HEIGHT) continue;
+//		_node = global.gridSpace[# _xCell+xx, _yCell+yy];
+//		_node.density[EAST]  = min(global.densityMax, _node.density[EAST] + _densityWeight*point_distance(x,y,_node.center[1]+0.5*CELL_SIZE,_node.center[2]));
+//		_node.density[NORTH] = min(global.densityMax, _node.density[NORTH] + _densityWeight*point_distance(x,y,_node.center[1],_node.center[2]-0.5*CELL_SIZE));
+//		_node.density[WEST]  = min(global.densityMax, _node.density[WEST] + _densityWeight*point_distance(x,y,_node.center[1]-0.5*CELL_SIZE,_node.center[2]));
+//		_node.density[SOUTH] = min(global.densityMax, _node.density[SOUTH] + _densityWeight*point_distance(x,y,_node.center[1],_node.center[2]+0.5*CELL_SIZE));
+//	}
+//	}
+//}
 
-// loop through list to increment timers (REAL TIME)
-var _size = ds_list_size(nodeActiveTimers);
-var _indOffset = 0;
-if(_size > 0) { for(var i=0; i<_size; i++)
-{
-    var _node = nodeActiveTimers[| i-_indOffset];
-    var _trigger = (--_node.timer == 0);
-    if(_trigger)
-    {
-        // set timer to -1 
-        _node.timer = -1;
-        // perform an action
-        switch(_node.state)
-        {
-            case NODE.SOLID:
-                _node.state = NODE.BROKEN;
-                _node.timer = _node.refreshTime;
-                break;
-            case NODE.SINGLESOLID:
-                _node.state = NODE.PBROKEN;
-                break;
-            case NODE.BROKEN:
-                _node.state = NODE.SOLID;
-                break;
-            default:
-                // do nothing
-                break;
-        }
-		_node.SetTile();
-        // then remove from the active timers 
-        if(_node.timer == -1)
-        {
-            ds_list_delete(nodeActiveTimers, i-_indOffset);
-            _indOffset++;
-        }
-    }
-}}

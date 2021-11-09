@@ -4,7 +4,13 @@ draw_set_font(fText);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_color(c_white);
-draw_text(5,5,room_get_name(room));
+if(room != rInit)
+{
+draw_text(5,5,room_get_name(room) 
+		+"\nCamera W:H =" + string(camera_get_view_width(view_camera[0])) + " : " + string(camera_get_view_height(view_camera[0]))
+		+"\nViewport W:H =" + string(view_get_wport(0)) + " : " + string(view_get_hport(0))
+		);
+}
 /*
 
 draw_set_alpha(1);
