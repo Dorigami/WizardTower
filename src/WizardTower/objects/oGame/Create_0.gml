@@ -64,12 +64,16 @@ function InitializeDisplay(){
 }
 
 // game setup
+depth = -9990;
 game_set_speed(FRAME_RATE, gamespeed_fps);
 InitializeDisplay();
 global.gamePaused = false;
 global.muteMusic = false;
 global.muteSound = false;
+global.iGame = id;
 global.iCamera = instance_create_layer(0,0,"Instances",oCamera);
+global.iPlayer = instance_create_layer(0,0,"Instances",oPlayer);
+global.unitSelection = ds_list_create();
 global.gridSpace = ds_grid_create(GRID_WIDTH, GRID_HEIGHT);
 global.startPoint = vect2(0,0);
 global.goalPoint = vect2(0,0);

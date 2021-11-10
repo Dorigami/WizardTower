@@ -16,8 +16,12 @@ var _height = display_get_gui_height();
 //var _height = room_height;
 optionFocus = 0;
 var _sprite = sBtn40x32;
-options[0] = CreateButton(oButtonGeneric,_sprite,0.5*_width-(0.5*sprite_get_width(_sprite)),0.5*_height,"PLAY",true,GoToLevel,[rTest],GoToLevel,[rTest]);
-options[1] = CreateButton(oButtonGeneric,_sprite,0.5*_width-(0.5*sprite_get_width(_sprite)),0.7*_height,"QUIT",true,QuitToDesktop,-1,QuitToDesktop,-1);
+options[0] = CreateButton(oButtonGeneric,_sprite,0.5*_width-(0.5*sprite_get_width(_sprite)),0.5*_height,"PLAY",true,
+					      GoToLevel,[rTest],
+						  GoToLevel,[rTest]);
+options[1] = CreateButton(oButtonGeneric,_sprite,0.5*_width-(0.5*sprite_get_width(_sprite)),0.7*_height,"QUIT",true,
+					      QuitToDesktop,-1,
+						  QuitToDesktop,-1);
 for(var i=0; i<array_length(options); i++)
 {
 	options[i].enabled = false;

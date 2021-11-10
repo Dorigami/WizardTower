@@ -1,0 +1,2 @@
+/// @description 
+clickPos = -1;

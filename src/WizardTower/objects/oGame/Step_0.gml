@@ -1,4 +1,5 @@
 /// @description control the game
+
 //--// pathing queue
 if(ds_queue_size(pathQueue) > 0)
 {
@@ -17,4 +18,6 @@ if(ds_queue_size(pathQueue) > 0)
 		}
 	}
 	ds_queue_dequeue(pathQueue);
+	delete _ticket;
 }
+

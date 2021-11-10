@@ -4,7 +4,7 @@ function FindPath_Astar(_start=[2,0,0], _end=[2,0,0], _allowDiagonal){
     var _startNode = global.gridSpace[# _start[1] div CELL_SIZE, _start[2] div CELL_SIZE];
     var _endNode = global.gridSpace[# _end[1] div CELL_SIZE, _end[2] div CELL_SIZE];
 
-    var openSet = global.controller.pathHeap; openSet.Initialize();
+    var openSet = global.iGame.pathHeap; openSet.Initialize();
     var closedSet = ds_list_create();
 
     // add starting node to OPEN before looping
@@ -186,7 +186,7 @@ PathTicket = function(_units,_startPoint,_endPoint) constructor{
 function PathRequest(_units, _startPoint, _endPoint){
 	// sends a ticket to the controller to return a path to the goal
 	var _ticket = new PathTicket(_units, _startPoint, _endPoint);
-	with(global.controller) ds_queue_enqueue(pathQueue, _ticket);
+	with(global.iGame) ds_queue_enqueue(pathQueue, _ticket);
 }
 
 
