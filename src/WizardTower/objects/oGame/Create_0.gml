@@ -44,7 +44,7 @@ function InitializeDisplay(){
 	if(idealHeight & 1) idealHeight++;
 
 	//do the zoom
-	zoom = 2;
+	zoom = 1;
 	zoomMax = floor(display_get_width() / idealWidth);
 	zoom = min(zoom, zoomMax)
 	

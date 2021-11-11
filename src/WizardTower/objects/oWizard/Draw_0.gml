@@ -12,4 +12,4 @@ if(selected){
 	draw_self();
 }
 
-draw_text(x+10,y+10,string(selected));
+draw_text(x+10,y+10,string(selected)+ "\n texel W:H = "+string(texelW)+":"+string(texelH));

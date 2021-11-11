@@ -7,7 +7,7 @@ PathTicket = function(_units,_startPoint,_endPoint) constructor{
 }
 
 
-selected = true;
+selected = false;
 resolution = 12;
 dSet = ds_list_create();
 iSet = ds_list_create();

@@ -2,7 +2,7 @@
 var _lowest = 0;
 var _map = undefined;
 var _value = 0;
-var _dist = 0;
+
 depth = -y;
 allMasked = true;
 speedMax = 2;
