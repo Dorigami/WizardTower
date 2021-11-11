@@ -82,6 +82,7 @@ if(path != -1)
 if(destinationDistance <= 1.5*CELL_SIZE)
 {
 	arrived = true;
+	arrivalSlow = max(arrivalSlow - 0.04, 0);
 } else { arrivalSlow = 1 }
 
 // update position
@@ -93,4 +94,11 @@ position = vect_add(position,velocity);
 x = position[1];
 y = position[2];
 
+if(arrived) && (vect_len(velocity) == 0)
+{
+	arrived = false;
+	path = -1
+	destination = -1;
+	destinationDistance = 0;
+}
 

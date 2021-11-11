@@ -1,5 +1,11 @@
 /// @description init properties
 
+// shader stuff
+upixelH = shader_get_uniform(shOutline, "pixelH");
+upixelW = shader_get_uniform(shOutline, "pixelW");
+texelW = texture_get_texel_width(sprite_get_texture(sprite_index,0));
+texelH = texture_get_texel_height(sprite_get_texture(sprite_index,0));
+
 PathTicket = function(_units,_startPoint,_endPoint) constructor{
 	units = _units;
 	startPoint = _startPoint;
@@ -27,7 +33,8 @@ path = -1;
 pathIndex = 0;
 pathIndexEnd = 0;
 pathDelay = 60;
-
+mySpawner = noone;
+spawning = false;
 
 steeringMag = 0.2;
 steering = vect2(0,0);
@@ -36,8 +43,4 @@ position = vect2(x,y);
 
 speedMax = 8;
 
-// shader stuff
-upixelH = shader_get_uniform(shOutline, "pixelH");
-upixelW = shader_get_uniform(shOutline, "pixelW");
-texelW = texture_get_texel_width(sprite_get_texture(sprite_index,0));
-texelH = texture_get_texel_height(sprite_get_texture(sprite_index,0));
+

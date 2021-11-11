@@ -1,2 +1,5 @@
 /// @description 
-selected = false;
+if(!global.gamePaused)
+{
+	selected = false;
+}
