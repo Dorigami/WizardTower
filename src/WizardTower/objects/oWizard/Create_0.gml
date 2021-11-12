@@ -30,17 +30,24 @@ destination = -1;
 destinationDistance = 0;
 target = noone;
 path = -1;
+pathUpdateDelay = 10;
 pathIndex = 0;
 pathIndexEnd = 0;
 pathDelay = 60;
 mySpawner = noone;
 spawning = false;
 
-steeringMag = 0.2;
+steeringMag = 0.3;
 steering = vect2(0,0);
 velocity = vect2(0,0);
 position = vect2(x,y);
 
-speedMax = 8;
+stats = {
+	Health : 2,
+	Aspeed : 1,
+	Mspeed : 2,
+	Power : 1
+}
+
 
 

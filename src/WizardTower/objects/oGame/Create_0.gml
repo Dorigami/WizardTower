@@ -14,6 +14,12 @@ Pathfinding();
 #macro NORTH 1
 #macro WEST 2
 #macro SOUTH 3
+enum FACTION
+{
+	PLAYER,
+	NATURE,
+	ENEMY
+}
 
 // set up the camera(s)
 function InitializeDisplay(){
@@ -44,7 +50,7 @@ function InitializeDisplay(){
 	if(idealHeight & 1) idealHeight++;
 
 	//do the zoom
-	zoom = 1;
+	zoom = 2;
 	zoomMax = floor(display_get_width() / idealWidth);
 	zoom = min(zoom, zoomMax)
 	
@@ -79,6 +85,7 @@ global.startPoint = vect2(0,0);
 global.goalPoint = vect2(0,0);
 pathHeap = new NodeHeap();
 pathQueue = ds_queue_create();
+maxDiscomfort = 64;
 for(var i=0;i<GRID_WIDTH;i++)
 {
 for(var j=0;j<GRID_HEIGHT;j++)

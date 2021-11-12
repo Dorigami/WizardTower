@@ -156,9 +156,9 @@ function csAvoid(_obj){
 		_uObj = speed_dir_to_vect2(1,_dir);
 		for(var i=0;i<resolution;i++)
 		{
-				_uMap = speed_dir_to_vect2(1,i*(360 div resolution));
-				_map[i]	= _weight*vect_dot(_uMap,_uObj);			
-				if(_dist > _maskRange) && (_map[i] > 0) mask[i] = true;
+			_uMap = speed_dir_to_vect2(1,i*(360 div resolution));
+			_map[i]	= _weight*vect_dot(_uMap,_uObj);			
+			if(_dist > _maskRange) && (_map[i] > 0) mask[i] = true;
 		}
 		ds_list_add(other.dSet, _map);
 	} 

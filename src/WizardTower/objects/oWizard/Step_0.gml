@@ -3,15 +3,17 @@ var _lowest = 0;
 var _map = undefined;
 var _value = 0;
 
+if(spawning) exit;
+
 depth = -y;
 allMasked = true;
-speedMax = 2;
 if(destination != -1) destinationDistance = point_distance(position[1],position[2],destination[1],destination[2]);
 
 // interpolate density at current position
 myNode = global.gridSpace[# x div CELL_SIZE, y div CELL_SIZE];
-if(path != -1)
+if(destination != -1)
 {
+	
 	if(ds_exists(path, ds_type_list)) && (ds_list_size(path) > 1) && (myNode == path[| 0]) 
 	{ 
 		ds_list_delete(path, 0);
@@ -33,7 +35,7 @@ if(path != -1)
 		AvoidObstructions(x, y, true, true);
 	}
 	{// get danger of other followers
-		csAvoid(oFollower2);
+		csAvoid(oWizard);
 	}
 	{// get interest of goal
 		csChasePath(path);
@@ -87,7 +89,7 @@ if(destinationDistance <= 1.5*CELL_SIZE)
 
 // update position
 steering = speed_dir_to_vect2(steeringMag,direction);
-velocity = vect_truncate(vect_add(velocity, steering), speedMax*interest*arrivalSlow);
+velocity = vect_truncate(vect_add(velocity, steering), stats.Mspeed*interest*arrivalSlow);
 if(allMasked) velocity = vect2(0,0);
 position = vect_add(position,velocity);
 

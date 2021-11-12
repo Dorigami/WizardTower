@@ -14,6 +14,7 @@ if(ds_queue_size(pathQueue) > 0)
 			{
 				//if(ds_exists(path, ds_type_list)) ds_list_destroy(path);
 				path = _path;
+				if(ds_list_size(path) > 0) direction = point_direction(x, y, path[| 0].center[1], path[| 0].center[2]);
 			}
 		}
 	}

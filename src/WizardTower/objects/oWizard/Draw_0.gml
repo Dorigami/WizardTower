@@ -12,4 +12,13 @@ if(selected){
 	draw_self();
 }
 
-draw_text(x+10,y+10,string(selected)+ "\n arrived = "+string(arrived));
+if(ds_exists(path,ds_type_list))
+{
+	for(var i=0;i<ds_list_size(path);i++)
+	{
+		var _node = path[| i];
+		draw_set_color(c_yellow);
+		draw_set_alpha(0.5);
+		draw_circle(_node.center[1], _node.center[2],4,false);
+	}
+}
