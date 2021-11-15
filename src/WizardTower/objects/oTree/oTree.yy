@@ -7,7 +7,10 @@
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "pResource",
+    "path": "objects/pResource/pResource.yy",
+  },
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
@@ -24,8 +27,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Entities",
-    "path": "folders/Objects/Entities.yy",
+    "name": "Resources",
+    "path": "folders/Objects/Entities/Resources.yy",
   },
   "resourceVersion": "1.0",
   "name": "oTree",

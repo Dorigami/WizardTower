@@ -1,6 +1,25 @@
 /// @description 
 
-myNode = global.gridSpace[# x div CELL_SIZE, y div CELL_SIZE];
+// Inherit the parent event
+event_inherited();
+
+function HutStateFree(){
+	if(stateCheck != state)
+	{
+		stateCheck = state;
+		speed = 0;
+	}
+	//set alarm
+	if(ds_queue_size(spawnQueue) > 0) && (alarm[0] == -1)
+	{
+		alarm[0] = spawnSpeed;
+	}
+}
+
+stateScript[STATE.SPAWN] = StructureSpawn;
+stateScript[STATE.FREE] = HutStateFree;
+stateScript[STATE.DEAD] = StructureDead;
+
 spawnSpeed = 120;
 spawnQueue = ds_queue_create();
 spawnHoldPoint = vect2(-50,-50)

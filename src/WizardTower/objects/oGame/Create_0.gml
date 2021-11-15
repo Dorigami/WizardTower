@@ -3,9 +3,9 @@ Pathfinding();
 #macro RESOLUTION_W 640
 #macro RESOLUTION_H 384
 #macro ROOMSTART rStartMenu
-#macro GRID_WIDTH 20
-#macro GRID_HEIGHT 12
-#macro CELL_SIZE 32
+#macro GRID_WIDTH 40
+#macro GRID_HEIGHT 24
+#macro CELL_SIZE 16
 #macro FRAME_RATE 32
 #macro MENUDEPTH 7777
 #macro OUT 0
@@ -20,7 +20,12 @@ enum FACTION
 	NATURE,
 	ENEMY
 }
-
+enum STATE
+{
+	SPAWN,
+	FREE,
+	DEAD
+}
 // set up the camera(s)
 function InitializeDisplay(){
 	//// dynamic resolution

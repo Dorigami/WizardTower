@@ -1,5 +1,8 @@
 /// @description init properties
 
+// Inherit the parent event
+event_inherited();
+
 // shader stuff
 upixelH = shader_get_uniform(shOutline, "pixelH");
 upixelW = shader_get_uniform(shOutline, "pixelW");
@@ -42,12 +45,7 @@ steering = vect2(0,0);
 velocity = vect2(0,0);
 position = vect2(x,y);
 
-stats = {
-	Health : 2,
-	Aspeed : 1,
-	Mspeed : 2,
-	Power : 1
-}
+faction = FACTION.PLAYER;
 
 
 

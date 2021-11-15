@@ -89,7 +89,7 @@ if(destinationDistance <= 1.5*CELL_SIZE)
 
 // update position
 steering = speed_dir_to_vect2(steeringMag,direction);
-velocity = vect_truncate(vect_add(velocity, steering), stats.Mspeed*interest*arrivalSlow);
+velocity = vect_truncate(vect_add(velocity, steering), statMspeed*interest*arrivalSlow);
 if(allMasked) velocity = vect2(0,0);
 position = vect_add(position,velocity);
 

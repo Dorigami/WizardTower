@@ -17,15 +17,20 @@ if(room != rStartMenu)
 			draw_set_alpha(0.1);
 			draw_set_color(c_white);
 		}
-	
-	    draw_rectangle(i*CELL_SIZE, j*CELL_SIZE, i*CELL_SIZE + CELL_SIZE-1, j*CELL_SIZE + CELL_SIZE-1, true);
-
+		if(i & 1)
+		{
+			if(j & 1){draw_set_color(c_white)} else {draw_set_color(c_black)}
+		} else {
+			if(j mod 2 == 0){draw_set_color(c_white)} else {draw_set_color(c_black)}
+		}
+		draw_rectangle(i*CELL_SIZE, j*CELL_SIZE, i*CELL_SIZE + CELL_SIZE-1, j*CELL_SIZE + CELL_SIZE-1, false);
+		draw_set_color(c_white);
 	    draw_set_font(fText);
 	    draw_set_alpha(1);
-		// discomfort
-	    draw_set_halign(fa_center);
-	    draw_set_valign(fa_middle);
-	    draw_text(_node.center[1], _node.center[2], string(_node.discomfort));
+		//// discomfort
+	    //draw_set_halign(fa_center);
+	    //draw_set_valign(fa_middle);
+	    //draw_text(_node.center[1], _node.center[2], string(_node.discomfort));
 	    //// east density
 	    //draw_set_halign(fa_right);
 	    //draw_set_valign(fa_middle);

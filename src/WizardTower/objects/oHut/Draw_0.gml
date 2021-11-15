@@ -1,5 +1,5 @@
 /// @description 
 
-draw_self();
+// Inherit the parent event
+event_inherited();
 
-draw_text(x,y-30,"alarm[0] = " + string(alarm[0]))
