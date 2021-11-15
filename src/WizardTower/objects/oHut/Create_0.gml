@@ -31,6 +31,6 @@ repeat(queueSize)
 	{
 		ds_queue_enqueue(other.spawnQueue, id);
 		visible = false;
-		spawning = true;
+		mySpawner = other.id;
 	}
 }

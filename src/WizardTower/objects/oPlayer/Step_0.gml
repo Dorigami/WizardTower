@@ -34,7 +34,8 @@ if(!global.gamePaused)
 			{
 				MoveCommand(global.unitSelection[| i], 
 					        clamp(mouse_x,0,GRID_WIDTH*CELL_SIZE-1), 
-							clamp(mouse_y,0,GRID_HEIGHT*CELL_SIZE-1)
+							clamp(mouse_y,0,GRID_HEIGHT*CELL_SIZE-1),
+							true
 							);
 			}
 		}

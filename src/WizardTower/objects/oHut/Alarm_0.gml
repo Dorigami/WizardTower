@@ -27,7 +27,6 @@ if(instance_exists(_inst))
 	{
 		direction = _bestDir;
 		visible = true;
-		spawning = false;
 		x = other.x;
 		y = other.y;
 		position = vect2(x,y);

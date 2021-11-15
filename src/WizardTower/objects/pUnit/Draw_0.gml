@@ -15,6 +15,8 @@ if(selected){
 		// draw flashing entity
 		draw_sprite_ext( sprite_index,image_index,floor(x),floor(y-z),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
 	}
+	draw_set_color(c_white);
+	if(destination != -1) draw_circle(destination[1], destination[2], 3, false);
 } else {
 	if(flash != 0)
 	{   // set shader
@@ -29,3 +31,7 @@ if(selected){
 // reset shader
 if(shader_current() != -1) shader_reset();
 
+draw_text(x+20,y-40,"alarm[0] = " + string(alarm[0]) 
+			   + "\nstate: "+script_get_name(stateScript[state])
+			   + "\ndestination: "+string(destination)
+);
