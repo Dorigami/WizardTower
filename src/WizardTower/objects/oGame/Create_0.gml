@@ -24,6 +24,9 @@ enum STATE
 {
 	SPAWN,
 	FREE,
+	BUILD,
+	GATHER,
+	ATTACK,
 	DEAD
 }
 // set up the camera(s)
@@ -90,7 +93,7 @@ global.startPoint = vect2(0,0);
 global.goalPoint = vect2(0,0);
 pathHeap = new NodeHeap();
 pathQueue = ds_queue_create();
-maxDiscomfort = 64;
+maxDiscomfort = 6;
 for(var i=0;i<GRID_WIDTH;i++)
 {
 for(var j=0;j<GRID_HEIGHT;j++)

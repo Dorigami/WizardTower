@@ -45,7 +45,7 @@ if(state != STATE.SPAWN)
 						 );
 }
 
-draw_text(x+20,y-40,"alarm[0] = " + string(alarm[0]) 
-			   + "\n"+script_get_name(stateScript[state])
-			   + "\n"+string(image_alpha)  
-);
+//draw_text(x+20,y-40,"alarm[0] = " + string(alarm[0]) 
+//			   + "\n"+script_get_name(stateScript[state])
+//			   + "\n"+string(image_alpha)  
+//);

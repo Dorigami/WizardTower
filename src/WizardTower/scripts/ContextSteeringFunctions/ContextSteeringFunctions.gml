@@ -135,8 +135,8 @@ function csChase(_obj){
 }
 
 function csAvoid(_obj){
-	var _slowRange = 30;
-	var _maskRange = 20;
+	var _slowRange = 20;
+	var _maskRange = 10;
 	var _weight = 0;
 	var _dist = 0; // distance
 	var _dir = 0; // direction 

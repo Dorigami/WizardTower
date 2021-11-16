@@ -19,10 +19,10 @@ stateScript[STATE.SPAWN] = StructureSpawn;
 stateScript[STATE.FREE] = HutStateFree;
 stateScript[STATE.DEAD] = StructureDead;
 
-spawnSpeed = 120;
+spawnSpeed = 80;
 spawnQueue = ds_queue_create();
 spawnHoldPoint = vect2(0,0)
-queueSize = 3;
+queueSize = 8;
 
 repeat(queueSize)
 {

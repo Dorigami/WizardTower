@@ -8,6 +8,7 @@ mn = statMana;
 
 stateScript[STATE.SPAWN] = UnitSpawn;
 stateScript[STATE.FREE] = UnitFree;
+stateScript[STATE.BUILD] = UnitBuild;
 stateScript[STATE.DEAD] = UnitDead;
 state = STATE.SPAWN;
 stateCheck = -1;

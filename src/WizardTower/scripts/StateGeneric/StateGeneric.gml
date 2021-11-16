@@ -48,6 +48,7 @@ function UnitFree(){
 		
 		// get danger of other followers
 		csAvoid(oWizard);
+		//csAvoid(pStructure);
 		
 		// get interest of goal
 		csChasePath(path);
@@ -96,7 +97,23 @@ function UnitFree(){
 	{
 		if(destinationDistance <= statRange)
 		{
-		
+			switch(object_get_parent(target.object_index))
+			{
+				case pUnit:
+					//do nothing
+					break;
+				case pStructure:
+					if(target.state == STATE.SPAWN) 
+					{
+						state = STATE.BUILD;
+					} else {
+						target = noone;
+					}
+					break;
+				case pResource:
+					state = STATE.GATHER;
+					break;
+			}
 		}
 	}
 	//arrive at destination
@@ -123,6 +140,29 @@ function UnitFree(){
 		destinationDistance = 0;
 	}
 
+}
+function UnitBuild(){
+	if(stateCheck != state)
+	{
+		stateCheck = state;
+	}
+	var _exists = instance_exists(target);
+	var _leaveState = false;
+	if(_exists)
+	{
+		// check range
+		if(point_distance(x,y,target.x,target.y) <= statRange)
+		{
+			// increment build progress
+			target.buildProgress = min(1, target.buildProgress + target.statBuildTime/sqr(FRAME_RATE));
+			if(target.buildProgress >= 1) _leaveState = true
+		} else { _leaveState = true }
+	} else { _leaveState = true }
+
+	if(_leaveState)
+	{
+		state = STATE.FREE;
+	}
 }
 function UnitSpawn(){
 	if(stateCheck != state)
@@ -163,7 +203,12 @@ function UnitDead(){
 	}
 }
 function StructureFree(){
-
+	if(stateCheck != state)
+	{
+		stateCheck = state;
+		buildProgress = 0;
+		image_alpha = 1;
+	}
 }
 function StructureSpawn(){
 	if(stateCheck != state)

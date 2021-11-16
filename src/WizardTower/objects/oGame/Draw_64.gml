@@ -1,4 +1,7 @@
 /// @description view data
+
+/*
+
 draw_set_alpha(1);
 draw_set_font(fText);
 draw_set_halign(fa_left);

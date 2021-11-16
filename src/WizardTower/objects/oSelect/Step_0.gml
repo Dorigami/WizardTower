@@ -6,7 +6,7 @@ dir_ = point_direction(x,y,mouse_x,mouse_y);
 image_xscale = lengthdir_x(len_, dir_);
 image_yscale = lengthdir_y(len_, dir_);
 
-visible = len_ >= 30 ? true : false;
+visible = len_ >= 5 ? true : false;
 
 // update unit selection
 if(mouse_check_button_released(mb_left))

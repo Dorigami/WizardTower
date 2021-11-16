@@ -13,6 +13,7 @@ if(selected){
 	{   // set shader
 		shader_set(flashShader); uFlash = shader_get_uniform(flashShader, "flash"); shader_set_uniform_f(uFlash, flash);
 		// draw flashing entity
+		show_debug_message("! 1 !");
 		draw_sprite_ext( sprite_index,image_index,floor(x),floor(y-z),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
 	}
 	draw_set_color(c_white);
@@ -22,16 +23,19 @@ if(selected){
 	{   // set shader
 		shader_set(flashShader); uFlash = shader_get_uniform(flashShader, "flash"); shader_set_uniform_f(uFlash, flash);
 		// draw flashing entity
+		show_debug_message("! 2 !");
 		draw_sprite_ext( sprite_index,image_index,floor(x),floor(y-z),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
 	} else {
 		// draw entity normally
+		show_debug_message("! 3 !");
 		draw_sprite_ext( sprite_index,image_index,floor(x),floor(y-z),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
 	}
 }
 // reset shader
 if(shader_current() != -1) shader_reset();
 
-draw_text(x+20,y-40,"alarm[0] = " + string(alarm[0]) 
-			   + "\nstate: "+script_get_name(stateScript[state])
-			   + "\ndestination: "+string(destination)
-);
+//draw_text(x+20,y-40,"alarm[0] = " + string(alarm[0]) 
+//			   + "\nstate: " + script_get_name(stateScript[state])
+//			   + "\ndestination: " + string(destination)
+//			   + "\ntarget: " + string(target)
+//);
