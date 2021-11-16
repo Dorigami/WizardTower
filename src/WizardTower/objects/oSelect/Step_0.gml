@@ -20,14 +20,20 @@ if(mouse_check_button_released(mb_left))
 		_size = ds_list_size(global.unitSelection);
 		if(_size > 0)
 		{
-			for(var i=0;i<_size;i++)
+			for(var i=_size-1;i>=0;i--)
 			{
 				var _inst = global.unitSelection[| i];
+				if(!is_undefined(_inst)) && (!_inst.active)
+				{
+					show_debug_message("deleting slot: " + string(ds_list_find_index(global.unitSelection, _inst)));
+					ds_list_delete(global.unitSelection,ds_list_find_index(global.unitSelection, _inst));
+				}
 			}
+			show_debug_message(string(ds_list_size(global.unitSelection)));
 		}
 	} else {
 		var _inst = instance_place(x,y,oWizard)
-		if(_inst != noone) 
+		if(_inst != noone) && (_inst.active)
 		{
 			ds_list_add(global.unitSelection,_inst);
 		}

@@ -134,9 +134,10 @@ function UnitSpawn(){
 		flash = flashSpeed*waitDuration;
 		image_alpha = 0;
 	}
+
 	image_alpha = min(1, image_alpha+0.04);
-	
 	spawnProgress = wait/waitDuration;
+
 	if(++wait >= waitDuration)
 	{
 		state = STATE.FREE;
@@ -162,20 +163,7 @@ function UnitDead(){
 	}
 }
 function StructureFree(){
-	if(x != xTo) || (y != yTo)
-	{
-		var _dir = point_direction(x,y,xTo,yTo);
-		var _dist = point_distance(x,y,xTo,yTo);
-		if(_dist <= statMovespeed)
-		{
-			x = xTo;
-			y = yTo;
-			speed = 0;
-		} else {
-			speed = statMovespeed;
-			direction = _dir;
-		}
-	}
+
 }
 function StructureSpawn(){
 	if(stateCheck != state)

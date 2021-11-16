@@ -7,12 +7,11 @@ function HutStateFree(){
 	if(stateCheck != state)
 	{
 		stateCheck = state;
-		speed = 0;
 	}
 	//set alarm
-	if(ds_queue_size(spawnQueue) > 0) && (alarm[0] == -1)
+	if(ds_queue_size(spawnQueue) > 0) && (alarm[9] == -1)
 	{
-		alarm[0] = spawnSpeed;
+		alarm[9] = spawnSpeed;
 	}
 }
 
@@ -22,8 +21,8 @@ stateScript[STATE.DEAD] = StructureDead;
 
 spawnSpeed = 120;
 spawnQueue = ds_queue_create();
-spawnHoldPoint = vect2(-50,-50)
-queueSize = 5;
+spawnHoldPoint = vect2(0,0)
+queueSize = 3;
 
 repeat(queueSize)
 {
@@ -31,6 +30,7 @@ repeat(queueSize)
 	{
 		ds_queue_enqueue(other.spawnQueue, id);
 		visible = false;
+		active = false;
 		mySpawner = other.id;
 	}
 }

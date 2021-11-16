@@ -30,6 +30,7 @@ if(instance_exists(_inst))
 		x = other.x;
 		y = other.y;
 		position = vect2(x,y);
+		active = true;
 		MoveCommand(id, _node.center[1], _node.center[2]);
 	}
 }

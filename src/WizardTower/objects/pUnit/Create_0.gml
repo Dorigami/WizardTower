@@ -16,6 +16,7 @@ waitDuration = 0;
 spawnProgress = 0;
 faction = FACTION.ENEMY;
 
+active = true;
 target = noone;
 selected = false;
 resolution = 12;

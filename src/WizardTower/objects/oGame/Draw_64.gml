@@ -9,7 +9,16 @@ if(room != rInit)
 draw_text(5,5,room_get_name(room) 
 		+"\nCamera W:H =" + string(camera_get_view_width(view_camera[0])) + " : " + string(camera_get_view_height(view_camera[0]))
 		+"\nViewport W:H =" + string(view_get_wport(0)) + " : " + string(view_get_hport(0))
+		+"\nselection size =" + string(ds_list_size(global.unitSelection))
 		);
+		//if(ds_exists(global.unitSelection, ds_type_list))
+		//{
+		//	draw_text(5,5,room_get_name(room) 
+		//		+"\nCamera W:H =" + string(camera_get_view_width(view_camera[0])) + " : " + string(camera_get_view_height(view_camera[0]))
+		//		+"\nViewport W:H =" + string(view_get_wport(0)) + " : " + string(view_get_hport(0))
+		//		+"\nselection size =" + string(ds_list_size(global.unitSelection))
+		//		);
+		//}
 }
 /*
 

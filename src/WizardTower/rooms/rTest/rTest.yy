@@ -33,7 +33,6 @@
   "creationCodeFile": "",
   "inheritCode": false,
   "instanceCreationOrder": [
-    {"name":"inst_6A5EFA14","path":"rooms/rTest/rTest.yy",},
     {"name":"inst_52D4A5B9","path":"rooms/rTest/rTest.yy",},
     {"name":"inst_4BC0F86","path":"rooms/rTest/rTest.yy",},
     {"name":"inst_3EDD8683","path":"rooms/rTest/rTest.yy",},
@@ -44,6 +43,7 @@
     {"name":"inst_6704AEA1","path":"rooms/rTest/rTest.yy",},
     {"name":"inst_862E07F","path":"rooms/rTest/rTest.yy",},
     {"name":"inst_32FC24AE","path":"rooms/rTest/rTest.yy",},
+    {"name":"inst_6A5EFA14","path":"rooms/rTest/rTest.yy",},
     {"name":"inst_1C92A2C","path":"rooms/rTest/rTest.yy",},
   ],
   "inheritCreationOrder": false,
