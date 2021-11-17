@@ -170,7 +170,7 @@ function UnitSpawn(){
 		stateCheck = state;
 		spawnProgress = 0;
 		wait = 0;
-		waitDuration = 60;
+		waitDuration = 30;
 		flash = flashSpeed*waitDuration;
 		image_alpha = 0;
 	}
