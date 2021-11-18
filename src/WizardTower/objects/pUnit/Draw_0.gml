@@ -1,20 +1,20 @@
-/// @description 
+/// @description
 
 if(shadowEnabled) draw_sprite_ext(sShadow,0,floor(x),floor(y),shadowScale,shadowScale,0,c_white,1);
-
 if(selected){
 	// outline the entity
 	shader_set(shOutline);
 	shader_set_uniform_f(upixelW, texelW);
 	shader_set_uniform_f(upixelH, texelH);
 	draw_sprite_ext(sprite_index,image_index,x,y-z,1,1,0,c_white,image_alpha);
+	shader_reset();
 	// show flash on entity
 	if(flash != 0)
 	{   // set shader
 		shader_set(flashShader); uFlash = shader_get_uniform(flashShader, "flash"); shader_set_uniform_f(uFlash, flash);
 		// draw flashing entity
-		show_debug_message("! 1 !");
 		draw_sprite_ext( sprite_index,image_index,floor(x),floor(y-z),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
+		shader_reset();
 	}
 	draw_set_color(c_white);
 	if(destination != -1) draw_circle(destination[1], destination[2], 3, false);
@@ -23,17 +23,17 @@ if(selected){
 	{   // set shader
 		shader_set(flashShader); uFlash = shader_get_uniform(flashShader, "flash"); shader_set_uniform_f(uFlash, flash);
 		// draw flashing entity
-		show_debug_message("! 2 !");
 		draw_sprite_ext( sprite_index,image_index,floor(x),floor(y-z),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
+		shader_reset();
 	} else {
 		// draw entity normally
-		show_debug_message("! 3 !");
 		draw_sprite_ext( sprite_index,image_index,floor(x),floor(y-z),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
 	}
 }
-// reset shader
-if(shader_current() != -1) shader_reset();
-
+//show_debug_message(string(shader_current()));
+//// reset shader
+//if(shader_current() != -1) 
+//show_debug_message("! 5 !");
 //draw_text(x+20,y-40,"alarm[0] = " + string(alarm[0]) 
 //			   + "\nstate: " + script_get_name(stateScript[state])
 //			   + "\ndestination: " + string(destination)

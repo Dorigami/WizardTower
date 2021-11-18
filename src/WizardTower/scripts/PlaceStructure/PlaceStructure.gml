@@ -1,0 +1,3 @@
+function PlaceStructure(_obj){
+
+}

@@ -129,6 +129,8 @@ function UnitFree(){
 	if(allMasked) velocity = vect2(0,0);
 	position = vect_add(position,velocity);
 
+	position[1] = clamp(position[1],0,GRID_WIDTH*CELL_SIZE);
+	position[2] = clamp(position[2],0,GRID_WIDTH*CELL_SIZE);
 	x = position[1];
 	y = position[2];
 

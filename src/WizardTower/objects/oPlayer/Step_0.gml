@@ -5,28 +5,17 @@ if(!global.gamePaused)
 		
 		
 //--// CONTROLS
-	var _selectionClear = keyboard_check_pressed(vk_space)
-	var _moveCommand = mouse_check_button_released(mb_right);
-	var _up, _left, _down, _right, _fastPan
-	_up = keyboard_check(ord("W"));
-	_left = keyboard_check(ord("A"));
-	_down = keyboard_check(ord("S"));
-	_right = keyboard_check(ord("D"));
-	_fastPan = keyboard_check(vk_shift);
-	// unit selection
-	if(mouse_check_button_released(mb_left)) clickPos = -1;
-	if(mouse_check_button_pressed(mb_left)) 
-	{
-		clickPos = vect2(mouse_x, mouse_y);
-		instance_create_layer(clickPos[1],clickPos[2],"Instances",oSelect);
-	}
+	// checl for inputs from the current control scheme
+	if(controlScheme != -1) script_execute(controlScheme);
+	
+	// execute actions based on the active inputs
 	// clear selection
-	if(_selectionClear)
+	if(inpSelectionClear)
 	{
 		EmptySelection();
 	}
 	// move command selected units
-	if(_moveCommand)
+	if(inpMoveCommand)
 	{
 		if(ds_list_size(global.unitSelection) > 0)
 		{
@@ -44,17 +33,17 @@ if(!global.gamePaused)
 	// camera pan
 	with(global.iCamera)
 	{
-		direction = point_direction(0, 0, _right - _left, _down - _up);
+		direction = point_direction(0, 0, other.inpRight - other.inpLeft, other.inpDown - other.inpUp);
 		var _panSpeed = 8;
-		if(abs(_right - _left) || abs(_down - _up)) 
+		if(abs(other.inpRight - other.inpLeft) || abs(other.inpDown - other.inpUp)) 
 		{
 			//show_debug_message("pan direction: " + string(direction) 
 			//	              +"\nleft-right: "+ string(abs(_right - _left))
 			//				  +"\ndown-up: "+ string(abs(_down - _up))
 			//);
 			follow = noone;
-			xTo += lengthdir_x(_panSpeed+_fastPan*_panSpeed, direction);
-			yTo += lengthdir_y(_panSpeed+_fastPan*_panSpeed, direction);
+			xTo += lengthdir_x(_panSpeed+other.inpFastPan*_panSpeed, direction);
+			yTo += lengthdir_y(_panSpeed+other.inpFastPan*_panSpeed, direction);
 			x = xTo; 
 			y = yTo;
 		} 
