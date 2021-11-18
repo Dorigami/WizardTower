@@ -12,3 +12,4 @@ inpDown = false;
 inpLeft = false;
 inpRight = false;
 inpFastPan = false;
+
