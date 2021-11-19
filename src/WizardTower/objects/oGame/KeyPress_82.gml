@@ -1,3 +1,0 @@
-/// @description 
-
-room_restart();

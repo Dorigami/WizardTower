@@ -1,4 +1,6 @@
 function ControlSchemeDefault(){
+	inpPause = keyboard_check_pressed(vk_escape);
+	inpRestart = keyboard_check_pressed(ord("R"));
 	inpSelectionClear = keyboard_check_pressed(vk_space);
 	inpMoveCommand = mouse_check_button_released(mb_right);
 	inpUp = keyboard_check(ord("W"));
@@ -50,10 +52,22 @@ function ControlSchemeDefault(){
 			y = yTo;
 		} 
 	}
+	// pause/end game
+	if(inpPause)
+	{
+		// transition to the main menu
+		if(room != rStartMenu) RoomTransition(TRANS_TYPE.FADE,rStartMenu,InitializeGameData,0.02);
+	}
+	if(inpRestart)
+	{
+		// restart the current level
+		room_restart();
+	}
 }
 function ControlSchemeStructurePlacement(){
 	inpConfirm = mouse_check_button_pressed(mb_left);
-	inpCancel = mouse_check_button_pressed(mb_right);
+	inpCancel = mouse_check_button_pressed(mb_right) || keyboard_check_pressed(vk_escape);
+	inpPersist = keyboard_check(vk_shift);
 	inpSelectionClear = keyboard_check_pressed(vk_space);
 	inpUp = keyboard_check(ord("W"));
 	inpLeft = keyboard_check(ord("A"));
@@ -74,7 +88,12 @@ function ControlSchemeStructurePlacement(){
 	}
 	if(inpConfirm) 
 	{
-		target = noone;
+		if(inpPersist)
+		{
+			target = instance_create_layer(mouse_x,mouse_y,"Instances",target.object_index);
+		} else {
+			target = noone;
+		}
 	}
 	if(inpCancel)
 	{
@@ -86,7 +105,6 @@ function ControlSchemeStructurePlacement(){
 	{
 		EmptySelection();
 	}
-
 
 	// camera pan
 	if(abs(inpRight - inpLeft) || abs(inpDown - inpUp)) 

@@ -13,6 +13,7 @@ stateScript[STATE.SPAWN] = StructureSpawn;
 stateScript[STATE.FREE] = StructureFree;
 stateScript[STATE.DEAD] = StructureDead;
 target = noone;
+radialOptions = -1;
 
 /*
 
