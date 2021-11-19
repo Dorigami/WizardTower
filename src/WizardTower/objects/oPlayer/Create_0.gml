@@ -1,6 +1,7 @@
 /// @description 
 clickPos = -1;
 controlScheme = ControlSchemeDefault;
+target = noone;
 
 // inputs
 inpConfirm = false;

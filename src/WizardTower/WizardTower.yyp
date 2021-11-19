@@ -63,7 +63,7 @@
     {"id":{"name":"vector_functions","path":"scripts/vector_functions/vector_functions.yy",},"order":9,},
     {"id":{"name":"oImp","path":"objects/oImp/oImp.yy",},"order":2,},
     {"id":{"name":"sImp","path":"sprites/sImp/sImp.yy",},"order":17,},
-    {"id":{"name":"PlaceStructure","path":"scripts/PlaceStructure/PlaceStructure.yy",},"order":16,},
+    {"id":{"name":"NewStructurePlacement","path":"scripts/NewStructurePlacement/NewStructurePlacement.yy",},"order":16,},
     {"id":{"name":"ContextSteeringFunctions","path":"scripts/ContextSteeringFunctions/ContextSteeringFunctions.yy",},"order":7,},
     {"id":{"name":"pButton","path":"objects/pButton/pButton.yy",},"order":1,},
     {"id":{"name":"Note1","path":"notes/Note1/Note1.yy",},"order":0,},

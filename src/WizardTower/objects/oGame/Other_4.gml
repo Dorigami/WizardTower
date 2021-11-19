@@ -14,7 +14,7 @@ with(global.iCamera)
 // hud setup
 if(room == rTest)
 {
-	CreateButton(oButtonGeneric,sBtn32x32,10,0.5*_height,"tower",true,-1,-1,-1,-1);
-	CreateButton(oButtonGeneric,sBtn32x32,10,0.6*_height,"wall",true,-1,-1,-1,-1);
-	CreateButton(oButtonGeneric,sBtn32x32,10,0.7*_height,"hut",true,-1,-1,-1,-1);
+	CreateButton(oButtonGeneric,sBtn32x32,10,0.5*_height,"tower",true,-1,-1,NewStructurePlacement,[oTower]);
+	CreateButton(oButtonGeneric,sBtn32x32,10,0.6*_height,"wall",true,-1,-1,NewStructurePlacement,[oWall]);
+	CreateButton(oButtonGeneric,sBtn32x32,10,0.7*_height,"hut",true,-1,-1,NewStructurePlacement,[oHut]);
 }
