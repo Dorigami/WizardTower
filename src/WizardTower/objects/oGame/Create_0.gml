@@ -7,7 +7,8 @@ Pathfinding();
 #macro GRID_HEIGHT 24
 #macro CELL_SIZE 16
 #macro FRAME_RATE 32
-#macro MENUDEPTH 7777
+#macro MENUDEPTH -7777
+#macro BUTTONDEPTH -6666
 #macro OUT 0
 #macro IN 1
 #macro EAST 0
@@ -81,6 +82,7 @@ function InitializeDisplay(){
 depth = -9990;
 game_set_speed(FRAME_RATE, gamespeed_fps);
 InitializeDisplay();
+global.onButton = false;
 global.gamePaused = false;
 global.muteMusic = false;
 global.muteSound = false;

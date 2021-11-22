@@ -9,12 +9,30 @@ function ControlSchemeDefault(){
 	inpRight = keyboard_check(ord("D"));
 	inpFastPan = keyboard_check(vk_shift);
 	// unit selection
-	if(mouse_check_button_released(mb_left)) clickPos = -1;
+	if(mouse_check_button_released(mb_left)) 
+	{
+		clickPos = -1;
+		if(!global.onButton)
+		{
+			// if a structure was clicked, open it's radial menu
+			var _inst = instance_place(mouse_x,mouse_y,pStructure);
+			if(radialTarget != noone) && instance_exists(radialTarget) radialTarget.radialActive = false;
+			radialTarget = _inst;
+			if(_inst != noone) _inst.radialActive = true;
+		}
+	}
 	if(mouse_check_button_pressed(mb_left)) 
 	{
-		clickPos = vect2(mouse_x, mouse_y);
-		instance_create_layer(clickPos[1],clickPos[2],"Instances",oSelect);
+		// check if player clicked on a button or a structure
+		var _check = place_meeting(mouse_x,mouse_y,pStructure)
+		if(!_check) && (!global.onButton)
+		{
+			// create unit selection object
+			clickPos = vect2(mouse_x, mouse_y);
+			instance_create_layer(clickPos[1],clickPos[2],"Instances",oSelect);
+		}
 	}
+	
 //--// execute actions based on the active inputs
 	// clear selection
 	if(inpSelectionClear)
@@ -88,6 +106,10 @@ function ControlSchemeStructurePlacement(){
 	}
 	if(inpConfirm) 
 	{
+		if(ds_list_size(global.unitSelection) > 0)
+		{
+			for(var i=0;i<ds_list_size(global.unitSelection);i++) MoveCommand(global.unitSelection[| i].id,target.x,target.y,true);
+		}
 		if(inpPersist)
 		{
 			target = instance_create_layer(mouse_x,mouse_y,"Instances",target.object_index);

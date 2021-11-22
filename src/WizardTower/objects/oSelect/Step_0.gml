@@ -30,6 +30,7 @@ if(mouse_check_button_released(mb_left))
 			}
 		}
 	} else {
+		// check for new selection
 		var _inst = instance_place(x,y,oWizard);
 		if(_inst != noone) && (_inst.active)
 		{
@@ -41,7 +42,7 @@ if(mouse_check_button_released(mb_left))
 			if(_inst == noone) _inst = instance_place(x,y,pResource);
 			if(_inst != noone) && (_inst.radialOptions != -1)
 			{
-				_inst.openRadial = true;			
+				global.iPlayer.radialTarget = _inst;			
 			}
 		}
 	}

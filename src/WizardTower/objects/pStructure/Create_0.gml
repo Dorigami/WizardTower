@@ -14,6 +14,9 @@ stateScript[STATE.FREE] = StructureFree;
 stateScript[STATE.DEAD] = StructureDead;
 target = noone;
 radialOptions = -1;
+radialArgs = -1;
+radialActive = false;
+radialCheck = radialActive;
 
 /*
 

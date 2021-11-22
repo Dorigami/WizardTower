@@ -12,6 +12,7 @@ with(global.iCamera)
 }
 
 // hud setup
+global.onButton = false;
 if(room == rTest)
 {
 	CreateButton(oButtonGeneric,sBtn32x32,10,0.5*_height,"tower",true,-1,-1,NewStructurePlacement,[oTower]);

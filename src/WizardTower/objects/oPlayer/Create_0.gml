@@ -1,4 +1,5 @@
 /// @description 
+visible = false;
 clickPos = -1;
 controlScheme = ControlSchemeDefault;
 radialTarget = noone;

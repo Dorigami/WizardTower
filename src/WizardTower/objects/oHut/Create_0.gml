@@ -8,11 +8,13 @@ function HutStateFree(){
 	{
 		stateCheck = state;
 	}
-	//set alarm
+	//set alarm to spawn wizards
 	if(ds_queue_size(spawnQueue) > 0) && (alarm[9] == -1)
 	{
 		alarm[9] = spawnSpeed;
 	}
+	// create radial menu when activated
+	StructureRadialLogic();
 }
 
 stateScript[STATE.SPAWN] = StructureSpawn;
@@ -21,7 +23,7 @@ stateScript[STATE.DEAD] = StructureDead;
 
 spawnSpeed = 80;
 spawnQueue = ds_queue_create();
-spawnHoldPoint = vect2(0,0)
+spawnHoldPoint = vect2(0,0);
 queueSize = 8;
 
 repeat(queueSize)
@@ -34,3 +36,10 @@ repeat(queueSize)
 		mySpawner = other.id;
 	}
 }
+// setup radial
+radialArgs = [[oButtonRadial,sRadialOne,x,y,"",false,radialDebugScript,["1"],radialDebugScript,["1"]],
+			  [oButtonRadial,sRadialTwo,x,y,"",false,radialDebugScript,["2"],radialDebugScript,["2"]],
+			  [oButtonRadial,sRadialThree,x,y,"",false,radialDebugScript,["3"],radialDebugScript,["3"]],
+			  [oButtonRadial,sRadialThree,x,y,"",false,radialDebugScript,["3"],radialDebugScript,["3"]]
+			 ];
+radialOptions = array_create(array_length(radialArgs),noone);

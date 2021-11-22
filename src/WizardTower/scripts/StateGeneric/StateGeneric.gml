@@ -166,6 +166,20 @@ function UnitBuild(){
 		state = STATE.FREE;
 	}
 }
+function UnitAttack(){
+	var _exists = instance_exists(target);
+	if(stateCheck != state)
+	{
+		stateCheck = state;
+		if(_exists) HurtEntity(id,target,statPower)
+		wait = 0;
+		waitDuration = FRAME_RATE/statAspeed;
+	}
+	if(++wait >= waitDuration)
+	{
+		state = STATE.FREE;
+	}
+}
 function UnitSpawn(){
 	if(stateCheck != state)
 	{
@@ -211,6 +225,7 @@ function StructureFree(){
 		buildProgress = 0;
 		image_alpha = 1;
 	}
+	StructureRadialLogic();
 }
 function StructureSpawn(){
 	if(stateCheck != state)
@@ -233,6 +248,7 @@ function StructureDead(){
 		speed = 0;
 		waitDuration = FRAME_RATE;
 		wait = 0;
+		radialActive = false;
 	}
 	// remove from play
 	if(++wait >= waitDuration)

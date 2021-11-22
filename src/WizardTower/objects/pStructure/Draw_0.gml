@@ -41,7 +41,7 @@ if(state != STATE.SPAWN)
 						 sprite_width,
 						 _hgt,
 						 floor(x)-sprite_get_xoffset(sprite_index),
-						 floor(y-z)+sprite_get_yoffset(sprite_index)-_hgt,
+						 floor(y-z)+sprite_height-sprite_get_yoffset(sprite_index)-_hgt,
 						 );
 }
 

@@ -1,5 +1,5 @@
 /// @description Initialize
-depth = -MENUDEPTH;
+depth = BUTTONDEPTH;
 image_speed = 0;
 image_index = 0;
 

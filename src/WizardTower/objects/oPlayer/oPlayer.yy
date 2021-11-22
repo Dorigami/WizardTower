@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "sSelect",
+    "path": "sprites/sSelect/sSelect.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,

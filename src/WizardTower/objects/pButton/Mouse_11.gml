@@ -20,5 +20,5 @@ if(room == rStartMenu)
 } else {
 	
 	focus = false;
-
+	global.onButton = false;
 }
