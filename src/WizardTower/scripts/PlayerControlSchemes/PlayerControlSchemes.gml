@@ -100,8 +100,8 @@ function ControlSchemeStructurePlacement(){
 	} else {
 		with(target)
 		{
-			x = mouse_x;
-			y = mouse_y;
+			x = 0.5*CELL_SIZE + (mouse_x div CELL_SIZE)*CELL_SIZE;
+			y = 0.5*CELL_SIZE + (mouse_y div CELL_SIZE)*CELL_SIZE;
 		}
 	}
 	if(inpConfirm) 

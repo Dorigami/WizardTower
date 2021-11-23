@@ -5,7 +5,7 @@ Pathfinding();
 #macro ROOMSTART rStartMenu
 #macro GRID_WIDTH 40
 #macro GRID_HEIGHT 24
-#macro CELL_SIZE 16
+#macro CELL_SIZE 32
 #macro FRAME_RATE 32
 #macro MENUDEPTH -7777
 #macro BUTTONDEPTH -6666

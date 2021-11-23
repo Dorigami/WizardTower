@@ -14,7 +14,7 @@ flashShader = shWhiteFlash;
 invulnerable = 0;
 myNode = global.gridSpace[# x div CELL_SIZE, y div CELL_SIZE];
 showBars = false;
-
+faction = FACTION.PLAYER;
 /*
 
 // draw variables

@@ -97,22 +97,40 @@ function UnitFree(){
 	{
 		if(destinationDistance <= statRange)
 		{
-			switch(object_get_parent(target.object_index))
+			if(target.faction == faction)
 			{
-				case pUnit:
-					//do nothing
-					break;
-				case pStructure:
-					if(target.state == STATE.SPAWN) 
-					{
-						state = STATE.BUILD;
-					} else {
-						target = noone;
-					}
-					break;
-				case pResource:
-					state = STATE.GATHER;
-					break;
+				// friendly interact logic
+				switch(object_get_parent(target.object_index))
+				{
+					case pUnit:
+						//do nothing
+						break;
+					case pStructure:
+						if(target.state == STATE.SPAWN) 
+						{
+							state = STATE.BUILD;
+						} else {
+							target = noone;
+						}
+						break;
+					case pResource:
+						state = STATE.GATHER;
+						break;
+				}
+			} else {
+				// enemy interact logic
+				switch(object_get_parent(target.object_index))
+				{
+					case pUnit:
+						//do nothing
+						break;
+					case pStructure:
+						state = STATE.ATTACK;
+						break;
+					case pResource:
+						state = STATE.GATHER;
+						break;
+				}
 			}
 		}
 	}
@@ -163,6 +181,15 @@ function UnitBuild(){
 
 	if(_leaveState)
 	{
+		with(pStructure)
+		{
+			if(state == STATE.SPAWN) 
+			{
+				MoveCommand(other.id,x,y,true); 
+				state = STATE.FREE;
+				exit;
+			}
+		}
 		state = STATE.FREE;
 	}
 }
@@ -253,11 +280,6 @@ function StructureDead(){
 	// remove from play
 	if(++wait >= waitDuration)
 	{
-		// spawn a random powerup
-		if(random(1) > 0.39)
-		{
-			SpawnPowerup(x,y,irandom(POWERUP.TOTAL-1));
-		}
 		instance_destroy();
 	}
 }

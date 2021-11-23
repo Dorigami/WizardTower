@@ -15,9 +15,6 @@ PathTicket = function(_units,_startPoint,_endPoint) constructor{
 	endPoint = _endPoint;
 }
 
-stateScript[STATE.SPAWN] = UnitSpawn;
-stateScript[STATE.FREE] = UnitFree;
-stateScript[STATE.DEAD] = UnitDead;
 faction = FACTION.PLAYER;
 
 

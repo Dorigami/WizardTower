@@ -2,6 +2,20 @@
 
 if(shadowEnabled) draw_sprite_ext(sShadow,0,floor(x),floor(y),shadowScale,shadowScale,0,c_white,1);
 if(selected){
+	if(ds_exists(path,ds_type_list))
+	{
+		if(ds_list_size(path) > 1)
+		{
+			for(var i=1;i<ds_list_size(path);i++)
+			{
+				var _node0 = path[| i-1];
+				var _node1 = path[| i];
+				draw_set_color(c_yellow);
+				draw_set_alpha(0.5);
+				draw_line(_node0.center[1], _node0.center[2],_node1.center[1], _node1.center[2]);
+			}
+		}
+	}
 	// outline the entity
 	shader_set(shOutline);
 	shader_set_uniform_f(upixelW, texelW);
