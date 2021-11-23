@@ -162,35 +162,32 @@ function UnitFree(){
 
 }
 function UnitBuild(){
-	if(stateCheck != state)
-	{
-		stateCheck = state;
-	}
 	var _exists = instance_exists(target);
 	var _leaveState = false;
+	if(stateCheck != state)
+	{
+		if(_exists) ds_list_add(target.builderList, id);
+		stateCheck = state;
+	}
 	if(_exists)
 	{
+		// check state of target
+		if(target.state != STATE.SPAWN) _leaveState = true;
 		// check range
-		if(point_distance(x,y,target.x,target.y) <= statRange)
-		{
-			// increment build progress
-			target.buildProgress = min(1, target.buildProgress + target.statBuildTime/sqr(FRAME_RATE));
-			if(target.buildProgress >= 1) _leaveState = true
-		} else { _leaveState = true }
+		if(point_distance(x,y,target.x,target.y) <= statRange) _leaveState = true;
 	} else { _leaveState = true }
 
 	if(_leaveState)
 	{
+		state = STATE.FREE;
 		with(pStructure)
 		{
 			if(state == STATE.SPAWN) 
 			{
 				MoveCommand(other.id,x,y,true); 
-				state = STATE.FREE;
 				exit;
 			}
 		}
-		state = STATE.FREE;
 	}
 }
 function UnitAttack(){
@@ -261,9 +258,26 @@ function StructureSpawn(){
 		buildProgress = 0;
 		image_alpha = 0.2;
 	}
+	var _size = ds_list_size(builderList);
+	if(_size > 0)
+	{
+		var _offset = 0;
+		for(var i=0;i<_size;i++)
+		{
+			if(!instance_exists(builderList[| i-_offset])) || (builderList[| i-_offset].state != STATE.BUILD)
+			{
+				//ignore units that stop building
+				ds_list_delete(builderList, i-_offset);
+				_offset++;
+				_size--;
+			}
+		}
+		if(_size > 0) buildProgress = min(1, target.buildProgress + (0.9+0.1*_size)*(FRAME_RATE/target.statBuildTime));
+	}
 	
 	if(buildProgress >= 1)
 	{
+		ds_list_destroy(builderList);
 		state = STATE.FREE;
 		image_alpha = 1;
 	}

@@ -1,6 +1,7 @@
 function MoveCommand(_id,_xTo,_yTo,_findTarget){
 	with(_id)
 	{
+		arrived = false;
 		destination = vect2(_xTo, _yTo);
 		PathRequest([id], position, destination);
 		// get a target

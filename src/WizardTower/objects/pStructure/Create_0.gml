@@ -6,6 +6,7 @@ event_inherited();
 hp = statHealth;
 mn = statMana;
 buildProgress = 0;
+builderList = ds_list_create();
 
 state = STATE.SPAWN;
 stateCheck = -1;
