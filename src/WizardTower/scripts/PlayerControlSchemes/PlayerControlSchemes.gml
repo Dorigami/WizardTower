@@ -46,11 +46,11 @@ function ControlSchemeDefault(){
 		{
 			for(var i=0; i<ds_list_size(global.unitSelection);i++)
 			{
-				MoveCommand(global.unitSelection[| i], 
-					        clamp(mouse_x,0,GRID_WIDTH*CELL_SIZE-1), 
-							clamp(mouse_y,0,GRID_HEIGHT*CELL_SIZE-1),
-							true
-							);
+				with(global.unitSelection[| i])
+				{
+					if(state != STATE.SPAWN) || (state != STATE.DEAD) state = STATE.FREE;
+					MoveCommand(id, clamp(mouse_x,0,GRID_WIDTH*CELL_SIZE-1), clamp(mouse_y,0,GRID_HEIGHT*CELL_SIZE-1),true);
+				}
 			}
 		}
 	}

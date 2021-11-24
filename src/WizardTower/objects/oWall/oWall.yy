@@ -28,7 +28,7 @@
   ],
   "properties": [],
   "overriddenProperties": [
-    {"propertyId":{"name":"statBuildTime","path":"objects/pStructure/pStructure.yy",},"objectId":{"name":"pStructure","path":"objects/pStructure/pStructure.yy",},"value":"1","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"statBuildTime","path":"objects/pStructure/pStructure.yy",},"objectId":{"name":"pStructure","path":"objects/pStructure/pStructure.yy",},"value":"3","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "Structures",

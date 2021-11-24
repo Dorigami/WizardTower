@@ -25,7 +25,9 @@
   "physicsShapePoints": [],
   "eventList": [],
   "properties": [],
-  "overriddenProperties": [],
+  "overriddenProperties": [
+    {"propertyId":{"name":"statBuildTime","path":"objects/pStructure/pStructure.yy",},"objectId":{"name":"pStructure","path":"objects/pStructure/pStructure.yy",},"value":"6","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+  ],
   "parent": {
     "name": "Structures",
     "path": "folders/Objects/Entities/Structures.yy",

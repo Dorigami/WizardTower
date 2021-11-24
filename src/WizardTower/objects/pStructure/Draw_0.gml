@@ -45,11 +45,11 @@ if(state != STATE.SPAWN)
 						 );
 }
 
-draw_text(x+20,y-40,"alarm[0] = " + string(alarm[0]) 
-			   + "\n"+script_get_name(stateScript[state])
-			   + "\n"+string(image_alpha)  
-);
-if(ds_exists(builderList, ds_type_list))
-{
-draw_text(x-60,y,"list " + string(ds_list_size(builderList)));
-}
+//draw_text(x+20,y-40,"alarm[0] = " + string(alarm[0]) 
+//			   + "\n"+script_get_name(stateScript[state])
+//			   + "\n"+string(image_alpha)  
+//);
+//if(ds_exists(builderList, ds_type_list))
+//{
+//	draw_text(x-60,y,"list " + string(ds_list_size(builderList)) + "\nProg: " + string(buildProgress));
+//}

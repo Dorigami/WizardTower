@@ -1,4 +1,5 @@
 function NewStructurePlacement(_obj){
+	EmptySelection();
 	with(global.iPlayer)
 	{
 		if(target != noone) && (instance_exists(target)) instance_destroy(target);

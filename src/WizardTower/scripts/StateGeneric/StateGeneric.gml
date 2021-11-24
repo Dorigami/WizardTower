@@ -172,9 +172,14 @@ function UnitBuild(){
 	if(_exists)
 	{
 		// check state of target
-		if(target.state != STATE.SPAWN) _leaveState = true;
-		// check range
-		if(point_distance(x,y,target.x,target.y) <= statRange) _leaveState = true;
+		if(target.state != STATE.SPAWN) 
+		{
+			target = noone; 
+			_leaveState = true;
+		} else {
+			// check range
+			if(point_distance(x,y,target.x,target.y) > statRange) _leaveState = true;
+		}
 	} else { _leaveState = true }
 
 	if(_leaveState)
@@ -272,7 +277,7 @@ function StructureSpawn(){
 				_size--;
 			}
 		}
-		if(_size > 0) buildProgress = min(1, target.buildProgress + (0.9+0.1*_size)*(FRAME_RATE/target.statBuildTime));
+		if(_size > 0) buildProgress = min(1, buildProgress + (0.9+0.1*_size)*(1/(statBuildTime*FRAME_RATE)));
 	}
 	
 	if(buildProgress >= 1)
