@@ -30,8 +30,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Structures",
-    "path": "folders/Objects/Entities/Structures.yy",
+    "name": "Trash",
+    "path": "folders/Objects/Trash.yy",
   },
   "resourceVersion": "1.0",
   "name": "oHut",

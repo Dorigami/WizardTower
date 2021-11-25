@@ -185,6 +185,8 @@ function UnitBuild(){
 	if(_leaveState)
 	{
 		state = STATE.FREE;
+		destination = -1;
+		path = -1
 		with(pStructure)
 		{
 			if(state == STATE.SPAWN) 
