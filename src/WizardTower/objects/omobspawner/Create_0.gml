@@ -154,19 +154,22 @@ function SetMoney(){
 	}
 }
 function SpawnMob(){
-    var _struct = {
-        path : container.path,
-        hp : container.hp,
-        damage : container.damage,
-        spd : container.spd,
-        armor : container.armor,
-        stealth : container.stealth,
-        money : container.money   
-    };
-    // create the mob using the struct, and let it initialize itself
-    var _obj = varEnemies[type];
-	repeat(groupSize){
-		instance_create_layer(0, 0, "Instances", _obj, _struct);
+	with(container)
+	{
+	    var _struct = {
+	        path : path,
+	        hp : hp,
+	        damage : damage,
+	        spd : spd,
+	        armor : armor,
+	        stealth : stealth,
+	        money : money   
+	    };
+	    // create the mob using the struct, and let it initialize itself
+	    var _obj = varEnemies[type];
+		repeat(groupSize){
+			instance_create_layer(0, 0, "Instances", _obj, _struct);
+		}
 	}
 }
 
