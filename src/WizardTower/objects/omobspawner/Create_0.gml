@@ -27,10 +27,11 @@ varPaths = [];
 var n = 0;
 while(path_exists(n))
 {
-	if(path_get_closed(n) == 0) varPaths[n] = n;
+	if(path_get_closed(n) == 0) varPaths[array_length(varPaths)] = n;
 	n++;
 }
-show_debug_message()
+path = varPaths[0];
+show_debug_message("paths:" + string(varPaths));
 
 
 // list the names of the variables that will be adjusted
@@ -194,4 +195,4 @@ ButtonAdd(215,yValues[5],id,13,"btnArmor",_sprite,-1,SetArmor,-1);
 ButtonAdd(215,yValues[6],id,14,"btnStealth",_sprite,-1,SetStealth,-1);
 ButtonAdd(215,yValues[7],id,15,"btnMoney",_sprite,-1,SetMoney,-1);
 
-ButtonAdd(180,yValues[8],id,16,"btnSpawn",_sprite,-1,SpawnMob,-1);
+ButtonAdd(215,yValues[8],id,16,"btnSpawn",_sprite,-1,SpawnMob,-1);
