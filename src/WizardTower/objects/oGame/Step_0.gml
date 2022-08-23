@@ -1,5 +1,30 @@
 /// @description control the game
 
+if(keyboard_check_pressed(vk_f10))
+{
+	with(oMobSpawner) instance_destroy();
+	instance_create_layer(0.5*room_width,0.5*room_height,"Instances",oMobSpawner);
+	show_debug_message("mob spawner created")
+}
+if(keyboard_check_pressed(vk_f11))
+{
+	var _struct = { 
+		path : pathMob0,
+		hp : 10, 
+		damage : 1,
+		spd : 3, 
+		armor : 1,
+		stealth : false, 
+		money : 20
+	}
+	repeat(5){
+		instance_create_layer(0, 0, "Instances", oImp, _struct);
+	}
+	show_debug_message("mob has been created");
+}
+
+exit;
+
 //--// pathing queue
 if(ds_queue_size(pathQueue) > 0)
 {
@@ -21,4 +46,3 @@ if(ds_queue_size(pathQueue) > 0)
 	ds_queue_dequeue(pathQueue);
 	delete _ticket;
 }
-

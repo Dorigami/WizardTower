@@ -1,7 +1,6 @@
 /// @description 
 
-z = 0; 
-spd = 0;
+z = 0; ;
 grav = 0;
 face = 0;
 gravEnabled = true;

@@ -5,6 +5,7 @@
   },
   "solid": false,
   "visible": true,
+  "managed": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
@@ -31,8 +32,8 @@
     {"propertyId":{"name":"statBuildTime","path":"objects/pStructure/pStructure.yy",},"objectId":{"name":"pStructure","path":"objects/pStructure/pStructure.yy",},"value":"3","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
-    "name": "Structures",
-    "path": "folders/Objects/Entities/Structures.yy",
+    "name": "Trash",
+    "path": "folders/Objects/Trash.yy",
   },
   "resourceVersion": "1.0",
   "name": "oWall",

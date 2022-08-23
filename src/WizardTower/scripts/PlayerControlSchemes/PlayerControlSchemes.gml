@@ -8,68 +8,68 @@ function ControlSchemeDefault(){
 	inpDown = keyboard_check(ord("S"));
 	inpRight = keyboard_check(ord("D"));
 	inpFastPan = keyboard_check(vk_shift);
-	// unit selection
-	if(mouse_check_button_released(mb_left)) 
-	{
-		clickPos = -1;
-		if(!global.onButton)
-		{
-			// if a structure was clicked, open it's radial menu
-			var _inst = instance_place(mouse_x,mouse_y,pStructure);
-			if(radialTarget != noone) && instance_exists(radialTarget) radialTarget.radialActive = false;
-			radialTarget = _inst;
-			if(_inst != noone) _inst.radialActive = true;
-		}
-	}
-	if(mouse_check_button_pressed(mb_left)) 
-	{
-		// check if player clicked on a button or a structure
-		var _check = place_meeting(mouse_x,mouse_y,pStructure)
-		if(!_check) && (!global.onButton)
-		{
-			// create unit selection object
-			clickPos = vect2(mouse_x, mouse_y);
-			instance_create_layer(clickPos[1],clickPos[2],"Instances",oSelect);
-		}
-	}
+	//// unit selection
+	//if(mouse_check_button_released(mb_left)) 
+	//{
+	//	clickPos = -1;
+	//	if(!global.onButton)
+	//	{
+	//		// if a structure was clicked, open it's radial menu
+	//		var _inst = instance_place(mouse_x,mouse_y,pStructure);
+	//		if(radialTarget != noone) && instance_exists(radialTarget) radialTarget.radialActive = false;
+	//		radialTarget = _inst;
+	//		if(_inst != noone) _inst.radialActive = true;
+	//	}
+	//}
+	//if(mouse_check_button_pressed(mb_left)) 
+	//{
+	//	// check if player clicked on a button or a structure
+	//	var _check = place_meeting(mouse_x,mouse_y,pStructure)
+	//	if(!_check) && (!global.onButton)
+	//	{
+	//		// create unit selection object
+	//		clickPos = vect2(mouse_x, mouse_y);
+	//		instance_create_layer(clickPos[1],clickPos[2],"Instances",oSelect);
+	//	}
+	//}
 	
-//--// execute actions based on the active inputs
-	// clear selection
-	if(inpSelectionClear)
-	{
-		EmptySelection();
-	}
-	// move command selected units
-	if(inpMoveCommand)
-	{
-		if(ds_list_size(global.unitSelection) > 0)
-		{
-			for(var i=0; i<ds_list_size(global.unitSelection);i++)
-			{
-				with(global.unitSelection[| i])
-				{
-					if(state != STATE.SPAWN) || (state != STATE.DEAD) state = STATE.FREE;
-					MoveCommand(id, clamp(mouse_x,0,GRID_WIDTH*CELL_SIZE-1), clamp(mouse_y,0,GRID_HEIGHT*CELL_SIZE-1),true);
-				}
-			}
-		}
-	}
+////--// execute actions based on the active inputs
+//	// clear selection
+//	if(inpSelectionClear)
+//	{
+//		EmptySelection();
+//	}
+//	// move command selected units
+//	if(inpMoveCommand)
+//	{
+//		if(ds_list_size(global.unitSelection) > 0)
+//		{
+//			for(var i=0; i<ds_list_size(global.unitSelection);i++)
+//			{
+//				with(global.unitSelection[| i])
+//				{
+//					if(state != STATE.SPAWN) || (state != STATE.DEAD) state = STATE.FREE;
+//					MoveCommand(id, clamp(mouse_x,0,GRID_WIDTH*CELL_SIZE-1), clamp(mouse_y,0,GRID_HEIGHT*CELL_SIZE-1),true);
+//				}
+//			}
+//		}
+//	}
 
-	// camera pan
-	if(abs(inpRight - inpLeft) || abs(inpDown - inpUp)) 
-	{
-		var _dir = point_direction(0, 0, inpRight - inpLeft, inpDown - inpUp)
-		var _panSpeed = 8;
-		with(global.iCamera)
-		{
-			direction = _dir;
-			follow = noone;
-			xTo += lengthdir_x(_panSpeed+other.inpFastPan*_panSpeed, direction);
-			yTo += lengthdir_y(_panSpeed+other.inpFastPan*_panSpeed, direction);
-			x = xTo; 
-			y = yTo;
-		} 
-	}
+//	// camera pan
+//	if(abs(inpRight - inpLeft) || abs(inpDown - inpUp)) 
+//	{
+//		var _dir = point_direction(0, 0, inpRight - inpLeft, inpDown - inpUp)
+//		var _panSpeed = 8;
+//		with(global.iCamera)
+//		{
+//			direction = _dir;
+//			follow = noone;
+//			xTo += lengthdir_x(_panSpeed+other.inpFastPan*_panSpeed, direction);
+//			yTo += lengthdir_y(_panSpeed+other.inpFastPan*_panSpeed, direction);
+//			x = xTo; 
+//			y = yTo;
+//		} 
+//	}
 	// pause/end game
 	if(inpPause)
 	{

@@ -32,7 +32,7 @@ function UnitFree(){
 		}
 
 		// clear context maps
-		for(var i=0;i<resolution;i++) 
+		for(var i=0;i<CS_RESOLUTION;i++) 
 		{
 			dangerMap[i] = 0;
 			interestMap[i] = 0;
@@ -59,7 +59,7 @@ function UnitFree(){
 		for(var i=0;i<ds_list_size(iSet);i++)
 		{
 			_map = iSet[| i];
-			for(var j=0;j<resolution;j++)
+			for(var j=0;j<CS_RESOLUTION;j++)
 			{
 				if(_map[j] > interestMap[j]) interestMap[j] = _map[j];
 			}
@@ -68,18 +68,18 @@ function UnitFree(){
 		for(var i=0;i<ds_list_size(dSet);i++)
 		{
 			_map = dSet[| i];
-			for(var j=0;j<resolution;j++){ if(_map[j] > dangerMap[j]) dangerMap[j] = min(1, _map[j]) }
+			for(var j=0;j<CS_RESOLUTION;j++){ if(_map[j] > dangerMap[j]) dangerMap[j] = min(1, _map[j]) }
 		}
 	//--// merge danger and interest
 		// find lowest danger value 
-		for(var i=0;i<resolution;i++){ if(dangerMap[i] < _lowest) _lowest = dangerMap[i] }
+		for(var i=0;i<CS_RESOLUTION;i++){ if(dangerMap[i] < _lowest) _lowest = dangerMap[i] }
 		//// set the mask
-		//for(var i=0;i<resolution;i++) { mask[i] = dangerMap[i] > _lowest ? 1 : 0 }
+		//for(var i=0;i<CS_RESOLUTION;i++) { mask[i] = dangerMap[i] > _lowest ? 1 : 0 }
 		//// reduce all danger values by the lowest value
-		//for(var i=0;i<resolution;i++){ dangerMap[i] = dangerMap[i] - _lowest }
+		//for(var i=0;i<CS_RESOLUTION;i++){ dangerMap[i] = dangerMap[i] - _lowest }
 
 		// get a preferred direction
-		for(var i=0;i<resolution;i++) 
+		for(var i=0;i<CS_RESOLUTION;i++) 
 		{
 			if(mask[i]) continue;
 			_value = max(0, interestMap[i] - dangerMap[i]);
@@ -87,7 +87,7 @@ function UnitFree(){
 			{
 				allMasked = false;
 				interest = _value;
-				direction = i*(360 div resolution);
+				direction = i*(360 div CS_RESOLUTION);
 			}
 		}
 	}

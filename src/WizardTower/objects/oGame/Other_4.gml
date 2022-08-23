@@ -1,6 +1,7 @@
 /// @description Level Setup on playspace
 var _width = display_get_gui_width();
 var _height = display_get_gui_height();
+global.col = layer_tilemap_get_id(layer_get_id("Col"));
 // setup view
 with(global.iCamera)
 {
@@ -10,6 +11,12 @@ with(global.iCamera)
 	x = xTo;
 	y = yTo;
 }
+
+// setup pathing grid building tiles
+for(var i=0;i<GRID_WIDTH;i++) {
+for(var j=0;j<GRID_HEIGHT;j++) {
+	global.gridSpace[# i, j].blocked = tilemap_get(global.col,i,j);
+}}
 
 // hud setup
 global.onButton = false;
