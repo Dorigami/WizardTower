@@ -16,7 +16,7 @@ if(room != rStartMenu)
 		} else {
 			if(j mod 2 == 0){draw_set_color(c_white)} else {draw_set_color(c_black)}
 		}
-		draw_rectangle(i*CELL_SIZE, j*CELL_SIZE, i*CELL_SIZE + CELL_SIZE-1, j*CELL_SIZE + CELL_SIZE-1, true);
+		draw_rectangle(i*TILE_SIZE, j*TILE_SIZE, i*TILE_SIZE + TILE_SIZE-1, j*TILE_SIZE + TILE_SIZE-1, true);
 	}
 	}
 }

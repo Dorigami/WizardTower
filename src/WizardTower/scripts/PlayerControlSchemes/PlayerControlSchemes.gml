@@ -49,7 +49,7 @@ function ControlSchemeDefault(){
 //				with(global.unitSelection[| i])
 //				{
 //					if(state != STATE.SPAWN) || (state != STATE.DEAD) state = STATE.FREE;
-//					MoveCommand(id, clamp(mouse_x,0,GRID_WIDTH*CELL_SIZE-1), clamp(mouse_y,0,GRID_HEIGHT*CELL_SIZE-1),true);
+//					MoveCommand(id, clamp(mouse_x,0,GRID_WIDTH*TILE_SIZE-1), clamp(mouse_y,0,GRID_HEIGHT*TILE_SIZE-1),true);
 //				}
 //			}
 //		}
@@ -100,8 +100,8 @@ function ControlSchemeStructurePlacement(){
 	} else {
 		with(target)
 		{
-			x = 0.5*CELL_SIZE + (mouse_x div CELL_SIZE)*CELL_SIZE;
-			y = 0.5*CELL_SIZE + (mouse_y div CELL_SIZE)*CELL_SIZE;
+			x = 0.5*TILE_SIZE + (mouse_x div TILE_SIZE)*TILE_SIZE;
+			y = 0.5*TILE_SIZE + (mouse_y div TILE_SIZE)*TILE_SIZE;
 		}
 	}
 	if(inpConfirm) 

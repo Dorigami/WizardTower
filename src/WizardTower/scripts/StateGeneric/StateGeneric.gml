@@ -135,7 +135,7 @@ function UnitFree(){
 		}
 	}
 	//arrive at destination
-	if(destinationDistance <= 1*CELL_SIZE)
+	if(destinationDistance <= 1*TILE_SIZE)
 	{
 		arrived = true;
 		arrivalSlow = max(arrivalSlow - 0.04, 0);
@@ -147,8 +147,8 @@ function UnitFree(){
 	if(allMasked) velocity = vect2(0,0);
 	position = vect_add(position,velocity);
 
-	position[1] = clamp(position[1],0,GRID_WIDTH*CELL_SIZE);
-	position[2] = clamp(position[2],0,GRID_WIDTH*CELL_SIZE);
+	position[1] = clamp(position[1],0,GRID_WIDTH*TILE_SIZE);
+	position[2] = clamp(position[2],0,GRID_WIDTH*TILE_SIZE);
 	x = position[1];
 	y = position[2];
 

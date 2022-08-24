@@ -1,8 +1,8 @@
 
 function FindPath_Astar(_start=[2,0,0], _end=[2,0,0], _allowDiagonal){
     //convert world position into node positions 
-    var _startNode = global.gridSpace[# _start[1] div CELL_SIZE, _start[2] div CELL_SIZE];
-    var _endNode = global.gridSpace[# _end[1] div CELL_SIZE, _end[2] div CELL_SIZE];
+    var _startNode = global.gridSpace[# _start[1] div TILE_SIZE, _start[2] div TILE_SIZE];
+    var _endNode = global.gridSpace[# _end[1] div TILE_SIZE, _end[2] div TILE_SIZE];
 
     var openSet = global.iGame.pathHeap; openSet.Initialize();
     var closedSet = ds_list_create();
@@ -71,7 +71,7 @@ GridNode = function(_xCell=0,_yCell=0) constructor
 	parent = undefined;
 	HeapIndex = 0;
     cell = vect2(_xCell,_yCell);
-    center = vect2(_xCell*CELL_SIZE+0.5*CELL_SIZE, _yCell*CELL_SIZE+0.5*CELL_SIZE);
+    center = vect2(_xCell*TILE_SIZE+0.5*TILE_SIZE, _yCell*TILE_SIZE+0.5*TILE_SIZE);
 	static fCost = function(){
 	    return gCost + hCost;
 	}	

@@ -1,7 +1,7 @@
 function AvoidObstructions(_x, _y, _blocked){
 	var _nodeList = ds_list_create();
-	var _slowRange = CELL_SIZE;
-	var _maskRange = CELL_SIZE-5;
+	var _slowRange = TILE_SIZE;
+	var _maskRange = TILE_SIZE-5;
 	var _weight = 0;
 	var _dist = 0;
 	var _x2 = 0;
@@ -12,8 +12,8 @@ function AvoidObstructions(_x, _y, _blocked){
 	var _map = 0; // new map to be added to the set
 	var _uNode = 0; // unit vector to node point
 	var _uMap = 0; // unit vector of context map
-	var _xCell = _x div CELL_SIZE;
-	var _yCell = _y div CELL_SIZE;
+	var _xCell = _x div TILE_SIZE;
+	var _yCell = _y div TILE_SIZE;
 	// get node & neighboring nodes, add them to a list
 	for(var xx=-1;xx<=1;xx++) {
 	for(var yy=-1;yy<=1;yy++) {

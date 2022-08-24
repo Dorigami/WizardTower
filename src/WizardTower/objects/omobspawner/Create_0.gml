@@ -9,6 +9,9 @@ height = 500;
 mouseOffsetX = 0;
 mouseOffsetY = 0;
 
+x = 0;
+y = 0;
+
 tabHeight = 10; // thickness of the tab used to click and drag window
 tabDrag = false;
 
@@ -24,15 +27,16 @@ money = 0;
 
 // get all existing paths from the room's layer properties
 varPaths = [];
-var n = 0;
-while(path_exists(n))
+for(var i=0;i<6;i++)
 {
-	if(path_get_closed(n) == 0) varPaths[array_length(varPaths)] = n;
-	n++;
+	if(path_get_closed(global.mobPaths[i]) == false) 
+	{
+		varPaths[array_length(varPaths)] = global.mobPaths[i];
+		show_debug_message("adding path: " + path_get_name(global.mobPaths[i]));
+	}
 }
-path = varPaths[0];
-show_debug_message("paths:" + string(varPaths));
-
+if(array_length(varPaths) > 0) path = varPaths[0];
+show_debug_message(string(varPaths));
 
 // list the names of the variables that will be adjusted
 varNames = [
@@ -56,7 +60,7 @@ function SetPath(){
 	    // set value
         if(txtbox.text != "")
         {
-            path = clamp(real(txtbox.text),0,array_length(varPaths)-1);
+            path = varPaths[clamp(real(txtbox.text),0,array_length(varPaths)-1)];
             txtbox.text = "";
             txtbox.caption = "path = " + string(path) + " (" + path_get_name(path) + ")";
         }
@@ -174,28 +178,30 @@ function SpawnMob(){
 }
 
 var _sprite = sTextbox;
+var _h1 = 110;
+var _h2 = 215
 var _vOrigin = 20;
 var _vSpacing = 22;
 var yValues = array_create(9, 0);
 for(var i=0;i<9;i++) yValues[i] = _vOrigin+_vSpacing*i
 
-TextBoxAdd(110,yValues[0],id,0,"path",_sprite,"","path = " + string(path),5,SetType,-1);
-TextBoxAdd(110,yValues[1],id,1,"type",_sprite,"","type = " + string(type),5,SetType,-1);
-TextBoxAdd(110,yValues[2],id,2,"groupSize",_sprite,"","groupSize = " + string(groupSize),5,SetGroupSize,-1);
-TextBoxAdd(110,yValues[3],id,3,"health",_sprite,"","health = " + string(health),5,SetHealth,-1);
-TextBoxAdd(110,yValues[4],id,4,"speed",_sprite,"","speed = " + string(speed),5,SetSpeed,-1);
-TextBoxAdd(110,yValues[5],id,5,"armor",_sprite,"","armor = " + string(armor),5,SetArmor,-1);
-TextBoxAdd(110,yValues[6],id,6,"stealth",_sprite,"","stealth = " + string(stealth),5,SetStealth,-1);
-TextBoxAdd(110,yValues[7],id,7,"money",_sprite,"","money = " + string(money),5,SetMoney,-1);
+TextBoxAdd(_h1,yValues[0],id,0,"path",_sprite,"","path = " + string(path),5,SetPath,-1);
+TextBoxAdd(_h1,yValues[1],id,1,"type",_sprite,"","type = " + string(type),5,SetType,-1);
+TextBoxAdd(_h1,yValues[2],id,2,"groupSize",_sprite,"","groupSize = " + string(groupSize),5,SetGroupSize,-1);
+TextBoxAdd(_h1,yValues[3],id,3,"health",_sprite,"","health = " + string(health),5,SetHealth,-1);
+TextBoxAdd(_h1,yValues[4],id,4,"speed",_sprite,"","speed = " + string(speed),5,SetSpeed,-1);
+TextBoxAdd(_h1,yValues[5],id,5,"armor",_sprite,"","armor = " + string(armor),5,SetArmor,-1);
+TextBoxAdd(_h1,yValues[6],id,6,"stealth",_sprite,"","stealth = " + string(stealth),5,SetStealth,-1);
+TextBoxAdd(_h1,yValues[7],id,7,"money",_sprite,"","money = " + string(money),5,SetMoney,-1);
 
 _sprite = sBtnRadial16x16;
-ButtonAdd(215,yValues[0],id,8,"btnPath",_sprite,-1,SetPath,-1);
-ButtonAdd(215,yValues[1],id,9,"btnType",_sprite,-1,SetType,-1);
-ButtonAdd(215,yValues[2],id,10,"btnGroupSize",_sprite,-1,SetGroupSize,-1);
-ButtonAdd(215,yValues[3],id,11,"btnHealth",_sprite,-1,SetHealth,-1);
-ButtonAdd(215,yValues[4],id,12,"btnSpeed",_sprite,-1,SetSpeed,-1);
-ButtonAdd(215,yValues[5],id,13,"btnArmor",_sprite,-1,SetArmor,-1);
-ButtonAdd(215,yValues[6],id,14,"btnStealth",_sprite,-1,SetStealth,-1);
-ButtonAdd(215,yValues[7],id,15,"btnMoney",_sprite,-1,SetMoney,-1);
+ButtonAdd(_h2,yValues[0],id,8,"btnPath",_sprite,-1,SetPath,-1);
+ButtonAdd(_h2,yValues[1],id,9,"btnType",_sprite,-1,SetType,-1);
+ButtonAdd(_h2,yValues[2],id,10,"btnGroupSize",_sprite,-1,SetGroupSize,-1);
+ButtonAdd(_h2,yValues[3],id,11,"btnHealth",_sprite,-1,SetHealth,-1);
+ButtonAdd(_h2,yValues[4],id,12,"btnSpeed",_sprite,-1,SetSpeed,-1);
+ButtonAdd(_h2,yValues[5],id,13,"btnArmor",_sprite,-1,SetArmor,-1);
+ButtonAdd(_h2,yValues[6],id,14,"btnStealth",_sprite,-1,SetStealth,-1);
+ButtonAdd(_h2,yValues[7],id,15,"btnMoney",_sprite,-1,SetMoney,-1);
 
 ButtonAdd(215,yValues[8],id,16,"btnSpawn",_sprite,-1,SpawnMob,-1);

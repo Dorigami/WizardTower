@@ -25,7 +25,7 @@ function NexusStateSpawn(){
 				active = true;
 				mySpawner = other.id;
 				position = vect2(x,y);
-				MoveCommand(id, myNode.center[1]+CELL_SIZE, myNode.center[2]);
+				MoveCommand(id, myNode.center[1]+TILE_SIZE, myNode.center[2]);
 			}
 		}	
 		state = STATE.FREE;

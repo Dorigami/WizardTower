@@ -2,6 +2,6 @@
 
 if(!global.gamePaused)
 {
-	myNode = global.gridSpace[# x div CELL_SIZE, y div CELL_SIZE];
+	myNode = global.gridSpace[# x div TILE_SIZE, y div TILE_SIZE];
 	if(stateScript[state] != -1) script_execute(stateScript[state]);
 }

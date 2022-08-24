@@ -132,8 +132,8 @@ with(pUnit)
 	if(allMasked) velocity = vect2(0,0);
 	position = vect_add(position,velocity);
 
-	position[1] = clamp(position[1],0,GRID_WIDTH*CELL_SIZE);
-	position[2] = clamp(position[2],0,GRID_WIDTH*CELL_SIZE);
+	position[1] = clamp(position[1],0,GRID_WIDTH*TILE_SIZE);
+	position[2] = clamp(position[2],0,GRID_WIDTH*TILE_SIZE);
 	x = position[1];
 	y = position[2];
 
@@ -152,15 +152,13 @@ with(pUnit)
 		gridY = _y;
 		// add id to the target list for towers in range
 		var _node = global.gridSpace[# _x, _y];
-		if(ds_list_size(node.towersIR) > 0)
+		if(!is_undefined(_node)) && (ds_list_size(_node.towersIR) > 0)
 		{
-			for(var i=0;i<ds_list_size(node.towersIR);i++)
+			for(var i=0;i<ds_list_size(_node.towersIR);i++)
 			{
+				// add instance to the towers' target list
 				var _tower = node.towersIR[| i];
-				if(!is_undefined(_tower)) && (instance_exists(_tower))
-				{
-					ds_list_add(_tower.targetList);
-				}
+				if(!is_undefined(_tower)) && (instance_exists(_tower)) ds_list_add(_tower.targetList);
 			}
 		}	
 	}

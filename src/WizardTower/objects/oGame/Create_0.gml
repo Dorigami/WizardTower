@@ -4,7 +4,7 @@
 #macro ROOMSTART rStartMenu
 #macro GRID_WIDTH 40
 #macro GRID_HEIGHT 24
-#macro CELL_SIZE 32
+#macro TILE_SIZE 32
 #macro FRAME_RATE 32
 #macro MENUDEPTH -7777
 #macro BUTTONDEPTH -6666
@@ -38,7 +38,7 @@ GridNode = function(_xCell=0,_yCell=0) constructor
     towersIR = ds_list_create(); // g = discomfort
 	parent = undefined;
     cell = vect2(_xCell,_yCell);
-    center = vect2(_xCell*CELL_SIZE+0.5*CELL_SIZE, _yCell*CELL_SIZE+0.5*CELL_SIZE);
+    center = vect2(_xCell*TILE_SIZE+0.5*TILE_SIZE, _yCell*TILE_SIZE+0.5*TILE_SIZE);
 }
 
 // set up the camera(s)
@@ -105,6 +105,7 @@ global.gridSpace = ds_grid_create(GRID_WIDTH, GRID_HEIGHT);
 global.startPoint = vect2(0,0);
 global.goalPoint = vect2(0,0);
 global.col = layer_tilemap_get_id(layer_get_id("Col"));
+global.mobPaths = [pathMob0, pathMob1, pathMob2, pathMob3, pathMob4, pathMob5];
 menuStack = ds_stack_create();
 for(var i=0;i<GRID_WIDTH;i++ ) { 
 for(var j=0;j<GRID_HEIGHT;j++) {

@@ -187,6 +187,7 @@ Button = function() constructor{
 				highlighted = false;
 				pressed = false;
 			}
+			if(container.controlsFocus == index) && (keyboard_check_pressed(vk_enter)) activated = true;
 			if(activated)
 			{
 				activated = false;

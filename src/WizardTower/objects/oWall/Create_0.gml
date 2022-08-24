@@ -28,7 +28,7 @@ function WallStateSpawn(){
 	{
 		state = STATE.FREE;
 		myNode.walkable = true;
-		myNode.discomfort += 8*CELL_SIZE;
+		myNode.discomfort += 8*TILE_SIZE;
 		image_alpha = 1;
 	}
 }

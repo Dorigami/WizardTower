@@ -3,6 +3,9 @@
 // allow dragging
 if(tabDrag)
 {
-	x = clamp(mouse_x + mouseOffsetX, 0, room_width-width);
-	y = mouse_y; //clamp(mouse_y + mouseOffsetY, 0, room_height-height);
+	x = clamp(mouse_x + mouseOffsetX, 0, GRID_WIDTH*TILE_SIZE - width);
+	y = clamp(mouse_y + mouseOffsetY, tabHeight, GRID_HEIGHT*TILE_SIZE - height);
+} else {
+	x = clamp(x, 0, GRID_WIDTH*TILE_SIZE - width);
+	y = clamp(y, tabHeight, GRID_HEIGHT*TILE_SIZE - height);
 }
