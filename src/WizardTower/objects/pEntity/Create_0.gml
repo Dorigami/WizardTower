@@ -11,9 +11,8 @@ flashSpeed = 0.04;
 uFlash = shader_get_uniform(shWhiteFlash, "flash");
 flashShader = shWhiteFlash;
 invulnerable = 0;
-myNode = global.gridSpace[# x div TILE_SIZE, y div TILE_SIZE];
 showBars = false;
-faction = FACTION.PLAYER;
+
 /*
 
 // draw variables

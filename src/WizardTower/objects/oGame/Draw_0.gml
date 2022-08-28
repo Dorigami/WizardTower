@@ -1,5 +1,8 @@
 /// @description 
 
+/*
+
+// show the gridspace
 draw_set_color(c_white)
 draw_rectangle(0,0,room_width,room_height,true)
 draw_set_alpha(0.2);

@@ -9,8 +9,8 @@
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "pStructure",
-    "path": "objects/pStructure/pStructure.yy",
+    "name": "pTower",
+    "path": "objects/pTower/pTower.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -29,7 +29,7 @@
   ],
   "properties": [],
   "overriddenProperties": [
-    {"propertyId":{"name":"statBuildTime","path":"objects/pStructure/pStructure.yy",},"objectId":{"name":"pStructure","path":"objects/pStructure/pStructure.yy",},"value":"3","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"statBuildTime","path":"objects/pTower/pTower.yy",},"objectId":{"name":"pTower","path":"objects/pTower/pTower.yy",},"value":"3","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "Trash",

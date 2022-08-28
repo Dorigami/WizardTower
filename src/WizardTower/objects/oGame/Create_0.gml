@@ -16,22 +16,6 @@
 #macro SOUTH 3
 #macro CS_RESOLUTION 6
 
-enum FACTION
-{
-	PLAYER,
-	NATURE,
-	ENEMY
-}
-enum STATE
-{
-	SPAWN,
-	FREE,
-	BUILD,
-	GATHER,
-	ATTACK,
-	DEAD
-}
-
 GridNode = function(_xCell=0,_yCell=0) constructor
 {
     blocked = false; // whether the cell has something built on it
@@ -89,6 +73,30 @@ function InitializeDisplay(){
 	alarm[0] = 1;
 }
 
+playerHealth = 100;
+playerMoney = 20;
+menuStack = ds_stack_create();
+spawnerMemory = {
+	path : pathMob0,
+	type : 0,
+	groupSize : 5,
+	hp : 10,
+	damage : 1,
+	spd : 1,
+	armor : 0,
+	stealth : 0,
+	money : 10
+}
+
+path = -1;
+type = 0;
+groupSize = 0;
+hp = 0;
+damage = 0;
+spd = 0;
+armor = 0;
+stealth = 0;
+money = 0;
 // game setup
 depth = -9990;
 game_set_speed(FRAME_RATE, gamespeed_fps);
@@ -100,17 +108,71 @@ global.muteSound = false;
 global.iGame = id;
 global.iCamera = instance_create_layer(0,0,"Instances",oCamera);
 global.iPlayer = instance_create_layer(0,0,"Instances",oPlayer);
+global.iUI = instance_create_layer(0,0,"Instances",oUI);
 global.unitSelection = ds_list_create();
 global.gridSpace = ds_grid_create(GRID_WIDTH, GRID_HEIGHT);
 global.startPoint = vect2(0,0);
 global.goalPoint = vect2(0,0);
 global.col = layer_tilemap_get_id(layer_get_id("Col"));
 global.mobPaths = [pathMob0, pathMob1, pathMob2, pathMob3, pathMob4, pathMob5];
-menuStack = ds_stack_create();
 for(var i=0;i<GRID_WIDTH;i++ ) { 
 for(var j=0;j<GRID_HEIGHT;j++) {
 	global.gridSpace[# i, j] = new GridNode(i,j);
 }}
+
+
+
+// setup a map to store the default tower stats
+defaultStats = ds_map_create();
+
+	
+var _pellet = { cost : 1, damage : 1, armorpierce : 1, cooldown : 1,
+		        range : 3, detect : false, moneyMod : 1 }
+				ds_map_add(defaultStats, oTowerPellet, _pellet);
+	
+var _minigun = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		            range : 1, detect : false, moneyMod : 1 }
+					ds_map_add(defaultStats, oTowerMinigun, _minigun);
+	
+var _bomber = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		        range : 1, detect : false, moneyMod : 1 }
+				ds_map_add(defaultStats, oTowerBomber, _bomber);
+
+var _bolt = { cost : 2, damage : 1, armorpierce : 1, cooldown : 1,
+		        range : 1, detect : false, moneyMod : 1 }
+				ds_map_add(defaultStats, oTowerBolt, _bolt);
+
+var _sniper = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		        range : 1, detect : false, moneyMod : 1 }
+				ds_map_add(defaultStats, oTowerSniper, _sniper);
+	
+var _laser = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		        range : 1, detect : false, moneyMod : 1 }
+				ds_map_add(defaultStats, oTowerLaser, _laser);
+
+var _ice = { cost : 3, damage : 1, armorpierce : 1, cooldown : 1,
+		        range : 1, detect : false, moneyMod : 1 }
+				ds_map_add(defaultStats, oTowerIce, _ice);
+
+var _brittle = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		            range : 1, detect : false, moneyMod : 1 }
+					ds_map_add(defaultStats, oTowerBrittle, _brittle);
+
+var _frost = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		        range : 1, detect : false, moneyMod : 1 }
+				ds_map_add(defaultStats, oTowerFrost, _frost);
+
+var _intel = { cost : 4, damage : 1, armorpierce : 1, cooldown : 1,
+		        range : 1, detect : false, moneyMod : 1 }
+				ds_map_add(defaultStats, oTowerIntel, _intel);
+
+var _spotter = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		            range : 1, detect : false, moneyMod : 1 }
+					ds_map_add(defaultStats, oTowerSpotter, _spotter);
+
+var _stalker = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		            range : 1, detect : false, moneyMod : 1 }
+					ds_map_add(defaultStats, oTowerStalker, _stalker);
 
 room_goto(ROOMSTART);
 
@@ -135,49 +197,9 @@ room_goto(ROOMSTART);
         spotter - adjacent towers will get additional money yield, and also have stealth detect
         stalker - adjacent towers will also have a small armor piercing and damage bonus
 
-    tower stats = {
-        damage : 0 // basic damage resisted by armor
-        armorpierce : 0 // true damage that ignores armor
-        cooldown : 0 // delay between attacks
-        range : 0 // distance threashold to attack enemies
-		detect : false // ability to see stealth units
-		moneyMod : 0 // multiplier to gold income per kill
-    }
-    unit stats = {
-		hp : 0 // damage required to defeat the enemy
-        damage : 0 // value that is dealt to player if they are not defeated
-		speed : 0 // movement rate 
-		armor : 0 // this value is deducted from incoming basic damage
-		stealth : false // only towers with detection can attack 
-		money : 0 // value awarded to the player when defeated
-    }
-
-    have a ui to spawn enemies with the ability to set: group size, armor, health, speed,
-
-	-- algorithm to follow path using context steering --
-
-//--// pUnit create
-
-var _struct = { units will be given a structed when created that will have:
-	path : -1,
-	hp : 0, 
-	damage : 0,
-	speed : 0, 
-	armor : 0,
-	stealth : false, 
-	money : 0
-}
-oldnum = -1;
-newnum = -1;
-/////////////////////////////////////////////////// path = -1; //////////
-pathNum = path_get_number(path);
-pathLen = path_get_length(path);
-pathVect = vect2(0,0); // direction that path is currently going
-pathPos = 0; // number from 0 - 1 indicating progress
-pathNode = vect2(path_get_point_x(path,0), path_get_point_y(path,0));
 
 //--//COLOR PALETTE:
-	i'll need a a palette of 8 colors
+	i'll need a palette of 8 colors
 	2 to be used for towers
 	2 to be used for enemies
 	2 to be used for the terrain
@@ -203,13 +225,8 @@ SLSO8 PALETTE
 #ffecd6 rgb(255,236,214)
 
 //--//things I updated:
-	oMobSpawner - create event
-	pUnit - create event
-	oGame - begin step event
-	move GridNode struct over to oGame 
-		(delete the pathfinding codes)
-		(keep context steering codes)
-
+	oGame - create event
+	
 //--// things to work on
 	- tower sprites
 	- tower mechanics
@@ -218,4 +235,5 @@ SLSO8 PALETTE
 	- player money
 	- game UI
 	- enemy spawn timeline
+
 */

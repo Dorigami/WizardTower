@@ -9,8 +9,8 @@
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "pStructure",
-    "path": "objects/pStructure/pStructure.yy",
+    "name": "pTower",
+    "path": "objects/pTower/pTower.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -24,12 +24,14 @@
   "physicsStartAwake": true,
   "physicsKinematic": false,
   "physicsShapePoints": [],
-  "eventList": [],
+  "eventList": [
+    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+  ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Trash",
-    "path": "folders/Objects/Trash.yy",
+    "name": "Towers",
+    "path": "folders/Objects/Entities/Towers.yy",
   },
   "resourceVersion": "1.0",
   "name": "oTowerBolt",

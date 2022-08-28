@@ -22,6 +22,5 @@ for(var j=0;j<GRID_HEIGHT;j++) {
 global.onButton = false;
 if(room == rTest)
 {
-	CreateButton(oButtonGeneric,sBtn32x32,10,0.5*_height,"tower",true,-1,-1,NewStructurePlacement,[oTower]);
-	CreateButton(oButtonGeneric,sBtn32x32,10,0.6*_height,"wall",true,-1,-1,NewStructurePlacement,[oWall]);
+	global.iUI.fadeIn = true;
 }

@@ -9,8 +9,8 @@
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "pStructure",
-    "path": "objects/pStructure/pStructure.yy",
+    "name": "pTower",
+    "path": "objects/pTower/pTower.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,

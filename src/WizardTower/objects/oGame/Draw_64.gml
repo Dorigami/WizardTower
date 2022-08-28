@@ -1,7 +1,7 @@
 /// @description view data
 
-
-
+/*
+ 
 // show all unit data
 var _str = "";
 draw_set_halign(fa_left);

@@ -122,7 +122,7 @@ TextBox = function() constructor{
 		draw_set_color(c_white);
 	}
 }
-function ButtonAdd(_x, _y, _cntr, _ind, _name, _spr, _sprAlt, _scr, _scrArgs){
+function ButtonAdd(_x, _y, _cntr, _ind, _name, _spr, _sprAlt, _caption, _hotkey, _scr, _scrArgs){
 	var _newControl = new Button()
 	with _newControl
 	{
@@ -130,6 +130,8 @@ function ButtonAdd(_x, _y, _cntr, _ind, _name, _spr, _sprAlt, _scr, _scrArgs){
 		index = _ind;
 		name = _name;
 		sprite = _spr;
+		caption = _caption;
+		hotkey = _hotkey;
 		spriteAlt = _sprAlt;
 		activationScript = _scr;
 		activationScriptArgs = _scrArgs;
@@ -149,6 +151,8 @@ Button = function() constructor{
 	spriteAlt = undefined;
 	drawAlt = false;
 	image = 0;
+	caption = "";
+	hotkey = undefined;
 	width = 0;
 	height = 0;
 	x = 0;
@@ -168,6 +172,10 @@ Button = function() constructor{
 			width = sprite_get_width(sprite);
 			height = sprite_get_height(sprite);
 		}
+		if(!is_undefined(hotkey))
+		{
+			caption += "\n[" + chr(hotkey) + "]";
+		}
 	}
 	static Update = function(){
 		xTrue = x + container.x;
@@ -177,17 +185,29 @@ Button = function() constructor{
 			if(point_in_rectangle(mouse_x,mouse_y,xTrue,yTrue,xTrue+width,yTrue+height))
 			{
 				highlighted = true;
-				pressed = mouse_check_button(mb_any) 
+				pressed = mouse_check_button(mb_any);
 				if(mouse_check_button_released(mb_any)) 
 				{
 					container.controlsFocus = index;
-					activated = true
+					activated = true;
 				}
 			} else {
 				highlighted = false;
 				pressed = false;
 			}
-			if(container.controlsFocus == index) && (keyboard_check_pressed(vk_enter)) activated = true;
+			// respond to key presses
+			// activate on enter when focused
+			if(container.controlsFocus == index)
+			{ 
+				highlighted = true;
+				if(keyboard_check_pressed(vk_enter)) activated = true;
+			}
+			// hotkey to activate the button
+			if(!is_undefined(hotkey))
+			{
+				if(keyboard_check(hotkey)) pressed = true;
+				if(keyboard_check_released(hotkey)) activated = true;
+			}
 			if(activated)
 			{
 				activated = false;
@@ -201,18 +221,24 @@ Button = function() constructor{
 		}
 	}
 	static Draw = function(){
-		draw_set_color(c_black);
-		if(instance_exists(container))&&(index == container.controlsFocus) draw_rectangle(xTrue,yTrue,xTrue+width,yTrue+height,true)
-		draw_set_color(c_white);
 		var _alpha = enabled ? min(1, container.image_alpha) : min(0.5, container.image_alpha); 
 		draw_set_alpha(_alpha);
+		draw_set_color(c_white);
+		// draw button sprite
 		if(drawAlt) && (!is_undefined(spriteAlt))
 		{
 			draw_sprite(spriteAlt, image, xTrue, yTrue)
 		} else {
 			draw_sprite(sprite, image, xTrue, yTrue);
 		}
-		draw_set_alpha(container.image_alpha);
+		if(!is_undefined(caption))
+		{
+			// show caption
+			draw_set_halign(fa_center);
+			draw_set_valign(fa_middle);
+			draw_text(xTrue + 0.5*width, yTrue + 0.5*height, caption);
+			draw_set_alpha(1);
+		}
 	}
 }
 function LabelAdd(_x, _y, _cntr, _ind, _name, _spr, _text, _caption){
