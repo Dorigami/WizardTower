@@ -1,4 +1,7 @@
 /// @description Control the Button
+
+if(ds_stack_top(global.iGame.menuStack) != id) exit;
+
 controlsCount = ds_list_size(controlsList)
 if(controlsCount > 0)
 {
