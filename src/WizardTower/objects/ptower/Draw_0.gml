@@ -14,9 +14,10 @@ draw_sprite_ext(sprite_index,
 				image_blend,
 				image_alpha
 				);
-draw_text(x,y-40,"0: " + string(alarm[0]) + "\n1: " + string(alarm[1]) + "  size: " + string(ds_list_size(targetList)));
+				
+//draw_text(x,y-40,"0: " + string(cdTimer) + "\n1: " + string(alarm[1]) + "  size: " + string(ds_list_size(targetList)));
+//draw_circle(x+0.5*TILE_SIZE,y+0.5*TILE_SIZE,range*TILE_SIZE,true);
 
-draw_circle(x+0.5*TILE_SIZE,y+0.5*TILE_SIZE,range*TILE_SIZE,true);
 //draw_text(x+20,y-40,"alarm[0] = " + string(alarm[0]) 
 //			   + "\n"+script_get_name(stateScript[state])
 //			   + "\n"+string(image_alpha)  

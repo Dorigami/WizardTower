@@ -79,8 +79,8 @@ menuStack = ds_stack_create();
 spawnerMemory = {
 	path : pathMob0,
 	type : 0,
-	groupSize : 5,
-	hp : 10,
+	groupSize : 8,
+	hp : 3,
 	damage : 1,
 	spd : 1,
 	armor : 0,
@@ -125,8 +125,8 @@ for(var j=0;j<GRID_HEIGHT;j++) {
 // setup a map to store the default tower stats
 defaultStats = ds_map_create();
 
-	
-var _pellet = { cost : 1, damage : 1, armorpierce : 1, cooldown : 1,
+//--// towers
+var _pellet = { cost : 1, damage : 1, armorpierce : 1, cooldown : 0.5,
 		        range : 3, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerPellet, _pellet);
 	
@@ -138,8 +138,8 @@ var _bomber = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 		        range : 1, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerBomber, _bomber);
 
-var _bolt = { cost : 2, damage : 1, armorpierce : 1, cooldown : 1,
-		        range : 1, detect : false, moneyMod : 1 }
+var _bolt = { cost : 2, damage : 2, armorpierce : 1, cooldown : 1,
+		        range : 4, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerBolt, _bolt);
 
 var _sniper = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
@@ -150,8 +150,8 @@ var _laser = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 		        range : 1, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerLaser, _laser);
 
-var _ice = { cost : 3, damage : 1, armorpierce : 1, cooldown : 1,
-		        range : 1, detect : false, moneyMod : 1 }
+var _ice = { cost : 3, damage : 3, armorpierce : 1, cooldown : 1,
+		        range : 2, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerIce, _ice);
 
 var _brittle = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
@@ -173,10 +173,32 @@ var _spotter = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 var _stalker = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 		            range : 1, detect : false, moneyMod : 1 }
 					ds_map_add(defaultStats, oTowerStalker, _stalker);
+//--// enemies
+// - grunt (basic unit, high numbers)
+// - brute (small numbers, high health)
+// - golem (small numbers, high armor)
+// - fiend (fast, but low health)
+// - transport (armored, slow, spawns grunts when killed)
+var _grunt = {type : 0,hp : 4,damage : 1,spd : 2,armor : 1,stealth : 0,money : 5}
+				ds_map_add(defaultStats, oUnitGrunt, _grunt);
+	
+var _brute = {type : 1,hp : 8,damage : 1,spd : 1,armor : 2,stealth : 0,money : 25}
+					ds_map_add(defaultStats, oUnitBrute, _brute);
+	
+var _golem = {type : 2,hp : 10,damage : 1,spd : 1,armor : 10,stealth : 0,money : 25}
+				ds_map_add(defaultStats, oUnitGolem, _golem);
+
+var _fiend = {type : 3,hp : 2,damage : 1,spd : 3,armor : 0,stealth : 0,money : 10}
+				ds_map_add(defaultStats, oUnitFiend, _fiend);
+
+var _transport = {type : 4,hp : 6,damage : 1,spd : 1.5,armor : 4,stealth : 0,money : 15}
+				ds_map_add(defaultStats, oUnitTransport, _transport);
 
 room_goto(ROOMSTART);
 
 /*
+	This game will have a cyberspace-pixelart style.  the enemies should resemble viruses, the terrain should look like a circuit/pcb or maybe just a minimalist pixely walkway (makeing it look like some environment within a computer's logic)
+	
 	create a generic room   
 	create a static path in the room for mobs to follow
 
@@ -225,15 +247,121 @@ SLSO8 PALETTE
 #ffecd6 rgb(255,236,214)
 
 //--//things I updated:
+	oAttackBolt
 	oGame - create event
-	
 //--// things to work on
+	- define modifiers for waves to give enemies stealth, extra armor, etc...
+	- find/create a tileset for the terrain & paths
 	- tower sprites
-	- tower mechanics
+	- tower mechanics (add a kill count for individual towers)
 	- enemy sprites
 	- player health / enemy damage
 	- player money
 	- game UI
 	- enemy spawn timeline
+	- music
+		- startmenu jingle
+		- stage 1 track
+	- sound effects
+		- sndStageVictory
+		- sndStageDefeat
+		- sndGruntHurt
+		- sndGruntKill
+		- sndGruntAttack
+		- sndBruteHurt
+		- sndBruteKill
+		- sndBruteAttack
+		- sndGolemHurt
+		- sndGolemKill
+		- sndGolemAttack
+		- sndFiendHurt
+		- sndFiendKill
+		- sndFiendAttack
+		- sndTransportHurt
+		- sndTransportKill
+		- sndTransportAttack
+		- sndTowerBuilt
+		- sndTowerSold
+		- sndTowerUpgrade
+		- sndShootPellet
+		- sndShootMinigun
+		- sndShootBomber
+		- sndShootBolt
+		- sndShootSniper
+		- sndShootLaser
+		- sndShootIce
+		- sndShootBrittle
+		- sndShootFrostbite
+		- sndShootIntel
+		- sndShootSpotter
+		- sndShootStalker
+	- animations
+		- sGrunt
+		- sGruntDie
+		- sBrute
+		- sBruteDie
+		- sGolem
+		- sGolemDie
+		- sFiend
+		- sFiendDie
+		- sTransport
+		- sTransportDie
+        - sTowerPelletIdle
+		- sTowerPelletShoot
+        - sTowerMinigunIdle
+		- sTowerMinigunShoot
+        - sTowerBomberIdle
+		- sTowerBomberShoot
+        - sTowerBoltIdle
+		- sTowerBoltShoot
+        - sTowerSniperIdle
+		- sTowerSniperShoot
+        - sTowerLaserIdle
+		- sTowerLaserShoot
+        - sTowerIceIdle
+		- sTowerIceShoot
+        - sTowerBrittleIdle
+		- sTowerBrittleShoot
+        - sTowerFrostIdle
+		- sTowerFrostShoot
+        - sTowerIntelIdle
+		- sTowerIntelShoot
+        - sTowerSpotterIdle
+		- sTowerSpotterShoot
+        - sTowerStalkerIdle
+		- sTowerStalkerShoot
+		- sBtnPause
+		- sBtnResetCamera
+		- sBtnMuteSound
+		- sBtnMuteMusic
+		- sBtnBuyItem
+	- add purchase options to the UI for misc buffs/interventions
+		- stuff like: resotre 1 hp to player or place a temporary slow field on the map
+	- add a ui button to start next wave early, this will buf the units' money yield for that wave
 
+	
+	oTimeline
+	- create -
+// array of stucts used to initialize the timeline
+stageData = [
+{ moment : 000, path : pathMob0, type : 0, groupSize : 8, mutators : -1 },
+{ moment : 200, path : pathMob0, type : 1, groupSize : 8, mutators : -1 },
+{ moment : 400, path : pathMob0, type : 2, groupSize : 8, mutators : -1 },
+{ moment : 600, path : pathMob0, type : 3, groupSize : 8, mutators : -1 },
+{ moment : 800, path : pathMob0, type : 4, groupSize : 8, mutators : -1 }
+];
+// get all unique moment times from the stage data
+var _list - ds_list_create();
+for(var i=0;i<array_length(stageData);i++)
+{
+	if(ds_list_find_index(_list,stageData[i].moment) == -1)
+	{
+		ds_list_add(_list, stageData[i].moment);
+	}
+}
+// create an array used for drawing the timeline to the UI
+timelineMarkers = array_create(ds_list_size(_list),-1);
+for(var i=0;i<ds_list_size(_list);i++) { timelineMarkers[i] = _list[| i]; }
+ds_list_destroy(_list);
 */
+

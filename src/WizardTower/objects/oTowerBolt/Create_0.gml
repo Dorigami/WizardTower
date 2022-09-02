@@ -5,3 +5,5 @@
 event_inherited();
 
 attackScript = AttackBolt;
+
+

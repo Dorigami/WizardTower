@@ -21,6 +21,7 @@ targetRefresh = 10;
 cdTimer = -1;
 targetLimit = 1;
 
+
 radialOptions = -1;
 radialArgs = -1;
 radialActive = false;
@@ -35,5 +36,9 @@ function GetEnemies(){
 	var _r = range*TILE_SIZE;
 	ds_list_clear(targetList)
 	collision_circle_list(_x,_y,_r,pUnit,false,true,targetList,false);
+	while(ds_list_size(targetList) > targetLimit)
+	{
+		ds_list_delete(targetList,ds_list_size(targetList)-1)
+	}
 }
 

@@ -1,17 +1,24 @@
 /// @description Control the Button
 
 if(ds_stack_top(global.iGame.menuStack) != id) exit;
-
-controlsCount = ds_list_size(controlsList)
-if(controlsCount > 0)
+if(!global.gamePaused)
 {
-	for(var i=0; i<controlsCount; i++)
+	// remove menu when escape is pressed
+	if(keyboard_check_pressed(vk_escape)) && (ds_stack_top(global.iGame.menuStack) == id) && (object_index != oUI)
 	{
-		var _ctrl = controlsList[| i];
-		_ctrl.Update();
+		instance_destroy();
+	}
+	// update controls
+	controlsCount = ds_list_size(controlsList)
+	if(controlsCount > 0)
+	{
+		for(var i=0; i<controlsCount; i++)
+		{
+			var _ctrl = controlsList[| i];
+			_ctrl.Update();
+		}
 	}
 }
-
 /*
 
 if(!enabled)

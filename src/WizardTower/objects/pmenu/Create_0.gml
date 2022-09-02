@@ -174,7 +174,10 @@ Button = function() constructor{
 		}
 		if(!is_undefined(hotkey))
 		{
-			caption += "\n[" + chr(hotkey) + "]";
+			if(hotkey != vk_enter) && (hotkey != vk_space)
+			{
+				caption += "\n[" + chr(hotkey) + "]";
+			}
 		}
 	}
 	static Update = function(){

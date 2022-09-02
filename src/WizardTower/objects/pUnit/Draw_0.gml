@@ -1,6 +1,29 @@
 /// @description
 
 if(shadowEnabled) draw_sprite_ext(sShadow,0,floor(x),floor(y),shadowScale,shadowScale,0,c_white,1);
+
+if(flash != 0)
+{   // set shader
+	shader_set(flashShader); uFlash = shader_get_uniform(flashShader, "flash"); shader_set_uniform_f(uFlash, flash);
+	// draw flashing entity
+	draw_sprite_ext( sprite_index,image_index,floor(x),floor(y-z),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
+	shader_reset();
+} else {
+	// draw entity normally
+	draw_sprite_ext( sprite_index,image_index,floor(x),floor(y-z),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
+}
+// draw a health bar
+if(hp < hpMax)
+{
+	draw_healthbar(hpRect[0],hpRect[1],hpRect[2],hpRect[3],100*(hp/hpMax),c_black,c_green,c_green,0,true,true);
+}
+
+draw_text(x+10,y,string(spd));
+
+/*
+ 
+original draw code, with unit selection 
+if(shadowEnabled) draw_sprite_ext(sShadow,0,floor(x),floor(y),shadowScale,shadowScale,0,c_white,1);
 if(selected){
 	if(ds_exists(path,ds_type_list))
 	{
@@ -45,7 +68,8 @@ if(selected){
 	}
 }
 
-/* show context
+//--/////////////////////////////////////////////// 
+////// show context
 
 var _innerLen = 20;
 var _outerLen = 60;
@@ -81,6 +105,7 @@ draw_set_color(c_white);
 draw_circle(x,y,_innerLen,true);
 draw_circle(x,y,_outerLen,true);
 
+//--///////////////////////////////////////////////
 
 //show_debug_message(string(shader_current()));
 //// reset shader

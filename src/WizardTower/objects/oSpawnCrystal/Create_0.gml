@@ -10,6 +10,6 @@ stateScript[STATE.BUILD] = -1;
 stateScript[STATE.GATHER] = -1;
 stateScript[STATE.DEAD] = StructureDead;
 
-radialArgs = [[oButtonRadial,sImpRadial,x,y,"",false,RadialSpawnEnemy,[oImp],RadialSpawnEnemy,[oImp]]
+radialArgs = [[oButtonRadial,sImpRadial,x,y,"",false,RadialSpawnEnemy,[oUnitGrunt],RadialSpawnEnemy,[oUnitGrunt]]
 			 ];
 radialOptions = array_create(array_length(radialArgs),noone);

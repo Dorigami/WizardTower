@@ -41,7 +41,7 @@ varNames = [
     "money"
 ];
 varEnemies = [
-    oImp
+    oUnitGrunt
 ];
 
 function SetPath(){ 

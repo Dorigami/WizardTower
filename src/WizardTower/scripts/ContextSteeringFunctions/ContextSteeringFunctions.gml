@@ -113,7 +113,7 @@ function csChaseGoal(_goal){
 	var _uObj = 0; // unit vector of the object
 	var _uMap = 0; // unit vector of context map
 	// get interest values
-	show_debug_message(string(_goal))
+	//show_debug_message(string(_goal))
 	_map = array_create(CS_RESOLUTION, 0);
 	_dist = point_distance(x,y,_goal[1],_goal[2]);
 	if(_dist > _range) return;
@@ -180,7 +180,7 @@ function csAvoidObj(_obj){
 			_map[i]	= _weight*vect_dot(_uMap,_uObj);			
 			if(_dist < _maskRange) && (_map[i] > 0) other.mask[i] = true;
 		}
-		show_debug_message("danger: " + string(_map));
+		//show_debug_message("danger: " + string(_map));
 		ds_list_add(other.dSet, _map);
 	} 
 }

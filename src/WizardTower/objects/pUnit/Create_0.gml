@@ -3,6 +3,8 @@
 // Inherit the parent event
 event_inherited();
 
+image_speed = 0.2*(spd);
+
 gridX = x div GRID_WIDTH;
 gridY = y div GRID_HEIGHT;
 active = true;
@@ -14,6 +16,8 @@ interestMap = array_create(CS_RESOLUTION, 0);
 mask = array_create(CS_RESOLUTION, 0);
 allMasked = false;
 interest = 0;
+hpRect = [0,0,0,0];
+hpMax = hp;
 
 steeringMag = 0.3;
 steering = vect2(0,0);

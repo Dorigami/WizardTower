@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sTrooperMissile",
-    "path": "sprites/sTrooperMissile/sTrooperMissile.yy",
+    "name": "sTrooperBomb",
+    "path": "sprites/sTrooperBomb/sTrooperBomb.yy",
   },
   "solid": false,
   "visible": true,
@@ -32,7 +32,7 @@
     "path": "folders/Objects/Entities/Units.yy",
   },
   "resourceVersion": "1.0",
-  "name": "oTrooperMissile",
+  "name": "oUnitBrute",
   "tags": [],
   "resourceType": "GMObject",
 }

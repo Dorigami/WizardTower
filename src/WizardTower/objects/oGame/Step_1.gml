@@ -17,7 +17,7 @@ if(ds_stack_size(menuStack) > 0)
 if(global.gamePaused) exit;
 
 
-// calculate
+// calculate unit movement
 with(pUnit)
 {
 	var _x, _y;
@@ -56,7 +56,6 @@ with(pUnit)
 			pathVect = speed_dir_to_vect2(1,
 				point_direction(_pOld[1],_pOld[2],_pNew[1],_pNew[2])
 			);
-			show_debug_message("old: " + string(_pOld) + "     new: " + string(_pNew) + " " + string(pathVect));
 			// update the old number
 			oldnum = newnum;
 		}
@@ -136,7 +135,9 @@ with(pUnit)
 	position[2] = clamp(position[2],0,GRID_WIDTH*TILE_SIZE);
 	x = position[1];
 	y = position[2];
-
+	
+	image_xscale = sign(dcos(direction));
+	
 	// update the path position
 	var _len = vect_len(velocity);
 	var _dot = vect_dot(vect_norm(velocity), pathVect)
