@@ -120,7 +120,27 @@ for(var j=0;j<GRID_HEIGHT;j++) {
 	global.gridSpace[# i, j] = new GridNode(i,j);
 }}
 
-
+// array of stucts used to initialize the timeline
+stageData = [
+{ moment : 000, path : pathMob0, type : 0, groupSize : 8, mutators : -1 },
+{ moment : 200, path : pathMob0, type : 1, groupSize : 8, mutators : -1 },
+{ moment : 400, path : pathMob0, type : 2, groupSize : 8, mutators : -1 },
+{ moment : 600, path : pathMob0, type : 3, groupSize : 8, mutators : -1 },
+{ moment : 800, path : pathMob0, type : 4, groupSize : 8, mutators : -1 }
+];
+// get all unique moment times from the stage data
+var _list - ds_list_create();
+for(var i=0;i<array_length(stageData);i++)
+{
+	if(ds_list_find_index(_list,stageData[i].moment) == -1)
+	{
+		ds_list_add(_list, stageData[i].moment);
+	}
+}
+// create an array used for drawing the timeline to the UI
+timelineMarkers = array_create(ds_list_size(_list),-1);
+for(var i=0;i<ds_list_size(_list);i++) { timelineMarkers[i] = _list[| i]; }
+ds_list_destroy(_list);
 
 // setup a map to store the default tower stats
 defaultStats = ds_map_create();

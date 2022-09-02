@@ -73,6 +73,7 @@
     {"id":{"name":"radialDebugScript","path":"scripts/radialDebugScript/radialDebugScript.yy",},"order":1,},
     {"id":{"name":"shRedFlash","path":"shaders/shRedFlash/shRedFlash.yy",},"order":2,},
     {"id":{"name":"sNexus","path":"sprites/sNexus/sNexus.yy",},"order":6,},
+    {"id":{"name":"tlStage","path":"timelines/tlStage/tlStage.yy",},"order":0,},
     {"id":{"name":"s2","path":"sprites/s2/s2.yy",},"order":1,},
     {"id":{"name":"pathMob3","path":"paths/pathMob3/pathMob3.yy",},"order":3,},
     {"id":{"name":"sImpRadial","path":"sprites/sImpRadial/sImpRadial.yy",},"order":7,},
