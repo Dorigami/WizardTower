@@ -38,6 +38,14 @@ function BuyTower(_obj){
 }
 function StartStage(){
 	show_debug_message("stage starting");
+	with(global.iGame)
+	{
+		if(!timeline_running)
+		{
+			timeline_position = 0;
+			timeline_running = true;
+		}
+	}
 }
 
 var _control = undefined;

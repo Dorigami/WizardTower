@@ -7,7 +7,7 @@ event_inherited();
 
 draw_set_alpha(image_alpha);
 var _x = x + 20;
-var _y = y + 20;
+var _y = y + 30;
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_font(fTextSmall);
@@ -21,28 +21,15 @@ draw_set_valign(fa_top);
 draw_text(_x,_y,"HEALTH: " + _hp + 
                       "\nMONEY: " + _money  
 					  );
-					  
-draw_set_alpha(1);
-
-if(global.gamePaused)
-{
-	draw_set_halign(fa_center);
-	draw_set_valign(fa_middle);
-	_x = x + 0.5*viewWidthHalf;
-	_y = y + 0.3*viewHeightHalf;
-	draw_text(_x,_y,"GAME PAUSED");
-	draw_set_halign(fa_left);
-	draw_set_valign(fa_bottom);
-}
 
 // timeline bar
 with(global.iGame)
 {
-	if(timeline_index != -1) && (timelineMarkers != undefined)
+	if(timeline_index != -1) && (is_array(timelineMarkers))
 	{
-		var _x = 0.5*_width-200;
+		var _x = other.viewWidthHalf-60;
 		var _xx = 0;
-		var _y = 10;
+		var _y = 20;
 		var _w = 400;
 		var _h = 6;
 		var _size = array_length(timelineMarkers);
@@ -64,4 +51,17 @@ with(global.iGame)
 		draw_set_color(c_blue);
 		draw_rectangle(_xx-3,_y-4,_xx+3,_y+_h+4,false);
 	}
+}
+
+draw_set_alpha(1);
+
+if(global.gamePaused)
+{
+	draw_set_halign(fa_center);
+	draw_set_valign(fa_middle);
+	_x = x + 0.5*viewWidthHalf;
+	_y = y + 0.3*viewHeightHalf;
+	draw_text(_x,_y,"GAME PAUSED");
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_bottom);
 }
