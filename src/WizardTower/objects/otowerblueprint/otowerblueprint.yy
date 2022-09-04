@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "s32x32",
+    "path": "sprites/s32x32/s32x32.yy",
+  },
   "solid": false,
   "visible": false,
   "managed": true,

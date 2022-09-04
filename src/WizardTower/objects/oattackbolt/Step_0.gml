@@ -14,7 +14,11 @@ var _y2 = target.y;
 progress += progressSpeed;
 zVel += zDelta;
 z = z+zVel;
-if(progress >= 1) instance_destroy();
+if(progress >= 1) 
+{
+	HurtEntity(creator.id,target.id,damage);
+	instance_destroy();
+}
 xprevious = x;
 yprevious = y;
 x = _x1+progress*(_x2-_x1);

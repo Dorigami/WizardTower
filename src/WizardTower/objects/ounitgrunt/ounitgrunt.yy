@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "s_sniper_move_dr",
-    "path": "sprites/s_sniper_move_dr/s_sniper_move_dr.yy",
+    "name": "sUnitGrunt",
+    "path": "sprites/sUnitGrunt/sUnitGrunt.yy",
   },
   "solid": false,
   "visible": true,

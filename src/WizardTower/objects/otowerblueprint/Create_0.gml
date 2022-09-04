@@ -1,5 +1,5 @@
 /// @description 
-
+depth = MENUDEPTH;
 // this object will get the variable 'towerObj' 
 // set by whatever creates the blueprint.  
 if(is_undefined(towerObj)) 

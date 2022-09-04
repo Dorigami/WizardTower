@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sTrooperBomb",
-    "path": "sprites/sTrooperBomb/sTrooperBomb.yy",
+    "name": "sUnitBrute",
+    "path": "sprites/sUnitBrute/sUnitBrute.yy",
   },
   "solid": false,
   "visible": true,

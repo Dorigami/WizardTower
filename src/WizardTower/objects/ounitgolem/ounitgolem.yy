@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sTrooperMissile",
-    "path": "sprites/sTrooperMissile/sTrooperMissile.yy",
+    "name": "sUnitGolem",
+    "path": "sprites/sUnitGolem/sUnitGolem.yy",
   },
   "solid": false,
   "visible": true,

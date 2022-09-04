@@ -142,8 +142,13 @@ with(pUnit)
 	var _len = vect_len(velocity);
 	var _dot = vect_dot(vect_norm(velocity), pathVect)
 	pathPos += (_len*_dot) / pathLen;
-	if(pathPos >= 1) instance_destroy();
-
+	if(pathPos >= 1) 
+	{
+		// deal damage to player then destroy self
+		instance_destroy();
+		global.iGame.playerHealth -= damage;
+		if(global.iGame.playerHealth < 0) global.iGame.playerHealth = 0;
+	}
 	// update grid position
 	_x = position[1] div GRID_WIDTH;
 	_y = position[2] div GRID_HEIGHT;  

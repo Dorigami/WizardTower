@@ -18,6 +18,7 @@ allMasked = false;
 interest = 0;
 hpRect = [0,0,0,0];
 hpMax = hp;
+killed = true;
 
 steeringMag = 0.3;
 steering = vect2(0,0);

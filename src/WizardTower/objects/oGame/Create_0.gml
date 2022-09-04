@@ -137,8 +137,13 @@ function TimelineSpawn(){
 					}
 				}
 			}
-		}	else {
+		} else {
 			show_debug_message("ERROR at timelinespawn: list size is zero" );
+		}
+		
+		if(timeline_position == timelineMarkers[array_length(timelineMarkers)-1])
+		{
+			timeline_running = false;
 		}
 	}
 }
