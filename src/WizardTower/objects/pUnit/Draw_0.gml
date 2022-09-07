@@ -18,8 +18,6 @@ if(hp < hpMax)
 	draw_healthbar(hpRect[0],hpRect[1],hpRect[2],hpRect[3],100*(hp/hpMax),c_black,c_green,c_green,0,true,true);
 }
 
-draw_text(x+10,y,string(spd));
-
 /*
  
 original draw code, with unit selection 

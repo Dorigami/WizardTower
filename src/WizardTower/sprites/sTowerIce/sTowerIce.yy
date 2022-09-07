@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "Towers",
+    "path": "folders/Sprites/Towers.yy",
   },
   "resourceVersion": "1.0",
   "name": "sTowerIce",

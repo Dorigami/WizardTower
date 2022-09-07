@@ -101,10 +101,7 @@ TextBox = function() constructor{
 		image = index == container.controlsFocus ? 1 : 0;
 		
 		draw_sprite(sprite, image, xTrue, yTrue);
-		//draw_set_color(c_white);
-		//draw_rectangle(xTrue-1,yTrue-1,xTrue+_maxWid+1,yTrue+_hgt+1,false);
-		//draw_set_color(c_black);
-		//draw_rectangle(xTrue-1,yTrue-1,xTrue+_maxWid+1,yTrue+_hgt+1,true);
+		draw_set_color(c_white);
 		draw_set_valign(fa_middle);
 		draw_set_halign(fa_left);
 		draw_text(_x+14,_y, text);
@@ -152,6 +149,7 @@ Button = function() constructor{
 	drawAlt = false;
 	image = 0;
 	caption = "";
+	color = c_white;
 	hotkey = undefined;
 	width = 0;
 	height = 0;
@@ -203,7 +201,6 @@ Button = function() constructor{
 			if(container.controlsFocus == index)
 			{ 
 				highlighted = true;
-				if(keyboard_check_pressed(vk_enter)) activated = true;
 			}
 			// hotkey to activate the button
 			if(!is_undefined(hotkey))
@@ -226,7 +223,7 @@ Button = function() constructor{
 	static Draw = function(){
 		var _alpha = enabled ? min(1, container.image_alpha) : min(0.5, container.image_alpha); 
 		draw_set_alpha(_alpha);
-		draw_set_color(c_white);
+		draw_set_color(color);
 		// draw button sprite
 		if(drawAlt) && (!is_undefined(spriteAlt))
 		{
@@ -239,12 +236,12 @@ Button = function() constructor{
 			// show caption
 			draw_set_halign(fa_center);
 			draw_set_valign(fa_middle);
-			draw_text(xTrue + 0.5*width, yTrue + 0.5*height, caption);
+			draw_text(xTrue + 0.5*width, yTrue + 0.5*height + image, caption);
 			draw_set_alpha(1);
 		}
 	}
 }
-function LabelAdd(_x, _y, _cntr, _ind, _name, _spr, _text, _caption){
+function LabelAdd(_x, _y, _cntr, _ind, _name, _spr, _text){
 	var _newControl = new Label()
 	with _newControl
 	{
@@ -253,7 +250,6 @@ function LabelAdd(_x, _y, _cntr, _ind, _name, _spr, _text, _caption){
 		name = _name;
 		sprite = _spr;
 		text = _text;
-		caption = _caption;
 		x = _x;
 		y = _y;
 	}
@@ -268,12 +264,12 @@ Label = function() constructor{
 	name = "";
 	sprite = undefined;
 	text = "";
-	caption = "";
+	alpha = 1;
 	image = 0;
 	width = 0;
 	height = 0;
-	x = _x;
-	y = _y;
+	x = 0;
+	y = 0;
 	highlighted = false;
 	highlightForced = false;
 	pressed = false;
@@ -294,13 +290,12 @@ Label = function() constructor{
 		yTrue = y + container.y;
 	}
 	static Draw = function(){
-		var _x = x+8;
-		var _y = y+0.5*height;
-
-		if(!is_undefined(sprite)) draw_sprite(sprite, image, x, y);
-		draw_set_valign(fa_middle);
+		if(!is_undefined(sprite)) draw_sprite(sprite, image, xTrue, yTrue);
+		draw_set_alpha(alpha);
+		draw_set_color(c_white);
+		draw_set_valign(fa_top);
 		draw_set_halign(fa_left);
-		draw_text(_x,_y, text);
+		draw_text(xTrue,yTrue, text);
 	}
 }
 controlsCount = 0;

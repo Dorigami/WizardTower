@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Range",
-    "path": "folders/Sprites/Range.yy",
+    "name": "Towers",
+    "path": "folders/Sprites/Towers.yy",
   },
   "resourceVersion": "1.0",
   "name": "s3",

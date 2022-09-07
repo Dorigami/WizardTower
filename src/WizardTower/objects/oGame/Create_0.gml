@@ -66,86 +66,13 @@ function InitializeDisplay(){
 		if(i == 30){show_message("update display initialize, there are too many rooms")}
 		room_set_view_enabled(i, true);
 		room_set_viewport(i,0,true,0,0,idealWidth, idealHeight);
+		room_set_width(i,RESOLUTION_W + 2*TILE_SIZE);
+		room_set_height(i,RESOLUTION_H + 2*TILE_SIZE);
 	}	
 	surface_resize(application_surface, RESOLUTION_W, RESOLUTION_H);
 	display_set_gui_size(RESOLUTION_W, RESOLUTION_H);
 	window_set_size(RESOLUTION_W*zoom, RESOLUTION_H*zoom);
 	alarm[0] = 1;
-}
-// timeline init data function
-function TimelineSetData(_data)
-{
-	with(global.iGame)
-	{
-		// get all unique moment times from the stage data
-		var _markerList = ds_list_create();
-		for(var i=0;i<array_length(_data);i++)
-		{
-			// get markers representing each moment, add them to a list
-			if(ds_list_find_index(_markerList,_data[i].moment) == -1) ds_list_add(_markerList, _data[i].moment);
-		
-			// combine stage data into the timeline map
-			var _mom = _data[i].moment;
-			var _list = tlmap[? _mom];
-			if(is_undefined(_list))
-			{
-				tlmap[? _mom] = ds_list_create();
-				_list = tlmap[? _mom];
-			}
-			ds_list_add(_list, _data[i]);
-		}
-	
-		timeline_clear(tl);
-		timelineMarkers = array_create(ds_list_size(_markerList),-1);
-		for(var i=0;i<ds_list_size(_markerList);i++) { 
-			// create an array used for drawing the timeline to the UI
-			timelineMarkers[i] = _markerList[| i];
-			// add moment to the timeline
-			timeline_moment_add_script(tl, _markerList[| i],TimelineSpawn);
-		}
-		ds_list_destroy(_markerList);
-	}
-}
-// timeline moment function
-function TimelineSpawn(){
-	var _list, _group, _stats;
-	var _st = {path : -1,type : -1,hp : -1,damage : -1,spd : -1,armor : -1,stealth : -1,money : -1}
-
-	with(global.iGame)
-	{
-		_list = tlmap[? timeline_position];
-		if(ds_list_size(_list) > 0)
-		{
-			for(var i=0;i<ds_list_size(_list);i++)
-			{
-				_group = _list[| i];
-				if(!is_undefined(_group))
-				{
-					// get values to spawn the group
-					_stats = defaultStats[? arrEnemies[_group.type]];
-					_st.path = _group.path;
-					_st.type = _group.type;
-					_st.hp = _stats.hp;
-					_st.damage = _stats.damage;
-					_st.spd = _stats.spd;
-					_st.armor = _stats.armor;
-					_st.stealth = _stats.stealth;
-					_st.money = _stats.money;
-					// spawn the group
-					repeat(_group.groupSize){
-						instance_create_layer(0, 0, "Instances", arrEnemies[_group.type], _st);
-					}
-				}
-			}
-		} else {
-			show_debug_message("ERROR at timelinespawn: list size is zero" );
-		}
-		
-		if(timeline_position == timelineMarkers[array_length(timelineMarkers)-1])
-		{
-			timeline_running = false;
-		}
-	}
 }
 
 playerHealth = 100;
@@ -176,7 +103,6 @@ money = 0;
 depth = -9990;
 game_set_speed(FRAME_RATE, gamespeed_fps);
 InitializeDisplay();
-global.onButton = false;
 global.gamePaused = false;
 global.muteMusic = false;
 global.muteSound = false;
@@ -196,23 +122,13 @@ for(var j=0;j<GRID_HEIGHT;j++) {
 }}
 
 // array of stucts used to spawn specific waves at indicated moments
-stageData = [
-{ moment : 000, path : pathMob0, type : 0, groupSize : 8, mutators : -1 },
-{ moment : 200, path : pathMob0, type : 1, groupSize : 8, mutators : -1 },
-{ moment : 200, path : pathMob0, type : 2, groupSize : 8, mutators : -1 },
-{ moment : 400, path : pathMob0, type : 2, groupSize : 8, mutators : -1 },
-{ moment : 600, path : pathMob0, type : 3, groupSize : 8, mutators : -1 },
-{ moment : 800, path : pathMob0, type : 4, groupSize : 8, mutators : -1 }
-];
+stageData = undefined;
 
 // array of stucts used to initialize the timeline
 tl = timeline_add();
 tlmoment = -1; // current moment in the timeline
 tlmap = ds_map_create(); // this map will store lists that will store structs containing spawn information.  the 'key' will correspond to the timeline moment where the spawning will take place
 timeline_index = tl;
-
-// initialize the timeline using the stageData
-TimelineSetData(stageData);
 
 
 // setup a map to store the default tower stats
@@ -263,15 +179,15 @@ var _frost = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 				ds_map_add(defaultStats, oTowerFrost, _frost);
 
 var _intel = { cost : 4, damage : 1, armorpierce : 1, cooldown : 1,
-		        range : 1, detect : false, moneyMod : 1 }
+		        range : 1, detect : false, moneyMod : 1.2 }
 				ds_map_add(defaultStats, oTowerIntel, _intel);
 
 var _spotter = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
-		            range : 1, detect : false, moneyMod : 1 }
+		            range : 1, detect : false, moneyMod : 1.2 }
 					ds_map_add(defaultStats, oTowerSpotter, _spotter);
 
 var _stalker = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
-		            range : 1, detect : false, moneyMod : 1 }
+		            range : 1, detect : false, moneyMod : 1.2 }
 					ds_map_add(defaultStats, oTowerStalker, _stalker);
 //--// enemies
 // - grunt (basic unit, high numbers)

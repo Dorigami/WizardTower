@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sTower",
-    "path": "sprites/sTower/sTower.yy",
+    "name": "sTowerMinigun1",
+    "path": "sprites/sTowerMinigun1/sTowerMinigun1.yy",
   },
   "solid": false,
   "visible": true,

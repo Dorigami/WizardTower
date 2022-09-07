@@ -27,7 +27,10 @@ if(ds_list_size(targetList) < targetLimit)
 		for(var i=ds_list_size(targetList)-1;i>=0;i--)
 		{
 			_inst = targetList[| i];
-			_inst.spd = _slowMag * global.iGame.defaultStats[? _inst.object_index].spd;
+			if(!is_undefined(_inst)) && (instance_exists(_inst))
+			{
+				_inst.spd = _slowMag * global.iGame.defaultStats[? _inst.object_index].spd;
+			}
 		}
 	}
 }

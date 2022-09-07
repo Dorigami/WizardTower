@@ -5,7 +5,7 @@ if(!global.gamePaused)
 	var _x1 = x-0.5*sprite_width;
 	var _x2 = _x1+sprite_width;
 	var _y1 = y-20;
-	var _y2 = _y1+5;
+	var _y2 = _y1+1;
 	hpRect = [_x1,_y1,_x2,_y2];
 	depth = -bbox_bottom;
 	// seecum to gravity

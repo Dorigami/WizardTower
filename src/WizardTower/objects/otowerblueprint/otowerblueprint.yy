@@ -1,12 +1,12 @@
 {
-  "spriteId": {
-    "name": "s32x32",
-    "path": "sprites/s32x32/s32x32.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": false,
   "managed": true,
-  "spriteMaskId": null,
+  "spriteMaskId": {
+    "name": "s32x32",
+    "path": "sprites/s32x32/s32x32.yy",
+  },
   "persistent": false,
   "parentObjectId": null,
   "physicsObject": false,

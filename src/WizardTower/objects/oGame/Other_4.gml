@@ -18,9 +18,3 @@ for(var j=0;j<GRID_HEIGHT;j++) {
 	global.gridSpace[# i, j].blocked = tilemap_get(global.col,i,j);
 }}
 
-// hud setup
-global.onButton = false;
-if(room == rTest)
-{
-	global.iUI.fadeIn = true;
-}

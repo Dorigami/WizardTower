@@ -14,7 +14,12 @@ draw_sprite_ext(sprite_index,
 				image_blend,
 				image_alpha
 				);
-				
+
+if(showBars)
+{
+	draw_text(x,y-30,string(moneyMod));
+}
+
 //draw_text(x,y-40,"0: " + string(cdTimer) + "\n1: " + string(alarm[1]) + "  size: " + string(ds_list_size(targetList)));
 //draw_circle(x+0.5*TILE_SIZE,y+0.5*TILE_SIZE,range*TILE_SIZE,true);
 

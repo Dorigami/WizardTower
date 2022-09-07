@@ -52,4 +52,8 @@ if(mouse_check_button_released(mb_left))
 {
 	if(tabDrag) tabDrag = false; 
 }
-
+for(var i=0;i<ds_list_size(controlsList);i++)
+{
+	var _ctrl = controlsList[| i];
+	if(_ctrl.index == controlsFocus) && (keyboard_check_released(vk_enter)) activated = true;
+}

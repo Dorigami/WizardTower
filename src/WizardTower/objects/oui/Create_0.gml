@@ -8,7 +8,13 @@ event_inherited();
 cam = view_camera[0];
 viewWidthHalf = 0.5*camera_get_view_width(cam);
 viewHeightHalf = 0.5*camera_get_view_height(cam);
+yMenu = RESOLUTION_H-72;
 fadeIn = false;
+target = noone;
+rectPurchase = [0,0,0,0];
+rectUpgrade = [0,0,0,0];
+rectInfo = [0,0,0,0];
+rectStart = [0,0,0,0];
 
 image_alpha = 0;
 image_xscale = RESOLUTION_W / sprite_width;
@@ -40,7 +46,7 @@ function StartStage(){
 	show_debug_message("stage starting");
 	with(global.iGame)
 	{
-		if(!timeline_running)
+		if(!timeline_running) && (!is_undefined(stageData))
 		{
 			timeline_position = 0;
 			timeline_running = true;
@@ -67,4 +73,8 @@ _control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"buyintel",sBtnAction,,
 _x += 400; _y += 0;
 _control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"startstage",sBtnAction,,"start",vk_enter,StartStage,-1);
 
-
+// upgrade buttons
+_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"startstage",sBtnAction,,"start",vk_enter,StartStage,-1);
+_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"startstage",sBtnAction,,"start",vk_enter,StartStage,-1);
+_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"startstage",sBtnAction,,"start",vk_enter,StartStage,-1);
+_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"startstage",sBtnAction,,"start",vk_enter,StartStage,-1);

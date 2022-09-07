@@ -80,8 +80,8 @@ function AttackFrostbite(_tgt){
 		with(_tgt) instance_destroy();
 	}
 }
-function AttackIntel(_tgt){
-	AttackTest();
+function AttackIntel(){
+	
 }
 function AttackSpotter(_tgt){
 	if(instance_exists(_tgt))

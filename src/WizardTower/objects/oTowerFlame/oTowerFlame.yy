@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sTowerFlame",
-    "path": "sprites/sTowerFlame/sTowerFlame.yy",
+    "name": "sTowerIntel",
+    "path": "sprites/sTowerIntel/sTowerIntel.yy",
   },
   "solid": false,
   "visible": true,

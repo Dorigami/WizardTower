@@ -1,57 +1,39 @@
 /// @description 
 
-depth = MENUDEPTH;
+event_inherited();
 
 // title fade in variables
 title = "WIZARD TOWER"
 intro = true;
 titleAlpha = 0;
 optionAlpha = 0;
+x = 0;
+y = 0;
 alarm[0] = FRAME_RATE*1;
 alarm[1] = FRAME_RATE*2;
 
-var _width = display_get_gui_width();
-var _height = display_get_gui_height();
-//var _width = room_width;
-//var _height = room_height;
-optionFocus = 0;
+var _width = room_width; //display_get_gui_width();
+var _height = room_height; //display_get_gui_height();
+
+LabelAdd(0.5*_width-(0.6*string_width(title)),0.3*_height,id,0,"title",,title);
 var _sprite = sBtn40x32;
-options[0] = CreateButton(oButtonGeneric,_sprite,0.5*_width-(0.5*sprite_get_width(_sprite)),0.5*_height,"PLAY",true,
-					      GoToLevel,[rTest],
-						  GoToLevel,[rTest]);
-options[1] = CreateButton(oButtonGeneric,_sprite,0.5*_width-(0.5*sprite_get_width(_sprite)),0.7*_height,"QUIT",true,
-					      QuitToDesktop,-1,
-						  QuitToDesktop,-1);
-for(var i=0; i<array_length(options); i++)
-{
-	options[i].enabled = false;
-}
+ButtonAdd(0.5*_width-(0.5*sprite_get_width(_sprite)),0.5*_height,id,1,"play",_sprite,,"PLAY",,GoToLevel,[rTest]);
+ButtonAdd(0.5*_width-(0.5*sprite_get_width(_sprite)),0.7*_height,id,2,"quit",_sprite,,"QUIT",,QuitToDesktop,[rTest]);
 
-/*
-function GUIButton(_x=0,_y=0, _sprite=-1, _text="",_width=20,_height=100) constructor{
-	sprite = _sprite;
-	focus = false;
-	image = 0;
-	text = _text;
-	textColor = c_white;
-	x = _x;
-	y = _y;
-	width = sprite== -1 ? _width : sprite_get_width(sprite);
-	height = sprite== -1 ? _height : sprite_get_height(sprite);
-}
+controlsList[| 1].enabled = false;
+controlsList[| 2].enabled = false;
 
-// set up menu options
-var _width = display_get_gui_width();
-var _height = display_get_gui_height();
-var _buttonWidth = 100;
-var _buttonHeight = 20;
-options = [ new GUIButton(0.5*_width,0.5*_height,"PLAY",_buttonWidth,_buttonHeight), 
-            new GUIButton(0.5*_width,0.5*_height,"PLAY",_buttonWidth,_buttonHeight),
-			new GUIButton(0.5*_width,0.5*_height,"PLAY",_buttonWidth,_buttonHeight),
-			new GUIButton(0.5*_width,0.5*_height,"PLAY",_buttonWidth,_buttonHeight),
-			new GUIButton(0.5*_width,0.5*_height,"PLAY",_buttonWidth,_buttonHeight),
-			];
+//optionFocus = 0;
+//options[0] = CreateButton(oButtonGeneric,_sprite,0.5*_width-(0.5*sprite_get_width(_sprite)),0.5*_height,"PLAY",true,
+//					      GoToLevel,[rTest],
+//						  GoToLevel,[rTest]);
+//options[1] = CreateButton(oButtonGeneric,_sprite,0.5*_width-(0.5*sprite_get_width(_sprite)),0.7*_height,"QUIT",true,
+//					      QuitToDesktop,-1,
+//						  QuitToDesktop,-1);
+//for(var i=0; i<array_length(options); i++)
+//{
+//	options[i].enabled = false;
+//}
 
-//options = ["PLAY", "LEVEL SELECT", "SETTINGS", "QUIT"];
 
 
