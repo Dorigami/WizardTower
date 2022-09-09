@@ -14,7 +14,7 @@ if(!global.gamePaused)
 		var _stats = -1;
 		var _cantplace = place_meeting(x,y,pTower);
 		image_blend = _cantplace ? c_red : c_white;
-		if(mouse_check_button_pressed(mb_left)) && (!_cantplace)
+		if(mouse_check_button_released(mb_left)) && (!_cantplace)
 		{
 			_stats = global.iGame.defaultStats[? towerObj];
 			if(global.iGame.playerMoney >= _stats.cost) 

@@ -25,12 +25,6 @@ steering = vect2(0,0);
 velocity = vect2(0,0);
 position = vect2(x,y);
 
-// shader stuff
-upixelH = shader_get_uniform(shOutline, "pixelH");
-upixelW = shader_get_uniform(shOutline, "pixelW");
-texelW = texture_get_texel_width(sprite_get_texture(sprite_index,0));
-texelH = texture_get_texel_height(sprite_get_texture(sprite_index,0));
-
 // must recieve a struct to set stats and path
 
 if(!is_undefined(path)) && (path != -1) && (path_exists(path))

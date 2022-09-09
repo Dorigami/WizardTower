@@ -40,6 +40,7 @@ if(sprite_index != -1)
 	draw_rectangle(rectStart[0],rectStart[1],rectStart[2],rectStart[3],false);
 	draw_set_alpha(1);
 }
+
 if(controlsCount > 0)
 {
 	for(var i=0; i<controlsCount; i++)

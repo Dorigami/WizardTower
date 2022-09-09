@@ -10,7 +10,9 @@ viewWidthHalf = 0.5*camera_get_view_width(cam);
 viewHeightHalf = 0.5*camera_get_view_height(cam);
 yMenu = RESOLUTION_H-72;
 fadeIn = false;
-target = noone;
+targetClick = false;
+targetHover = noone;
+targetHoverCheck = noone;
 rectPurchase = [0,0,0,0];
 rectUpgrade = [0,0,0,0];
 rectInfo = [0,0,0,0];
@@ -74,7 +76,11 @@ _x += 400; _y += 0;
 _control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"startstage",sBtnAction,,"start",vk_enter,StartStage,-1);
 
 // upgrade buttons
-_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"startstage",sBtnAction,,"start",vk_enter,StartStage,-1);
-_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"startstage",sBtnAction,,"start",vk_enter,StartStage,-1);
-_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"startstage",sBtnAction,,"start",vk_enter,StartStage,-1);
-_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"startstage",sBtnAction,,"start",vk_enter,StartStage,-1);
+_x = rectUpgrade[0]; _y = rectUpgrade[1];
+_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"upgrade1",sBtnUpgrade,,"upg1",vk_enter,StartStage,-1);
+_x = 1.2*rectUpgrade[0]; _y = rectUpgrade[1];
+_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"upgrade2",sBtnUpgrade,,"upg2",vk_enter,StartStage,-1);
+_x = rectUpgrade[0]; _y = 1.2*rectUpgrade[1];
+_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"upgrade3",sBtnUpgrade,,"upg3",vk_enter,StartStage,-1);
+_x = 1.2*rectUpgrade[0]; _y = 1.2*rectUpgrade[1];
+_control = ButtonAdd(_x,_y,id,ds_list_size(controlsList),"upgrade4",sBtnUpgrade,,"upg4",vk_enter,StartStage,-1);

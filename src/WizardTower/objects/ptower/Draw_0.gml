@@ -15,9 +15,14 @@ draw_sprite_ext(sprite_index,
 				image_alpha
 				);
 
-if(showBars)
+if(global.iUI.targetHover == id)
 {
-	draw_text(x,y-30,string(moneyMod));
+	// outline the entity
+	shader_set(shOutline);
+	shader_set_uniform_f(upixelW, texelW);
+	shader_set_uniform_f(upixelH, texelH);
+	draw_sprite_ext(sprite_index,image_index,x,y,1,1,0,c_white,image_alpha);
+	shader_reset();
 }
 
 //draw_text(x,y-40,"0: " + string(cdTimer) + "\n1: " + string(alarm[1]) + "  size: " + string(ds_list_size(targetList)));

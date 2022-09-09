@@ -36,6 +36,35 @@ rectStart[1] = _y1;
 rectStart[2] = rectStart[0] + 100;
 rectStart[3] = _y2;
 
-var _startButton = controlsList[| 4];
-_startButton.x = (((rectStart[0] + rectStart[2]) div 2) - x) - 0.5*sprite_get_width(_startButton.sprite);
-_startButton.y = (RESOLUTION_H-36) - 0.5*sprite_get_height(_startButton.sprite);
+// move wave start button
+var _btn = controlsList[| 4];
+_btn.x = (((rectStart[0] + rectStart[2]) div 2) - x) - 0.5*sprite_get_width(_btn.sprite);
+_btn.y = (RESOLUTION_H-36) - 0.5*sprite_get_height(_btn.sprite);
+
+// move the upgrade buttons
+var _x,_y;
+var _hsep = 4;
+var _vsep = 1;
+var _center = [0.5*(rectUpgrade[2]+rectUpgrade[0]), 0.5*(rectUpgrade[3]+rectUpgrade[1])];
+// move the upgrade buttons
+_btn = controlsList[| 5];
+_btn.x = (_center[0]-_hsep-sprite_get_width(_btn.sprite)) - x;
+_btn.y = (_center[1]-_vsep-sprite_get_height(_btn.sprite)) - y;
+
+_btn = controlsList[| 6];
+_btn.x = _center[0]+_hsep-x;
+_btn.y = (_center[1]-_vsep-sprite_get_height(_btn.sprite)) - y;
+
+_btn = controlsList[| 7];
+_btn.x = _center[0]-_hsep-sprite_get_width(_btn.sprite) - x;
+_btn.y = _center[1]+_vsep-y;
+
+_btn = controlsList[| 8];
+_btn.x = _center[0]+_hsep-x;
+_btn.y = _center[1]+_vsep-y;
+// disable upgrade buttons
+for(var i=5;i<=8;i++) 
+{
+	_btn = controlsList[| i]; 
+	_btn.enabled = false;
+}

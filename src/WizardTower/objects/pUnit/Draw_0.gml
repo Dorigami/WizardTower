@@ -12,8 +12,17 @@ if(flash != 0)
 	// draw entity normally
 	draw_sprite_ext( sprite_index,image_index,floor(x),floor(y-z),image_xscale,image_yscale,image_angle,image_blend,image_alpha);
 }
+if(global.iUI.targetHover == id)
+{
+	// outline the entity
+	shader_set(shOutline);
+	shader_set_uniform_f(upixelW, texelW);
+	shader_set_uniform_f(upixelH, texelH);
+	draw_sprite_ext(sprite_index,image_index,x,y-z,1,1,0,c_white,image_alpha);
+	shader_reset();
+}
 // draw a health bar
-if(hp < hpMax)
+if(hp < hpMax) || (showBars)
 {
 	draw_healthbar(hpRect[0],hpRect[1],hpRect[2],hpRect[3],100*(hp/hpMax),c_black,c_green,c_green,0,true,true);
 }

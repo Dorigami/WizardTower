@@ -2,17 +2,27 @@
 // follow camera
 x = camera_get_view_x(view_camera[0]);// global.iCamera.x-viewWidthHalf;
 y = camera_get_view_y(view_camera[0]);//global.iCamera.y-viewHeightHalf;
-if(target != noone)
-{	
-	if(!instance_exists(target)) 
-	{target = noone;
-	} else {
 
+// refresh target if one has not been clicked on
+if(targetClick = false)
+{
+	targetHover = collision_point(mouse_x,mouse_y,pEntity,false,true);
+} else {
+	if(targetHover == noone) || (!instance_exists(targetHover)) 
+	{
+		targetClick = false;
+		targetHover = noone
 	}
+}
+if(mouse_check_button_released(mb_left))
+{
+	var _tgt = collision_point(mouse_x,mouse_y,pEntity,false,true);
+	targetClick = _tgt == noone ? false : true;
+	targetHover = _tgt;
 }
 // update areas to display info on the UI
 var _y1 = y + RESOLUTION_H-64;
-var _y2 = _y1 + 56;
+var _y2 = _y1 + 55;
 rectPurchase[0] = x + 8;
 rectPurchase[1] = _y1;
 rectPurchase[2] = rectPurchase[0] + 160;
