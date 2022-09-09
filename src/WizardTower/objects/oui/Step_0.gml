@@ -20,6 +20,11 @@ if(mouse_check_button_released(mb_left))
 	targetClick = _tgt == noone ? false : true;
 	targetHover = _tgt;
 }
+if(targetHover != targetHoverCheck)
+{
+	targetHoverCheck = targetHover;
+	UpdateUpgradeButtons();
+}
 // update areas to display info on the UI
 var _y1 = y + RESOLUTION_H-64;
 var _y2 = _y1 + 55;

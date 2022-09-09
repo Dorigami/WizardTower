@@ -55,6 +55,33 @@ function StartStage(){
 		}
 	}
 }
+function UpdateUpgradeButtons(){
+	var _btn = noone;
+	if(targetHover == noone)
+	{
+		// clear the upgrade buttons
+		for(var i=5;i<=8;i++) {	_btn = controlsList[| i]; _btn.enabled = false; _btn.caption = "---"}
+	} else {
+		switch(targetHover.object_index)
+		{
+			case oTowerPellet:
+				_btn = controlsList[| 5];
+				_btn = controlsList[| 6];
+				_btn = controlsList[| 7];
+				_btn = controlsList[| 8];
+				break;
+			case oTowerBolt:
+				//
+				break;
+			case oTowerIce:
+				//
+				break;
+			case oTowerIntel:
+				//
+				break;
+		}
+	}
+}
 
 var _control = undefined;
 var _x = x+16;
