@@ -18,22 +18,22 @@ if(room != rStartMenu) && (room != rInit)
 }
 // set initial position of the camera
 var _y1 = y + RESOLUTION_H-64;
-var _y2 = _y1 + 56;
+var _y2 = _y1 + 55;
 rectPurchase[0] = x + 8;
 rectPurchase[1] = _y1;
-rectPurchase[2] = rectPurchase[0] + 160;
+rectPurchase[2] = rectPurchase[0] + 200;
 rectPurchase[3] = _y2;
 rectUpgrade[0] = rectPurchase[2] + 1;
 rectUpgrade[1] = _y1;
-rectUpgrade[2] = rectUpgrade[0] + 180;
+rectUpgrade[2] = rectUpgrade[0] + 110;
 rectUpgrade[3] = _y2;
 rectInfo[0] = rectUpgrade[2] + 1;
 rectInfo[1] = _y1;
-rectInfo[2] = rectInfo[0] + 180;
+rectInfo[2] = rectInfo[0] + 190;
 rectInfo[3] = _y2;
 rectStart[0] = rectInfo[2] + 1;
 rectStart[1] = _y1;
-rectStart[2] = rectStart[0] + 100;
+rectStart[2] = rectStart[0] + 120;
 rectStart[3] = _y2;
 
 // move wave start button

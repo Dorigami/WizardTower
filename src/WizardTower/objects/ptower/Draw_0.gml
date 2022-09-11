@@ -3,6 +3,14 @@
 draw_set_color(c_white);
 draw_set_alpha(1);
 
+if(global.iUI.targetClick) && (global.iUI.targetHover == id)
+{
+	draw_set_alpha(0.1)
+	draw_set_color(global.iGame.color7);
+	draw_circle(x+16,y+16,range*TILE_SIZE,false);
+	draw_set_alpha(1)
+}
+
 // draw entity normally (transparent)
 draw_sprite_ext(sprite_index,
 				image_index,

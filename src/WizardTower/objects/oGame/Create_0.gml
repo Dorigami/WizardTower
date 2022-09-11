@@ -75,8 +75,17 @@ function InitializeDisplay(){
 	alarm[0] = 1;
 }
 
+color0 = make_colour_rgb(13,43,69);
+color1 = make_colour_rgb(32,60,86);
+color2 = make_colour_rgb(84,78,104);
+color3 = make_colour_rgb(141,105,122);
+color4 = make_colour_rgb(208,129,89);
+color5 = make_colour_rgb(255,170,94);
+color6 = make_colour_rgb(255,212,163);
+color7 = make_colour_rgb(255,236,214);
+
 playerHealth = 100;
-playerMoney = 20;
+playerMoney = 200;
 menuStack = ds_stack_create();
 spawnerMemory = {
 	path : pathMob0,
@@ -100,7 +109,7 @@ armor = 0;
 stealth = 0;
 money = 0;
 // game setup
-depth = -9990;
+depth = MENUDEPTH;
 game_set_speed(FRAME_RATE, gamespeed_fps);
 InitializeDisplay();
 global.gamePaused = false;
@@ -142,52 +151,52 @@ arrEnemies = [
 defaultStats = ds_map_create();
 
 //--// towers
-var _pellet = { cost : 1, damage : 1, armorpierce : 1, cooldown : 0.5,
+var _pellet = { name : "Pellet",cost : 1, damage : 1, armorpierce : 1, cooldown : 0.5,
 		        range : 3, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerPellet, _pellet);
 	
-var _minigun = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+var _minigun = { name : "Minigun",cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 		            range : 1, detect : false, moneyMod : 1 }
 					ds_map_add(defaultStats, oTowerMinigun, _minigun);
 	
-var _bomber = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+var _bomber = { name : "Bomber",cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 		        range : 1, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerBomber, _bomber);
 
-var _bolt = { cost : 2, damage : 2, armorpierce : 1, cooldown : 1,
+var _bolt = { name : "Bolt",cost : 2, damage : 2, armorpierce : 1, cooldown : 1,
 		        range : 4, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerBolt, _bolt);
 
-var _sniper = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
-		        range : 1, detect : false, moneyMod : 1 }
+var _sniper = { name : "Sniper",cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		        range : 1, detect : true, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerSniper, _sniper);
 	
-var _laser = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+var _laser = { name : "Laser",cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 		        range : 1, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerLaser, _laser);
 
-var _ice = { cost : 3, damage : 3, armorpierce : 1, cooldown : 1,
+var _ice = { name : "Ice",cost : 3, damage : 3, armorpierce : 1, cooldown : 1,
 		        range : 2, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerIce, _ice);
 
-var _brittle = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+var _brittle = { name : "Brittle",cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 		            range : 1, detect : false, moneyMod : 1 }
 					ds_map_add(defaultStats, oTowerBrittle, _brittle);
 
-var _frost = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+var _frost = { name : "Frostbite",cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 		        range : 1, detect : false, moneyMod : 1 }
 				ds_map_add(defaultStats, oTowerFrost, _frost);
 
-var _intel = { cost : 4, damage : 1, armorpierce : 1, cooldown : 1,
+var _intel = { name : "Intel",cost : 4, damage : 1, armorpierce : 1, cooldown : 1,
 		        range : 1, detect : false, moneyMod : 1.2 }
 				ds_map_add(defaultStats, oTowerIntel, _intel);
 
-var _spotter = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
-		            range : 1, detect : false, moneyMod : 1.2 }
+var _spotter = { name : "Spotter",cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		            range : 1, detect : true, moneyMod : 1.2 }
 					ds_map_add(defaultStats, oTowerSpotter, _spotter);
 
-var _stalker = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
-		            range : 1, detect : false, moneyMod : 1.2 }
+var _stalker = { name : "Stalker",cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
+		            range : 1, detect : true, moneyMod : 1.2 }
 					ds_map_add(defaultStats, oTowerStalker, _stalker);
 //--// enemies
 // - grunt (basic unit, high numbers)
@@ -195,19 +204,19 @@ var _stalker = { cost : 5, damage : 1, armorpierce : 1, cooldown : 1,
 // - golem (small numbers, high armor)
 // - fiend (fast, but low health)
 // - transport (armored, slow, spawns grunts when killed)
-var _grunt = {type : 0,hp : 4,damage : 1,spd : 2,armor : 1,stealth : 0,money : 5}
+var _grunt = {name : "Grunt",path : -1,type : 0,hp : 4,damage : 1,spd : 2,armor : 1,stealth : 0,money : 5}
 				ds_map_add(defaultStats, oUnitGrunt, _grunt);
 	
-var _brute = {type : 1,hp : 8,damage : 1,spd : 1,armor : 2,stealth : 0,money : 25}
+var _brute = {name : "Brute",path : -1,type : 1,hp : 8,damage : 1,spd : 1,armor : 2,stealth : 0,money : 25}
 					ds_map_add(defaultStats, oUnitBrute, _brute);
 	
-var _golem = {type : 2,hp : 10,damage : 1,spd : 1,armor : 10,stealth : 0,money : 25}
+var _golem = {name : "Golem",path : -1,type : 2,hp : 10,damage : 1,spd : 1,armor : 10,stealth : 0,money : 25}
 				ds_map_add(defaultStats, oUnitGolem, _golem);
 
-var _fiend = {type : 3,hp : 2,damage : 1,spd : 3,armor : 0,stealth : 0,money : 10}
+var _fiend = {name : "Fiend",path : -1,type : 3,hp : 2,damage : 1,spd : 3,armor : 0,stealth : 0,money : 10}
 				ds_map_add(defaultStats, oUnitFiend, _fiend);
 
-var _transport = {type : 4,hp : 6,damage : 1,spd : 1.5,armor : 4,stealth : 0,money : 15}
+var _transport = {name : "Transport",path : -1,type : 4,hp : 6,damage : 1,spd : 1.5,armor : 4,stealth : 0,money : 15}
 				ds_map_add(defaultStats, oUnitTransport, _transport);
 
 room_goto(ROOMSTART);
@@ -237,20 +246,6 @@ room_goto(ROOMSTART);
 
 
 //--//COLOR PALETTE:
-	i'll need a palette of 8 colors
-	2 to be used for towers
-	2 to be used for enemies
-	2 to be used for the terrain
-	1 used for accent features and effects
-	1 used for the overall background
-towerColor1 = make_colour_rgb()
-towerColor2 = make_colour_rgb()
-enemyColor1 = make_colour_rgb()
-enemyColor2 = make_colour_rgb()
-terrainColor1 = make_colour_rgb()
-terrainColor2 = make_colour_rgb()
-accentColor = make_colour_rgb()
-bgColor = make_colour_rgb()
 
 SLSO8 PALETTE
 #0d2b45 rgb(13,43,69)
@@ -263,8 +258,10 @@ SLSO8 PALETTE
 #ffecd6 rgb(255,236,214)
 
 //--//things I updated:
-	oAttackBolt
 	oGame - create event
+	oUI - create event
+	oUI - step event
+	oUI - draw event
 //--// things to work on
 	- define modifiers for waves to give enemies stealth, extra armor, etc...
 	- find/create a tileset for the terrain & paths
@@ -272,13 +269,12 @@ SLSO8 PALETTE
 	- tower mechanics (add a kill count for individual towers)
 	- enemy sprites
 	- player health / enemy damage
-	- player money
 	- game UI
-	- enemy spawn timeline
 	- music
 		- startmenu jingle
 		- stage 1 track
 	- sound effects
+		- sndButtonClick
 		- sndStageVictory
 		- sndStageDefeat
 		- sndGruntHurt

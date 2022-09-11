@@ -22,8 +22,11 @@ if(!global.gamePaused)
 				// pay for the tower
 				global.iGame.playerMoney -= _stats.cost;
 				instance_create_layer(rect[0], rect[1],"Instances",towerObj, _stats);
-				// check if player still has money
-				if(global.iGame.playerMoney < _stats.cost) _cancel = true;
+				// check if player still has money and check for shift key 
+				if(global.iGame.playerMoney < _stats.cost) || (!keyboard_check(vk_shift))
+				{
+					_cancel = true;
+				}
 				// check money modifier buff (intel towers only)
 				if(towerObj == oTowerIntel) || (towerObj == oTowerSpotter) || (towerObj == oTowerStalker)
 				{

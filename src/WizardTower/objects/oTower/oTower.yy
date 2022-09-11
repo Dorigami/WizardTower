@@ -1,8 +1,8 @@
 {
-  "spriteId": {
-    "name": "sTowerMinigun1",
-    "path": "sprites/sTowerMinigun1/sTowerMinigun1.yy",
-  },
+  "resourceType": "GMObject",
+  "resourceVersion": "1.0",
+  "name": "oTower",
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "managed": true,
@@ -27,14 +27,10 @@
   "eventList": [],
   "properties": [],
   "overriddenProperties": [
-    {"propertyId":{"name":"statBuildTime","path":"objects/pTower/pTower.yy",},"objectId":{"name":"pTower","path":"objects/pTower/pTower.yy",},"value":"6","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","propertyId":{"name":"statBuildTime","path":"objects/pTower/pTower.yy",},"objectId":{"name":"pTower","path":"objects/pTower/pTower.yy",},"value":"6",},
   ],
   "parent": {
     "name": "Trash",
     "path": "folders/Objects/Trash.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "oTower",
-  "tags": [],
-  "resourceType": "GMObject",
 }

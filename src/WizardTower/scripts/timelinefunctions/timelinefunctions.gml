@@ -49,7 +49,6 @@ function TimelineSetData(_data)
 // timeline moment function
 function TimelineSpawn(){
 	var _list, _group, _stats;
-	var _st = {path : -1,type : -1,hp : -1,damage : -1,spd : -1,armor : -1,stealth : -1,money : -1}
 
 	with(global.iGame)
 	{
@@ -63,17 +62,11 @@ function TimelineSpawn(){
 				{
 					// get values to spawn the group
 					_stats = defaultStats[? arrEnemies[_group.type]];
-					_st.path = _group.path;
-					_st.type = _group.type;
-					_st.hp = _stats.hp;
-					_st.damage = _stats.damage;
-					_st.spd = _stats.spd;
-					_st.armor = _stats.armor;
-					_st.stealth = _stats.stealth;
-					_st.money = _stats.money;
+					_stats.path = _group.path;
+
 					// spawn the group
 					repeat(_group.groupSize){
-						instance_create_layer(0, 0, "Instances", arrEnemies[_group.type], _st);
+						instance_create_layer(0, 0, "Instances", arrEnemies[_group.type], _stats);
 					}
 				}
 			}

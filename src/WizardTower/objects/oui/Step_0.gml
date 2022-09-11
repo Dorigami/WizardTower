@@ -11,39 +11,26 @@ if(targetClick = false)
 	if(targetHover == noone) || (!instance_exists(targetHover)) 
 	{
 		targetClick = false;
-		targetHover = noone
+		targetHover = noone;
 	}
 }
-if(mouse_check_button_released(mb_left))
+if(mouse_check_button_released(mb_left)) || (mouse_check_button_released(mb_right))
 {
-	var _tgt = collision_point(mouse_x,mouse_y,pEntity,false,true);
-	targetClick = _tgt == noone ? false : true;
-	targetHover = _tgt;
+	// only update the buttons if the player clicks outside of the UI elements
+	if(!point_in_rectangle(mouse_x,mouse_y,rectPurchase[0],rectPurchase[1],rectStart[2],rectStart[3]))
+	{
+		var _tgt = noone;
+		if(mouse_check_button_released(mb_left)) _tgt = collision_point(mouse_x,mouse_y,pEntity,false,true); 
+		targetClick = _tgt == noone ? false : true;
+		targetHover = _tgt;
+		UpdateUpgradeButtons();
+	}
 }
-if(targetHover != targetHoverCheck)
+if(targetHover != targetHoverCheck) && (targetClick)
 {
 	targetHoverCheck = targetHover;
 	UpdateUpgradeButtons();
 }
-// update areas to display info on the UI
-var _y1 = y + RESOLUTION_H-64;
-var _y2 = _y1 + 55;
-rectPurchase[0] = x + 8;
-rectPurchase[1] = _y1;
-rectPurchase[2] = rectPurchase[0] + 160;
-rectPurchase[3] = _y2;
-rectUpgrade[0] = rectPurchase[2] + 1;
-rectUpgrade[1] = _y1;
-rectUpgrade[2] = rectUpgrade[0] + 180;
-rectUpgrade[3] = _y2;
-rectInfo[0] = rectUpgrade[2] + 1;
-rectInfo[1] = _y1;
-rectInfo[2] = rectInfo[0] + 180;
-rectInfo[3] = _y2;
-rectStart[0] = rectInfo[2] + 1;
-rectStart[1] = _y1;
-rectStart[2] = rectStart[0] + 100;
-rectStart[3] = _y2;
 
 // Inherit the parent event
 event_inherited();

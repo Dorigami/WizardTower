@@ -1,7 +1,10 @@
 {
+  "resourceType": "GMObject",
+  "resourceVersion": "1.0",
+  "name": "oTowerLaser",
   "spriteId": {
-    "name": "sTowerMinigun1",
-    "path": "sprites/sTowerMinigun1/sTowerMinigun1.yy",
+    "name": "sTowerLaser1",
+    "path": "sprites/sTowerLaser1/sTowerLaser1.yy",
   },
   "solid": false,
   "visible": true,
@@ -25,7 +28,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -33,8 +36,4 @@
     "name": "Towers",
     "path": "folders/Objects/Entities/Towers.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "oTowerLaser",
-  "tags": [],
-  "resourceType": "GMObject",
 }

@@ -1,8 +1,8 @@
 {
-  "spriteId": {
-    "name": "sTowerIntel",
-    "path": "sprites/sTowerIntel/sTowerIntel.yy",
-  },
+  "resourceType": "GMObject",
+  "resourceVersion": "1.0",
+  "name": "oTowerFlame",
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "managed": true,
@@ -31,8 +31,4 @@
     "name": "Trash",
     "path": "folders/Objects/Trash.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "oTowerFlame",
-  "tags": [],
-  "resourceType": "GMObject",
 }
