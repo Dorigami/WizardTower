@@ -20,7 +20,7 @@ targetList = ds_list_create();
 targetRefresh = 10;
 cdTimer = -1;
 targetLimit = 1;
-
+killCount = 0;
 
 radialOptions = -1;
 radialArgs = -1;

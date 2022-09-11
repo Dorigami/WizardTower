@@ -23,7 +23,6 @@
     {"id":{"name":"Pathfinding","path":"scripts/Pathfinding/Pathfinding.yy",},"order":8,},
     {"id":{"name":"oTower","path":"objects/oTower/oTower.yy",},"order":2,},
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},"order":2,},
-    {"id":{"name":"EmptySelection","path":"scripts/EmptySelection/EmptySelection.yy",},"order":12,},
     {"id":{"name":"sBtn128x64","path":"sprites/sBtn128x64/sBtn128x64.yy",},"order":5,},
     {"id":{"name":"oUnitGolem","path":"objects/oUnitGolem/oUnitGolem.yy",},"order":3,},
     {"id":{"name":"shOutline","path":"shaders/shOutline/shOutline.yy",},"order":0,},
