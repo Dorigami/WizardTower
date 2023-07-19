@@ -130,21 +130,8 @@ function NearestCell(_other_entity){
 }
 
 function EntityVisibility(){
-    if(point_distance(position[1], position[2], global.iCamera.x, global.iCamera.y))
-    {
-        if(size_check == 2)
-        {
-            // see if current node is sighted
-            visible = tilemap_get(global.fog_of_war, xx, yy) == VISION.SIGHTED;
-        } else {
-            var valid = false;
-            // check if any occuiped nodes are sighted
-            
-        }
-    } else {
-        visible = false;
-    }
-
+	visible = abs(position[1] - global.iCamera.x) < global.iCamera.viewWidthHalf+20 && 
+	          abs(position[2] - global.iCamera.y) < global.iCamera.viewHeightHalf+20;
 }
 
 function DensitySplat(){

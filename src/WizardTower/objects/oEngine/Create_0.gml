@@ -67,10 +67,6 @@ global.hud_focus = noone;
 global.danger_set = ds_list_create();
 global.interest_set = ds_list_create();
 cs_unit_vectors = array_create(CS_RESOLUTION, 0);
-temp_layer = layer_create(100);
-fog_of_war_layer = layer_create(-9999);
-fog_of_war_enabled = false;
-boundary_edges = [new Edge(0,0,0,0),new Edge(0,0,0,0),new Edge(0,0,0,0),new Edge(0,0,0,0)] // this will be the same as the room boundary, used for LoS calculation
 action = {};
 mouse_action = {};
 menu_stack = ds_stack_create();
@@ -78,7 +74,6 @@ blueprint_instance = noone;
 killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
 game_grid_heap.Initialize(global.game_grid);
-game_grid_spawn_nodes = ds_list_create();
 
 // create grids for actors to manage entity density
 faction_entity_density_maps = ds_list_create();
@@ -150,10 +145,9 @@ function room_start_init_game_grid(){
 	for(var i=0;i<ds_list_size(actor_list);i++)
 	{
 		var _actor = actor_list[| i];
-		ds_grid_resize(_actor.fov_map, global.game_grid_width, global.game_grid_height);
-		ds_grid_clear(_actor.fov_map, VISION.UNSEEN);
-		ds_grid_resize(_actor.build_map, global.game_grid_width, global.game_grid_height);
-		ds_grid_clear(_actor.build_map, 0);
+		// ds_grid_resize(_actor.fov_map, global.game_grid_width, global.game_grid_height);
+		// ds_grid_resize(_actor.build_map, global.game_grid_width, global.game_grid_height);
+		// ds_grid_clear(_actor.build_map, 0);
 	}
 }
 

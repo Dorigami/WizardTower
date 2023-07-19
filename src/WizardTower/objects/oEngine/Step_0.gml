@@ -16,17 +16,11 @@ if(keyboard_check_pressed(ord("K")))
 			(path_get_point_x(_path, 0)-global.game_grid_xorigin) div GRID_SIZE, 
 			(path_get_point_y(_path, 0)-global.game_grid_yorigin) div GRID_SIZE
 		];
-		var _comm = {start_command : new Command("start", _path)};
-		with(instance_create_layer(_node.x, _node.y, "Instances", oMobController)){
-			// give the desired path to the mob, in the form of a command
-			ds_queue_enqueue(command_queue, _comm);
-			
-			// give units to the mob
-			repeat(_mob_size){
-				var _unit = ConstructUnit(_node.xx, _node.yy, 2, "skeleton");
-				_unit.member_of = id;
-				ds_list_add(members, _unit);
-			}
+		// give units to the mob
+		repeat(_mob_size){
+			var _unit = ConstructUnit(_node.xx, _node.yy, 2, "skeleton");
+			_unit.member_of = id;
+			ds_list_add(members, _unit);
 		}
 	}
 }
