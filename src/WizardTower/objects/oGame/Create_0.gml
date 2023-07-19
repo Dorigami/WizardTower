@@ -1,103 +1,8 @@
 /// @description 
-#macro RESOLUTION_W 640
-#macro RESOLUTION_H 384
-#macro ROOMSTART rStartMenu
-#macro GRID_WIDTH 40
-#macro GRID_HEIGHT 24
-#macro TILE_SIZE 32
-#macro FRAME_RATE 32
-#macro MENUDEPTH -7777
-#macro BUTTONDEPTH -6666
-#macro OUT 0
-#macro IN 1
-#macro EAST 0
-#macro NORTH 1
-#macro WEST 2
-#macro SOUTH 3
-#macro CS_RESOLUTION 6
-
-GridNode = function(_xCell=0,_yCell=0) constructor
-{
-    blocked = false; // whether the cell has something built on it
-    towersIR = ds_list_create(); // g = discomfort
-	parent = undefined;
-    cell = vect2(_xCell,_yCell);
-    center = vect2(_xCell*TILE_SIZE+0.5*TILE_SIZE, _yCell*TILE_SIZE+0.5*TILE_SIZE);
-}
-
-// set up the camera(s)/display
-function InitializeDisplay(){
-	//// dynamic CS_RESOLUTION
-		//idealWidth = 0;
-		//idealHeight = RESOLUTION_H;
-		//aspect_ratio_ = display_get_width() / display_get_height();
-		//idealWidth = round(idealHeight*aspect_ratio_);
-	// static CS_RESOLUTION
-	idealWidth = RESOLUTION_W;
-	idealHeight = RESOLUTION_H;
-	aspect_ratio_ = RESOLUTION_W / RESOLUTION_H;
-
-	//// perfect pixel scaling
-		//if(display_get_width() mod idealWidth != 0)
-		//{
-		//	var d = round(display_get_width() / idealWidth);
-		//	idealWidth = display_get_width() / d;
-		//}
-		//if(display_get_height() mod idealHeight != 0)
-		//{
-		//	var d = round(display_get_height() / idealHeight);
-		//	idealHeight = display_get_height() / d;
-		//}
-
-	//check for odd numbers
-	if(idealWidth & 1) idealWidth++;
-	if(idealHeight & 1) idealHeight++;
-
-	//do the zoom
-	zoom = 2;
-	zoomMax = floor(display_get_width() / idealWidth);
-	zoom = min(zoom, zoomMax)
-	
-	// enable & set views of each room
-	for(var i=0; i<=100; i++)
-	{
-		if(!room_exists(i)) break;
-		show_debug_message(room_get_name(i)+" has been initialized")
-		if(i == 30){show_message("update display initialize, there are too many rooms")}
-		room_set_view_enabled(i, true);
-		room_set_viewport(i,0,true,0,0,idealWidth, idealHeight);
-		room_set_width(i,RESOLUTION_W + 2*TILE_SIZE);
-		room_set_height(i,RESOLUTION_H + 2*TILE_SIZE);
-	}	
-	surface_resize(application_surface, RESOLUTION_W, RESOLUTION_H);
-	display_set_gui_size(RESOLUTION_W, RESOLUTION_H);
-	window_set_size(RESOLUTION_W*zoom, RESOLUTION_H*zoom);
-	alarm[0] = 1;
-}
-
-color0 = make_colour_rgb(13,43,69);
-color1 = make_colour_rgb(32,60,86);
-color2 = make_colour_rgb(84,78,104);
-color3 = make_colour_rgb(141,105,122);
-color4 = make_colour_rgb(208,129,89);
-color5 = make_colour_rgb(255,170,94);
-color6 = make_colour_rgb(255,212,163);
-color7 = make_colour_rgb(255,236,214);
 
 playerHealth = 100;
 playerMoney = 200;
 menuStack = ds_stack_create();
-spawnerMemory = {
-	path : pathMob0,
-	type : 0,
-	groupSize : 8,
-	hp : 3,
-	damage : 1,
-	spd : 1,
-	armor : 0,
-	stealth : 0,
-	money : 10
-}
 
 path = -1;
 type = 0;
@@ -109,9 +14,7 @@ armor = 0;
 stealth = 0;
 money = 0;
 // game setup
-depth = MENUDEPTH;
-game_set_speed(FRAME_RATE, gamespeed_fps);
-InitializeDisplay();
+
 global.gamePaused = false;
 global.muteMusic = false;
 global.muteSound = false;
@@ -120,13 +23,13 @@ global.iCamera = instance_create_layer(0,0,"Instances",oCamera);
 global.iPlayer = instance_create_layer(0,0,"Instances",oPlayer);
 global.iUI = instance_create_layer(0,0,"Instances",oUI);
 global.unitSelection = ds_list_create();
-global.gridSpace = ds_grid_create(GRID_WIDTH, GRID_HEIGHT);
+global.gridSpace = ds_grid_create(global.game_grid_width, global.game_grid_height);
 global.startPoint = vect2(0,0);
 global.goalPoint = vect2(0,0);
 global.col = layer_tilemap_get_id(layer_get_id("Col"));
 global.mobPaths = [pathMob0, pathMob1, pathMob2, pathMob3, pathMob4, pathMob5];
-for(var i=0;i<GRID_WIDTH;i++ ) { 
-for(var j=0;j<GRID_HEIGHT;j++) {
+for(var i=0;i<global.game_grid_width;i++ ) { 
+for(var j=0;j<global.game_grid_height;j++) {
 	global.gridSpace[# i, j] = new GridNode(i,j);
 }}
 

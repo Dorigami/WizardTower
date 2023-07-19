@@ -1,4 +1,7 @@
 /// @description 
+
+/*
+
 function WallStateSpawn(){
 	if(stateCheck != state)
 	{

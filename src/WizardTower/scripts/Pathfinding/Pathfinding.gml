@@ -27,7 +27,7 @@ function FindPath_Astar(_start=[2,0,0], _end=[2,0,0], _allowDiagonal){
             for(var yy=-1; yy<=1; yy++)
             {
 				if(!_allowDiagonal) && (abs(xx)+abs(yy) == 2) continue;
-                if(_currentNode.cell[1]+xx > -1) && (_currentNode.cell[1]+xx < GRID_WIDTH) && (_currentNode.cell[2]+yy > -1) && (_currentNode.cell[2]+yy < GRID_HEIGHT)
+                if(_currentNode.cell[1]+xx > -1) && (_currentNode.cell[1]+xx < global.game_grid_width) && (_currentNode.cell[2]+yy > -1) && (_currentNode.cell[2]+yy < global.game_grid_height)
 				{
 					var _neighbor = global.gridSpace[# _currentNode.cell[1]+xx, _currentNode.cell[2]+yy];
 	                if(!is_undefined(_neighbor)) && (_neighbor != _currentNode) && (_neighbor.walkable) && (ds_list_find_index(closedSet,_neighbor) == -1) && (!openSet.Contains(_neighbor)) 
@@ -94,7 +94,7 @@ GridNode = function(_xCell=0,_yCell=0) constructor
 NodeHeap = function() constructor
 {
 	currentItemCount = 0;
-	maxHeapSize = GRID_WIDTH*GRID_HEIGHT;
+	maxHeapSize = global.game_grid_width*global.game_grid_height;
 	items = array_create(maxHeapSize, -1);
 
 	static Initialize = function(){

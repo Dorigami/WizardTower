@@ -1,5 +1,7 @@
 /// @description gravity & flash
 
+/*
+
 if(!global.gamePaused)
 {
 	var _x1 = x-0.5*sprite_width;

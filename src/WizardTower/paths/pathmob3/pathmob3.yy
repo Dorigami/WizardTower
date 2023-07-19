@@ -1,17 +1,16 @@
 {
-  "kind": 0,
+  "resourceType": "GMPath",
+  "resourceVersion": "1.0",
+  "name": "pathMob3",
   "closed": false,
-  "precision": 4,
-  "points": [
-    {"speed":100.0,"x":576.0,"y":192.0,},
-    {"speed":100.0,"x":64.0,"y":192.0,},
-  ],
+  "kind": 0,
   "parent": {
     "name": "Paths",
     "path": "folders/Paths.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "pathMob3",
-  "tags": [],
-  "resourceType": "GMPath",
+  "points": [
+    {"speed":100.0,"x":576.0,"y":192.0,},
+    {"speed":100.0,"x":64.0,"y":192.0,},
+  ],
+  "precision": 4,
 }

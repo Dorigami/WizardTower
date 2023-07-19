@@ -49,7 +49,7 @@ function ControlSchemeDefault(){
 //				with(global.unitSelection[| i])
 //				{
 //					if(state != STATE.SPAWN) || (state != STATE.DEAD) state = STATE.FREE;
-//					MoveCommand(id, clamp(mouse_x,0,GRID_WIDTH*TILE_SIZE-1), clamp(mouse_y,0,GRID_HEIGHT*TILE_SIZE-1),true);
+//					MoveCommand(id, clamp(mouse_x,0,global.game_grid_width*TILE_SIZE-1), clamp(mouse_y,0,global.game_grid_height*TILE_SIZE-1),true);
 //				}
 //			}
 //		}

@@ -131,8 +131,8 @@ with(pUnit)
 	if(allMasked) velocity = vect2(0,0);
 	position = vect_add(position,velocity);
 
-	position[1] = clamp(position[1],0,GRID_WIDTH*TILE_SIZE);
-	position[2] = clamp(position[2],0,GRID_WIDTH*TILE_SIZE);
+	position[1] = clamp(position[1],0,global.game_grid_width*TILE_SIZE);
+	position[2] = clamp(position[2],0,global.game_grid_width*TILE_SIZE);
 	x = position[1];
 	y = position[2];
 	
@@ -150,8 +150,8 @@ with(pUnit)
 		if(global.iGame.playerHealth < 0) global.iGame.playerHealth = 0;
 	}
 	// update grid position
-	_x = position[1] div GRID_WIDTH;
-	_y = position[2] div GRID_HEIGHT;  
+	_x = position[1] div global.game_grid_width;
+	_y = position[2] div global.game_grid_height;  
 	if(_x != gridX) || (_y != gridY)
 	{
 		gridX = _x;

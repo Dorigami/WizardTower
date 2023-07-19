@@ -1,4 +1,7 @@
 /// @description update targetList
+
+/*
+
 var _inst = noone;
 var _x1 = x+0.5*TILE_SIZE;
 var _y1 = y+0.5*TILE_SIZE;

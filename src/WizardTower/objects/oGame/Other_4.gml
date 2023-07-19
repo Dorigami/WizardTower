@@ -13,8 +13,8 @@ with(global.iCamera)
 }
 
 // setup pathing grid building tiles
-for(var i=0;i<GRID_WIDTH;i++) {
-for(var j=0;j<GRID_HEIGHT;j++) {
+for(var i=0;i<global.game_grid_width;i++) {
+for(var j=0;j<global.game_grid_height;j++) {
 	global.gridSpace[# i, j].blocked = tilemap_get(global.col,i,j);
 }}
 

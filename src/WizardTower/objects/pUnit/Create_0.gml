@@ -1,12 +1,14 @@
 /// @description 
 
+/*
+
 // Inherit the parent event
 event_inherited();
 
 image_speed = 0.2*(spd);
 
 gridX = x div GRID_WIDTH;
-gridY = y div GRID_HEIGHT;
+gridY = y div global.game_grid_height;
 active = true;
 selected = false;
 dSet = ds_list_create();

@@ -1,6 +1,0 @@
-/// @description 
-if(!global.gamePaused)
-{
-
-}
-

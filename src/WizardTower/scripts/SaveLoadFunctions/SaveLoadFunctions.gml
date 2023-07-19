@@ -1,12 +1,12 @@
 function LoadLevel(){
 	/// @description  Save the current map
-	var _ds_grid = ds_grid_create(room_width div CELL_WIDTH, room_height div CELL_HEIGHT);
-	mp_grid_to_ds_grid(_mp_grid, _ds_grid);
+	// var _ds_grid = ds_grid_create(room_width div CELL_WIDTH, room_height div CELL_HEIGHT);
+	// mp_grid_to_ds_grid(_mp_grid, _ds_grid);
 	var i, j, _str;
 	var _base_x = 0;
 	var _base_y = 0;
-	var _w = ds_grid_width(_ds_grid);
-	var _h = ds_grid_height(_ds_grid);     
+	// var _w = ds_grid_width(_ds_grid);
+	// var _h = ds_grid_height(_ds_grid);     
 	var _filename = "newMap";
 	
 		//key
@@ -142,8 +142,8 @@ function SaveLevel(){
 		with(o_supplybase) { mp_grid_building_add() }
 	}
 	var i, j, _str;
-	var _w = ds_grid_width(_ds_grid);
-	var _h = ds_grid_height(_ds_grid);     
+	var _w = 0;// ds_grid_width(_ds_grid);
+	var _h = 0;//ds_grid_height(_ds_grid);     
 	var _filename = "newMap";
 
 	//key

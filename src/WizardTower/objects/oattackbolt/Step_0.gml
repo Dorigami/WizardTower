@@ -16,7 +16,7 @@ zVel += zDelta;
 z = z+zVel;
 if(progress >= 1) 
 {
-	HurtEntity(creator.id,target.id,damage);
+	// HurtEntity(creator.id,target.id,damage);
 	instance_destroy();
 }
 xprevious = x;

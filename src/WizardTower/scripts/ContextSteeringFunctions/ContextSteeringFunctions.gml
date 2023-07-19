@@ -18,7 +18,7 @@ function AvoidObstructions(_x, _y, _blocked){
 	for(var xx=-1;xx<=1;xx++) {
 	for(var yy=-1;yy<=1;yy++) {
 		// ensure node location is valid
-		if(_xCell+xx < 0) || (_xCell+xx >= GRID_WIDTH) || (_yCell+yy < 0) || (_yCell+yy >= GRID_HEIGHT) continue;
+		if(_xCell+xx < 0) || (_xCell+xx >= global.game_grid_width) || (_yCell+yy < 0) || (_yCell+yy >= global.game_grid_height) continue;
 		// get node [x, y, tiledata]
 		_node = global.gridSpace[# _xCell+xx, _yCell+yy];
 		// add node to list to be evaluated

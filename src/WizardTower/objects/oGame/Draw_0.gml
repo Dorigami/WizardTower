@@ -9,9 +9,9 @@ draw_set_alpha(0.2);
 
 if(room != rStartMenu)
 {
-	for(var i=0;i<GRID_WIDTH;i++)
+	for(var i=0;i<global.game_grid_width;i++)
 	{
-	for(var j=0;j<GRID_HEIGHT;j++)
+	for(var j=0;j<global.game_grid_height;j++)
 	{
 		if(i & 1)
 		{

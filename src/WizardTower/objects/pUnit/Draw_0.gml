@@ -1,5 +1,7 @@
 /// @description
 
+/*
+
 if(shadowEnabled) draw_sprite_ext(sShadow,0,floor(x),floor(y),shadowScale,shadowScale,0,c_white,1);
 
 if(flash != 0)

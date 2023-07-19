@@ -1,81 +1,77 @@
 /// @description 
 
-/*
+if(global.mouse_focus == id)
+{
+	// draw outline around the entity
+	shader_set(shOutline);
+	shader_set_uniform_f(upixelW, texelW);
+	shader_set_uniform_f(upixelH, texelH);
+	draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,0,c_white,image_alpha);
+	shader_reset();
+}
+if(selected)
+{
+	// put arrow above a selected entity
+	draw_sprite(sSelectionIndicator, 0, position[1], bbox_top)
+}
+// draw the entity
+draw_self();
 
-if(highlight) || (selected)
+if(!is_undefined(ai))
 {
-	draw_sprite_ext(sprite_index,0,x,y,image_xscale,image_yscale,0,c_white,0.2);
+	var _size = ds_list_size(ai.commands);
+	// show goal points for each command
+	if(_size > 0) && (selected){	
+	for(var i=0; i<_size; i++){
+		var _cmd = ai.commands[| i];
+		var _x1 = i==0 ? x : ai.commands[| i-1].x;
+		var _y1 = i==0 ? y : ai.commands[| i-1].y;
+		var _x2 = _cmd.x;
+		var _y2 = _cmd.y;
+
+		draw_set_color(_cmd.type == "move" ? c_blue : c_red);
+
+		draw_circle(_cmd.x, _cmd.y, 4, false);
+		draw_line(_x1, _y1, _x2, _y2);
+
+		draw_set_color(c_white);
+	}}
 }
-if(unitSpriteIndex != -1) && (unitSpriteIndex != sHighlight)
+
+var _prog = 0;
+if(!is_undefined(structure)) || (!is_undefined(blueprint))
 {
-	draw_sprite_ext(unitSpriteIndex,unitImageIndex,x,y,1,1,0,c_white,image_alpha);
-}
-if(showBars) || (selected)
-{
-	draw_set_alpha(0.6);
-	
-	var _x = x-0.5*(sprite_get_width(barSpriteIndex)-sprite_get_xoffset(barSpriteIndex));
-	var _y = y-size-sprite_get_height(barSpriteIndex);
-	var _barX = _x;
-	var _barY = _y;
-	var _prop = 0;
-	draw_sprite(barSpriteIndex, barImageIndex, _x, _y);
-	_x += 190;
-	_y -= 6;
-	switch(barImageIndex)
+	var _stt = undefined;
+	if(!is_undefined(structure)) _stt = structure;
+	if(!is_undefined(blueprint)) 
 	{
-		case 0:
-			// Health
-			draw_set_color(hpColor);
-			draw_text(_x,_y,string(hp));
-			_prop = hp / statHealth;
-			draw_rectangle(_barX,_barY,lerp(_barX,_barX+176,_prop),_barY+11,false);
-			// Metal
-			// Crystal
-			break;
-		case 1:
-			// Health
-			draw_set_color(hpColor);
-			draw_text(_x,_y,string(hp));
-			_prop = hp / statHealth;
-			draw_rectangle(_barX,_barY,lerp(_barX,_barX+176,_prop),_barY+11,false);
-			// Metal
-			// Crystal
-			draw_set_color(ctlColor);
-			draw_text(_x,_y+26,string(rsc2));
-			_prop = rsc2 / statResource2;
-			draw_rectangle(_barX,_barY+25,lerp(_barX,_barX+176,_prop),_barY+36,false);
-			break;
-		case 2:
-			// Health
-			draw_set_color(hpColor);
-			draw_text(_x,_y,string(hp));
-			_prop = hp / statHealth;
-			draw_rectangle(_barX,_barY,lerp(_barX,_barX+176,_prop),_barY+11,false);
-			// Metal
-			draw_set_color(mtlColor);
-			draw_text(_x,_y+18,string(rsc1));
-			_prop = rsc1 / statResource1;
-			draw_rectangle(_barX,_barY+17,lerp(_barX,_barX+176,_prop),_barY+28,false);
-			// Crystal
-			break;
-		case 3:
-			// Health
-			draw_set_color(hpColor);
-			draw_text(_x,_y,string(hp));
-			_prop = hp / statHealth;
-			draw_rectangle(_barX,_barY,lerp(_barX,_barX+176,_prop),_barY+11,false);
-			// Metal
-			draw_set_color(mtlColor);
-			draw_text(_x,_y+18,string(rsc1));
-			_prop = rsc1 / statResource1;
-			draw_rectangle(_barX,_barY+17,lerp(_barX,_barX+176,_prop),_barY+28,false);
-			// Crystal
-			draw_set_color(ctlColor);
-			draw_text(_x,_y+36,string(rsc2));
-			_prop = rsc2 / statResource2;
-			draw_rectangle(_barX,_barY+34,lerp(_barX,_barX+176,_prop),_barY+45,false);
-			break;
+		_stt = blueprint;
+		draw_text(x,y+20,string(ds_list_size(blueprint.targeted_by)));
 	}
-	draw_set_alpha(1);
+	if(_stt.build_timer_set_point > 0)
+	{
+		_prog = 100*(_stt.build_timer / _stt.build_timer_set_point);
+		draw_healthbar(buildtimer_bbox[0],buildtimer_bbox[1],buildtimer_bbox[2],buildtimer_bbox[3],_prog,c_black,c_gray,c_gray,0,true,false);
+	}
 }
+
+if(!is_undefined(fighter))
+{
+	if(fighter.basic_cooldown_timer > 0)
+	{
+		_prog = fighter.basic_cooldown_timer; 
+		draw_healthbar(basicattackbar_bbox[0],basicattackbar_bbox[1],basicattackbar_bbox[2],basicattackbar_bbox[3],_prog,c_black,c_gray,c_gray,0,true,false);
+	}
+	if(fighter.active_cooldown_timer > 0)
+	{
+		_prog = fighter.active_cooldown_timer; 
+		draw_healthbar(activeattackbar_bbox[0],activeattackbar_bbox[1],activeattackbar_bbox[2],activeattackbar_bbox[3],_prog,c_black,c_gray,c_gray,0,true,false);
+	}
+	if(fighter.hp < fighter.hp_max)
+	{
+		_prog = 100*(fighter.hp / fighter.hp_max);
+		draw_healthbar(healthbar_bbox[0],healthbar_bbox[1],healthbar_bbox[2],healthbar_bbox[3],_prog,c_black,c_green,c_green,0,true,false);
+	}
+}
+
+

@@ -1,5 +1,7 @@
 /// @description 
 
+/*
+
 if(!global.gamePaused)
 {
 	// attack when cooldown timer is done && a valid target exists
