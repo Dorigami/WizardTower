@@ -83,7 +83,7 @@ actor_list = ds_list_create();
 // add actors
 player_actor = new Actor(true, PLAYER_FACTION);  // 'true' means that this actor is a player
 enemy_actor = new Actor(false, ENEMY_FACTION);  // 'false' means that this actor is not a player
-neutral_actor = new Actor(false, NEUTRAL_FACTION));  // 'false' means that this actor is not a player
+neutral_actor = new Actor(false, NEUTRAL_FACTION);  // 'false' means that this actor is not a player
 ds_list_add(actor_list, neutral_actor, player_actor, enemy_actor);
 
 
@@ -102,6 +102,7 @@ function room_start_init_game_grid(){
 		x2 = (bbox_right div GRID_SIZE) * GRID_SIZE;
 		y1 = (bbox_top div GRID_SIZE) * GRID_SIZE;
 		y2 = (bbox_bottom div GRID_SIZE) * GRID_SIZE;
+		instance_destroy();
 	}
 	_w = x2-x1+1;
 	_h = y2-y1+1;

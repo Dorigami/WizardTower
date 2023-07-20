@@ -1,6 +1,6 @@
 /// @description 
 
-
+/*
 if(room != rStartMenu) && (room != rInit)
 {
 	room_start_init_game_grid();

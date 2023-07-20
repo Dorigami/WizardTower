@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sSelect_1",
-    "path": "sprites/sSelect_1/sSelect_1.yy",
+    "name": "schecker32x32",
+    "path": "sprites/schecker32x32/schecker32x32.yy",
   },
   "spriteMaskId": null,
   "visible": false,
