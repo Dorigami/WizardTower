@@ -60,8 +60,6 @@ global.iSelect = instance_create_layer(0, 0, "Instances", oSelect);
 global.iSound = instance_create_layer(0, 0, "Instances", oSound);
 global.game_state = GameStates.PLAY;
 global.game_state_previous = global.game_state;
-global.terrain_tiles = -1;
-global.fog_of_war = -1;
 global.mouse_focus = noone;
 global.hud_focus = noone;
 global.danger_set = ds_list_create();
@@ -75,23 +73,20 @@ killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
 game_grid_heap.Initialize(global.game_grid);
 
-// create grids for actors to manage entity density
-faction_entity_density_maps = ds_list_create();
-repeat(3){
-	var _grid = ds_grid_create(1,1);
-	ds_list_add(faction_entity_density_maps, _grid);
-}
-
 // fill the unit vector array with unit vectors for each context steering directions
 for(var i=0; i<CS_RESOLUTION; i++){
     cs_unit_vectors[i] = speed_dir_to_vect2(1, i*(360 div CS_RESOLUTION));
 }
 
 actor_list = ds_list_create();
-var _neutral_actor = new Actor(false, ds_list_size(actor_list));
-// add player
-player_actor = new Actor(true, ds_list_size(actor_list));  // 'true' means that this actor is a player
-ds_list_add(actor_list, _neutral_actor, player_actor);
+
+// add actors
+player_actor = new Actor(true, PLAYER_FACTION);  // 'true' means that this actor is a player
+enemy_actor = new Actor(false, ENEMY_FACTION);  // 'false' means that this actor is not a player
+neutral_actor = new Actor(false, NEUTRAL_FACTION));  // 'false' means that this actor is not a player
+ds_list_add(actor_list, neutral_actor, player_actor, enemy_actor);
+
+
 
 window_set_fullscreen(false);
 room_goto(ROOM_START);

@@ -389,13 +389,6 @@ Actor = function(_player=false, _faction, _apm=0, _ai=undefined) constructor{
 			}
         }
     }
-	static SetFogOfWar = function(){
-		if(!layer_tilemap_exists(global.iEngine.fog_of_war_layer, global.fog_of_war)) exit;
-		for(var i=0; i<global.game_grid_width; i++){
-		for(var j=0; j<global.game_grid_height; j++){
-			if( tilemap_get(global.fog_of_war, i, j) != fov_map[# i, j]) tilemap_set(global.fog_of_war, fov_map[# i, j], i, j); 
-		}}
-	}
 }
 
 //  spearbearer, physical dps (throw spear dealing damage, unit can't attack while on cooldown but can retrieve the spear to reset the cooldown)

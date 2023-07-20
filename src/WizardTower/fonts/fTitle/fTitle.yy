@@ -1,7 +1,7 @@
 {
   "resourceType": "GMFont",
   "resourceVersion": "1.0",
-  "name": "fText",
+  "name": "fTitle",
   "AntiAlias": 1,
   "applyKerning": 0,
   "ascender": 0,

@@ -203,7 +203,7 @@
     "path": "folders/Fonts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "fText",
+  "name": "fTitle",
   "tags": [],
   "resourceType": "GMFont",
 }

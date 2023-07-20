@@ -3,7 +3,7 @@ if(!gui)
 {
 	draw_self();
 
-	draw_set_font(fTextButton);
+	draw_set_font(fDefaultButton);
 	draw_set_color(textColor);
 	draw_set_alpha(image_alpha);
 	draw_set_halign(fa_center);

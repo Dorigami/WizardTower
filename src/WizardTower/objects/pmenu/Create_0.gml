@@ -43,7 +43,7 @@ TextBox = function() constructor{
 	static Init = function(){
 		if(!is_undefined(sprite))
 		{
-			draw_set_font(fTextSmall);
+			draw_set_font(fDefaultSmall);
 			fontHeight = string_height("L"); 
 			width = sprite_get_width(sprite);
 			height = sprite_get_height(sprite);

@@ -2,7 +2,7 @@
 #macro RESOLUTION_W 640
 #macro RESOLUTION_H 720 // doesnt really do anything, height is calculated based on aspect ratio and width
 #macro FRAME_RATE 60
-#macro ROOM_START rTest
+#macro ROOM_START rDebug
 #macro EAST 0
 #macro NORTH 1
 #macro WEST 2

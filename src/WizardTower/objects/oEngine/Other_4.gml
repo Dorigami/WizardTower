@@ -1,24 +1,5 @@
 /// @description 
 
-// set new edge boundary
-// east boundary
-var edge = boundary_edges[EAST];
-edge.x1 = room_width; edge.y1 = 0; 
-edge.x2 = room_width; edge.y2 = room_height;
-// north boundary
-edge = boundary_edges[NORTH];
-edge.x1 = 0; edge.y1 = 0; 
-edge.x2 = room_width; edge.y2 = 0;
-// west boundary
-edge = boundary_edges[WEST];
-edge.x1 = 0; edge.y1 = 0; 
-edge.x2 = 0; edge.y2 = room_height;
-// south boundary
-edge = boundary_edges[SOUTH];
-edge.x1 = 0; edge.y1 = room_height; 
-edge.x2 = room_width; edge.y2 = room_height;
-
-
 
 if(room != rStartMenu) && (room != rInit)
 {
@@ -54,8 +35,3 @@ if(room != rStartMenu) && (room != rInit)
 
 }
 
-// add tilemap to the room
-if(global.terrain_tiles == -1) || (!layer_tilemap_exists(temp_layer, global.terrain_tiles)){
-	temp_layer = layer_create(100);
-	global.terrain_tiles = layer_tilemap_create(temp_layer, 0, 0, tsCheckerTile, global.game_grid_width*GRID_SIZE, global.game_grid_height*GRID_SIZE);
-}

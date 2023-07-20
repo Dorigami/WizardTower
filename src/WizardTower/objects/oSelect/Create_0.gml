@@ -1,6 +1,110 @@
 /// @description Initialize
 
-image_alpha = 0.1;
+image_alpha = 0.4;
 
 len_ = 0;
 dir_ = 0;
+enabled = false;
+
+function EmptySelection(_actor){
+	var _size = ds_list_size(_actor.selected_entities);
+	
+	for(var i=0;i<_size;i++) _actor.selected_entities[| i].selected = false;
+
+	ds_list_clear(_actor.selected_entities);
+	global.iEngine.available_abilities_arr[0] = "-1";
+	global.iEngine.available_abilities_arr[1] = "-1";
+	global.iEngine.available_abilities_arr[2] = "-1";
+	global.iEngine.available_abilities_arr[3] = "-1";
+	global.iEngine.available_abilities_arr[4] = "-1";
+	global.iEngine.available_abilities_arr[5] = "-1";
+	global.iEngine.available_abilities_arr[6] = "-1";
+	global.iEngine.available_abilities_arr[7] = "-1";
+	global.iEngine.available_abilities_arr[8] = "-1";
+}
+
+function EnableSelection(){
+    enabled = true;
+    x = mouse_x;
+    y = mouse_y;
+    show_debug_message("Enable Selection");
+}
+
+function ConfirmSelection(){
+	var _player_actor = global.iEngine.player_actor;
+	var _val = 0, i = 0, _inst = noone, _ent = undefined, _offset = 0, _valid = true;
+	var _has_units = false;
+	var _has_structures = false;
+	var _faction_index = 100; // set to arbitrary high faction, as this is the highest index to reference
+	var _tmp = ds_list_create();
+	var _plist = _player_actor.selected_entities;
+	EmptySelection(_player_actor);
+	if(visible){
+		_val = instance_place_list(x,y,pEntity,_tmp,false);
+		if(_val > 0){
+			// filter the selection
+			for(i=0;i<_val;i++){
+				// 1a) loop through to find the lowest actor/faction index.
+				// 1b) see if structures or units were selected.
+				_ent = _tmp[| i];
+				 
+				if(_faction_index != PLAYER_FACTION) && (_faction_index > _ent.faction) _faction_index = _ent.faction;
+				if(!_has_units) && (!is_undefined(_ent.unit)) { _has_units = true; }
+				if(!_has_structures) && (!is_undefined(_ent.structure)) { _has_structures = true; }
+			}
+			for(i=0;i<_val;i++){
+				// 2) loop again, removing applicable IDs
+				_valid = true;
+				_ent = _tmp[| i];
+
+				if(_ent.faction != _faction_index) _valid = false;
+
+				if(_has_units) 
+				{   // only add units if a unit is among the entities
+					if(is_undefined(_ent.unit)) _valid = false;
+				} else if(_has_structures){
+					// only add structures if there weren't any units among entities
+					if(is_undefined(_ent.structure)) _valid = false;
+				} 
+
+				if(_valid) {
+					_ent.selected = true;
+					ds_list_add(_plist, _ent);
+				}
+			}
+			// update the string to draw abilities to the screen
+			_ent = _plist[| 0];
+			with(_ent)
+			{
+				if(!is_undefined(unit)) var _abilities = unit.abilities;
+				if(!is_undefined(structure)) var _abilities = structure.abilities;
+				for(var i=0;i<9;i++) global.iEngine.available_abilities_arr[i] = _abilities[i] == -1 ? "-1" : script_get_name(_abilities[i]);
+			}
+		}
+	} else {
+		// if the selection area is small enough, just get 1 instance at location
+		_ent = instance_place(x,y,pEntity);
+		if(_ent != noone) {
+			_ent.selected = true;
+			ds_list_add(_plist, _ent);
+			// update the string to draw abilities to the screen
+			if(!is_undefined(_ent.unit)) var _abilities = _ent.unit.abilities;
+			if(!is_undefined(_ent.structure)) var _abilities = _ent.structure.abilities;
+			for(var i=0;i<9;i++) global.iEngine.available_abilities_arr[i] = _abilities[i] == -1 ? "-1" : script_get_name(_abilities[i]);
+		}
+	}
+
+	ds_list_destroy(_tmp);
+	enabled = false;
+    visible = false;
+    global.iEngine.selecting = false;
+    show_debug_message("Confirm Selection");
+}
+
+function CancelSelection(){
+	EmptySelection(global.iEngine.player_actor);
+	enabled = false;
+    visible = false;
+    global.iEngine.selecting = false;
+    show_debug_message("Cancel Selection");
+}

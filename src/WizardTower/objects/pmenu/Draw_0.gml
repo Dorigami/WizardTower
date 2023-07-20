@@ -26,7 +26,7 @@ if(!gui)
 {
 	
 
-	draw_set_font(fText);
+	draw_set_font(fDefault);
 	draw_set_color(textColor);
 	draw_set_alpha(image_alpha);
 	draw_set_halign(fa_center);

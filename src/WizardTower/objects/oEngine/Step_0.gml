@@ -364,6 +364,7 @@ if(global.game_state != GameStates.PAUSE)
 	var _actor_size = ds_list_size(actor_list);
 	if(_actor_size > 0)
 	{
+		/*
 		for(var i=0; i<_actor_size; i++)
 		{
 			var _actor = actor_list[| i];
@@ -381,16 +382,8 @@ if(global.game_state != GameStates.PAUSE)
 
 					ai.Update();
 				} 
-			//--// go through the units and structures to set certain data structures:
-				// update fov grid
-				if(global.iEngine.fog_of_war_enabled) && (faction == PLAYER_FACTION) && (--fov_update_timer <= 0)
-				{
-					fov_update_timer = fov_update_time;
-					CalcFovMap();
-					SetFogOfWar();
-				}
-				// update build grid
 			}
 		}
+		*/
 	}
 }

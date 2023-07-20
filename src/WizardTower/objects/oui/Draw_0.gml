@@ -2,7 +2,7 @@
 
 // initialize
 draw_set_alpha(image_alpha);
-draw_set_font(fText);
+draw_set_font(fDefault);
 
 // Inherit the parent event
 //-0-// the ui has a modified draw event (below) DO NOT INHERIT
@@ -57,7 +57,7 @@ var _x = x + 20;
 var _y = y + 30;
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
-draw_set_font(fTextSmall);
+draw_set_font(fDefaultSmall);
 
 
 // health bar
