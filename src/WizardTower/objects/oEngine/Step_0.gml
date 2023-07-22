@@ -177,17 +177,10 @@ if(!is_undefined(move_command)){
 
 if(!is_undefined(start_next_wave))
 {
-	show_debug_message("starting next wave");
-	if(ds_list_size(actor_list) > 1)
+	show_debug_message("starting next wave");	
+	if(!is_undefined(enemy_actor.ai)) && (is_instanceof(enemy_actor.ai, DebugActorAI)) && (!enemy_actor.ai.start_next_wave)
 	{
-		for(var i=1; i<ds_list_size(actor_list); i++)
-		{
-			var _actor = actor_list[| i];
-			if(!is_undefined(_actor.ai)) && (is_instanceof(_actor.ai, DebugActorAI)) && (!_actor.ai.start_next_wave)
-			{
-				_actor.ai.start_next_wave = true;
-			}
-		}
+		enemy_actor.ai.start_next_wave = true;
 	}
 }
 
@@ -218,9 +211,6 @@ if(!is_undefined(confirm_build_action)) || (!is_undefined(confirm_build_action_m
 {
 	show_debug_message("Confirm Build Action");
 	
-	
-
-
 	// 2) set the current build blueprint to the unit selected previously
 	if(instance_exists(blueprint_instance))
 	{
@@ -332,12 +322,13 @@ if(!is_undefined(escape)){
 	
 if(global.game_state != GameStates.PAUSE)
 {
-	// Entity Loop
+/*
+// Entity Loop
 	with(pEntity)
 	{	// calculate the density field of units on the map
 		if(!is_undefined(unit))	DensitySplat();
 	}
-
+*/
 	with(pEntity)
 	{
 		EntityVisibility();
@@ -364,7 +355,6 @@ if(global.game_state != GameStates.PAUSE)
 	var _actor_size = ds_list_size(actor_list);
 	if(_actor_size > 0)
 	{
-		/*
 		for(var i=0; i<_actor_size; i++)
 		{
 			var _actor = actor_list[| i];
@@ -384,6 +374,5 @@ if(global.game_state != GameStates.PAUSE)
 				} 
 			}
 		}
-		*/
 	}
 }

@@ -5,33 +5,33 @@ DebugActorAI = function() constructor{
 			instance : noone,
 			complete : false,
 			ms1 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			],
 			ms5000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
 			],
 			ms10000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
 			],
 			ms15000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
 			],
 			ms20000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
 			]
 		},
 		wave2 : {
@@ -39,39 +39,39 @@ DebugActorAI = function() constructor{
 			instance : noone,
 			complete : false,
 			ms1 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10] 
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1] 
 			],
 			ms5000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			],
 			ms10000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			],
 			ms15000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			],
 			ms20000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			]
 		},
 		wave3 : {
@@ -79,39 +79,39 @@ DebugActorAI = function() constructor{
 			instance : noone,
 			complete : false,
 			ms1 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10] 
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1] 
 			],
 			ms5000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			],
 			ms10000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			],
 			ms15000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			],
 			ms20000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			]
 		},
 		wave4 : {
@@ -119,39 +119,39 @@ DebugActorAI = function() constructor{
 			instance : noone,
 			complete : false,
 			ms1 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10] 
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1] 
 			],
 			ms5000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			],
 			ms10000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			],
 			ms15000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			],
 			ms20000 : [
-				["shieldbearer", 40, 2],
-				["shieldbearer", 40, 4],
-				["shieldbearer", 40, 6],
-				["shieldbearer", 40, 8],
-				["shieldbearer", 40, 10]
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1],
+				["skeleton", 1, 1]
 			]
 		}
 	}
@@ -230,8 +230,8 @@ DebugActorAI = function() constructor{
 
 	static Init = function(){
 		// create spawn points
-		var _struct = undefined;
-		var i = 0;
+		var _struct = undefined, _arr=undefined, _unit_arr = undefined;
+		var i=0,j=0,k=0;
 		for(i=0;i<ds_list_size(owner.structures);i++)
 		{
 			_struct = undefined;
@@ -251,6 +251,31 @@ DebugActorAI = function() constructor{
 			ds_list_add(wave_paths, asset_get_index(path_get_name(i)));
 			show_debug_message("Adding path to AI component: index = {0}, name = {1}", i, path_get_name(i));
 			i++;
+		}
+		// set random spawn positions for the wave content
+		wave_index = 0; // used to get the spawn data (content) for the wave corresponding to this index
+		wave_keys = variable_struct_get_names(wave_content); // array of keys for accessing the spawn data for specific waves
+		wave_index_limit = array_length(wave_keys)-1;
+		for(i=0;i<array_length(wave_keys);i++)
+		{
+			_struct = wave_content[$ wave_keys[i]];
+			_arr = variable_struct_get_names(_struct);
+			for(j=0;j<array_length(_arr);j++)
+			{
+				// check to see if the info at index 'j' is a spawn mob
+				if(string_length(string_digits(_arr[j])) > 0)
+				{
+					_unit_arr = struct_get(_struct, _arr[j])
+					for(k=0;k<array_length(_unit_arr);k++)
+					{
+						// set x value to the right edge of the game grid
+						_unit_arr[k][1] = global.game_grid_xorigin + global.game_grid_width*GRID_SIZE + GRID_SIZE;
+						// set y value to a random value within vertical bounds of the game grid
+						_unit_arr[k][2] = global.game_grid_yorigin + irandom(global.game_grid_height)*GRID_SIZE ;
+					}
+					struct_set(_struct, _arr[j], _unit_arr);
+				}
+			}
 		}
 	}
 	static Update = function(){

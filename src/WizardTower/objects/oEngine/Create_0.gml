@@ -98,14 +98,15 @@ function room_start_init_game_grid(){
     global.game_grid_yorigin = undefined;
 	with(oPlaySpace)
 	{
-		x1 = (bbox_left div GRID_SIZE) * GRID_SIZE;
-		x2 = (bbox_right div GRID_SIZE) * GRID_SIZE;
-		y1 = (bbox_top div GRID_SIZE) * GRID_SIZE;
-		y2 = (bbox_bottom div GRID_SIZE) * GRID_SIZE;
+		x1 = bbox_left div GRID_SIZE;
+		x2 = bbox_right div GRID_SIZE;
+		y1 = bbox_top div GRID_SIZE;
+		y2 = bbox_bottom div GRID_SIZE;
 		instance_destroy();
 	}
 	_w = x2-x1+1;
 	_h = y2-y1+1;
+	
 	// check for valid width & height
 	if(_w <= 0) || (_h <= 0)
 	{
@@ -115,11 +116,17 @@ function room_start_init_game_grid(){
 	
 	// adjust the game grid if needed
 	ds_grid_resize(global.game_grid, _w, _h);
-	global.game_grid_xorigin = x1;
-	global.game_grid_yorigin = y1;
+	global.game_grid_xorigin = x1*GRID_SIZE;
+	global.game_grid_yorigin = y1*GRID_SIZE;
 	global.game_grid_width = _w;
 	global.game_grid_height = _h;
 
+	show_debug_message("game grid param origin: [{0}, {1}] | dimensions: [{2}, {3}]", 
+		global.game_grid_xorigin, 
+		global.game_grid_yorigin,
+		global.game_grid_width,
+		global.game_grid_height
+		);
 	// fill game grid with nodes	
 	for(i=0; i<_w; i++){
 	for(j=0; j<_h; j++){
@@ -151,8 +158,8 @@ function room_start_init_camera(){
 	// set camera position 
 	// NOTE: the game grid must initialize prior to updating the camera
 
-	var _x = GRID_SIZE*global.game_grid_width div 2;
-	var _y = GRID_SIZE*global.game_grid_height div 2;
+	var _x = global.game_grid_xorigin + GRID_SIZE*global.game_grid_width div 2;
+	var _y = global.game_grid_yorigin + GRID_SIZE*global.game_grid_height div 2;
 
 	with(global.iCamera)
 	{

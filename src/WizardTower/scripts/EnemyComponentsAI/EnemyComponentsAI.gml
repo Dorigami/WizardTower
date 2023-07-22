@@ -82,54 +82,32 @@ DefenderAI = function() constructor{
 			} else {
 				attack_target = _cmd.value;
 			}
-			
-			switch(fight_behavior)
+
+			// attack any enemy in range, but prioritize the attack command target
+			if(ds_list_size(enemies_in_range) > 0) 
 			{
-				case FIGHTBEHAVIOR.AGGRESSIVE:
-					// attack any enemy in range, but prioritize the attack command target
-					if(ds_list_size(enemies_in_range) > 0) 
+				// if the attack command target is not in range, then check for any enemies nearby
+				if(ds_list_find_index(enemies_in_range, attack_target) == -1){
+					// attack closest enemy, or the enemy that attacked this unit recently
+					if(instance_exists(retaliation_target))
+					{attack_target = retaliation_target} else {attack_target = enemies_in_range[| 0]}
+				}
+				// give attack command for target if unit is idle
+				if(ds_list_size(owner.ai.commands) == 0)
+				{
+					// if the attack target exists and there is no command currently, give attack command
+					if(instance_exists(attack_target))
 					{
-						// if the attack command target is not in range, then check for any enemies nearby
-						if(ds_list_find_index(enemies_in_range, attack_target) == -1){
-							// attack closest enemy, or the enemy that attacked this unit recently
-							if(instance_exists(retaliation_target))
-							{attack_target = retaliation_target} else {attack_target = enemies_in_range[| 0]}
-						}
-						// give attack command for target if unit is idle
-						if(ds_list_size(owner.ai.commands) == 0)
+						with(global.iEngine)
 						{
-							// if the attack target exists and there is no command currently, give attack command
-							if(instance_exists(attack_target))
-							{
-								with(global.iEngine)
-								{
-									var _atk_comm = new Command("attack", other.attack_target, other.attack_target.x, other.attack_target.y); 
-								}
-								ds_list_add(owner.ai.commands, _atk_comm);
-							}
+							var _atk_comm = new Command("attack", other.attack_target, other.attack_target.x, other.attack_target.y); 
 						}
-					} else {
-						// noone to attack but retaliate if applicable, retaliation target is assumed to be noone when not applicable
-						attack_target = retaliation_target;
+						ds_list_add(owner.ai.commands, _atk_comm);
 					}
-					break;
-				case FIGHTBEHAVIOR.DEFENSIVE:
-					// retaliate against enemies that are within leashing range from anchor point
-					if(instance_exists(retaliation_target)){
-						if(point_distance(owner.xAnchor, owner.yAnchor, retaliation_target.x, retaliation_target.y) > 1.5*range*GRID_SIZE){
-							retaliation_target = noone;
-						} else {
-							attack_target = retaliation_target;
-						}
-					}
-					if(attack_target == noone) && (ds_list_size(enemies_in_range) > 0) attack_target = enemies_in_range[| 0];
-					break;
-				case FIGHTBEHAVIOR.PASSIVE:
-					if(retaliation_target != noone) retaliation_target = noone;
-					break;
-				default:
-					show_debug_message("fighter does not have a valid fight behavior");
-					break;
+				}
+			} else {
+				// noone to attack but retaliate if applicable, retaliation target is assumed to be noone when not applicable
+				attack_target = retaliation_target;
 			}
 
 			// attack valid target	

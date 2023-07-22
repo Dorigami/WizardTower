@@ -175,7 +175,9 @@ FighterStats = function() constructor{
         build_radius : 0,
         abilities : [ManualBasicAttack,ManualActiveAttack,-1,-1,-1,-1,-1,-1,-1],
         obj : oShieldBearer,
-        bunker_size : 0
+        bunker_size : 0,
+        basic_attack : global.iEngine.shield_basic,
+        active_attack : global.iEngine.shield_active
     }
     spearbearer = { // melee fighter
         name : "default name",
@@ -199,7 +201,9 @@ FighterStats = function() constructor{
         build_radius : 0,
         abilities : [ManualBasicAttack,ManualActiveAttack,-1,-1,-1,-1,-1,-1,-1],
         obj : oSpearBearer,
-        bunker_size : 0
+        bunker_size : 0,
+        basic_attack : global.iEngine.spear_basic,
+        active_attack : global.iEngine.spear_active
     }
     lensbearer = { // mid-range fighter
         name : "default name",
@@ -223,7 +227,9 @@ FighterStats = function() constructor{
         build_radius : 0,
         abilities : [ManualBasicAttack,ManualActiveAttack,-1,-1,-1,-1,-1,-1,-1],
         obj : oLensBearer,
-        bunker_size : 0
+        bunker_size : 0,
+        basic_attack : global.iEngine.lens_basic,
+        active_attack : global.iEngine.lens_active
     }
     torchbearer = { // long-range fighter
         name : "default name",
@@ -247,7 +253,9 @@ FighterStats = function() constructor{
         build_radius : 0,
         abilities : [ManualBasicAttack,ManualActiveAttack,-1,-1,-1,-1,-1,-1,-1],
         obj : oTorchBearer,
-        bunker_size : 0
+        bunker_size : 0,
+        basic_attack : global.iEngine.torch_basic,
+        active_attack : global.iEngine.torch_active
     }
     skeleton = { // basic enemy unit
         name : "default name",
@@ -271,7 +279,9 @@ FighterStats = function() constructor{
         build_radius : 0,
         abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
         obj : oSkeleton,
-        bunker_size : 0
+        bunker_size : 0,
+        basic_attack : global.iEngine.skeleton_basic,
+        active_attack : global.iEngine.skeleton_active
     }
 
     // STRUCTURES
@@ -297,7 +307,9 @@ FighterStats = function() constructor{
         obj : oConduit,
         size : [2,2], // [width , height]
         rally_offset : [0,3],
-        bunker_size : 0
+        bunker_size : 0,
+        basic_attack : global.iEngine.conduit_basic,
+        active_attack : global.iEngine.conduit_active
     }
     turret = {
         name : "default name",
@@ -321,7 +333,9 @@ FighterStats = function() constructor{
         obj : oTurret,
         size : [2,2], // [width , height]
         rally_offset : [0,3],
-        bunker_size : 0
+        bunker_size : 0,
+        basic_attack : global.iEngine.turret_basic,
+        active_attack : global.iEngine.turret_active
     }
     barricade = { // a wall to 
         name : "default name",
@@ -345,6 +359,8 @@ FighterStats = function() constructor{
         obj : oBarricade,
         size : [1,1], // [width , height]
         rally_offset : [0,3],
-        bunker_size : 0
+        bunker_size : 0,
+        basic_attack : global.iEngine.barricade_basic,
+        active_attack : global.iEngine.barricade_active
     }
 }
