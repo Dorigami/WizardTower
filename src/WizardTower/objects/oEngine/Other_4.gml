@@ -3,6 +3,7 @@
 
 if(room != rStartMenu) && (room != rInit)
 {
+	health = 20;
 	room_start_init_game_grid();
 	room_start_init_camera();
 	// RoomStartInitMap();

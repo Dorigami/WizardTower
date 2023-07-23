@@ -271,7 +271,7 @@ FighterStats = function() constructor{
         hp : 6,
         strength : 3,
         defense : 1,
-        speed : 1,
+        speed : 3,
         range : 1,
         tags : [],
         size : [1,1], // [width , height]

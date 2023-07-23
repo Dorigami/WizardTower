@@ -4,7 +4,8 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
 	var i=0,j=0,k=0,v=0,interest=-100000000000,dist=0,ang=0,uAng=vect2(0,0),uVel=vect2(0,0);
 	var speed_limit = fighter.speed*max(0, 1-move_penalty); // move penalty represents debuffs that affect movement speed
 	var speed_terrain_penalty = 0; // this is how much movement is slowed in the desired direction, based on game grid parameters
-	var _node = global.game_grid[# xx, yy];
+	var _in_cell = point_in_rectangle(xx,yy,0,0,global.game_grid_width-1, global.game_grid_height-1)
+	var _node = _in_cell ? global.game_grid[# xx, yy] : undefined;
 	var _otherNode = undefined, _otherEntity = noone;
 	var _neutral_density = global.iEngine.faction_entity_density_maps[| NEUTRAL_FACTION];
 	var _ally_density = faction == PLAYER_FACTION ? global.iEngine.faction_entity_density_maps[| PLAYER_FACTION] : global.iEngine.faction_entity_density_maps[| ENEMY_FACTION];
@@ -133,6 +134,13 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
 	}
 	
 	ds_list_destroy(_col_list);
+	
+	// complete route
+	if(position[1] <= global.game_grid_xorigin+1)
+	{
+		HurtPlayer();
+		instance_destroy();
+	}
 }
 
 function SB_Horizontal(_goal_priority, _attack_priority, _density_priority, _discomfort_priority){
@@ -290,6 +298,13 @@ function CheckNodeChange(){
 					_node.occupied_list[| k].fighter.FindEnemies();
 				}
 			}}
+		}
+		if(xx == 0) && (faction == ENEMY_FACTION)
+		{
+			with(oEnemyGoal)
+			{
+				enable_collision_checking = true;
+			}
 		}
 	}
 }

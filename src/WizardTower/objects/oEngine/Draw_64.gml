@@ -30,6 +30,8 @@ if(global.game_state == GameStates.PAUSE)
 	_str = "";
 	with(_player)
 	{
+		// show player health
+		_str += "HEALTH: " + string(health) + "\n";
 		// show unit supply
 		_str += "SUPPLY: " + string(supply_current+supply_in_queue) + " / " + string(supply_limit) + "\n";
 		// show available material
