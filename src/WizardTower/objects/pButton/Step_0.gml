@@ -1,4 +1,11 @@
 /// @description Control the Button
+if(gui)
+{
+	// check for mouse position
+	focus = point_in_rectangle(global.iHUD.mx,global.iHUD.my,bbox_left,bbox_top,bbox_right,bbox_bottom) 
+} else {
+	// do nothing
+}
 if(!enabled)
 {
 	if(image_index != 0) image_index = 0;
@@ -11,7 +18,7 @@ if(!enabled)
 		press = false;
 		textColor = baseColor;
 	} else {
-		if(point_in_rectangle(mouse_x,mouse_y,bbox_left,bbox_top,bbox_right,bbox_bottom))
+		if(focus)
 		{
 			// animate button
 			if(mouse_check_button(mb_any)) 
@@ -34,11 +41,11 @@ if(!enabled)
 		}
 		textColor = highlightColor;
 		image_index = 1;
-		if(press)
-		{
-			image_index = 2;
-		}
+		if(press){ image_index = 2; }
 	}
+	
+	if(focus_override){ textColor = highlightColor; image_index = 1; }
+	if(press_override){ image_index = 2; }
 
 	if(image_index == 0){
 		textOffsetY = 0;

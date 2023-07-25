@@ -28,7 +28,13 @@ function handle_play_mouse(){
         }
     } else if mouse_check_button_pressed(mb_left){
         if(ds_stack_size(menu_stack) <= 1){
-            return {selecting : new Command("selecting",true,0,0)}
+            if(global.hud_focus == -1)
+            {
+                // start selection process
+                return {selecting : new Command("selecting",true,0,0)}
+            } else {
+                // do nothing (this may change later; action buttons will trigger as a seperate input)
+            }
         } else {
             return {left_click : new Command("left_click",true,mouse_x, mouse_y)}
         }
@@ -73,15 +79,15 @@ function handle_play_mouse(){
     } else if(mouse_wheel_up()){
         if(ds_stack_size(menu_stack) > 1)
         {
-            return {wheel_up : new Command("wheel_up",true,0,0)}
+            return { wheel_up : new Command("wheel_up",true,0,0) }
         } else {
-            return {camera_zoomin : new Command("camera_zoomin",true,0,0)}
+            return { camera_zoomin : new Command("camera_zoomin",true,0,0) }
         }
     } else if(mouse_wheel_down()){
         if(ds_stack_size(menu_stack) > 1){
-            return {wheel_down : new Command("wheel_down",true,0,0)}
+            return { wheel_down : new Command("wheel_down",true,0,0) }
         } else {
-            return {camera_zoomout : new Command("camera_zoomout",true,0,0)}
+            return { camera_zoomout : new Command("camera_zoomout",true,0,0) }
         }
     } 
     return {}

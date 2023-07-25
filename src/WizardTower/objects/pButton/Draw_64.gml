@@ -9,5 +9,5 @@ if(gui)
 	draw_set_alpha(image_alpha);
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_middle);
-	draw_text_ext(x+0.5*sprite_width,y+0.5*sprite_height + textOffsetY, text, 20, 0.9*sprite_width);
+	draw_text_ext(x+0.5*sprite_width,y+0.5*sprite_height + textOffsetY, text, 10, 0.9*sprite_width);
 }

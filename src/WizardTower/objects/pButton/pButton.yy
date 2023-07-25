@@ -32,7 +32,10 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": null,
+  "spriteId": {
+    "name": "sBtnPlaceholder",
+    "path": "sprites/sBtnPlaceholder/sBtnPlaceholder.yy",
+  },
   "spriteMaskId": null,
   "visible": true,
 }

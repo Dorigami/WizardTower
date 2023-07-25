@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "WizardTower",
-    "path": "WizardTower.yyp",
+    "name": "Scripts",
+    "path": "folders/Scripts.yy",
   },
 }

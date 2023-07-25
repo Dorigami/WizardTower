@@ -12,8 +12,8 @@
     "path": "folders/Objects/Buttons.yy",
   },
   "parentObjectId": {
-    "name": "pButton_1",
-    "path": "objects/pButton_1/pButton_1.yy",
+    "name": "pButton",
+    "path": "objects/pButton/pButton.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,
@@ -31,8 +31,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sBtnLevelSelect",
-    "path": "sprites/sBtnLevelSelect/sBtnLevelSelect.yy",
+    "name": "sBtn64x64",
+    "path": "sprites/sBtn64x64/sBtn64x64.yy",
   },
   "spriteMaskId": null,
   "visible": true,

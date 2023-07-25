@@ -24,9 +24,6 @@ if(room != rStartMenu) && (room != rInit)
 			_actor.ai.Init();
 		}
 	}
-	
-	//// give the enemy a base
-	//ConstructStructure(50, 15, enemy_actor.faction, "base");
-
 }
 
+global.iHUD.Init();

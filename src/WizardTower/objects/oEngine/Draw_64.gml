@@ -28,19 +28,6 @@ if(global.game_state == GameStates.PAUSE)
 	draw_set_color(c_white);
 	draw_set_alpha(1);
 	_str = "";
-	with(_player)
-	{
-		// show player health
-		_str += "HEALTH: " + string(health) + "\n";
-		// show unit supply
-		_str += "SUPPLY: " + string(supply_current+supply_in_queue) + " / " + string(supply_limit) + "\n";
-		// show available material
-		_str += "MATERIAL: [+"+string(material_per_second)+"] "+string(material)+"\n";
-		// show available material
-		_str += "EXPERIENCE: "+string(experience_points)+"\n";
-		// show upgrade points
-		_str += "UPGRADE: " + string(upgrade_points) + "\n";
-	}
 	// display abilities available
 	for(i=0;i<3;i++)
 	{
@@ -50,11 +37,7 @@ if(global.game_state == GameStates.PAUSE)
 		_str += string(_ind+3) + "[" + ability_hotkeys[_ind+2] + "] = " + available_abilities_arr[_ind+2] + "\n";
 	}
 	draw_text(5,15,_str);
-	// display mouse data
-	draw_text(180,10, "camera location = [" + string(global.iCamera.x) + ", " + string(global.iCamera.y) + "] "+string(zoom)+"\n" 
-					+ "mouse location = [" + string(mouse_x) + ", " + string(mouse_y) + "] [" 
-					+ string(mouse_x div GRID_SIZE) + ", " + string(mouse_y div GRID_SIZE) + "]\n mouse focus = " 
-					+ string(global.mouse_focus));
+
 
 	// show enemy wave status
 	var enemy_actor = actor_list[| 1];

@@ -1,5 +1,5 @@
 /// @description Initialize
-depth = BUTTONDEPTH;
+depth = -6000;
 image_speed = 0;
 image_index = 0;
 
@@ -15,6 +15,8 @@ highlightColor = c_yellow;
 textColor = c_black;
 textOffsetY = 0;
 focus = false;
+focus_override = false;
 press = false;
+press_override = false;
 gui = false;
 enabled = true;

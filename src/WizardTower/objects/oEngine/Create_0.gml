@@ -20,7 +20,7 @@ color6 = make_colour_rgb(255,212,163);
 color7 = make_colour_rgb(255,236,214);
 
 available_abilities_arr = ["-1","-1","-1","-1","-1","-1","-1","-1","-1"];
-ability_hotkeys = ["R","T","Y","F","G","H","V","B","N"];
+ability_hotkeys = ["1","2","3","4","5","6","7","8","9"];
 keybinds_string = "escape - pause/unpause/cancel action\n" 
                 + "F3 - toggle debug view\n"
                 + "alt+Enter - toggle fullscreen\n"
@@ -55,6 +55,7 @@ for(var j=0; j<global.game_grid_height; j++){
 // other global variables
 global.unitSelection = ds_list_create();
 global.iEngine = id;
+global.iHUD = instance_create_layer(0,0,"Instances", oHUD);
 global.iCamera = instance_create_layer(0, 0, "Instances", oCamera);
 global.iSelect = instance_create_layer(0, 0, "Instances", oSelect);
 global.iSound = instance_create_layer(0, 0, "Instances", oSound);
@@ -72,6 +73,8 @@ blueprint_instance = noone;
 killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
 game_grid_heap.Initialize(global.game_grid);
+stored_player_abilities = array_create(9,undefined);
+zoom_delay_time = 10;
 
 // fill the unit vector array with unit vectors for each context steering directions
 for(var i=0; i<CS_RESOLUTION; i++){
@@ -135,6 +138,7 @@ function room_start_init_game_grid(){
 		{
 			global.game_grid[# i, j] = new Node(i, j);
 		} else {
+			ds_list_clear(_node.occupied_list);
 			//update center position of the node
 			_node.x = global.game_grid_xorigin + (i*GRID_SIZE + (GRID_SIZE div 2));
 			_node.y = global.game_grid_yorigin + (j*GRID_SIZE + (GRID_SIZE div 2));

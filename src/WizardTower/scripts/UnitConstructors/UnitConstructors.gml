@@ -6,7 +6,8 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		var _struct = undefined;
 		var _actor = actor_list[| _faction];
 		var _stats = _actor.fighter_stats[$ _type_string];
-		var _node = global.game_grid[# _x div GRID_SIZE, _y div GRID_SIZE];
+		var _in_cell = point_in_rectangle(_x div GRID_SIZE, _y div GRID_SIZE,0,0,global.game_grid_width-1, global.game_grid_height-1)
+		var _node = _in_cell ? global.game_grid[# _x div GRID_SIZE, _y div GRID_SIZE] : undefined;
 		var _idle = -1;
 		var _move = -1; 
 		var _attack = -1;

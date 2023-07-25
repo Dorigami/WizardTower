@@ -189,3 +189,9 @@ Command = function(_type="", _value=undefined, _x=0, _y=0) constructor{
     x = _x; 
     y = _y;
 }
+
+Ability = function(_type="") constructor{
+	name = _type;
+	icon = sBtn32x32;
+	script = -1;
+}

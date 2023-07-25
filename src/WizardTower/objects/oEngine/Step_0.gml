@@ -91,17 +91,21 @@ if(!is_undefined(camera_pan)){
 var _zoom = !is_undefined(camera_zoomout) + 2*!is_undefined(camera_zoomin);
 if(_zoom > 0)
 {
-	if(_zoom == 1){
-		if(view_zoom != 1) view_zoom = 1; // zoom out
-	} else {
-		if(view_zoom != 0.5) view_zoom = 0.5; // zoom in
-	}
-	with(global.iCamera)
+	if(alarm[1] == -1)
 	{
-		camera_set_view_size(cam, global.iEngine.idealWidth*global.iEngine.view_zoom, global.iEngine.idealHeight*global.iEngine.view_zoom);
-		viewWidthHalf = round(0.5*camera_get_view_width(cam));
-		viewHeightHalf = round(0.5*camera_get_view_height(cam));	
-		camera_set_view_pos(cam, x-viewWidthHalf, y-viewHeightHalf);
+		alarm[1] = zoom_delay_time;
+		if(_zoom == 1){
+			view_zoom = view_zoom == 0.5 ? 1 : 2; // zoom out
+		} else {
+			view_zoom = view_zoom == 2 ? 1 : 0.5; // zoom in
+		}
+		with(global.iCamera)
+		{
+			camera_set_view_size(cam, global.iEngine.idealWidth*global.iEngine.view_zoom, global.iEngine.idealHeight*global.iEngine.view_zoom);
+			viewWidthHalf = round(0.5*camera_get_view_width(cam));
+			viewHeightHalf = round(0.5*camera_get_view_height(cam));	
+			camera_set_view_pos(cam, x-viewWidthHalf, y-viewHeightHalf);
+		}
 	}
 }
 
