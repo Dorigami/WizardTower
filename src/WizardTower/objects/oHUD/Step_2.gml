@@ -29,9 +29,3 @@ with(global.iEngine.player_actor)
 	// show upgrade points
 	other.player_data_string += "UPGRADE: " + string(upgrade_points) + "\n";
 }
-
-/*
-minimap_view_bbox[0] = ox + xx*minimap_tile_size - (zoom*tilehalfwidth+1);
-minimap_view_bbox[1] = oy + yy*minimap_tile_size - (zoom*tilehalfheight+1);
-minimap_view_bbox[2] = ox + xx*minimap_tile_size + (zoom*tilehalfwidth-1);
-minimap_view_bbox[3] = oy + yy*minimap_tile_size + (zoom*tilehalfheight-1);

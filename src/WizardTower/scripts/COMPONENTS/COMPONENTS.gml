@@ -15,7 +15,6 @@
 
 Blueprint = function(_build_time) constructor{
 	owner = undefined;
-	targeted_by = ds_list_create();
 	build_time = _build_time;
 	build_timer_set_point = _build_time*FRAME_RATE;
 	build_timer = -1;
@@ -39,7 +38,7 @@ Blueprint = function(_build_time) constructor{
 					_ent.x = owner.xTo;
 					_ent.y = owner.yTo;
 				} else {
-					ConstructStructure(owner.xx, owner.yy, owner.faction, owner.type_string);
+					ConstructStructure(owner.x, owner.y, owner.faction, owner.type_string);
 				}
 				with(owner) instance_destroy();
 			}
@@ -47,7 +46,6 @@ Blueprint = function(_build_time) constructor{
 	}
 	static Destroy = function(){
 		show_debug_message("Blueprint Entity has been destroyed.");
-		ds_list_destroy(targeted_by);
 	}
 }
 
@@ -116,7 +114,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		
 		owner.move_penalty += basic_attack.move_penalty;
 		
-		DealDamage(basic_attack.damage_value, basic_attack.damage_type, attack_target.fighter);
+		DealDamage(basic_attack.damage_value, attack_target.fighter);
 	}
 	static UseActive = function(){
 		attack_index = 1;
@@ -215,7 +213,8 @@ Unit = function(_supply_cost, _abilities, _can_bunker=true) constructor{
     can_bunker = _can_bunker;
 	blueprint_instance = noone;
 	static Update = function(){
-
+		// check for node change
+		CheckNodeChange(owner);
 	}
 	static Animate = function(){
 		var _totalFrames = image_number / 4;
@@ -248,6 +247,8 @@ Structure = function(_sup_bonus, _abilities, _rally_xx, _rally_yy) constructor{
 	rally_xx = _rally_xx;
 	rally_yy = _rally_yy;
 	static Update = function(){
+	    // check for node change
+	    CheckNodeChange(owner);
 		// handle build queue
 		if(is_undefined(build_ticket)) && (ds_queue_size(build_queue) > 0)
 		{

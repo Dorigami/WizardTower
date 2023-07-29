@@ -68,12 +68,14 @@ global.interest_set = ds_list_create();
 cs_unit_vectors = array_create(CS_RESOLUTION, 0);
 action = {};
 mouse_action = {};
+hud_action = {};
 menu_stack = ds_stack_create();
 blueprint_instance = noone;
 killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
 game_grid_heap.Initialize(global.game_grid);
-stored_player_abilities = array_create(9,undefined);
+initial_player_abilities = array_create(9, undefined);
+current_player_abilities = array_create(9,undefined);
 zoom_delay_time = 10;
 
 // fill the unit vector array with unit vectors for each context steering directions
@@ -138,6 +140,7 @@ function room_start_init_game_grid(){
 		{
 			global.game_grid[# i, j] = new Node(i, j);
 		} else {
+			_node.walkable = true;
 			ds_list_clear(_node.occupied_list);
 			//update center position of the node
 			_node.x = global.game_grid_xorigin + (i*GRID_SIZE + (GRID_SIZE div 2));
@@ -183,7 +186,28 @@ function room_start_init_camera(){
 		xTo = x; yTo = y;
 	}
 }
-
+function room_start_init_abilities(){
+	var _type = "";
+	var _ability = undefined;
+	for(var i=0;i<9;i++)
+	{
+		switch(i)
+		{
+			case 0: _type = "buy_turret"; break; 
+			case 1: _type = ""; break; 
+			case 2: _type = ""; break; 
+			case 3: _type = ""; break; 
+			case 4: _type = ""; break; 
+			case 5: _type = ""; break; 
+			case 6: _type = ""; break; 
+			case 7: _type = ""; break; 
+			case 8: _type = ""; break; 
+		}
+		// create abilites and add them to initial and stored ability arrays
+		initial_player_abilities[i] = new Ability(_type);
+		current_player_abilities[i] = variable_clone(initial_player_abilities[i]);
+	}
+}
 /* 
 
 function RoomStartInitEntities(){

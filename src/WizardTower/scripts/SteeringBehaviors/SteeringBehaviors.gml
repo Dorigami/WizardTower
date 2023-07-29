@@ -12,7 +12,7 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
 	var _opponent_density = faction == PLAYER_FACTION ? global.iEngine.faction_entity_density_maps[| ENEMY_FACTION] : global.iEngine.faction_entity_density_maps[| PLAYER_FACTION];
 	
 	var _col_list = ds_list_create();
-
+	var _halfgrid = GRID_SIZE div 2;
 	var mask = array_create(CS_RESOLUTION,0);
 	var _interest_map = array_create(CS_RESOLUTION,0);
 	var _goal_map = array_create(CS_RESOLUTION,0);
@@ -55,12 +55,18 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
 		if(!point_in_rectangle(xx+i, yy+j, 0,0,global.game_grid_width-1,global.game_grid_height-1)) continue;
 		_otherNode = global.game_grid[# xx+i, yy+j];
 		dist = point_distance(position[1], position[2], _otherNode.x, _otherNode.y);
-		uAng = speed_dir_to_vect2(1, point_direction(position[1], position[2], _otherNode.x, _otherNode.y));
+		ang = point_direction(position[1], position[2], _otherNode.x, _otherNode.y);
+		uAng = speed_dir_to_vect2(1, ang);
 
 		// get entities of otherNode and enforce mindistance
 		v = ds_list_size(_otherNode.occupied_list);
 		if(v > 0){ for(k=0;k<v;k++) ds_list_add(_col_list, _otherNode.occupied_list[| k]) }
 
+		if(_otherNode.blocked) || (!_otherNode.walkable)
+		{
+			if(dist <= collision_radius+_halfgrid) if(!mask[ang div 8]) mask[ang div 8] = true;
+		}
+		
 		for(k=0;k<CS_RESOLUTION;k++)
 		{ 
 //--// 3) get direction that minimizes unit density among allies
@@ -265,46 +271,49 @@ function SB_Horizontal(_goal_priority, _attack_priority, _density_priority, _dis
 	ds_list_destroy(_col_list);
 }
 
-function CheckNodeChange(){
-	// this function is assumed to be run inside of a unit entity
-	// will update current node as position changes
-	xx = (position[1]-global.game_grid_xorigin) div GRID_SIZE;
-	yy = (position[2]-global.game_grid_yorigin) div GRID_SIZE;
-	if(!point_in_rectangle(xx,yy,0,0,global.game_grid_width-1,global.game_grid_height-1)) exit;
-	if(xx != xx_prev) || (yy != yy_prev)
+function CheckNodeChange(_entity){
+	with(_entity)
 	{
-		var _newnode = global.game_grid[# xx, yy];
-		if(point_in_rectangle(xx_prev,yy_prev,0,0,global.game_grid_width-1,global.game_grid_height-1)) 
+		// this function is assumed to be run inside of a unit entity
+		// will update current node as position changes
+		xx = (position[1]-global.game_grid_xorigin) div GRID_SIZE;
+		yy = (position[2]-global.game_grid_yorigin) div GRID_SIZE;
+		if(!point_in_rectangle(xx,yy,0,0,global.game_grid_width-1,global.game_grid_height-1)) exit;
+		if(xx != xx_prev) || (yy != yy_prev)
 		{
-			var _oldnode = global.game_grid[# xx_prev, yy_prev];
-			ds_list_delete(_oldnode.occupied_list, ds_list_find_index(_oldnode.occupied_list, id));
-		}
-		ds_list_add(_newnode.occupied_list, id);
-		xx_prev = xx;
-		yy_prev = yy;
-		if(!is_undefined(fighter)) 
-		{
-			fighter.FindEnemies();
-			
-			var _range = 8;
-			var _node = undefined;
-			for(var i=-_range;i<=_range;i++){
-			for(var j=-_range;j<=_range;j++){
-				if(!point_in_rectangle(xx+i, yy+j,0,0,global.game_grid_width-1,global.game_grid_height-1)) continue;
-				_node = global.game_grid[# xx+i, yy+j];
-				var _size = ds_list_size(_node.occupied_list);
-				if(_size == 0) continue;
-				for(var k=0; k<_size; k++)
-				{
-					_node.occupied_list[| k].fighter.FindEnemies();
-				}
-			}}
-		}
-		if(xx == 0) && (faction == ENEMY_FACTION)
-		{
-			with(oEnemyGoal)
+			var _newnode = global.game_grid[# xx, yy];
+			if(point_in_rectangle(xx_prev,yy_prev,0,0,global.game_grid_width-1,global.game_grid_height-1)) 
 			{
-				enable_collision_checking = true;
+				var _oldnode = global.game_grid[# xx_prev, yy_prev];
+				ds_list_delete(_oldnode.occupied_list, ds_list_find_index(_oldnode.occupied_list, id));
+			}
+			ds_list_add(_newnode.occupied_list, id);
+			xx_prev = xx;
+			yy_prev = yy;
+			if(!is_undefined(fighter)) 
+			{
+				fighter.FindEnemies();
+			
+				var _range = 8;
+				var _node = undefined;
+				for(var i=-_range;i<=_range;i++){
+				for(var j=-_range;j<=_range;j++){
+					if(!point_in_rectangle(xx+i, yy+j,0,0,global.game_grid_width-1,global.game_grid_height-1)) continue;
+					_node = global.game_grid[# xx+i, yy+j];
+					var _size = ds_list_size(_node.occupied_list);
+					if(_size == 0) continue;
+					for(var k=0; k<_size; k++)
+					{
+						_node.occupied_list[| k].fighter.FindEnemies();
+					}
+				}}
+			}
+			if(xx == 0) && (faction == ENEMY_FACTION)
+			{
+				with(oEnemyGoal)
+				{
+					enable_collision_checking = true;
+				}
 			}
 		}
 	}

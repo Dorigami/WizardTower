@@ -1,15 +1,6 @@
 /// @description 
 
 function Update(){
-	
-    //if(x != xTo) || (y != yTo){
-    //    // update object position
-    //    x += 0.1*(xTo - x);
-    //    y += 0.1*(yTo - y);
-    //}
-
-    // check for node change
-    CheckNodeChange();
     
 //--// do the context steering
     // get desired direction

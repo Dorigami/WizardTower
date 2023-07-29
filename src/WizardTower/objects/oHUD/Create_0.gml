@@ -1,4 +1,17 @@
 /// @description 
+function hud_get_action(){
+	var rtn = my_action;
+	my_action = {}
+	return rtn;
+}
+function set_my_action_ability(_value){
+	with(global.iHUD)
+	{
+		my_action = {use_ability : new global.iEngine.Command("use_ability",_value,0,0)};
+	}
+}
+
+my_action = {};
 
 // mouse position on gui
 mx = device_mouse_x_to_gui(0);
@@ -23,33 +36,32 @@ player_data_x = minimap_width+1
 player_data_y = player_data_height*3;
 
 // action stuff
-actions_width = display_get_gui_height() div 2;
-actions_height = display_get_gui_height() div 2;
-actions_x = display_get_gui_width() - actions_width-1; 
-actions_y = display_get_gui_height() - actions_height-1;
-actions_buttons = array_create(9,0);
+abilities_width = display_get_gui_height() div 2;
+abilities_height = display_get_gui_height() div 2;
+abilities_x = display_get_gui_width() - abilities_width-1; 
+abilities_y = display_get_gui_height() - abilities_height-1;
+abilities_buttons = array_create(9,0);
 for(var i=0;i<9;i++)
 {
 	var _struct = {
 		text : "Action\n"+string(i+1),
 		gui : true,
-		leftScript : ManualBasicAttack,
-		leftArgs : -1,
-		rightScript : ManualBasicAttack,
-		rightArgs : -1,
+		leftScript : set_my_action_ability,
+		leftArgs : [i],
+		rightScript : set_my_action_ability,
+		rightArgs : [i],
+		creator : id
 	}
-	actions_buttons[i] = instance_create_layer(0,0,"Instances",btnPlayerAction,_struct);
+	abilities_buttons[i] = instance_create_layer(0,0,"Instances",btnPlayerAction,_struct);
 }
 
 enable_minimap = false;
-enable_actions = false;
+enable_abilities = false;
 enable_player_data = false;
-actions_bbox = array_create(4,0);
+abilities_bbox = array_create(4,0);
 minimap_bbox = array_create(4,0);
 minimap_view_bbox = array_create(4,0);
 player_data_bbox = array_create(4,0);
-
-
 
 function Init(){
 	switch(room)
@@ -61,17 +73,17 @@ function Init(){
 			player_data_bbox[1] = player_data_y;
 			player_data_bbox[2] = player_data_x + player_data_width;
 			player_data_bbox[3] = player_data_y + player_data_height;
-			// actions stufff
-			enable_actions = true;
-			actions_bbox[0] = actions_x;
-			actions_bbox[1] = actions_y;
-			actions_bbox[2] = actions_x + actions_width;
-			actions_bbox[3] = actions_y + actions_height;
+			// abilities stufff
+			enable_abilities = true;
+			abilities_bbox[0] = abilities_x;
+			abilities_bbox[1] = abilities_y;
+			abilities_bbox[2] = abilities_x + abilities_width;
+			abilities_bbox[3] = abilities_y + abilities_height;
 			var _sep = 36;
-			var _cx = ((actions_bbox[2]+actions_bbox[0]) div 2) - 1.5*_sep;
-			var _cy = ((actions_bbox[3]+actions_bbox[1]) div 2) - 1.5*_sep;
+			var _cx = ((abilities_bbox[2]+abilities_bbox[0]) div 2) - 1.5*_sep;
+			var _cy = ((abilities_bbox[3]+abilities_bbox[1]) div 2) - 1.5*_sep;
 			for(var i=0;i<9;i++){
-				with(actions_buttons[i])
+				with(abilities_buttons[i])
 				{
 					x = _cx + i%3*_sep;
 					y = _cy + (i div 3)*_sep;
@@ -90,9 +102,9 @@ function Init(){
 		default:
 			enable_player_data = false;
 			enable_minimap = false;
-			// actions stufff
-			enable_actions = false;
-			for(var i=0;i<9;i++){ actions_buttons[i].visible = false }
+			// abilities stufff
+			enable_abilities = false;
+			for(var i=0;i<9;i++){ abilities_buttons[i].visible = false }
 			break;
 	}
 }
@@ -125,7 +137,8 @@ function draw_minimap(){
 			draw_set_color(color_null);
 		} else {
 			_inst = _node.occupied_list[| 0];
-			if(_inst.faction == PLAYER_FACTION)
+			
+			if(!is_undefined(_inst)) && (instance_exists(_inst)) && (_inst.faction == PLAYER_FACTION)
 			{
 				draw_set_color(color_friendly);
 			} else {
@@ -140,10 +153,10 @@ function draw_minimap(){
 
 
 }
-function draw_actions(){
+function draw_abilities(){
 	draw_set_alpha(0.3);
 	draw_set_color(c_aqua);
-	draw_rectangle(actions_bbox[0],actions_bbox[1],actions_bbox[2],actions_bbox[3],false);
+	draw_rectangle(abilities_bbox[0],abilities_bbox[1],abilities_bbox[2],abilities_bbox[3],false);
 }
 function draw_player_data(){
 	draw_set_alpha(0.3);

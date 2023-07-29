@@ -4,9 +4,9 @@ if(enable_minimap)
 {
 	draw_minimap();
 }
-if(enable_actions)
+if(enable_abilities)
 {
-	draw_actions();
+	draw_abilities();
 }
 if(enable_player_data)
 {

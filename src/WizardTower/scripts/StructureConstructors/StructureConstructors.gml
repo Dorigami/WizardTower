@@ -1,8 +1,10 @@
-function ConstructStructure(_xx, _yy, _faction, _type_string){
+function ConstructStructure(_x, _y, _faction, _type_string){
 	// show_debug_message("Constructing STRUCTURE: xx = {0} | yy = {1} | faction = {2} | string = {3}", _xx, _yy, _faction, _type_string);
 	with(global.iEngine)
 	{
 		var _w, _h, _cw, _ch;
+		var _xx = (_x - global.game_grid_xorigin) div GRID_SIZE;
+		var _yy = (_y - global.game_grid_yorigin) div GRID_SIZE;
 		var _structure = undefined, _blueprint_component = undefined, _fighter_component = undefined, _unit_component = undefined, _structure_component = undefined, _ai_component = undefined, _bunker_component = undefined, _interactable_component = undefined;
 		var _struct = undefined;
 		var _actor = actor_list[| _faction];
@@ -20,7 +22,7 @@ function ConstructStructure(_xx, _yy, _faction, _type_string){
 		// check arguments for validity
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct structure - type string invalid"); exit;}
 		if(is_undefined(_actor)) { show_debug_message("ERROR: construct structure - actor for faction {0} invalid", _faction); exit;}
-		if(VerifyBuildingArea(_xx, _yy, _stats.size[0], _stats.size[1]) == false) { show_debug_message("ERROR: construct structure - one or more of the nodes are occupied"); exit;}
+		if(VerifyBuildingArea(_x, _y, _stats.size[0], _stats.size[1]) == false) { show_debug_message("ERROR: construct structure - one or more of the nodes are occupied"); exit;}
 
 		// get attack parameters
 		switch(_type_string)
@@ -80,16 +82,14 @@ function ConstructStructure(_xx, _yy, _faction, _type_string){
 		}
 
 		// create the entity
-		var _xstart = (_node.x div GRID_SIZE) * GRID_SIZE;
-		var _ystart = (_node.y div GRID_SIZE) * GRID_SIZE;
 		_struct = {
 			// cell or tile position
 			xx : _xx, 
 			yy : _yy,
 			xx_prev : _xx,
 			yy_prev : _yy,
-			xTo : _xstart,
-			yTo : _ystart, 
+			xTo : _x,
+			yTo : _y, 
 			size : _stats.size,
 			size_check : _stats.size[0]+_stats.size[1],
 			
@@ -100,7 +100,7 @@ function ConstructStructure(_xx, _yy, _faction, _type_string){
 			vel_force_conservation : 0.95,
 			vel_force : vect2(0,0),
 			vel_movement : vect2(0,0),
-			position : vect2(_xstart, _ystart),
+			position : vect2(_x, _y),
 			
 			// steering behavior
 			member_of : noone,
@@ -138,7 +138,7 @@ function ConstructStructure(_xx, _yy, _faction, _type_string){
 			interactable : _interactable_component
 		}
 
-		_structure = instance_create_layer(_xstart, _ystart, "Instances", _stats.obj, _struct);
+		_structure = instance_create_layer(_x, _y, "Instances", _stats.obj, _struct);
 
 		// set owner for each component
 		if(!is_undefined(_bunker_component)) _bunker_component.owner = _structure;
@@ -191,9 +191,6 @@ function ConstructStructure(_xx, _yy, _faction, _type_string){
 				global.game_grid[# _xx+i, _yy+j].block_sight = true;
 			}
 		}}
-		
-		// update the fov edges given that structures alter vision
-		player_actor.CalcFovEdges();
 		
 		return _structure; 
 	}

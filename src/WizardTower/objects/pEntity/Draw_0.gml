@@ -46,7 +46,6 @@ if(!is_undefined(structure)) || (!is_undefined(blueprint))
 	if(!is_undefined(blueprint)) 
 	{
 		_stt = blueprint;
-		draw_text(x,y+20,string(ds_list_size(blueprint.targeted_by)));
 	}
 	if(_stt.build_timer_set_point > 0)
 	{

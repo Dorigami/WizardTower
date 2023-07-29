@@ -246,12 +246,12 @@ DebugActorAI = function() constructor{
 		}
 		// get paths & add them to the ai
 		i = 0;
-		while(path_exists(asset_get_index(path_get_name(i))))
-		{
-			ds_list_add(wave_paths, asset_get_index(path_get_name(i)));
-			show_debug_message("Adding path to AI component: index = {0}, name = {1}", i, path_get_name(i));
-			i++;
-		}
+		//while(path_exists(asset_get_index(path_get_name(i))))
+		//{
+		//	ds_list_add(wave_paths, asset_get_index(path_get_name(i)));
+		//	show_debug_message("Adding path to AI component: index = {0}, name = {1}", i, path_get_name(i));
+		//	i++;
+		//}
 		// set random spawn positions for the wave content
 		wave_index = 0; // used to get the spawn data (content) for the wave corresponding to this index
 		wave_keys = variable_struct_get_names(wave_content); // array of keys for accessing the spawn data for specific waves

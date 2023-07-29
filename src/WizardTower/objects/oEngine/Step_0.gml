@@ -1,5 +1,6 @@
 /// @description run game
 
+hud_action = global.iHUD.hud_get_action();
 mouse_action = handle_mouse();
 action = handle_keys(global.game_state);
 
@@ -41,6 +42,8 @@ if(mouse_check_button_pressed(mb_any))
 
 escape = action[$ "escape"];
 if(is_undefined(escape)) escape = mouse_action[$ "escape"];
+use_ability = action[$ "use_ability"]; 
+if(is_undefined(use_ability)) use_ability = hud_action[$ "use_ability"];
 
 camera_pan = action[$ "camera_pan"];
 camera_fast_pan = action[$ "camera_fast_pan"];
@@ -60,7 +63,6 @@ left_release = mouse_action[$ "left_release"];
 wheel_down = mouse_action[$ "wheel_down"];
 wheel_up = mouse_action[$ "wheel_up"];
 start_next_wave = action[$ "start_next_wave"];
-use_ability = action[$ "use_ability"];
 change_build_type = action[$ "change_build_type"];
 confirm_build_action = action[$ "confirm_build_action"];
 confirm_build_action_mouse = mouse_action[$ "confirm_build_action"];
@@ -157,27 +159,7 @@ if(!is_undefined(move_command)){
 			}
 		}
 	}
-} else if(!is_undefined(bunker_command)){
-	show_debug_message("bunker command");
-	var _size = ds_list_size(player_actor.selected_entities);
-	if(_size > 0)
-	{
-		if(player_actor.selected_entities[| 0].faction == PLAYER_FACTION)
-		{
-			for(var i=0; i<_size; i++)
-			{
-				var _ent = player_actor.selected_entities[| i];
-				if(is_undefined(_ent.ai)) continue;
-				// give command
-				if(!keyboard_check(vk_shift))
-				{
-					ds_list_clear(_ent.ai.commands);
-				} 
-				ds_list_add(_ent.ai.commands, bunker_command);
-			}
-		}
-	}
-}
+} 
 
 if(!is_undefined(start_next_wave))
 {
@@ -222,7 +204,7 @@ if(!is_undefined(confirm_build_action)) || (!is_undefined(confirm_build_action_m
 		var _valid = true;
 		var _actor = actor_list[| PLAYER_FACTION];
 		var _stats = _actor.fighter_stats[$ blueprint_instance.type_string];
-		
+		show_debug_message("stats data = [ {0} / {1} ]", _stats.material_cost, _actor.material)
 		// check for resources
 		if(_stats.material_cost > _actor.material){ show_debug_message("not enough material"); _valid = false;}
 		if(_actor.supply_current + _actor.supply_in_queue + _stats.supply_cost > _actor.supply_limit){ show_debug_message("not enough supply"); _valid = false;}
@@ -230,7 +212,7 @@ if(!is_undefined(confirm_build_action)) || (!is_undefined(confirm_build_action_m
 		{
 			show_debug_message("build criteria met");
 			// create the blueprint entity for the builder to target
-			_ent = ConstructBlueprint(blueprint_instance.xx, blueprint_instance.yy, PLAYER_FACTION, blueprint_instance.type_string);
+			_ent = ConstructBlueprint(mouse_x, mouse_y, PLAYER_FACTION, blueprint_instance.type_string);
 			if(is_undefined(_ent)) exit;
 			if(!blueprint_instance.lock_to_grid)
 			{
@@ -277,10 +259,14 @@ if(!is_undefined(confirm_target_action)) || (!is_undefined(confirm_target_action
 
 if(!is_undefined(use_ability))
 {   show_debug_message("using ability {0}", use_ability.value);
-	if(!is_undefined(player_actor.selected_entities[| 0]))
+	var _ability = current_player_abilities[use_ability.value];
+	if(!is_instanceof(_ability, global.iEngine.Ability))
 	{
-		GetRunAbility([player_actor.selected_entities[| 0]], use_ability.value);
+		show_debug_message("can't get/run ability, no stored struct");
+		exit;
 	}
+	show_debug_message("use ability: {0}", _ability);
+	script_execute_array(_ability.script, _ability.args);
 }
 	
 if(!is_undefined(escape)){

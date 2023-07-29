@@ -1,5 +1,5 @@
 // Actor is the object class that will control units/structures of other factions
-Actor = function(_player=false, _faction, _apm=0, _ai=undefined) constructor{
+Actor = function(_player=false, _faction=NEUTRAL_FACTION, _apm=0, _ai=undefined) constructor{
     // parameters
     player = _player;
     faction = _faction;
@@ -191,7 +191,19 @@ Command = function(_type="", _value=undefined, _x=0, _y=0) constructor{
 }
 
 Ability = function(_type="") constructor{
-	name = _type;
-	icon = sBtn32x32;
-	script = -1;
+	switch(_type)
+	{
+		case "buy_turret":
+			name = _type;
+			icon = sImp;
+			script = BuilderCreateTurret;
+			args = [PLAYER_FACTION];
+			break;
+		default:
+			name = _type;
+			icon = sFollower2;
+			script = -1;
+			args = -1;
+			break;
+	}
 }

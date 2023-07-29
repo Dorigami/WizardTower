@@ -85,24 +85,7 @@ torch_active = {
     damage_value : 1,
     damage_obj : oTorchActive 
 }
-skeleton_basic = {
-    name : "Immolate",
-    cooldown : 5, // delay, in seconds, between attacks
-    move_penalty : 0.8, // move speed reduced during attack
-    duration : 0.2, // movement is reduced, other attacks cannot be done during this time
-    damage_point : 10, // damage is dealt after this step count
-    damage_value : 1,
-    damage_obj : oTorchBasic 
-}
-skeleton_active = {
-    name : "Firelight Beacon",
-    cooldown : 5, // delay, in seconds, between attacks
-    move_penalty : 0.8, // move speed reduced during attack
-    duration : 1.5, // movement is reduced, other attacks cannot be done during this time
-    damage_point : 10, // damage is dealt after this step count
-    damage_value : 1,
-    damage_obj : oTorchActive 
-}
+
 //--// Structure Attacks
 base_basic = {
     name : "Thrust Spear",
@@ -130,24 +113,7 @@ workshop_basic = {}
 workshop_active = {}
 armory_basic = {}
 armory_active = {}
-turret_basic = {
-    name : "Thrust Spear",
-    cooldown : 5, // delay, in seconds, between attacks
-    move_penalty : 0.8, // move speed reduced during attack
-    duration : 0.5, // movement is reduced, other attacks cannot be done during this time
-    damage_point : 10, // damage is dealt after this step count
-    damage_value : 1,
-    damage_obj : oSpearBasic 
-}
-turret_active = {
-    name : "Throw Spear",
-    cooldown : 5, // delay, in seconds, between attacks
-    move_penalty : 0.8, // move speed reduced during attack
-    duration : 1.5, // movement is reduced, other attacks cannot be done during this time
-    damage_point : 10, // damage is dealt after this step count
-    damage_value : 1,
-    damage_obj : oSpearActive 
-}
+
 barricade_basic = {}
 barricade_active = {}
 
@@ -271,7 +237,7 @@ FighterStats = function() constructor{
         hp : 6,
         strength : 3,
         defense : 1,
-        speed : 3,
+        speed : 1,
         range : 1,
         tags : [],
         size : [1,1], // [width , height]
@@ -280,8 +246,24 @@ FighterStats = function() constructor{
         abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
         obj : oSkeleton,
         bunker_size : 0,
-        basic_attack : global.iEngine.skeleton_basic,
-        active_attack : global.iEngine.skeleton_active
+        basic_attack : {
+            name : "Immolate",
+            cooldown : 2, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 2, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oTorchBasic 
+        },
+        active_attack : {
+            name : "Firelight Beacon",
+            cooldown : 5, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oTorchActive 
+        }
     }
 
     // STRUCTURES
@@ -317,7 +299,7 @@ FighterStats = function() constructor{
         build_time : 4, 
         supply_cost : 1,
         supply_capacity : 0,
-        material_cost : 300,
+        material_cost : 10,
 		material_reward : 100,
         experience_reward : 100,
 		upgrade_reward : 100,
@@ -334,8 +316,24 @@ FighterStats = function() constructor{
         size : [2,2], // [width , height]
         rally_offset : [0,3],
         bunker_size : 0,
-        basic_attack : global.iEngine.turret_basic,
-        active_attack : global.iEngine.turret_active
+        basic_attack : {
+            name : "Thrust Spear",
+            cooldown : 5, // delay, in seconds, between attacks
+            move_penalty : 0.8, // move speed reduced during attack
+            duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSpearBasic 
+        },
+        active_attack : {
+            name : "Throw Spear",
+            cooldown : 5, // delay, in seconds, between attacks
+            move_penalty : 0.8, // move speed reduced during attack
+            duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSpearActive 
+        }
     }
     barricade = { // a wall to 
         name : "default name",
