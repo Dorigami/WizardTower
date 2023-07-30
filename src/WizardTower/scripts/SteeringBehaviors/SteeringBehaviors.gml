@@ -161,6 +161,7 @@ function SB_Horizontal(_goal_priority, _attack_priority, _density_priority, _dis
 
 	var _col_list = ds_list_create();
 
+	var _halfgrid = GRID_SIZE div 2;
 	var mask = array_create(CS_RESOLUTION,0);
 	var _interest_map = array_create(CS_RESOLUTION,0);
 	var _goal_map = array_create(CS_RESOLUTION,0);
@@ -206,6 +207,11 @@ function SB_Horizontal(_goal_priority, _attack_priority, _density_priority, _dis
 		v = ds_list_size(_otherNode.occupied_list);
 		if(v > 0){ for(k=0;k<v;k++) ds_list_add(_col_list, _otherNode.occupied_list[| k]) }
 
+		if(_otherNode.blocked) || (!_otherNode.walkable)
+		{
+			if(dist <= collision_radius+_halfgrid) if(!mask[ang div 8]) mask[ang div 8] = true;
+		}
+
 		for(k=0;k<CS_RESOLUTION;k++)
 		{ 
 //--// 3) get direction that minimizes unit density among allies
@@ -232,7 +238,7 @@ function SB_Horizontal(_goal_priority, _attack_priority, _density_priority, _dis
 		{ 
 			k = i; // this value is to remember the index of the desired direction
 			uAng = global.iEngine.cs_unit_vectors[i];
-			interest = _interest_map[i]; 
+			interest = _interest_map[i];
 		}
 		// cancel movement in masked directions
 		if(mask[i]) && (vect_dot(uVel,global.iEngine.cs_unit_vectors[i]) > 0)

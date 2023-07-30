@@ -15,7 +15,7 @@ function ConstructBlueprint(_x, _y, _faction, _type_string){
 		var _move = -1; 
 		var _attack = -1;
 		var _death = -1;
-		
+		show_debug_message("x={0}, y={1}, xx={2}, yy={3}", _x,_y,_xx,_yy)
 		// check arguments for validity
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct blueprint - type string invalid"); exit;}
 		if(is_undefined(_actor)) { show_debug_message("ERROR: construct blueprint - actor for faction {0} invalid", _faction); exit;}
@@ -75,7 +75,7 @@ function ConstructBlueprint(_x, _y, _faction, _type_string){
 		_ch = _h div 2;
 		for(var i=-_cw; i<_w-_cw; i++){
 		for(var j=-_ch; j<_h-_ch; j++){
-			if(point_in_rectangle(_xx+i,_yy+j,0,0,global.game_grid_width,global.game_grid_height))
+			if(point_in_rectangle(_xx+i,_yy+j,0,0,global.game_grid_width-1,global.game_grid_height-1))
 			{
 				global.game_grid[# _xx+i, _yy+j].occupied_blueprint = _blueprint;
 			}
