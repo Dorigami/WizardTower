@@ -74,9 +74,6 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
     active_cooldown_timer = 0 ; // set to 100 after any attack, the attack itself will affect the rate
     active_cooldown_rate  = 0.01;
     attack_move_penalty   = 0   ;
-//    attack_duration
-//    attack_basic_cd
-//    attack_active_cd
     
 	static Update = function(){
 		if(basic_cooldown_timer > 0) basic_cooldown_timer = max(0, basic_cooldown_timer - basic_cooldown_rate);
@@ -113,8 +110,11 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		basic_cooldown_rate = 100 / (basic_attack.cooldown*FRAME_RATE);
 		
 		owner.move_penalty += basic_attack.move_penalty;
-		
-		DealDamage(basic_attack.damage_value, attack_target.fighter);
+		var _struct = {
+			creator : owner.fighter,
+			attackData : basic_attack,
+		}
+		instance_create_layer(owner.x,owner.y,"Instances", basic_attack.damage_obj, _struct);
 	}
 	static UseActive = function(){
 		attack_index = 1;
@@ -123,8 +123,11 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		active_cooldown_rate = active_attack.cooldown*FRAME_RATE*0.01;
 		
 		owner.move_penalty += active_attack.move_penalty;
-		
-		DealDamage(active_attack.damage_value, attack_target.fighter);
+		var _struct = {
+			creator : owner.fighter,
+			attackData : active_attack,
+		}
+		instance_create_layer(owner.x,owner.y,"Instances", active_attack.damage_obj, _struct);
 	}
     static DealDamage = function(_damage, _other_fighter){
 		if(is_undefined(_other_fighter)) return false; //
@@ -500,15 +503,52 @@ BasicStructureAI = function() constructor{
 			//}
 		} else {
 			// if there is no command, check if entity is a fighter and get first enemy in range
-			if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.enemies_in_range[| 0]))
+			if(!is_undefined(owner.fighter))
 			{
-				// if there are any enemies in range, attack them
-				var _target = owner.fighter.enemies_in_range[| 0];
-				with(global.iEngine){
-					var _cmd = new Command("defend",_target,_target.x,_target.y);
+				// resolve fighter behavior
+				with(owner.fighter)
+				{
+					// if there are any enemies in range, attack them
+					var _target = enemies_in_range[| 0];
+
+					// attack any enemy in range, but prioritize the attack command target
+					if(!is_undefined(_target)) && (instance_exists(_target)) 
+					{
+						// if the attack command target is not in range, check for any enemies nearby
+						if(ds_list_find_index(enemies_in_range, attack_target) == -1){
+							// attack closest enemy, or the enemy that attacked this unit recently
+							if(instance_exists(retaliation_target))
+							{
+								attack_target = retaliation_target
+							} else {
+								attack_target = enemies_in_range[| 0];
+							}
+						}
+						// give attack command for target if unit is idle
+						if(ds_list_size(owner.ai.commands) == 0)
+						{
+							// if the attack target exists and there is no command currently, give attack command
+							if(instance_exists(attack_target))
+							{
+								with(global.iEngine)
+								{
+									var _atk_comm = new Command("attack", other.attack_target, other.attack_target.x, other.attack_target.y); 
+								}
+								ds_list_add(owner.ai.commands, _atk_comm);
+							}
+						}
+					} else {
+						// noone to attack but retaliate if applicable, retaliation target is assumed to be noone when not applicable
+						attack_target = retaliation_target;
+					}
+
+					// attack valid target	
+					if(attack_index == -1) && (basic_cooldown_timer <= 0) && (attack_target != noone) && (instance_exists(attack_target))
+					{
+						owner.attack_direction = point_direction(owner.position[1], owner.position[2], attack_target.position[1], attack_target.position[2]);
+						if(ds_list_find_index(enemies_in_range, attack_target) > -1) UseBasic();
+					}
 				}
-				ds_list_add(commands,_cmd);
-				//GetAction();
 			}
 		}
 	}

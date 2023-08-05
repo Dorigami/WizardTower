@@ -15,7 +15,7 @@ function BuilderCreate(_type_string, _faction){
 		//	var _type_arr = ["shieldbearer", "spearbearer", "lensbearer", "torchbearer"];
 		//	var _gridlock = false;
 		//} else {
-			var _type_arr = ["conduit","lamp","workshop","armory","turret","barricade"];
+			var _type_arr = ["turret","barricade"];
 			var _gridlock = true;
 		//}
 		// change state

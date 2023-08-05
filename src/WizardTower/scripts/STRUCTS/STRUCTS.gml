@@ -198,12 +198,18 @@ Ability = function(_type="") constructor{
 			icon = sImp;
 			script = BuilderCreateTurret;
 			args = [PLAYER_FACTION];
+			title = "Basic Turret";
+			description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
+			values = {};
 			break;
 		default:
 			name = _type;
 			icon = sFollower2;
 			script = -1;
 			args = -1;
+			title = "Test Title";
+			description = "Test Description\nline 2\n line 3\nline 4\n line 5";
+			values = {};
 			break;
 	}
 }

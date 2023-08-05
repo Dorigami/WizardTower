@@ -59,9 +59,9 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 				break;
 			case "turret":
 				_idle = sTurret;
-				_move = -1; 
-				_attack = -1;
-				_death = -1;
+				_move = sTurret; 
+				_attack = sTurret;
+				_death = sTurret;
 				break;
 			case "barricade":
 				_idle = sBarricade;

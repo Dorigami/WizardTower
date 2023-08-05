@@ -164,6 +164,7 @@ function SB_Horizontal(_goal_priority, _attack_priority, _density_priority, _dis
 	var _halfgrid = GRID_SIZE div 2;
 	var mask = array_create(CS_RESOLUTION,0);
 	var _interest_map = array_create(CS_RESOLUTION,0);
+	var _danger_map = array_create(CS_RESOLUTION,0);
 	var _goal_map = array_create(CS_RESOLUTION,0);
 	var _goal_desire = 0;
 	var _attack_map = array_create(CS_RESOLUTION,0);
@@ -233,26 +234,26 @@ function SB_Horizontal(_goal_priority, _attack_priority, _density_priority, _dis
 	{
 		_interest_map[i] = _goal_priority*_goal_desire*_goal_map[i] + _attack_priority*_attack_desire*_attack_map[i] - 
 				   		   _density_priority*_density_desire*_density_map[i] - _discomfort_priority*_discomfort_desire*_discomfort_map[i];
-		
 		if(interest < _interest_map[i])
 		{ 
 			k = i; // this value is to remember the index of the desired direction
 			uAng = global.iEngine.cs_unit_vectors[i];
 			interest = _interest_map[i];
 		}
-		// cancel movement in masked directions
+	}
+
+	// calculate new velocity with steering, there is no speed limit in cases where steering is pointed away from current velocity
+	steering = vect_multr(uAng, steering_mag);
+	vel_movement = vect_truncate(vect_add(vel_movement, steering), max(0, speed_limit*(1-speed_terrain_penalty)));
+	
+	// cancel movement in masked directions
+	for(i=0;i<CS_RESOLUTION;i++)
+	{
 		if(mask[i]) && (vect_dot(uVel,global.iEngine.cs_unit_vectors[i]) > 0)
 		{
 			vel_movement = vect_subtract(vel_movement, vect_proj(vel_movement, global.iEngine.cs_unit_vectors[i]));
 		}
 	}
-
-	// calculate new velocity with steering, there is no speed limit in cases where steering is pointed away from current velocity
-	steering = vect_multr(uAng, steering_mag);
-	vel_movement = vect_dot(uAng, vect_norm(vel_movement)) > 0 ? 
-					vect_truncate(vect_add(vel_movement, steering), max(0, speed_limit*(1-speed_terrain_penalty))) :
-					vect_add(vel_movement, steering);
-
 
     // simulate friction(deceleration) with respect to outside influences on movement
     if(vel_force[1] != 0) || (vel_force[2] != 0) vel_force = vect_multr(vel_force, vel_force_conservation);
@@ -1029,11 +1030,11 @@ function sb_set_rules(goto_goal, avoid_units, avoid_buildings, avoid_enemies, fo
 		if(!path_exists(path_)) path_ = path_add(); 
 		mp_grid_path_ext(global.map_grid, path_, x, y,_cmd[1],_cmd[2], true)
 		// add target's final point if it exists
-		if(target_ != noone)
+		if(target != noone)
 		{
-		if(instance_exists(target_))
+		if(instance_exists(target))
 		{
-			path_add_point(path_get_number(path_),target_.x, target_.y,speed_);
+			path_add_point(path_get_number(path_),target.x, target.y,speed_);
 		}
 		}
 		// find index of nearest point in the path

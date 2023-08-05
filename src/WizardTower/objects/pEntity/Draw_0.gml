@@ -9,11 +9,7 @@ if(global.mouse_focus == id)
 	draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,0,c_white,image_alpha);
 	shader_reset();
 }
-if(selected)
-{
-	// put arrow above a selected entity
-	draw_sprite(sSelectionIndicator, 0, position[1], bbox_top)
-}
+
 // draw the entity
 draw_self();
 

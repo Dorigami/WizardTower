@@ -46,13 +46,14 @@ for(var i=0;i<9;i++)
 	var _struct = {
 		text : "Action\n"+string(i+1),
 		gui : true,
+		action_index : i,
 		leftScript : set_my_action_ability,
 		leftArgs : [i],
 		rightScript : set_my_action_ability,
 		rightArgs : [i],
 		creator : id
 	}
-	abilities_buttons[i] = instance_create_layer(0,0,"Instances",btnPlayerAction,_struct);
+	abilities_buttons[i] = instance_create_depth(0,0,depth-1,btnPlayerAction,_struct);
 }
 
 enable_minimap = false;
@@ -62,6 +63,10 @@ abilities_bbox = array_create(4,0);
 minimap_bbox = array_create(4,0);
 minimap_view_bbox = array_create(4,0);
 player_data_bbox = array_create(4,0);
+
+// misc stuff
+show_selected_entities = false;
+show_wave_data = false;
 
 function Init(){
 	switch(room)
@@ -176,5 +181,13 @@ function draw_player_data(){
 					+ string((mouse_x-global.game_grid_xorigin) div GRID_SIZE) + ", " + string((mouse_y-global.game_grid_yorigin) div GRID_SIZE) + "]\n mouse focus = " 
 					+ string(global.mouse_focus));
 }
-
+function draw_wave_data(){
+	// display wave count & enemies remaining
+	var _actor = global.iEngine.enemy_actor;
+	draw_set_valign(fa_bottom);
+	draw_set_halign(fa_right);
+	draw_text(player_data_bbox[2], player_data_bbox[3]-4, 
+	  "WAVE = [" + string(_actor.ai.wave_index) + " / " + string(array_length(_actor.ai.wave_keys)) + "]\n" 
+	+ "enemies remaining = [" + string(ds_list_size(_actor.units) + ds_list_size(_actor.structures))+"]");
+}
 

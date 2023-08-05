@@ -35,7 +35,7 @@ if(!is_undefined(blueprint)){
 
     // clear id from occupy cells
     if(size_check == 2){
-        global.game_grid[# xx, yy].occupied_blueprint = noone;
+        if(point_in_rectangle(xx, yy, 0, 0, global.game_grid_width-1, global.game_grid_height-1)) global.game_grid[# xx, yy].occupied_blueprint = noone;
     } else {
 		var _w = size[0];
 		var _h = size[1];

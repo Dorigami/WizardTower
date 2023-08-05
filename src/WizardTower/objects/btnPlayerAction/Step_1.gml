@@ -66,4 +66,33 @@ if(!enabled)
 		rightClick= false;
 		if(rightScript != -1) script_execute_array(rightScript, rightArgs);
 	}
+	
+	// DISPLAY INFORMATION IN A TEXT WINDOW
+	if(text_window_enabled)
+	{
+		if(focus)
+		{
+			if(!instance_exists(oTextWindow)) 
+			{
+				// create a new window
+				var _struct = {
+					target : id,
+					ability : global.iEngine.current_player_abilities[action_index],
+					bg_sprite : sDebugTextWindow9s,
+				}
+				with(global.iHUD) instance_create_depth(ox, oy, depth-2, oTextWindow, _struct);
+			} else {
+				// reset the window's target
+				with(oTextWindow)
+				{
+					if(target != other.id)
+					{
+						update_ability = true;
+						ability = global.iEngine.current_player_abilities[other.action_index];
+						target = other.id; 
+					}
+				}
+			}
+		}
+	}
 }

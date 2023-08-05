@@ -1,5 +1,5 @@
 /// @description Initialize
-depth = -6000;
+// depth = -6000;
 image_speed = 0;
 image_index = 0;
 
@@ -14,5 +14,5 @@ focus_override = false;
 press = false;
 press_override = false;
 enabled = true;
-
+text_window_enabled = true;
 

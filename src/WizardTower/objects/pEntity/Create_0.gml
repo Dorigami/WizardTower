@@ -9,6 +9,13 @@ function Update(){
 	if(script_exists(steering_behavior)) script_execute_array(steering_behavior, _movement_weights);
 	// steer toward desired direction
 
+
+	// update position relative to the gui layer
+	if(visible){
+		gui_x = position[1] - camera_get_view_x(view_camera[0]);
+		gui_y = position[2] - camera_get_view_y(view_camera[0]);
+	}
+	
 	// animate
 	var _idle_lim = 0.6;
 	var _move_lim = 0.8;
@@ -188,6 +195,8 @@ texelW = texture_get_texel_width(sprite_get_texture(sprite_index,0));
 texelH = texture_get_texel_height(sprite_get_texture(sprite_index,0));
 
 // data bars that display over-head
+gui_x = 0;
+gui_y = 0;
 bar_height = 6;
 healthbar_bbox =       [0,0,0,0];
 buildtimer_bbox =      [0,0,0,0];

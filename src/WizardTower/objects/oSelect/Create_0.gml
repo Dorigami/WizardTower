@@ -21,6 +21,12 @@ function EmptySelection(_actor){
 	global.iEngine.available_abilities_arr[6] = "-1";
 	global.iEngine.available_abilities_arr[7] = "-1";
 	global.iEngine.available_abilities_arr[8] = "-1";
+	
+	// update the hud for displaying selected entities
+	if(_actor.faction == PLAYER_FACTION)
+	{
+		global.iHUD.show_selected_entities = ds_list_size(_actor.selected_entities);
+	}
 }
 
 function EnableSelection(){
@@ -98,6 +104,9 @@ function ConfirmSelection(){
 	enabled = false;
     visible = false;
     global.iEngine.selecting = false;
+	// update the hud for displaying selected entities
+	global.iHUD.show_selected_entities = ds_list_size(global.iEngine.player_actor.selected_entities);
+	
     show_debug_message("Confirm Selection");
 }
 
@@ -106,5 +115,8 @@ function CancelSelection(){
 	enabled = false;
     visible = false;
     global.iEngine.selecting = false;
+	// update the hud for displaying selected entities
+	global.iHUD.show_selected_entities = ds_list_size(global.iEngine.player_actor.selected_entities);
+	
     show_debug_message("Cancel Selection");
 }

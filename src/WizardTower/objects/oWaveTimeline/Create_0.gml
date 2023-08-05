@@ -30,7 +30,7 @@ function SpawnMoment(){
 		instance_destroy();
 	}
 }
-show_debug_message("timeline created")
+
 // process the wave data passed to this object
 // wave_data = {struct};
 // wave_index = 0;
@@ -45,6 +45,12 @@ moment_index = 0;
 moment_count = array_length(wave_keys);
 moment_list = ds_list_create();
 entity_list = ds_list_create();
+
+// let the hud object know to display wave data
+with(global.iHUD)
+{
+	if(!show_wave_data) show_wave_data = true;
+}
 
 // add moments to the timeline
 for(var j=0; j<moment_count; j++)

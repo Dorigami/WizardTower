@@ -66,4 +66,24 @@ if(!enabled)
 		rightClick= false;
 		if(rightScript != -1) script_execute_array(rightScript, rightArgs);
 	}
+	
+	// DISPLAY INFORMATION IN A TEXT WINDOW
+	if(text_window_enabled)
+	{
+		if(image_index > 0)
+		{
+			if(!instance_exists(oTextWindow)) 
+			{
+				// create a new window
+				var _struct = {
+					target : id,
+					sprite_index : sDebugTextWindow9s,
+				}
+				with(global.iHUD) instance_create_depth(ox, oy, depth-1, oTextWindow, _struct);
+			} else {
+				// reset the window's target
+				oTextWindow.target = self; 
+			}
+		}
+	}
 }

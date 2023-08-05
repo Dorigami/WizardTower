@@ -27,17 +27,6 @@ if(global.game_state == GameStates.PAUSE)
 } else {
 	draw_set_color(c_white);
 	draw_set_alpha(1);
-	_str = "";
-	// display abilities available
-	for(i=0;i<3;i++)
-	{
-		_ind = i*3;
-		_str += "ability " + string(_ind+1) + "[" + ability_hotkeys[_ind] + "] = " + available_abilities_arr[_ind] + "  |  ";
-		_str += string(_ind+2) + "[" + ability_hotkeys[_ind+1] + "] = " + available_abilities_arr[_ind+1] + "  |  ";
-		_str += string(_ind+3) + "[" + ability_hotkeys[_ind+2] + "] = " + available_abilities_arr[_ind+2] + "\n";
-	}
-	draw_text(5,15,_str);
-
 
 	// show enemy wave status
 	var enemy_actor = actor_list[| 1];
