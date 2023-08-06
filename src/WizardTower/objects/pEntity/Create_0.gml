@@ -34,7 +34,7 @@ function Update(){
 			}
 			image_index += image_number/(_dur*FRAME_RATE);
 
-            _dir = attack_direction;
+            _dir = !is_undefined(structure) ? 0 : attack_direction;
 		} else {
             if(_spd <= _idle_lim)
             {

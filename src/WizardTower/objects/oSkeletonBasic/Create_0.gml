@@ -1,13 +1,13 @@
 /// @description 
 
-/*
-    var _struct = {
-        creator : owner.fighter,
-        attackData : basic_attack,
-        damageScript : DealDamage
-    } 
-*/
 
-damage_point_timer = attackData.damage_point;
-lifetime = 20;
+
+// Inherit the parent event
+event_inherited();
+
+needs_creator = true;
+lifetime = floor(attackData.duration*FRAME_RATE);
+lifetime_max = lifetime;
+damage_point_timer = floor(lifetime*0.75);
+damage_point_timer_max = damage_point_timer;
 

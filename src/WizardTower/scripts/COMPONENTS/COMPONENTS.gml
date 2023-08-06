@@ -112,6 +112,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		owner.move_penalty += basic_attack.move_penalty;
 		var _struct = {
 			creator : owner.fighter,
+			target : attack_target,
 			attackData : basic_attack,
 		}
 		instance_create_layer(owner.x,owner.y,"Instances", basic_attack.damage_obj, _struct);
@@ -125,6 +126,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		owner.move_penalty += active_attack.move_penalty;
 		var _struct = {
 			creator : owner.fighter,
+			target : attack_target,
 			attackData : active_attack,
 		}
 		instance_create_layer(owner.x,owner.y,"Instances", active_attack.damage_obj, _struct);
@@ -508,46 +510,34 @@ BasicStructureAI = function() constructor{
 				// resolve fighter behavior
 				with(owner.fighter)
 				{
-					// if there are any enemies in range, attack them
-					var _target = enemies_in_range[| 0];
-
-					// attack any enemy in range, but prioritize the attack command target
-					if(!is_undefined(_target)) && (instance_exists(_target)) 
+					var _target = noone;
+					// attack the current attack target, if possible
+					if(attack_target != noone) && (instance_exists(attack_target)) && (point_distance(owner.position[1], owner.position[2],attack_target.position[1],attack_target.position[2]) <= range*GRID_SIZE)
 					{
-						// if the attack command target is not in range, check for any enemies nearby
-						if(ds_list_find_index(enemies_in_range, attack_target) == -1){
-							// attack closest enemy, or the enemy that attacked this unit recently
-							if(instance_exists(retaliation_target))
-							{
-								attack_target = retaliation_target
-							} else {
-								attack_target = enemies_in_range[| 0];
-							}
-						}
-						// give attack command for target if unit is idle
-						if(ds_list_size(owner.ai.commands) == 0)
-						{
-							// if the attack target exists and there is no command currently, give attack command
-							if(instance_exists(attack_target))
-							{
-								with(global.iEngine)
-								{
-									var _atk_comm = new Command("attack", other.attack_target, other.attack_target.x, other.attack_target.y); 
-								}
-								ds_list_add(owner.ai.commands, _atk_comm);
-							}
-						}
+						_target = attack_target;
 					} else {
-						// noone to attack but retaliate if applicable, retaliation target is assumed to be noone when not applicable
-						attack_target = retaliation_target;
+						attack_target = noone;
 					}
-
-					// attack valid target	
-					if(attack_index == -1) && (basic_cooldown_timer <= 0) && (attack_target != noone) && (instance_exists(attack_target))
+					// if there is no attack target, attack nearest enemy
+					if(_target == noone)
 					{
-						owner.attack_direction = point_direction(owner.position[1], owner.position[2], attack_target.position[1], attack_target.position[2]);
-						if(ds_list_find_index(enemies_in_range, attack_target) > -1) UseBasic();
+						_target = enemies_in_range[| 0];
+						if(is_undefined(_target)) _target = noone;
 					}
+					// can't use retaliation target because structures cant move
+					
+					
+					// attack any enemy in range, but prioritize the attack command target
+					if(_target != noone) 
+					{
+						// attack valid target	
+						attack_target = _target;
+						if(attack_index == -1) && (basic_cooldown_timer <= 0)
+						{
+							owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
+							UseBasic();
+						}
+					} 
 				}
 			}
 		}

@@ -207,9 +207,9 @@ FighterStats = function() constructor{
         bunker_size : 0,
         basic_attack : {
             name : "Bone Slash",
-            cooldown : 3, // delay, in seconds, between attacks
+            cooldown : 2, // delay, in seconds, between attacks
             move_penalty : 1, // move speed reduced during attack
-            duration : 1, // movement is reduced, other attacks cannot be done during this time
+            duration : 0.5, // movement is reduced, other attacks cannot be done during this time
             damage_point : 10, // damage is dealt after this step count
             damage_value : 1,
             damage_obj : oSkeletonBasic 
@@ -229,7 +229,7 @@ FighterStats = function() constructor{
     turret = {
         name : "default name",
         description : "default description",
-        build_time : 4, 
+        build_time : 1, 
         supply_cost : 1,
         supply_capacity : 0,
         material_cost : 10,
@@ -240,7 +240,7 @@ FighterStats = function() constructor{
         strength : 3,
         defense : 1,
         speed : 0,
-        range : 1,
+        range : 4,
         tags : [],
         los_radius : 1,
         build_radius : 0,

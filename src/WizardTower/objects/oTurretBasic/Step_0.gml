@@ -1,19 +1,13 @@
 /// @description 
 
+// Inherit the parent event
+event_inherited();
+if(destroyed_self) exit;
 
-if(--lifetime <= 0)
-{
-    show_debug_message("end of life - " + object_get_name(object_index));
-    instance_destroy();
-}
-
-if(!variable_struct_exists(creator, "faction")) { instance_destroy(); exit; }
-
-if(--damage_point_timer == 0) && (instance_exists(creator.attack_target))
-{
-    show_debug_message("damage point - " + object_get_name(object_index));
-	with(creator)
-	{
-		DealDamage(other.attackData.damage_value, attack_target);
-	}
-}
+// animate the shot
+animation_progress = lifetime / lifetime_max;
+xTo = target.position[1];
+yTo = target.position[2];
+x = lerp(xTo, xstart, max(0, damage_point_timer/damage_point_timer_max));
+y = lerp(yTo, ystart, max(0, damage_point_timer/damage_point_timer_max));
+depth = -y;
