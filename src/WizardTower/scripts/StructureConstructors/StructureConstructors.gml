@@ -139,7 +139,11 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 		}
 
 		_structure = instance_create_layer(_x, _y, "Instances", _stats.obj, _struct);
-
+		with(_structure)
+		{
+			position[1] += ((bbox_right - bbox_left) div 2) - sprite_get_xoffset(sprite_index);
+			position[2] += ((bbox_bottom - bbox_top) div 2) - sprite_get_yoffset(sprite_index);
+		}
 		// set owner for each component
 		if(!is_undefined(_bunker_component)) _bunker_component.owner = _structure;
 		if(!is_undefined(_ai_component)) _ai_component.owner = _structure;

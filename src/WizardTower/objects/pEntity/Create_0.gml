@@ -95,12 +95,14 @@ function Update(){
 }
 
 function DistanceTo(_other_entity){
-	// returns distance between entities in terms of tiles
-	var _selfpos = [xx, yy];
-	var _otherpos = [_other_entity.xx, _other_entity.yy];
+	// returns distance between entities in terms of pixels
+	if(!is_undefined(structure))
+	
+	var _selfpos = [position[1], position[2]];
+	var _otherpos = [_other_entity.position[1], _other_entity.position[2]];
 	if(size_check > 2) _selfpos = _other_entity.NearestCell(id);
 	if(_other_entity.size_check > 2) _otherpos = id.NearestCell(_other_entity);
-	return point_distance(_selfpos[0], _selfpos[1], _otherpos[0], _otherpos[1]);
+	return point_distance(_selfpos[0], _selfpos[1], _otherpos[0], _otherpos[1]) - _other_entity.collision_radius;
 }
 
 function NearestCell(_other_entity){
@@ -182,10 +184,8 @@ function DensitySplat(){
 var _str = object_get_name(object_index);
 _str = string_lower(string_copy(_str,2,string_length(_str)-1));
 type_string = _str;
-
 faction_list_index = -1; // this index is set through the unit constructor script
 selected = false;
-
 checked_node_list = ds_list_create();
 
 // shader stuff

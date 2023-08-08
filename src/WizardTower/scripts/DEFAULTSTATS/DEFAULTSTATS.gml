@@ -197,7 +197,7 @@ FighterStats = function() constructor{
         strength : 3,
         defense : 1,
         speed : 1,
-        range : 1,
+        range : 0,
         tags : [],
         size : [1,1], // [width , height]
         los_radius : 4,
@@ -232,11 +232,11 @@ FighterStats = function() constructor{
         build_time : 1, 
         supply_cost : 1,
         supply_capacity : 0,
-        material_cost : 10,
+        material_cost : 50,
 		material_reward : 100,
         experience_reward : 100,
 		upgrade_reward : 100,
-        hp : 30,
+        hp : 5,
         strength : 3,
         defense : 1,
         speed : 0,
@@ -271,10 +271,10 @@ FighterStats = function() constructor{
     barricade = { // a wall to 
         name : "default name",
         description : "default description",
-        build_time : 2,
+        build_time : 1,
         supply_cost : 0,
         supply_capacity : 0,
-        material_cost : 50,
+        material_cost : 10,
 		material_reward : 100,
         experience_reward : 100,
 		upgrade_reward : 100,
@@ -282,7 +282,7 @@ FighterStats = function() constructor{
         strength : 3,
         defense : 1,
         speed : 0,
-        range : 1,
+        range : 0,
         tags : [],
         los_radius : 1,
         build_radius : 0,
@@ -291,23 +291,7 @@ FighterStats = function() constructor{
         size : [1,1], // [width , height]
         rally_offset : [0,3],
         bunker_size : 0,
-        basic_attack : {
-            name : "this can attack?",
-            cooldown : 5, // delay, in seconds, between attacks
-            move_penalty : 0.8, // move speed reduced during attack
-            duration : 0.5, // movement is reduced, other attacks cannot be done during this time
-            damage_point : 10, // damage is dealt after this step count
-            damage_value : 1,
-            damage_obj : oTurretBasic 
-        },
-        active_attack : {
-            name : "no way this can atack...",
-            cooldown : 5, // delay, in seconds, between attacks
-            move_penalty : 0.8, // move speed reduced during attack
-            duration : 1.5, // movement is reduced, other attacks cannot be done during this time
-            damage_point : 10, // damage is dealt after this step count
-            damage_value : 1,
-            damage_obj : oTurretActive 
-        }
+        basic_attack : undefined,
+        active_attack : undefined
     }
 }

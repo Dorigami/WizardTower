@@ -165,15 +165,16 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 	}
 	static FindEnemies = function(){
 		var i, j, _xx, _yy, _node, entity, list, index=0;
-		var _limit = range*GRID_SIZE;
+		var _cell_offset = max(1,range);
+		var _limit = range <= 0 ? owner.collision_radius+2 : range*GRID_SIZE;
 		_xx = owner.xx;
 		_yy = owner.yy;
 		ds_list_clear(owner.checked_node_list);
 		ds_list_clear(enemies_in_range);
 		// loop through all nodes in range
-		for(i=-range; i<=range; i++){
-		for(j=-range; j<=range; j++){
-			if(point_distance(_xx,_yy, _xx+i, _yy+j) <= range+0.5) && (point_in_rectangle(_xx+i, _yy+j,0,0,global.game_grid_width-1,global.game_grid_height-1)){
+		for(i=-_cell_offset; i<=_cell_offset; i++){
+		for(j=-_cell_offset; j<=_cell_offset; j++){
+			if(point_distance(_xx,_yy, _xx+i, _yy+j) <= _cell_offset+0.5) && (point_in_rectangle(_xx+i, _yy+j,0,0,global.game_grid_width-1,global.game_grid_height-1)){
 				// get possible enemy
 				_node = global.game_grid[# _xx+i, _yy+j];
 				ds_list_add(owner.checked_node_list, _node);
@@ -184,7 +185,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 					index = 0;
 					entity = list[| k];
 					// see if it is a fighter and if it is an enemy faction
-					if(!is_undefined(entity.fighter)) && (entity.faction != owner.faction) && (ds_list_find_index(enemies_in_range, entity) == -1){
+					if(owner.DistanceTo(entity) <= _limit) && (!is_undefined(entity.fighter)) && (entity.faction != owner.faction) && (ds_list_find_index(enemies_in_range, entity) == -1){
 						// sort the new found entity base on distance from this fighter (does account for the size of the owner entity)
 						while(!is_undefined(enemies_in_range[| index]))
 						{
@@ -336,68 +337,51 @@ BasicUnitAI = function() constructor{
 		var _cmd = undefined;
 		if(ds_list_size(commands) > 0)
 		{
-			_cmd = commands[| 0];
+			// _cmd = commands[| 0];
 			// handle movement
-			with(owner)
+		} else {
+			// if there is no command, check if entity is a fighter and get first enemy in range
+			if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
 			{
-				// resolve command updating conditions
-				switch(_cmd.type){
-					case "move":
-					//--// check for movement interactions
-
-						// goal is the command point
-						if(xTo != _cmd.x) xTo = _cmd.x;
-						if(yTo != _cmd.y) yTo = _cmd.y;
-
-						if(point_distance(x,y,xTo,yTo) < collision_radius)
+				// resolve fighter behavior
+				with(owner.fighter)
+				{
+					var _range = range == 0 ? owner.collision_radius : range*GRID_SIZE;
+					var _target = noone;
+					// attack the current attack target, if possible
+					if(attack_target != noone) && (instance_exists(attack_target)) && (point_distance(owner.position[1], owner.position[2],attack_target.position[1],attack_target.position[2]) <= _range)
+					{
+						_target = attack_target;
+					} else {
+						attack_target = noone;
+					}
+					// if there is no attack target, attack nearest enemy
+					if(_target == noone)
+					{
+						_target = enemies_in_range[| 0];
+						if(is_undefined(_target)) || (point_distance(owner.position[1], owner.position[2],_target.position[1],_target.position[2]) > _range)
 						{
-							// anchor to the goal point before removing move command
-							xAnchor = xTo;
-							yAnchor = yTo;
-							// remove move command
-							delete ai.commands[| 0];
-							ds_list_delete(ai.commands, 0);
-							// coast toward the goal
-							vel_force = vect_add(vel_force, vel_movement);
-							vel_movement[1] = 0;
-							vel_movement[2] = 0;
+							_target = noone;
 						}
-						break;
-
-					case "attack":
-					//--// check for attack interactions
-						if(instance_exists(_cmd.value))
+					}
+					// can't use retaliation target because structures cant move
+					
+					
+					// attack any enemy in range, but prioritize the attack command target
+					if(_target != noone) 
+					{
+						// attack valid target	
+						attack_target = _target;
+						if(attack_index == -1) && (basic_cooldown_timer <= 0)
 						{
-							// goal is the target's location
-							if(xTo != _cmd.value.x) xTo = _cmd.value.x;
-							if(yTo != _cmd.value.y) yTo = _cmd.value.y;
-						} else {
-							if(ds_list_size(ai.commands) > 0)
-							{
-								// remove attack command, and stay in place
-								ds_list_delete(ai.commands, 0);
-								_cmd = undefined;
-								xTo = position[1];
-								yTo = position[2];
-							}
+							owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
+							UseBasic();
 						}
-						break;
-
-					case "defend":
-					//--// check for defend interactions	
-						break;
-
-					case "bunker":
-					//--// check for bunker interactions
-						break;
-
-					default:
-						show_debug_message("ERROR: no command given for GetAction()");
-						break;
+					} 
 				}
 			}
 		}
-		
+		/*
 		// resolve fighter behavior
 		with(owner.fighter)
 		{
@@ -444,6 +428,7 @@ BasicUnitAI = function() constructor{
 				if(ds_list_find_index(enemies_in_range, attack_target) > -1) UseBasic();
 			}
 		}
+		*/
 	}
 	static Destroy = function(){
 		// delete commands
@@ -505,7 +490,7 @@ BasicStructureAI = function() constructor{
 			//}
 		} else {
 			// if there is no command, check if entity is a fighter and get first enemy in range
-			if(!is_undefined(owner.fighter))
+			if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
 			{
 				// resolve fighter behavior
 				with(owner.fighter)
