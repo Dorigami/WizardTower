@@ -70,8 +70,10 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			// cell or tile position
 			xx : _x div GRID_SIZE, 
 			yy : _y div GRID_SIZE,
+			my_node : global.game_grid[_x div GRID_SIZE, _y div GRID_SIZE],
 			xx_prev : _x div GRID_SIZE,
 			yy_prev : _y div GRID_SIZE,
+			my_node_prev : global.game_grid[_x div GRID_SIZE, _y div GRID_SIZE],
 			xTo : _x,
 			yTo : _y, 
 			xAnchor : _x,

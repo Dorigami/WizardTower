@@ -115,7 +115,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 			target : attack_target,
 			attackData : basic_attack,
 		}
-		instance_create_layer(owner.x,owner.y,"Instances", basic_attack.damage_obj, _struct);
+		instance_create_layer(owner.position[1],owner.position[2],"Instances", basic_attack.damage_obj, _struct);
 	}
 	static UseActive = function(){
 		attack_index = 1;
@@ -129,7 +129,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 			target : attack_target,
 			attackData : active_attack,
 		}
-		instance_create_layer(owner.x,owner.y,"Instances", active_attack.damage_obj, _struct);
+		instance_create_layer(owner.position[1],owner.position[2],"Instances", active_attack.damage_obj, _struct);
 	}
     static DealDamage = function(_damage, _other_fighter){
 		if(is_undefined(_other_fighter)) return false; //
@@ -220,7 +220,14 @@ Unit = function(_supply_cost, _abilities, _can_bunker=true) constructor{
 	blueprint_instance = noone;
 	static Update = function(){
 		// check for node change
-		CheckNodeChange(owner);
+		if(CheckNodeChange(owner) == true)
+		{
+			// node did change, check for node collision
+			if(!owner.my_node.walkable) || (owner.my_node.blocked)
+			{
+				
+			}
+		}
 	}
 	static Animate = function(){
 		var _totalFrames = image_number / 4;

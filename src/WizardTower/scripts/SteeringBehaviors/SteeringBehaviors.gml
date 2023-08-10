@@ -289,11 +289,12 @@ function CheckNodeChange(_entity){
 		if(xx != xx_prev) || (yy != yy_prev)
 		{
 			var _newnode = global.game_grid[# xx, yy];
-			if(point_in_rectangle(xx_prev,yy_prev,0,0,global.game_grid_width-1,global.game_grid_height-1)) 
-			{
-				var _oldnode = global.game_grid[# xx_prev, yy_prev];
-				ds_list_delete(_oldnode.occupied_list, ds_list_find_index(_oldnode.occupied_list, id));
-			}
+			var _oldnode = global.game_grid[# xx_prev, yy_prev];
+			// check if new node is walkable, if so resolve collision
+			
+			// remove id from previous node
+			ds_list_delete(_oldnode.occupied_list, ds_list_find_index(_oldnode.occupied_list, id));
+			
 			ds_list_add(_newnode.occupied_list, id);
 			xx_prev = xx;
 			yy_prev = yy;
@@ -322,7 +323,9 @@ function CheckNodeChange(_entity){
 					enable_collision_checking = true;
 				}
 			}
+			return true;
 		}
+		return false;
 	}
 }
 function BlueprintSteering(){
