@@ -98,7 +98,7 @@ FighterStats = function() constructor{
 		    damage_obj : oSpearActive 
 		}
     }
-    lensbearer = { // mid-range fighter
+    sentry = { // mid-range fighter
         name : "default name",
         description : "default description",
         build_time : 2,
@@ -112,23 +112,23 @@ FighterStats = function() constructor{
         hp : 10,
         strength : 3,
         defense : 1,
-        speed : 2,
-        range : 2,
+        speed : 1,
+        range : 3,
         tags : [],
         size : [1,1], // [width , height]
         los_radius : 4,
         build_radius : 0,
         abilities : [ManualBasicAttack,ManualActiveAttack,-1,-1,-1,-1,-1,-1,-1],
-        obj : oLensBearer,
+        obj : oSentry,
         bunker_size : 0,
         basic_attack : {
 			name : "Lens Flare",
-			cooldown : 5, // delay, in seconds, between attacks
-			move_penalty : 0.8, // move speed reduced during attack
+			cooldown : 0.2, // delay, in seconds, between attacks
+			move_penalty : 0, // move speed reduced during attack
 			duration : 0.2, // movement is reduced, other attacks cannot be done during this time
-			damage_point : 10, // damage is dealt after this step count
+			damage_point : 1, // damage is dealt after this step count
 			damage_value : 1,
-			damage_obj : oLensBasic 
+			damage_obj : oSentryBasic 
 		},
         active_attack : {
 		    name : "Focus Beam",
@@ -137,7 +137,7 @@ FighterStats = function() constructor{
 		    duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 		    damage_point : 10, // damage is dealt after this step count
 		    damage_value : 1,
-		    damage_obj : oLensActive 
+		    damage_obj : oSentryActive 
 		}
     }
     torchbearer = { // long-range fighter
@@ -193,7 +193,7 @@ FighterStats = function() constructor{
         experience_reward : 100,
 		upgrade_reward : 100,
         jump : 3,
-        hp : 3,
+        hp : 4,
         strength : 3,
         defense : 1,
         speed : 1,

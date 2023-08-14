@@ -9,15 +9,10 @@ function BuilderCreate(_type_string, _faction){
 			instance_destroy(blueprint_instance);
 			blueprint_instance = noone;
 		}
-		// if the type is of a structure, then set flag to lock its position to the map grid
-		// this flag will also help set the array of possible entities to build during the build state
-		//if(_is_unit){
-		//	var _type_arr = ["shieldbearer", "spearbearer", "lensbearer", "torchbearer"];
-		//	var _gridlock = false;
-		//} else {
-			var _type_arr = ["turret","barricade"];
-			var _gridlock = true;
-		//}
+
+		var _type_arr = ["turret", "barricade", "sentry"];
+		var _gridlock = true;
+		
 		// change state
 		global.game_state_previous = global.game_state;
 		global.game_state = GameStates.BUILDING;
@@ -40,7 +35,7 @@ function BuilderCreate(_type_string, _faction){
 			faction : _faction,
 			type_arr : _type_arr}
 		blueprint_instance = instance_create_layer(_xx*GRID_SIZE, _yy*GRID_SIZE, "Instances", oBlueprint, _struct);
-		show_debug_message("blueprint's type string is: {0}", blueprint_instance.type_string)
+		show_debug_message("blueprint's type string is: {0}", blueprint_instance.type_string);
 	}
 } 
 
@@ -48,6 +43,7 @@ function BuilderCreateBase(_faction){ BuilderCreate("base", _faction) }
 function BuilderCreateBarracks(_faction){ BuilderCreate("barracks", _faction) }
 function BuilderCreateTurret(_faction){ BuilderCreate("turret", _faction) }
 function BuilderCreateBarricade(_faction){ BuilderCreate("barricade", _faction) }
+function BuilderCreateSentry(_faction){ BuilderCreate("sentry", _faction) }
 
 function BuildStateUnit(){ BuilderCreate("shieldbearer", true) }
 function BuildStateStructure(){ BuilderCreate("conduit", false) }

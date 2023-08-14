@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oLensBearer",
+  "name": "oSentry",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [

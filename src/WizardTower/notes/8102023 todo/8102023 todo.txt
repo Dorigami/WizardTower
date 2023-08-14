@@ -1,0 +1,27 @@
+Mian idea: Tower defense with towers that can move
+
+Mechanics: 
+
+Prototying:
+
+Menu/Dialogue:
+
+Finalize game loop:
+
+Animations:
+
+Sound/music:
+
+function NodeCollision(_node){
+	// this function must run inside of an entity object in order to work.
+	// this function will check if the node is blocked or not walkable and will push the entity to the nearest edge of the given node
+	if(is_undefined(_node)) || (!is_instanceof(_node, global.iEngine.Node))
+	{
+		show_debug_message("Cannot run node collision: node doesn't exist");
+	}
+	if(xx != _node.xx) || (yy != _node.yy)
+	var dx = position[1] - _node.x;
+	var dy = position[2] - _node.y;
+	
+	
+}

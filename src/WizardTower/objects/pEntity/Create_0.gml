@@ -96,7 +96,6 @@ function Update(){
 
 function DistanceTo(_other_entity){
 	// returns distance between entities in terms of pixels
-	if(!is_undefined(structure))
 	
 	var _selfpos = [position[1], position[2]];
 	var _otherpos = [_other_entity.position[1], _other_entity.position[2]];
@@ -118,7 +117,7 @@ function NearestCell(_other_entity){
         var xc = _size[0] div 2;
         var yc = _size[1] div 2;
 
-        _rtn[0] = clamp(xx, 
+        _rtn[0] = clamp(xx,  
                         _other_entity.xx-xc,             // western tile limit
                         _other_entity.xx+_size[0]-xc-1); // eastern tile limit
         _rtn[1] = clamp(yy, 

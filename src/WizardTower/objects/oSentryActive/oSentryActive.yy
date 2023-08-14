@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oLensActive",
+  "name": "oSentryActive",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],

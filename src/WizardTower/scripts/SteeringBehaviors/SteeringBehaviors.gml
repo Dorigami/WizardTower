@@ -100,7 +100,7 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
 				   		   _density_priority*_density_desire*_density_map[i] - _discomfort_priority*_discomfort_desire*_discomfort_map[i];
 		
 		if(interest < _interest_map[i])
-		{ 
+		{  
 			k = i; // this value is to remember the index of the desired direction
 			uAng = global.iEngine.cs_unit_vectors[i];
 			interest = _interest_map[i]; 
@@ -138,6 +138,8 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
 	{
 		EnforceMinDistance(_col_list[| i]);
 	}
+	
+	EnforceTileCollision();
 	
 	ds_list_destroy(_col_list);
 	
@@ -293,7 +295,10 @@ function CheckNodeChange(_entity){
 			// check if new node is walkable, if so resolve collision
 			
 			// remove id from previous node
-			ds_list_delete(_oldnode.occupied_list, ds_list_find_index(_oldnode.occupied_list, id));
+			if(!is_undefined(_oldnode))
+			{
+				ds_list_delete(_oldnode.occupied_list, ds_list_find_index(_oldnode.occupied_list, id));
+			}
 			
 			ds_list_add(_newnode.occupied_list, id);
 			xx_prev = xx;

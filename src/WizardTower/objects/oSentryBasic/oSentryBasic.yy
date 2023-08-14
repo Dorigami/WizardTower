@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oLensBasic",
+  "name": "oSentryBasic",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],

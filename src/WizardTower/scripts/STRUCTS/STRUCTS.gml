@@ -202,6 +202,24 @@ Ability = function(_type="") constructor{
 			description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
 			values = {};
 			break;
+		case "buy_barricade":
+			name = _type;
+			icon = sImp;
+			script = BuilderCreateBarricade;
+			args = [PLAYER_FACTION];
+			title = "Basic Barricade";
+			description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
+			values = {};
+			break;
+		case "buy_sentry":
+			name = _type;
+			icon = sImp;
+			script = BuilderCreateSentry;
+			args = [PLAYER_FACTION];
+			title = "Basic Sentry";
+			description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
+			values = {};
+			break;
 		default:
 			name = _type;
 			icon = sFollower2;

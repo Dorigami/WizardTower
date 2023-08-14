@@ -24,13 +24,13 @@ Blueprint = function(_build_time) constructor{
 				// replace blueprint with structure
 				var _actor = global.iEngine.actor_list[| owner.faction];
 				var _stats = _actor.fighter_stats[$ owner.type_string];
-				show_debug_message("supply cost for {0}", _stats)
+				show_debug_message("supply cost for {0}", _stats);
 				_actor.supply_limit += _stats.supply_capacity;
 				_actor.supply_in_queue -= _stats.supply_cost;
 				_actor.supply_current += _stats.supply_cost;
 				
 				// construct either a unit, or a structure
-				if(_stats.obj == oLensBearer) || (_stats.obj == oTorchBearer) || (_stats.obj == oShieldBearer) || (_stats.obj == oSpearBearer)
+				if(_stats.obj == oSentry) || (_stats.obj == oTorchBearer) || (_stats.obj == oShieldBearer) || (_stats.obj == oSpearBearer)
 				{
 					var _ent = ConstructUnit(owner.xx, owner.yy, owner.faction, owner.type_string);
 					_ent.position[1] = owner.xTo;
@@ -220,14 +220,7 @@ Unit = function(_supply_cost, _abilities, _can_bunker=true) constructor{
 	blueprint_instance = noone;
 	static Update = function(){
 		// check for node change
-		if(CheckNodeChange(owner) == true)
-		{
-			// node did change, check for node collision
-			if(!owner.my_node.walkable) || (owner.my_node.blocked)
-			{
-				
-			}
-		}
+		CheckNodeChange(owner) 
 	}
 	static Animate = function(){
 		var _totalFrames = image_number / 4;
