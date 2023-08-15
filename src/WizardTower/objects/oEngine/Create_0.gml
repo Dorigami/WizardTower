@@ -186,6 +186,20 @@ function room_start_init_camera(){
 		xTo = x; yTo = y;
 	}
 }
+function room_start_init_player_stats(){
+	with(player_actor)
+	{
+		supply_limit = 40;
+		material = 200;
+		experience_points = 0;
+		upgrade_points = 0;
+		health = 20;
+		ds_list_clear(blueprints);
+		ds_list_clear(units);
+		ds_list_clear(structures);
+		ds_list_clear(control_groups);
+	}
+}
 function room_start_init_abilities(){
 	var _type = "";
 	var _ability = undefined;

@@ -312,6 +312,7 @@ DebugActorAI = function() constructor{
 		if(all_waves_complete)
 		{
 			show_debug_message("YOU WON THE DEBUG ROOM!!!");
+			audio_play_sound(snd_win,1,false);
 			all_waves_complete = false;
 		}
 	}

@@ -3,12 +3,10 @@
 
 if(room != rStartMenu) && (room != rInit)
 {
-	health = 20;
 	room_start_init_game_grid();
 	room_start_init_camera();
 	room_start_init_abilities();
-	// RoomStartInitMap();
-	// RoomStartInitEntities();
+	room_start_init_player_stats();
 
 	// create the ai behavior component for the actors, based on the current room
 	var _ai_component = new DebugActorAI();

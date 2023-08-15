@@ -10,7 +10,7 @@ Actor = function(_player=false, _faction=NEUTRAL_FACTION, _apm=0, _ai=undefined)
     supply_current = 0;
     supply_in_queue = 0;
     material = 0;
-    material_per_second = 40;
+    material_per_second = 0;
 	experience_points = 0;
 	upgrade_points = 0;
     fov_update_time = 20;

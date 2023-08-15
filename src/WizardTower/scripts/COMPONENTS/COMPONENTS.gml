@@ -135,10 +135,15 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		if(is_undefined(_other_fighter)) return false; //
 		if(_other_fighter.hp <= 0) return false; // fighter is already dead
 		var _ent = _other_fighter.owner;
+		var _damClac = max(1, _damage - _other_fighter.defense);
 		// verify entity
 		if(!instance_exists(_ent)) return false; // can't attack non-existance entity
 		// run calculation
-		_other_fighter.hp -= max(1, _damage - _other_fighter.defense); // 1 damage minimum is enforced here
+		_other_fighter.hp -= _damClac // 1 damage minimum is enforced here
+		with(_other_fighter.owner)
+		{
+			CreateFloatNumber(position[1], 0.5*(position[2] + bbox_top), _damClac, FLOATTYPE.FLARE, 90);
+		}
 		if(_other_fighter.hp <= 0)
 		{
 			// deal out rewards
@@ -513,7 +518,7 @@ BasicStructureAI = function() constructor{
 					
 					
 					// attack any enemy in range, but prioritize the attack command target
-					if(_target != noone) 
+					if(_target != noone) && (instance_exists(_target))
 					{
 						// attack valid target	
 						attack_target = _target;
