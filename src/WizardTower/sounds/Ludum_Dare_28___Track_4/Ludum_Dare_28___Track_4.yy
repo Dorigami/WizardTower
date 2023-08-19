@@ -3,14 +3,14 @@
   "resourceVersion": "1.0",
   "name": "Ludum_Dare_28___Track_4",
   "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "name": "GameMusic",
+    "path": "audiogroups/GameMusic",
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 0.0,
+  "duration": 128.01154,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

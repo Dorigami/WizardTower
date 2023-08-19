@@ -23,6 +23,10 @@ if(room != rStartMenu) && (room != rInit)
 			_actor.ai.Init();
 		}
 	}
+	// start music
+	SoundCommand(GameMusic, The_Verdant_Grove_LOOP);
+	//alarm[2] = 30;
+	//audio_play_sound(The_Verdant_Grove_LOOP,4,true,1);
 }
 
 global.iHUD.Init();

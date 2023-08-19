@@ -7,6 +7,7 @@
 #macro NORTH 1
 #macro WEST 2
 #macro SOUTH 3
+#macro NONE -1
 #macro OUT 0
 #macro IN 1
 #macro GRID_SIZE 32

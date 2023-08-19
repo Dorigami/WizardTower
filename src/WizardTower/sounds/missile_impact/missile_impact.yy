@@ -3,14 +3,14 @@
   "resourceVersion": "1.0",
   "name": "missile_impact",
   "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "name": "SoundEffects",
+    "path": "audiogroups/SoundEffects",
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 0.291304,
+  "duration": 0.286304,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

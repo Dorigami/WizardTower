@@ -1,5 +1,10 @@
 /// @description run game
 
+if(room == rInit)
+{
+	
+}
+
 hud_action = global.iHUD.hud_get_action();
 mouse_action = handle_mouse();
 action = handle_keys(global.game_state);

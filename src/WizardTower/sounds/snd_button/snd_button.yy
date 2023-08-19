@@ -3,14 +3,14 @@
   "resourceVersion": "1.0",
   "name": "snd_button",
   "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "name": "HUDEffects",
+    "path": "audiogroups/HUDEffects",
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 0.355907,
+  "duration": 0.350907,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

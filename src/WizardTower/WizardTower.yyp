@@ -4,6 +4,9 @@
   "name": "WizardTower",
   "AudioGroups": [
     {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"audiogroup_default","targets":-1,},
+    {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"GameMusic","targets":-1,},
+    {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"SoundEffects","targets":-1,},
+    {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"HUDEffects","targets":-1,},
   ],
   "configs": {
     "children": [],
@@ -115,7 +118,6 @@
     {"id":{"name":"sSpearMove","path":"sprites/sSpearMove/sSpearMove.yy",},},
     {"id":{"name":"GetRunAbility","path":"scripts/GetRunAbility/GetRunAbility.yy",},},
     {"id":{"name":"oConduit","path":"objects/oConduit/oConduit.yy",},},
-    {"id":{"name":"oSound","path":"objects/oSound/oSound.yy",},},
     {"id":{"name":"oEnemyGoal","path":"objects/oEnemyGoal/oEnemyGoal.yy",},},
     {"id":{"name":"sTerrain","path":"sprites/sTerrain/sTerrain.yy",},},
     {"id":{"name":"sTowerFrost1","path":"sprites/sTowerFrost1/sTowerFrost1.yy",},},
@@ -170,6 +172,7 @@
     {"id":{"name":"sConduit","path":"sprites/sConduit/sConduit.yy",},},
     {"id":{"name":"sTorchMove","path":"sprites/sTorchMove/sTorchMove.yy",},},
     {"id":{"name":"SaveLoadFunctions","path":"scripts/SaveLoadFunctions/SaveLoadFunctions.yy",},},
+    {"id":{"name":"SoundCommand","path":"scripts/SoundCommand/SoundCommand.yy",},},
     {"id":{"name":"VerifyBuildingArea","path":"scripts/VerifyBuildingArea/VerifyBuildingArea.yy",},},
     {"id":{"name":"RadialSpawnEnemy","path":"scripts/RadialSpawnEnemy/RadialSpawnEnemy.yy",},},
     {"id":{"name":"oHUD","path":"objects/oHUD/oHUD.yy",},},
@@ -195,6 +198,7 @@
     {"id":{"name":"sImpRadial","path":"sprites/sImpRadial/sImpRadial.yy",},},
     {"id":{"name":"BuilderCreationScripts","path":"scripts/BuilderCreationScripts/BuilderCreationScripts.yy",},},
     {"id":{"name":"sShieldIdle","path":"sprites/sShieldIdle/sShieldIdle.yy",},},
+    {"id":{"name":"oSoundManager","path":"objects/oSoundManager/oSoundManager.yy",},},
     {"id":{"name":"oSpearBearer","path":"objects/oSpearBearer/oSpearBearer.yy",},},
     {"id":{"name":"oTowerFrost","path":"objects/oTowerFrost/oTowerFrost.yy",},},
     {"id":{"name":"sUnitGrunt","path":"sprites/sUnitGrunt/sUnitGrunt.yy",},},

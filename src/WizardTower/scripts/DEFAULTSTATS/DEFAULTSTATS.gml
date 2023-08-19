@@ -186,7 +186,7 @@ FighterStats = function() constructor{
         name : "default name",
         description : "default description",
         build_time : 2,
-        supply_cost : 2,
+        supply_cost : 1,
         supply_capacity : 0,
         material_cost : 30,
 		material_reward : 100,

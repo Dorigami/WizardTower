@@ -3,14 +3,14 @@
   "resourceVersion": "1.0",
   "name": "enemy_hurt",
   "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "name": "SoundEffects",
+    "path": "audiogroups/SoundEffects",
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 0.241961,
+  "duration": 0.236961,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

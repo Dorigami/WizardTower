@@ -3,8 +3,8 @@
   "resourceVersion": "1.0",
   "name": "The_Verdant_Grove_LOOP",
   "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "name": "GameMusic",
+    "path": "audiogroups/GameMusic",
   },
   "bitDepth": 1,
   "bitRate": 128,
