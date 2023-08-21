@@ -15,15 +15,17 @@ while(_size > 0)
 		switch(_snd.type)
 		{
 			case GameMusic:
-				show_debug_message("game music given");
+				
 				if(!music_load) 
 				{
 					// put sound back into queue
-					ds_queue_enqueue(_snd);
+					ds_queue_enqueue(sound_queue,_snd);
+					show_debug_message("re inserting music");
 				} else {
-					music_fade_prev_song = music_fade_next_song;
+					// set next song then set up to fade into it
 					music_fade_next_song = _snd.value;
 					music_fade = !audio_is_playing(music_fade_prev_song);
+					show_debug_message("game music given, fade state = {0}", music_fade);
 				}
 				break;
 				
@@ -57,35 +59,50 @@ while(_size > 0)
 		
 	}
 }
+var _g1 = audio_exists(music_fade_prev_song) ? audio_sound_get_gain(music_fade_prev_song) : -1;
+var _g2 = audio_exists(music_fade_next_song) ? audio_sound_get_gain(music_fade_next_song) : -1;
+show_debug_message("previous song(gain) = ({2}){0}  fade state = {4}\nnext song(gain) = ({3}){1}/n\n", 
+	music_fade_prev_song, 
+	music_fade_next_song, 
+	_g1, 
+	_g2,
+	music_fade);
 
 // do fade transitions for music
 if(music_fade != NONE)
 {
 	if(music_fade == IN)
-	{
+	{	
 		_gain = audio_sound_get_gain(music_fade_next_song);
-		show_debug_message("fading in");
+		// play the song, if not already
 		if(!audio_is_playing(music_fade_next_song)) 
 		{
-			audio_play_sound(music_fade_next_song, 1000, true, 0);
-			audio_sound_gain(music_fade_next_song, music_gain, music_fade_duration);
-			show_debug_message("done fading");
+			next_inst = audio_play_sound(music_fade_next_song, 1000, true, 0);
+			_gain = 0;
 		}
 		
-		if(_gain >= music_gain)	music_fade = NONE;
-		
+		// if gsin id zero, start tarnsition to music gain level
+		if(_gain == 0) audio_sound_gain(next_inst, music_gain, music_fade_duration);
+		// stop transitioning
+		if(_gain >= music_gain)	
+		{
+			music_fade_prev_song = music_fade_next_song;
+			music_fade_next_song = -1;
+			music_fade = NONE;
+		}
 	} else if(music_fade == OUT) {
 		_gain = audio_sound_get_gain(music_fade_prev_song);
-		if(_gain == 0){
-			music_fade = audio_exists(music_fade_next_song);
-		} else if(_gain =){
+		if(_gain <= 0){
+			if(audio_is_playing(music_fade_prev_song)) audio_stop_sound(music_fade_prev_song);
+			if(music_fade_next_song != -1)
+			{
+				music_fade = audio_exists(music_fade_next_song);
+			} else {
+				music_fade = NONE;
+			}
+		} else if(_gain = music_gain){
+			audio_sound_gain(music_fade_prev_song, 0, music_fade_duration);
 		}
-		show_debug_message("fading out")
-		// stop current song and start the next song
-		if(audio_is_playing(music_fade_prev_song)) audio_stop_sound(music_fade_prev_song);
-		audio_play_sound(music_fade_next_song, 1, true, _gain);
-		audio_group_set_gain(GameMusic, music_gain, music_fade_duration)
-		music_fade = IN;
 	}
 }
 

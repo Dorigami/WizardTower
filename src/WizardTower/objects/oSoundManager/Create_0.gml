@@ -2,8 +2,10 @@
 
 sound_queue = ds_queue_create();
 
-music_fade_next_song = The_Verdant_Grove_LOOP;
+music_fade_next_song = The_Verdant_Grove_LOOP; 
+next_inst = undefined;
 music_fade_prev_song = The_Verdant_Grove_LOOP;
+prev_inst = undefined;
 music_fade = NONE;
 music_fade_duration = 5000;
 music_gain = 1;
