@@ -159,7 +159,6 @@
     {"name":"oGame","order":1,"path":"objects/oGame/oGame.yy",},
     {"name":"s6","order":5,"path":"sprites/s6/s6.yy",},
     {"name":"sTowerBrittle2","order":40,"path":"sprites/sTowerBrittle2/sTowerBrittle2.yy",},
-    {"name":"oUI","order":9,"path":"objects/oUI/oUI.yy",},
     {"name":"oAttackBolt","order":13,"path":"objects/oAttackBolt/oAttackBolt.yy",},
     {"name":"oSkeletonActive","order":11,"path":"objects/oSkeletonActive/oSkeletonActive.yy",},
     {"name":"sTowerBrittle1","order":39,"path":"sprites/sTowerBrittle1/sTowerBrittle1.yy",},

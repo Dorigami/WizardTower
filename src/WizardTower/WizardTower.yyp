@@ -212,7 +212,6 @@
     {"id":{"name":"s6","path":"sprites/s6/s6.yy",},},
     {"id":{"name":"oPlaySpace","path":"objects/oPlaySpace/oPlaySpace.yy",},},
     {"id":{"name":"sTowerBrittle2","path":"sprites/sTowerBrittle2/sTowerBrittle2.yy",},},
-    {"id":{"name":"oUI","path":"objects/oUI/oUI.yy",},},
     {"id":{"name":"oAttackBolt","path":"objects/oAttackBolt/oAttackBolt.yy",},},
     {"id":{"name":"oSkeletonActive","path":"objects/oSkeletonActive/oSkeletonActive.yy",},},
     {"id":{"name":"sTowerBrittle1","path":"sprites/sTowerBrittle1/sTowerBrittle1.yy",},},

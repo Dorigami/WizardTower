@@ -26,7 +26,7 @@ minimap_x = 0;
 minimap_y = minimap_height*2;
 minimap_tile_ox = 0;
 minimap_tile_oy = 0;
-minimap_tile_size = 2;
+minimap_tile_size = 4;
 
 // player data stuff
 player_data_string = "";

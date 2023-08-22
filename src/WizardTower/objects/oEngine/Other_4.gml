@@ -23,10 +23,15 @@ if(room != rStartMenu) && (room != rInit)
 			_actor.ai.Init();
 		}
 	}
+	
+	// create unwalkable wall
+	for(var i=0;i<global.game_grid_height;i++){
+		var _node = global.game_grid[# 20, i];
+		_node.walkable = false;
+	}
+	
 	// start music
 	SoundCommand(GameMusic, The_Verdant_Grove_LOOP);
-	//alarm[2] = 30;
-	//audio_play_sound(The_Verdant_Grove_LOOP,4,true,1);
 }
 
 global.iHUD.Init();
