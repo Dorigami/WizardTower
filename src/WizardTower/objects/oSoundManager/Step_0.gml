@@ -3,7 +3,7 @@
 // play sounds that have been sent in
 var _size = ds_queue_size(sound_queue);
 var _gain = 1;
-while(_size > 0)
+if(_size > 0)
 {
 	// only process a maximum of 3 sound commands per step
 	repeat(min(_size, 3))
@@ -24,8 +24,8 @@ while(_size > 0)
 				} else {
 					// set next song then set up to fade into it
 					music_fade_next_song = _snd.value;
-					music_fade = !audio_is_playing(music_fade_prev_song);
-					show_debug_message("game music given, fade state = {0}", music_fade);
+					music_fade_direction = !audio_is_playing(music_fade_prev_song);
+					show_debug_message("game music given, fade state = {0}", music_fade_direction);
 				}
 				break;
 				
@@ -54,55 +54,58 @@ while(_size > 0)
 				}
 				break;
 		}
-		
 		show_debug_message("playing sound: {0}", audio_get_name(_snd.value));
-		
 	}
 }
 var _g1 = audio_exists(music_fade_prev_song) ? audio_sound_get_gain(music_fade_prev_song) : -1;
 var _g2 = audio_exists(music_fade_next_song) ? audio_sound_get_gain(music_fade_next_song) : -1;
-show_debug_message("previous song(gain) = ({2}){0}  fade state = {4}\nnext song(gain) = ({3}){1}/n\n", 
-	music_fade_prev_song, 
-	music_fade_next_song, 
-	_g1, 
-	_g2,
-	music_fade);
+var _s1 = audio_exists(music_fade_prev_song) ? audio_get_name(music_fade_prev_song) : -1;
+var _s2 = audio_exists(music_fade_next_song) ? audio_get_name(music_fade_next_song) : -1;
+//show_debug_message("previous song(gain) = ({2}){0}  fade state = {4}\nnext song(gain) = ({3}){1}\n", 
+//	_s1,_s2,_g1,_g2,music_fade_direction);
 
 // do fade transitions for music
-if(music_fade != NONE)
+if(music_fade_direction != NONE)
 {
-	if(music_fade == IN)
+	if(music_fade_direction == IN)
 	{	
-		_gain = audio_sound_get_gain(music_fade_next_song);
+		// fade in the next song
+	
 		// play the song, if not already
 		if(!audio_is_playing(music_fade_next_song)) 
 		{
-			next_inst = audio_play_sound(music_fade_next_song, 1000, true, 0);
-			_gain = 0;
+			music_fade = 0;
+			audio_play_sound(music_fade_next_song, 1000, true);
+			show_debug_message("starting song");
+		} else {
+			// set music gain level as it transitions
+			music_fade = min(music_gain, music_fade+music_fade_rate);
+			audio_sound_gain(music_fade_next_song, music_fade, 0);
 		}
 		
-		// if gsin id zero, start tarnsition to music gain level
-		if(_gain == 0) audio_sound_gain(next_inst, music_gain, music_fade_duration);
+
+		show_debug_message("music fade_in | gain = {0}, song = {1}", _g2, _s2);
 		// stop transitioning
-		if(_gain >= music_gain)	
+		if(music_fade >= music_gain)	
 		{
 			music_fade_prev_song = music_fade_next_song;
 			music_fade_next_song = -1;
-			music_fade = NONE;
+			music_fade_direction = NONE;
 		}
-	} else if(music_fade == OUT) {
-		_gain = audio_sound_get_gain(music_fade_prev_song);
-		if(_gain <= 0){
+	} else {
+		// fade out the current song
+		music_fade = max(0, audio_sound_get_gain(music_fade_prev_song) - music_fade_rate);
+		if(music_fade <= 0){
 			if(audio_is_playing(music_fade_prev_song)) audio_stop_sound(music_fade_prev_song);
 			if(music_fade_next_song != -1)
 			{
-				music_fade = audio_exists(music_fade_next_song);
+				music_fade_direction = audio_exists(music_fade_next_song);
 			} else {
-				music_fade = NONE;
+				music_fade_direction = NONE;
 			}
-		} else if(_gain = music_gain){
-			audio_sound_gain(music_fade_prev_song, 0, music_fade_duration);
-		}
+		} 
+		show_debug_message("music fade_out | gain = {0}, song = {1}", _g1, _s1);
+		audio_sound_gain(music_fade_prev_song, music_fade, 0);
 	}
 }
 
