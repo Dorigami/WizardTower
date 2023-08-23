@@ -53,11 +53,14 @@ function Update(){
                 }
             }
         }
-        if(_dir > 90+_theta) && (_dir < 270-_theta){
-            if(image_xscale != -1) image_xscale = -1;
-        } else if(_dir < 90-_theta) || (_dir > 270+_theta){
-            if(image_xscale != 1) image_xscale = 1;
-        }
+		if(vect_len(vel_movement) > 0)
+		{
+	        if(_dir > 90+_theta) && (_dir < 270-_theta){
+	            if(image_xscale != -1) image_xscale = -1;
+	        } else if(_dir < 90-_theta) || (_dir > 270+_theta){
+	            if(image_xscale != 1) image_xscale = 1;
+	        }
+		}
 	}
 
     // update the healthbars' position

@@ -10,12 +10,12 @@ function EnforceTileCollision(){
 		if(abs(dx) < abs(dy))
 		{
 			// shift x position to node boundary
-			position[1] = _node.x + sign(dx)*HALF_GRID;
+			position[1] = _node.x + sign(dx)*(HALF_GRID-1);
 			if(sign(vel_movement[1]) != sign(dx)) vel_movement[1] = 0;
 			if(sign(vel_force[1]) != sign(dx)) vel_force[1] = 0;
 		} else {
 			// shift y position to node boundary
-			position[2] = _node.y + sign(dy)*HALF_GRID;
+			position[2] = _node.y + sign(dy)*(HALF_GRID-1);
 			if(sign(vel_movement[2]) != sign(dy)) vel_movement[2] = 0;
 			if(sign(vel_force[2]) != sign(dy)) vel_force[2] = 0;
 		}
