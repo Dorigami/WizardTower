@@ -106,8 +106,25 @@ function DistanceTo(_other_entity){
 	if(_other_entity.size_check > 2) _otherpos = id.NearestCell(_other_entity);
 	return point_distance(_selfpos[0], _selfpos[1], _otherpos[0], _otherpos[1]) - _other_entity.collision_radius;
 }
-
-function NearestCell(_other_entity){
+static CheckFighterTargetRange = function(entity){
+	var nearest_cell = undefined;
+	var xself = position[1];
+	var yself = position[2];
+	var xother = entity.position[1];
+	var yother = entity.position[2];
+	// get node position instead of entity position when dealing with a structure
+	if(!is_undefined(entity.structure))
+	{
+		nearest_cell = NearestCell(entity, true);
+		xother = nearest_cell[0];
+		yother = nearest_cell[1];
+	}
+	// get position of self
+	if(!is_undefined(structure)){
+		
+	}
+}
+function NearestCell(_other_entity, rtn_as_position=false){
     // this function assumes that the calling entity is of size 1x1 (occupies one tile)
     // and other entity can be any size (i.e. 2x3, 5x5)
     var _size = _other_entity.size;
@@ -127,8 +144,13 @@ function NearestCell(_other_entity){
                         _other_entity.yy-yc,             // northern tile limit
                         _other_entity.yy+_size[1]-yc-1); // southern tile limit
     }
-    
-    return _rtn;
+    if(rtn_as_position){
+		var _node = global.game_grid[# _rtn[0], _rtn[1]]
+		_rtn[0] = _node.x;
+		_rtn[1] = _node.y;
+	}
+	return _rtn;
+	
 }
 
 function EntityVisibility(){

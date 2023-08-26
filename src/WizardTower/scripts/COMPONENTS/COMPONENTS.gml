@@ -171,7 +171,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 	static FindEnemies = function(){
 		var i, j, _xx, _yy, _node, entity, list, index=0;
 		var _cell_offset = max(1,range);
-		var _limit = range <= 0 ? owner.collision_radius+2 : range*GRID_SIZE;
+		var _limit = range <= 0 ? owner.collision_radius+HALF_GRID : range*GRID_SIZE;
 		_xx = owner.xx;
 		_yy = owner.yy;
 		ds_list_clear(owner.checked_node_list);
@@ -351,11 +351,13 @@ BasicUnitAI = function() constructor{
 				// resolve fighter behavior
 				with(owner.fighter)
 				{
-					var _range = range == 0 ? owner.collision_radius : range*GRID_SIZE;
+					var _range = range == 0 ? owner.collision_radius+HALF_GRID : range*GRID_SIZE;
 					var _target = noone;
 					// attack the current attack target, if possible
-					if(attack_target != noone) && (instance_exists(attack_target)) && (point_distance(owner.position[1], owner.position[2],attack_target.position[1],attack_target.position[2]) <= _range)
+					if(attack_target != noone) && (instance_exists(attack_target))
 					{
+						// target is valid if its occupying node is in range
+						var _coord = attack_target.NearestCell()
 						_target = attack_target;
 					} else {
 						attack_target = noone;
