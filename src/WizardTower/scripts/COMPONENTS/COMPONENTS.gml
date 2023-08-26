@@ -357,8 +357,7 @@ BasicUnitAI = function() constructor{
 					if(attack_target != noone) && (instance_exists(attack_target))
 					{
 						// target is valid if its occupying node is in range
-						var _coord = attack_target.NearestCell()
-						_target = attack_target;
+						if(owner.CheckFighterTargetRange(attack_target) <= 1) _target = attack_target;
 					} else {
 						attack_target = noone;
 					}
@@ -366,7 +365,7 @@ BasicUnitAI = function() constructor{
 					if(_target == noone)
 					{
 						_target = enemies_in_range[| 0];
-						if(is_undefined(_target)) || (point_distance(owner.position[1], owner.position[2],_target.position[1],_target.position[2]) > _range)
+						if(is_undefined(_target)) || (owner.CheckFighterTargetRange(_target) > 1)
 						{
 							_target = noone;
 						}
@@ -377,8 +376,8 @@ BasicUnitAI = function() constructor{
 					// attack any enemy in range, but prioritize the attack command target
 					if(_target != noone) 
 					{
-						// attack valid target	
-						attack_target = _target;
+						// attack valid target
+						if(attack_target != _target) attack_target = _target;
 						if(attack_index == -1) && (basic_cooldown_timer <= 0)
 						{
 							owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
@@ -388,54 +387,6 @@ BasicUnitAI = function() constructor{
 				}
 			}
 		}
-		/*
-		// resolve fighter behavior
-		with(owner.fighter)
-		{
-			// check for attack command, set preliminary target 
-			if(is_undefined(_cmd)) || (_cmd.type != "attack")
-			{
-				attack_target = noone;
-			} else {
-				attack_target = _cmd.value;
-			}
-			
-
-			// attack any enemy in range, but prioritize the attack command target
-			if(ds_list_size(enemies_in_range) > 0) 
-			{
-				// if the attack command target is not in range, then check for any enemies nearby
-				if(ds_list_find_index(enemies_in_range, attack_target) == -1){
-					// attack closest enemy, or the enemy that attacked this unit recently
-					if(instance_exists(retaliation_target))
-					{attack_target = retaliation_target} else {attack_target = enemies_in_range[| 0]}
-				}
-				// give attack command for target if unit is idle
-				if(ds_list_size(owner.ai.commands) == 0)
-				{
-					// if the attack target exists and there is no command currently, give attack command
-					if(instance_exists(attack_target))
-					{
-						with(global.iEngine)
-						{
-							var _atk_comm = new Command("attack", other.attack_target, other.attack_target.x, other.attack_target.y); 
-						}
-						ds_list_add(owner.ai.commands, _atk_comm);
-					}
-				}
-			} else {
-				// noone to attack but retaliate if applicable, retaliation target is assumed to be noone when not applicable
-				attack_target = retaliation_target;
-			}
-
-			// attack valid target	
-			if(attack_index == -1) && (basic_cooldown_timer <= 0) && (attack_target != noone) && (instance_exists(attack_target))
-			{
-				owner.attack_direction = point_direction(owner.position[1], owner.position[2], attack_target.position[1], attack_target.position[2]);
-				if(ds_list_find_index(enemies_in_range, attack_target) > -1) UseBasic();
-			}
-		}
-		*/
 	}
 	static Destroy = function(){
 		// delete commands

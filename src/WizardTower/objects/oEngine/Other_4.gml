@@ -24,12 +24,6 @@ if(room != rStartMenu) && (room != rInit)
 		}
 	}
 	
-	// create unwalkable wall
-	for(var i=0;i<global.game_grid_height;i++){
-		var _node = global.game_grid[# 20, i];
-		_node.walkable = false;
-	}
-	
 	// start music
 	SoundCommand(GameMusic, The_Verdant_Grove_LOOP);
 }
