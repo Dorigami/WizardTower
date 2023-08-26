@@ -102,36 +102,17 @@ function DistanceTo(_other_entity){
 	
 	var _selfpos = [position[1], position[2]];
 	var _otherpos = [_other_entity.position[1], _other_entity.position[2]];
-	if(size_check > 2) _selfpos = _other_entity.NearestCell(id);
-	if(_other_entity.size_check > 2) _otherpos = id.NearestCell(_other_entity);
+	if(size_check > 2) _selfpos = _other_entity.NearestCell(id, true);
+	if(_other_entity.size_check > 2) _otherpos = id.NearestCell(_other_entity, true);
 	return point_distance(_selfpos[0], _selfpos[1], _otherpos[0], _otherpos[1]) - _other_entity.collision_radius;
 }
-function CheckFighterTargetRange(entity){
+function CheckAttackRange(entity){
 	// returns the ratio between distance to target entity and this entity's attack range (given that it is a Fighter)
 	// a value less than or equal to 1 means that the target is in range
-	var rtn = 0;
-	var nearest_cell = undefined;
-	var xself = position[1];
-	var yself = position[2];
-	var xother = entity.position[1];
-	var yother = entity.position[2];
-	// get node position instead of entity position when dealing with a structure
-	if(!is_undefined(entity.structure))
-	{
-		nearest_cell = NearestCell(entity, true);
-		xother = nearest_cell[0];
-		yother = nearest_cell[1];
-	}
-	// get position of self
-	if(!is_undefined(structure)){
-		with(entity){ nearest_cell = NearestCell(other, true) }
-		xself = nearest_cell[0];
-		yself = nearest_cell[1];
-	}
+
 	// get ratio of fighter rage to distance from target entity
-	rtn = point_distance(xself,yself,xother,yother) / (fighter.range == 0 ? collision_radius + HALF_GRID+2 : fighter.range*GRID_SIZE);
-	show_debug_message("attack range for {0}, targetting {1}.  return value = {2}", object_get_name(object_index), object_get_name(entity), rtn)
-	return rtn;
+	if(!instance_exists(entity)) exit;
+	return DistanceTo(entity) / (fighter.range == 0 ? collision_radius + HALF_GRID+4 : fighter.range*GRID_SIZE);
 }
 function NearestCell(_other_entity, rtn_as_position=false){
     // this function assumes that the calling entity is of size 1x1 (occupies one tile)

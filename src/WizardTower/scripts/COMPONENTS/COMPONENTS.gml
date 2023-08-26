@@ -30,7 +30,7 @@ Blueprint = function(_build_time) constructor{
 				_actor.supply_current += _stats.supply_cost;
 				
 				// construct either a unit, or a structure
-				if(_stats.obj == oSentry) || (_stats.obj == oTorchBearer) || (_stats.obj == oShieldBearer) || (_stats.obj == oSpearBearer)
+				if(_stats.obj == oSentry) || (_stats.obj == oTorchBearer) || (_stats.obj == oShieldBearer) || (_stats.obj == oSpearBearer) || (_stats.obj == oSentry)
 				{
 					var _ent = ConstructUnit(owner.xx, owner.yy, owner.faction, owner.type_string);
 					_ent.position[1] = owner.xTo;
@@ -357,7 +357,7 @@ BasicUnitAI = function() constructor{
 					if(attack_target != noone) && (instance_exists(attack_target))
 					{
 						// target is valid if its occupying node is in range
-						if(owner.CheckFighterTargetRange(attack_target) <= 1) _target = attack_target;
+						if(owner.CheckAttackRange(attack_target) <= 1) _target = attack_target;
 					} else {
 						attack_target = noone;
 					}
@@ -365,7 +365,7 @@ BasicUnitAI = function() constructor{
 					if(_target == noone)
 					{
 						_target = enemies_in_range[| 0];
-						if(is_undefined(_target)) || (owner.CheckFighterTargetRange(_target) > 1)
+						if(is_undefined(_target)) || (owner.CheckAttackRange(_target) > 1)
 						{
 							_target = noone;
 						}
