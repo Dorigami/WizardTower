@@ -67,35 +67,7 @@ if(!is_undefined(unit)){
 
 // if the entity is a structure, remove it from that faction's unit list
 if(!is_undefined(structure)){
-    _diff = _actor.structure_count - faction_list_index;
-    if(_diff > 1){
-        for(var i=1; i<_diff; i++){
-            _entity = _actor.structures[| faction_list_index+i];
-            if(!is_undefined(_entity)) _entity.faction_list_index--;
-        }
-    }
-    ds_list_delete(_actor.structures, faction_list_index);
-    _actor.structure_count--;
 
-    // clear id from occupy cells
-    if(size_check == 2){
-		_ind = ds_list_find_index(global.game_grid[# xx, yy].occupied_list, id);
-		if( _ind != -1) ds_list_delete(global.game_grid[# xx, yy].occupied_list, _ind);
-    } else {
-		var _w = size[0];
-		var _h = size[1];
-		var _cw = _w div 2;
-		var _ch = _h div 2;
-		for(var i=-_cw; i<_w-_cw; i++){
-		for(var j=-_ch; j<_h-_ch; j++){
-			if(point_in_rectangle(xx+i, yy+j, 0, 0, global.game_grid_width-1, global.game_grid_height-1)) 
-			{
-				_ind = ds_list_find_index(global.game_grid[# xx+i, yy+j].occupied_list, id);
-				if( _ind != -1) ds_list_delete(global.game_grid[# xx+i, yy+j].occupied_list, _ind);
-				global.game_grid[# xx+i, yy+j].walkable = true;
-			}
-		}}
-    }
 }
 
 // remove components
