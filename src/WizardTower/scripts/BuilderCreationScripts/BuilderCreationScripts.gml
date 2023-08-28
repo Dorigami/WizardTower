@@ -45,7 +45,7 @@ function BuilderCreateTurret(_faction){ BuilderCreate("turret", _faction) }
 function BuilderCreateBarricade(_faction){ BuilderCreate("barricade", _faction) }
 function BuilderCreateSentry(_faction){ BuilderCreate("sentry", _faction) }
 
-function BuildStateUnit(){ BuilderCreate("shieldbearer", true) }
+function BuildStateUnit(){ BuilderCreate("summoner", true) }
 function BuildStateStructure(){ BuilderCreate("conduit", false) }
 
 // light beam (basic)

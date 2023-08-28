@@ -30,7 +30,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			default:
 				_ai_component = new BasicUnitAI();
 				_steering_preference = UnitSteering_Basic;
-			case "shieldbearer":
+			case "summoner":
 				_idle = sShieldIdle;
 				_move = sShieldMove; 
 				_attack = sShieldShoot;

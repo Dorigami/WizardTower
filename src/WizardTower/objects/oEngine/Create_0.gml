@@ -222,9 +222,9 @@ function room_start_init_abilities(){
 		current_player_abilities[i] = variable_clone(initial_player_abilities[i]);
 	}
 }
-/* 
 
-function RoomStartInitEntities(){
+
+function room_start_init_entities(){
 	with(pEntity)
 	{
 		show_debug_message("type is: {0}, faction is: {1}, position is: [{2}] [{3}]", type_string, faction, x, y)
@@ -250,7 +250,7 @@ function RoomStartInitEntities(){
 		
 		switch(type_string)
 		{
-			case "shieldbearer":
+			case "summoner":
 				ConstructUnit((x-global.game_grid_xorigin) div GRID_SIZE, (y-global.game_grid_yorigin) div GRID_SIZE, faction, type_string);
 				break;
 			case "spearbearer":
@@ -269,6 +269,9 @@ function RoomStartInitEntities(){
 		instance_destroy();
 	}
 }
+
+
+/*
 
 function RoomStartInitMap(){
     // initalize the map by setting sight lines, blocking nodes, setting location & size of the game grid, etc...

@@ -30,7 +30,7 @@ Blueprint = function(_build_time) constructor{
 				_actor.supply_current += _stats.supply_cost;
 				
 				// construct either a unit, or a structure
-				if(_stats.obj == oSentry) || (_stats.obj == oTorchBearer) || (_stats.obj == oShieldBearer) || (_stats.obj == oSpearBearer) || (_stats.obj == oSentry)
+				if(_stats.obj == oSentry) || (_stats.obj == oTorchBearer) || (_stats.obj == oSummoner) || (_stats.obj == oSpearBearer) || (_stats.obj == oSentry)
 				{
 					var _ent = ConstructUnit(owner.xx, owner.yy, owner.faction, owner.type_string);
 					_ent.position[1] = owner.xTo;
@@ -133,6 +133,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 	}
     static DealDamage = function(_damage, _other_fighter){
 		if(is_undefined(_other_fighter)) return false; //
+		if(!instance_exists(_other_fighter.owner)) return false;
 		if(_other_fighter.hp <= 0) return false; // fighter is already dead
 		var _ent = _other_fighter.owner;
 		var _damClac = max(1, _damage - _other_fighter.defense);
@@ -402,7 +403,7 @@ BasicUnitAI = function() constructor{
 					if(_target == noone)
 					{
 						_target = enemies_in_range[| 0];
-						if(is_undefined(_target)) || (owner.CheckAttackRange(_target) > 1)
+						if(is_undefined(_target)) || (owner.CheckAttackRange(_target) > 1) || (!instance_exists(_target))
 						{
 							_target = noone;
 						}

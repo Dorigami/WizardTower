@@ -35,7 +35,7 @@ Actor = function(_player=false, _faction=NEUTRAL_FACTION, _apm=0, _ai=undefined)
 }
 
 //  spearbearer, physical dps (throw spear dealing damage, unit can't attack while on cooldown but can retrieve the spear to reset the cooldown)
-//  shieldbearer, physical support (greatly raise defense and mass, but cannot move or attack)
+//  summoner, physical support (greatly raise defense and mass, but cannot move or attack)
 //  lensbearer, magical dps (lock onto a target, dealing ramping damage for duration of the attack)
 //  torchbearer, magical support (illuminate to increase vision radius and damage nearby enemies, reduces movement speed)
 

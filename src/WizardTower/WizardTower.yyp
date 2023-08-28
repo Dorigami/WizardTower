@@ -157,7 +157,7 @@
     {"id":{"name":"oSkeletonBasic","path":"objects/oSkeletonBasic/oSkeletonBasic.yy",},},
     {"id":{"name":"oSentryBasic","path":"objects/oSentryBasic/oSentryBasic.yy",},},
     {"id":{"name":"s4","path":"sprites/s4/s4.yy",},},
-    {"id":{"name":"oShieldBearer","path":"objects/oShieldBearer/oShieldBearer.yy",},},
+    {"id":{"name":"oSummoner","path":"objects/oSummoner/oSummoner.yy",},},
     {"id":{"name":"powerup","path":"sounds/powerup/powerup.yy",},},
     {"id":{"name":"schecker32x32","path":"sprites/schecker32x32/schecker32x32.yy",},},
     {"id":{"name":"oUnitFiend","path":"objects/oUnitFiend/oUnitFiend.yy",},},

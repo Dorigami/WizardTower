@@ -111,7 +111,7 @@
     {"name":"oSkeletonBasic","order":10,"path":"objects/oSkeletonBasic/oSkeletonBasic.yy",},
     {"name":"oSentryBasic","order":4,"path":"objects/oSentryBasic/oSentryBasic.yy",},
     {"name":"s4","order":3,"path":"sprites/s4/s4.yy",},
-    {"name":"oShieldBearer","order":3,"path":"objects/oShieldBearer/oShieldBearer.yy",},
+    {"name":"oSummoner","order":3,"path":"objects/oSummoner/oSummoner.yy",},
     {"name":"powerup","order":13,"path":"sounds/powerup/powerup.yy",},
     {"name":"schecker32x32","order":37,"path":"sprites/schecker32x32/schecker32x32.yy",},
     {"name":"oUnitFiend","order":5,"path":"objects/oUnitFiend/oUnitFiend.yy",},

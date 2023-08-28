@@ -65,11 +65,6 @@ if(!is_undefined(unit)){
 	if( _ind != -1) ds_list_delete(global.game_grid[# xx, yy].occupied_list, _ind);
 } 
 
-// if the entity is a structure, remove it from that faction's unit list
-if(!is_undefined(structure)){
-
-}
-
 // remove components
 if(!is_undefined(blueprint)) { blueprint.Destroy(); delete blueprint } 
 if(!is_undefined(fighter)) { fighter.Destroy(); delete fighter } 

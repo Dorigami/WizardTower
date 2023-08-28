@@ -1,6 +1,6 @@
 
 //--//  spearbearer | physical dps (throw spear dealing damage, unit can't attack while on cooldown but can retrieve the spear to reset the cooldown)
-//--// shieldbearer | physical support (greatly raise defense and mass, but cannot move or attack)
+//--// summoner | physical support (greatly raise defense and mass, but cannot move or attack)
 //--//   lensbearer | magical dps (lock onto a target, dealing ramping damage for duration of the attack)
 //--//  torchbearer | magical support (illuminate to increase vision radius and damage nearby enemies, reduces movement speed)
 
@@ -14,7 +14,7 @@
 
 FighterStats = function() constructor{
     // UNITS
-    shieldbearer = { // support unit
+    summoner = { // support unit
         name : "default name",
         description : "default description",
         build_time : 2, // seconds
@@ -35,7 +35,7 @@ FighterStats = function() constructor{
         los_radius : 4,
         build_radius : 0,
         abilities : [ManualBasicAttack,ManualActiveAttack,-1,-1,-1,-1,-1,-1,-1],
-        obj : oShieldBearer,
+        obj : oSummoner,
         bunker_size : 0,
         basic_attack : {
 		    name : "Shield Bash",

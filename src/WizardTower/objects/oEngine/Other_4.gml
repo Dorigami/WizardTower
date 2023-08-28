@@ -7,6 +7,7 @@ if(room != rStartMenu) && (room != rInit)
 	room_start_init_camera();
 	room_start_init_abilities();
 	room_start_init_player_stats();
+	room_start_init_entities();
 
 	// create the ai behavior component for the actors, based on the current room
 	var _ai_component = new DebugActorAI();

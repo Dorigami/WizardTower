@@ -52,7 +52,6 @@ if(!is_undefined(structure)) || (!is_undefined(blueprint))
 
 if(!is_undefined(fighter))
 {
-	draw_text(x+10,y+10,"en: " + string(ds_list_size(fighter.enemies_in_range)));
 	if(fighter.basic_cooldown_timer > 0)
 	{
 		_prog = fighter.basic_cooldown_timer; 
