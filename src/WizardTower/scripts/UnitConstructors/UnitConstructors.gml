@@ -65,6 +65,9 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 				break;
 		}
 
+		// allow unit to be controlled by the player if it belongs to the player
+		if(_faction == PLAYER_FACTION) _steering_preference = SB_PlayerUnit;
+
 		// create the entity
 		_struct = {
 			// cell or tile position

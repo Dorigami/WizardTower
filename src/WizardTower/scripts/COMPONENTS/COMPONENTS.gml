@@ -378,10 +378,23 @@ BasicUnitAI = function() constructor{
 	}
 	static Update = function(){
 		var _cmd = undefined;
+		var _target = noone;
 		if(ds_list_size(commands) > 0)
 		{
-			// _cmd = commands[| 0];
+			_cmd = commands[| 0];
 			// handle movement
+			if(!is_undefined(_cmd))
+			{
+				if(_cmd.type == "attack") _target = _cmd.value;
+				if(instance_exists(_cmd.value))
+				{	
+					if(xTo != _cmd.value.position[1]) xTo = _cmd.value.position[1];
+					if(yTo != _cmd.value.position[2]) yTo = _cmd.value.position[2];
+				} else {
+					if(xTo != _cmd.x) xTo = _cmd.x;
+					if(yTo != _cmd.y) yTo = _cmd.y;
+				}
+			}
 		} else {
 			// if there is no command, check if entity is a fighter and get first enemy in range
 			if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
@@ -390,7 +403,7 @@ BasicUnitAI = function() constructor{
 				with(owner.fighter)
 				{
 					var _range = range == 0 ? owner.collision_radius+HALF_GRID : range*GRID_SIZE;
-					var _target = noone;
+					
 					// attack the current attack target, if possible
 					if(attack_target != noone) && (instance_exists(attack_target))
 					{

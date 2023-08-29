@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oShieldActive",
+  "name": "oSummonerBasic",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],

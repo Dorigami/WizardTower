@@ -251,19 +251,19 @@ function room_start_init_entities(){
 		switch(type_string)
 		{
 			case "summoner":
-				ConstructUnit((x-global.game_grid_xorigin) div GRID_SIZE, (y-global.game_grid_yorigin) div GRID_SIZE, faction, type_string);
+				ConstructUnit(x, y, faction, type_string);
 				break;
 			case "spearbearer":
-				ConstructUnit((x-global.game_grid_xorigin) div GRID_SIZE, (y-global.game_grid_yorigin) div GRID_SIZE, faction, type_string);
+				ConstructUnit(x, y, faction, type_string);
 				break;
 			case "lensbearer":
-				ConstructUnit((x-global.game_grid_xorigin) div GRID_SIZE, (y-global.game_grid_yorigin) div GRID_SIZE, faction, type_string);
+				ConstructUnit(x, y, faction, type_string);
 				break;
 			case "torchbearer":
-				ConstructUnit((x-global.game_grid_xorigin) div GRID_SIZE, (y-global.game_grid_yorigin) div GRID_SIZE, faction, type_string);
+				ConstructUnit(x, y, faction, type_string);
 				break;
 			case "base":
-				ConstructStructure((x-global.game_grid_xorigin) div GRID_SIZE, (y-global.game_grid_yorigin) div GRID_SIZE, faction, type_string);
+				ConstructStructure(x, y, faction, type_string);
 				break;
 		}
 		instance_destroy();

@@ -44,7 +44,7 @@ FighterStats = function() constructor{
 		    duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 		    damage_point : 10, // damage is dealt after this step count
 		    damage_value : 1,
-		    damage_obj : oShieldBasic 
+		    damage_obj : oSummonerBasic 
 		},
         active_attack : {
 		    name : "Bulwark",
@@ -53,7 +53,7 @@ FighterStats = function() constructor{
 		    duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 		    damage_point : 10, // damage is dealt after this step count
 		    damage_value : 1,
-		    damage_obj : oShieldActive 
+		    damage_obj : oSummonerActive 
 		}
     }
     spearbearer = { // melee fighter

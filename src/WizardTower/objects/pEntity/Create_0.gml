@@ -6,7 +6,6 @@ function Update(){
     // get desired direction
 	// weights = [goal, attack, density, discomfort]
 	var _movement_weights = [1,1,1,1];
-	show_debug_message("ster = {0}", steering_behavior)
 	if(!is_undefined(steering_behavior)) && (script_exists(steering_behavior)) script_execute_array(steering_behavior, _movement_weights);
 	// steer toward desired direction
 
