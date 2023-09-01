@@ -8,11 +8,11 @@
     {"name":"Map Initialization","order":15,"path":"folders/Objects/Map Initialization.yy",},
     {"name":"Radial Button Scripts","order":1,"path":"folders/Scripts/Radial Button Scripts.yy",},
     {"name":"Unit & Building Construction","order":22,"path":"folders/Scripts/Unit & Building Construction.yy",},
+    {"name":"Tree Tutorial","order":7,"path":"folders/Shaders/Tree Tutorial.yy",},
     {"name":"Map Stuff","order":36,"path":"folders/Sprites/Map Stuff.yy",},
     {"name":"Skeleton","order":34,"path":"folders/Sprites/Skeleton.yy",},
     {"name":"Structure Sprites","order":35,"path":"folders/Sprites/Structure Sprites.yy",},
     {"name":"Unit Sprites","order":33,"path":"folders/Sprites/Unit Sprites.yy",},
-    {"name":"Tree Tutorial","order":7,"path":"folders/Shaders/Tree Tutorial.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"s_engineer_move_dr","order":4,"path":"sprites/s_engineer_move_dr/s_engineer_move_dr.yy",},

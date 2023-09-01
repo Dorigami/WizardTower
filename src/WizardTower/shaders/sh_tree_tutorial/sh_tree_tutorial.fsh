@@ -18,7 +18,7 @@ float TaperBox( vec2 p, float wb, float wt, float yb, float yt, float blur )
         // top edge
         m *= smoothstep(blur, -blur, p.y - yt);
         
-        // sides:  0 when p.y=yb & 1 when p.y=yt
+        // sides:  0 when p.y=yt & 1 when p.y=yb
         float w = mix(wb, wt, (p.y-yb) / (yt-yb) );
         p.x = abs(p.x);
         m *= smoothstep(blur, -blur, p.x-w);
@@ -27,11 +27,14 @@ float TaperBox( vec2 p, float wb, float wt, float yb, float yt, float blur )
 
 vec4 Tree( vec2 uv, vec3 col, float blur )
 {
+    //float m = TaperBox(uv, .03, .03, -.05, .25, blur); // trunk
+    //     m += TaperBox(uv, .2, .1, .25, .5, blur); // canopy 1
+    //     m += TaperBox(uv, .15, .05, .5, .75, blur); // canopy 2
+    //     m += TaperBox(uv, .1, .0, .75, 1., blur); // top 
     float m = TaperBox(uv, .03, .03, -.05, .25, blur); // trunk
-    m += TaperBox(uv, .2, .1, .25, .5, blur); // canopy 1
-    m += TaperBox(uv, .15, .05, .5, .75, blur); // canopy 2
-    m += TaperBox(uv, .1, .0, .75, 1., blur); // top
-    
+         m += TaperBox(uv, .2, .1, .25, .5, blur); // canopy 1
+         m += TaperBox(uv, .15, .05, .5, .75, blur); // canopy 2
+         m += TaperBox(uv, .1, .0, .75, 1., blur); // top 
     float shadow = TaperBox(uv-vec2(.2,0), .1, .5, .15, .25, blur);
     shadow += TaperBox(uv+vec2(.25,0), .1, .5, .45, .5, blur);
     shadow += TaperBox(uv-vec2(.25,0), .1, .5, .7, .75, blur);
@@ -79,7 +82,7 @@ void main()
 {
 	//vec2 uv = (v_vTexcoord*2.0 - vec2(resW,resH)) / resH;
 	
-    vec2 uv = (v_vTexcoord-0.5*vec2(resW,resH)) / resH;
+    vec2 uv = ((v_vTexcoord-0.5*vec2(resW,resH)) / resH)*vec2(1.0,-1.0);
     vec2 M = (vec2(mouseX,mouseY)/vec2(resW,resH))*2.-1.; // mouse position from -1 to 1 (bL to tR)
     float t = iTime*.1;
     float blur = 0.005;
@@ -116,4 +119,6 @@ void main()
 
     gl_FragColor = col; 
 }
+
+
 
