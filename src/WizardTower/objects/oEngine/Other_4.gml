@@ -1,7 +1,7 @@
 /// @description 
 
 
-if(room != rStartMenu) && (room != rInit)
+if(room != rStartMenu) && (room != rInit) && (room != rShaderTest)
 {
 	room_start_init_game_grid();
 	room_start_init_camera();
@@ -29,4 +29,4 @@ if(room != rStartMenu) && (room != rInit)
 	SoundCommand(GameMusic, The_Verdant_Grove_LOOP);
 }
 
-global.iHUD.Init();
+if(instance_exists(global.iHUD)) global.iHUD.Init();

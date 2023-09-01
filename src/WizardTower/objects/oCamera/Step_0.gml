@@ -1,5 +1,7 @@
 /// @description update camera
 
+if(room = rShaderTest) exit;
+
 // update destination
 if(instance_exists(follow))
 {

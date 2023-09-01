@@ -1,4 +1,4 @@
-function InitializeDisplay(_asp){
+function InitializeDisplay(_asp, _zoom=2){
 	//// dynamic resolution
 		//idealWidth = 0;
 		//idealHeight = RESOLUTION_H;
@@ -28,7 +28,7 @@ function InitializeDisplay(_asp){
 	if(idealHeight & 1) idealHeight++;
 
 	//do the zoom
-	zoom = 2; // 1, 2, or 3
+	zoom = _zoom; // 1, 2, or 3
 	zoomMax = floor(display_get_width() / idealWidth);
 	zoom = min(zoom, zoomMax);
 	view_zoom = 1;

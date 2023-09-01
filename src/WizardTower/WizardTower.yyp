@@ -46,6 +46,7 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Unit Sprites","folderPath":"folders/Sprites/Unit Sprites.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Tile Sets","folderPath":"folders/Tile Sets.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Timelines","folderPath":"folders/Timelines.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Tree Tutorial","folderPath":"folders/Shaders/Tree Tutorial.yy",},
   ],
   "IncludedFiles": [],
   "isEcma": false,
@@ -289,6 +290,7 @@
     {"id":{"name":"sPlaySpace","path":"sprites/sPlaySpace/sPlaySpace.yy",},},
     {"id":{"name":"sTree","path":"sprites/sTree/sTree.yy",},},
     {"id":{"name":"sTowerSpotter2Top","path":"sprites/sTowerSpotter2Top/sTowerSpotter2Top.yy",},},
+    {"id":{"name":"sh_tree_tutorial","path":"shaders/sh_tree_tutorial/sh_tree_tutorial.yy",},},
     {"id":{"name":"ScreenShake","path":"scripts/ScreenShake/ScreenShake.yy",},},
     {"id":{"name":"sTowerMinigun2Top","path":"sprites/sTowerMinigun2Top/sTowerMinigun2Top.yy",},},
     {"id":{"name":"sSpearDeath","path":"sprites/sSpearDeath/sSpearDeath.yy",},},
@@ -319,5 +321,6 @@
   ],
   "TextureGroups": [
     {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","autocrop":false,"border":2,"compressFormat":"bz2","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},
+    {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"ShaderTestGroup","autocrop":false,"border":2,"compressFormat":"bz2","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},
   ],
 }

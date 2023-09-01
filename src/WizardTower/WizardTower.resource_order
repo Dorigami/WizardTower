@@ -12,6 +12,7 @@
     {"name":"Skeleton","order":34,"path":"folders/Sprites/Skeleton.yy",},
     {"name":"Structure Sprites","order":35,"path":"folders/Sprites/Structure Sprites.yy",},
     {"name":"Unit Sprites","order":33,"path":"folders/Sprites/Unit Sprites.yy",},
+    {"name":"Tree Tutorial","order":7,"path":"folders/Shaders/Tree Tutorial.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"s_engineer_move_dr","order":4,"path":"sprites/s_engineer_move_dr/s_engineer_move_dr.yy",},
@@ -228,6 +229,7 @@
     {"name":"sPlaySpace","order":32,"path":"sprites/sPlaySpace/sPlaySpace.yy",},
     {"name":"sTree","order":12,"path":"sprites/sTree/sTree.yy",},
     {"name":"sTowerSpotter2Top","order":31,"path":"sprites/sTowerSpotter2Top/sTowerSpotter2Top.yy",},
+    {"name":"sh_tree_tutorial","order":6,"path":"shaders/sh_tree_tutorial/sh_tree_tutorial.yy",},
     {"name":"sTowerMinigun2Top","order":48,"path":"sprites/sTowerMinigun2Top/sTowerMinigun2Top.yy",},
     {"name":"sSpearDeath","order":10,"path":"sprites/sSpearDeath/sSpearDeath.yy",},
     {"name":"snd_win","order":5,"path":"sounds/snd_win/snd_win.yy",},

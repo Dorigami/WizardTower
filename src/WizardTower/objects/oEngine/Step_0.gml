@@ -1,9 +1,6 @@
 /// @description run game
 
-if(room == rInit)
-{
-	
-}
+if(room == rShaderTest) exit;
 
 hud_action = global.iHUD.hud_get_action();
 mouse_action = handle_mouse();

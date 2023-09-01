@@ -93,6 +93,7 @@ function Init(){
 					x = _cx + i%3*_sep;
 					y = _cy + (i div 3)*_sep;
 					visible = true;
+					enabled = true;
 				}
 			}
 			// minimap stuff
@@ -104,9 +105,28 @@ function Init(){
 			minimap_bbox[2] = minimap_x + minimap_width;
 			minimap_bbox[3] = minimap_y + minimap_height;
 			break;
+		case rShaderTest:
+			// player data stuff
+			enable_player_data = false;
+			// abilities stufff
+			enable_abilities = false;
+			for(var i=0; i<9;i++)
+			{
+				with(abilities_buttons[i])
+				{
+					enabled = false;
+					visible = false;
+				}
+			}
+			// minimap stuff
+			enable_minimap = false;
+
+			break;
 		default:
 			enable_player_data = false;
 			enable_minimap = false;
+			ox = 0;
+			oy = 0;
 			// abilities stufff
 			enable_abilities = false;
 			for(var i=0;i<9;i++){ abilities_buttons[i].visible = false }

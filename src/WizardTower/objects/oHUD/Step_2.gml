@@ -10,11 +10,13 @@ zoom = global.iEngine.view_zoom;
 var _halfview_w = global.game_grid_width * minimap_tile_size * (global.iCamera.viewWidthHalf / ((global.game_grid_width div 2)*GRID_SIZE))/2;
 var _halfview_h = global.game_grid_height * minimap_tile_size * (global.iCamera.viewHeightHalf / ((global.game_grid_height div 2)*GRID_SIZE))/2;
 
-minimap_view_bbox[0] = ox + xx*minimap_tile_size - _halfview_w;
-minimap_view_bbox[1] = oy + yy*minimap_tile_size - _halfview_h;
-minimap_view_bbox[2] = ox + xx*minimap_tile_size + _halfview_w;
-minimap_view_bbox[3] = oy + yy*minimap_tile_size + _halfview_h;
-
+if(enable_minimap)
+{
+	minimap_view_bbox[0] = ox + xx*minimap_tile_size - _halfview_w;
+	minimap_view_bbox[1] = oy + yy*minimap_tile_size - _halfview_h;
+	minimap_view_bbox[2] = ox + xx*minimap_tile_size + _halfview_w;
+	minimap_view_bbox[3] = oy + yy*minimap_tile_size + _halfview_h;
+}
 player_data_string = "";
 with(global.iEngine.player_actor)
 {
