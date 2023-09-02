@@ -94,6 +94,7 @@ ds_list_add(actor_list, neutral_actor, player_actor, enemy_actor);
 
 
 window_set_fullscreen(false);
+if(ROOM_START == rShaderTest) instance_create_depth(0,0,0,oShaderTest);
 room_goto(ROOM_START);
 
 function room_start_init_game_grid(){

@@ -312,7 +312,7 @@ function SB_PlayerUnit(_goal_priority, _attack_priority, _density_priority, _dis
 	
 //--// 1) get direction and weight pointing toward unit's goal (the goal here would be the mob controller that this unit is a member of)
 	dist = point_distance(position[1],position[2],xTo,yTo);
-	uAng = distance > collision_radius ? 
+	uAng = dist > collision_radius ? 
 			speed_dir_to_vect2(1,point_direction(position[1],position[2],xTo,yTo)) :
 			vect2(0, 0);
 	_goal_desire = 1;
