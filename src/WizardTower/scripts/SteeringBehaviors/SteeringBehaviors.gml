@@ -315,13 +315,16 @@ function SB_PlayerUnit(_goal_priority, _attack_priority, _density_priority, _dis
 	
 //--// 1) get direction and weight pointing toward unit's goal (the goal here would be the mob controller that this unit is a member of)
 	var goaldist = point_distance(position[1],position[2],xTo,yTo);
-	uAng = dist > collision_radius ? 
+	uAng = goaldist > collision_radius ? 
 			speed_dir_to_vect2(1,point_direction(position[1],position[2],xTo,yTo)) :
 			vect2(0, 0);
 	_goal_desire = 1;
-	for(k=0;k<CS_RESOLUTION;k++)
-	{ 
-		_goal_map[k] += vect_dot(global.iEngine.cs_unit_vectors[k], uAng); 
+	if(uAng[1] + uAng[2] != 0)
+	{
+		for(k=0;k<CS_RESOLUTION;k++)
+		{ 
+			_goal_map[k] += vect_dot(global.iEngine.cs_unit_vectors[k], uAng); 
+		}
 	}
 
 //--// 2) get direction and weight pointing toward nearest valid attack target
@@ -383,8 +386,8 @@ function SB_PlayerUnit(_goal_priority, _attack_priority, _density_priority, _dis
 
 	// calculate new velocity with steering, there is no speed limit in cases where steering is pointed away from current velocity
 	steering = vect_multr(uAng, steering_mag);
-	vel_movement = vect_truncate(vect_add(vel_movement, steering), max(0, min(speed_limit*(1-speed_terrain_penalty), )));
-	if(vect_len(vel_movement) <= goaldist)
+	vel_movement = vect_truncate(vect_add(vel_movement, steering), max(0, speed_limit*(1-speed_terrain_penalty)));
+	if(vect_len(vel_movement) > goaldist)
 	{
 	    position[1] = xTo;
 	    position[2] = yTo;
