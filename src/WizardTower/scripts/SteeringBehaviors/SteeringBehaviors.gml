@@ -285,6 +285,9 @@ function SB_Horizontal(_goal_priority, _attack_priority, _density_priority, _dis
 function SB_PlayerUnit(_goal_priority, _attack_priority, _density_priority, _discomfort_priority){
 	// this function is assumed to be run inside of a unit entity
 	// will update current node as position changes
+	
+	if(position[1] == xTo) && (position[2] == yTo) exit;
+	
 	var i=0,j=0,k=0,v=0,interest=-100000000000,dist=0,ang=0,uAng=vect2(0,0),uVel=vect2(0,0);
 	var speed_limit = fighter.speed*max(0, 1-move_penalty); // move penalty represents debuffs that affect movement speed
 	var speed_terrain_penalty = 0; // this is how much movement is slowed in the desired direction, based on game grid parameters
@@ -311,7 +314,7 @@ function SB_PlayerUnit(_goal_priority, _attack_priority, _density_priority, _dis
 	var _discomfort_max_value = 0;
 	
 //--// 1) get direction and weight pointing toward unit's goal (the goal here would be the mob controller that this unit is a member of)
-	dist = point_distance(position[1],position[2],xTo,yTo);
+	var goaldist = point_distance(position[1],position[2],xTo,yTo);
 	uAng = dist > collision_radius ? 
 			speed_dir_to_vect2(1,point_direction(position[1],position[2],xTo,yTo)) :
 			vect2(0, 0);
@@ -380,14 +383,21 @@ function SB_PlayerUnit(_goal_priority, _attack_priority, _density_priority, _dis
 
 	// calculate new velocity with steering, there is no speed limit in cases where steering is pointed away from current velocity
 	steering = vect_multr(uAng, steering_mag);
-	vel_movement = vect_truncate(vect_add(vel_movement, steering), max(0, speed_limit*(1-speed_terrain_penalty)));
-	
-	// cancel movement in masked directions
-	for(i=0;i<CS_RESOLUTION;i++)
+	vel_movement = vect_truncate(vect_add(vel_movement, steering), max(0, min(speed_limit*(1-speed_terrain_penalty), )));
+	if(vect_len(vel_movement) <= goaldist)
 	{
-		if(mask[i]) && (vect_dot(uVel,global.iEngine.cs_unit_vectors[i]) > 0)
+	    position[1] = xTo;
+	    position[2] = yTo;
+		vel_movement[1] = 0;
+		vel_movement[2] = 0;
+	} else {	
+		// cancel movement in masked directions
+		for(i=0;i<CS_RESOLUTION;i++)
 		{
-			vel_movement = vect_subtract(vel_movement, vect_proj(vel_movement, global.iEngine.cs_unit_vectors[i]));
+			if(mask[i]) && (vect_dot(uVel,global.iEngine.cs_unit_vectors[i]) > 0)
+			{
+				vel_movement = vect_subtract(vel_movement, vect_proj(vel_movement, global.iEngine.cs_unit_vectors[i]));
+			}
 		}
 	}
 

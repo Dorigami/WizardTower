@@ -4,7 +4,7 @@
 #macro CANVAS_W sprite_get_width(sShaderCanvas)
 #macro CANVAS_H sprite_get_height(sShaderCanvas)
 #macro FRAME_RATE 60
-#macro ROOM_START rShaderTest
+#macro ROOM_START rDebug
 #macro EAST 0
 #macro NORTH 1
 #macro WEST 2
@@ -18,6 +18,9 @@
 #macro PLAYER_FACTION 1
 #macro NEUTRAL_FACTION 0
 #macro CS_RESOLUTION 8
+// entity types
+#macro UNIT 0
+#macro STRUCTURE 1
 
 enum GameStates {
     PAUSE,

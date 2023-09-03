@@ -248,24 +248,13 @@ function room_start_init_entities(){
 			}
 			_actor.ai = _ai_component;
 		}
-		
-		switch(type_string)
+		var _fighterstats = global.iEngine.actor_list[| faction].fighter_stats;
+		_fighterstats = _fighterstats[$ type_string];
+		if(_fighterstats.entity_type == UNIT)
 		{
-			case "summoner":
-				ConstructUnit(x, y, faction, type_string);
-				break;
-			case "spearbearer":
-				ConstructUnit(x, y, faction, type_string);
-				break;
-			case "lensbearer":
-				ConstructUnit(x, y, faction, type_string);
-				break;
-			case "torchbearer":
-				ConstructUnit(x, y, faction, type_string);
-				break;
-			case "base":
-				ConstructStructure(x, y, faction, type_string);
-				break;
+			ConstructUnit(x, y, faction, type_string);
+		} else if(_fighterstats.entity_type == STRUCTURE){
+			ConstructStructure(x, y, faction, type_string);
 		}
 		instance_destroy();
 	}

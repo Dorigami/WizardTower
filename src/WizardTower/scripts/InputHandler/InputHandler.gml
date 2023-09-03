@@ -46,12 +46,14 @@ function handle_play_mouse(){
         if(global.iSelect.enabled){
             return { select_cancel : new Command("select_cancel",true,0,0) }
         } else {
-            if(global.hud_focus != noone){
+            if(global.hud_focus != -1){
+				show_debug_message("registering input");
                 return { right_click : new Command("right_click",true,mouse_x, mouse_y) }
             } else if(global.mouse_focus != noone){
                 if(ds_list_size(player_actor.selected_entities) > 0)
                 {
                     // have the engine decide what the selected units do with the target
+					
                     var _ent = global.mouse_focus; 
                     if(_ent.faction == PLAYER_FACTION)
                     {

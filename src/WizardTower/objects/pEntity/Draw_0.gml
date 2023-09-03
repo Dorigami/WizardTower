@@ -32,6 +32,8 @@ if(!is_undefined(ai))
 
 		draw_set_color(c_white);
 	}}
+	draw_text(position[1]+10, position[2]+10, string(_size));
+	
 }
 
 var _prog = 0;

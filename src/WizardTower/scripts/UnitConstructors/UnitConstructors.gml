@@ -24,12 +24,11 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		_fighter_component = new Fighter(_stats.hp, _stats.strength, _stats.defense, _stats.speed, _stats.range, _stats.tags, _stats.basic_attack,_stats.active_attack);
 		_unit_component = new Unit(_stats.supply_cost, _stats.abilities, true); // the last argument sets "can_bunker"
 
-		// get animations and ai components 
+		// get animations and ai components
+		_ai_component = new BasicUnitAI();
+		_steering_preference = UnitSteering_Basic;
 		switch(_type_string)
 		{
-			default:
-				_ai_component = new BasicUnitAI();
-				_steering_preference = UnitSteering_Basic;
 			case "summoner":
 				_idle = sShieldIdle;
 				_move = sShieldMove; 
@@ -59,8 +58,6 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 				_move = sSkeletonMove; 
 				_attack = sSkeletonAttack;
 				_death = sSkeletonDeath;
-
-				_ai_component = new BasicUnitAI();
 				_steering_preference = SB_Horizontal;
 				break;
 		}

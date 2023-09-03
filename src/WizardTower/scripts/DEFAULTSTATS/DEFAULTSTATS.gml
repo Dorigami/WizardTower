@@ -16,6 +16,7 @@ FighterStats = function() constructor{
     // UNITS
     summoner = { // support unit
         name : "default name",
+		entity_type : UNIT,
         description : "default description",
         build_time : 2, // seconds
         supply_cost : 2,
@@ -58,6 +59,7 @@ FighterStats = function() constructor{
     }
     spearbearer = { // melee fighter
         name : "default name",
+		entity_type : UNIT,
         description : "default description",
         build_time : 2, // seconds
         supply_cost : 2,
@@ -100,6 +102,7 @@ FighterStats = function() constructor{
     }
     sentry = { // mid-range fighter
         name : "default name",
+		entity_type : UNIT,
         description : "default description",
         build_time : 2,
         supply_cost : 2,
@@ -142,6 +145,7 @@ FighterStats = function() constructor{
     }
     torchbearer = { // long-range fighter
         name : "default name",
+		entity_type : UNIT,
         description : "default description",
         build_time : 2,
         supply_cost : 2,
@@ -184,6 +188,7 @@ FighterStats = function() constructor{
     }
     skeleton = { // basic enemy unit
         name : "default name",
+		entity_type : UNIT,
         description : "default description",
         build_time : 2,
         supply_cost : 1,
@@ -228,6 +233,7 @@ FighterStats = function() constructor{
     // STRUCTURES
     turret = {
         name : "default name",
+		entity_type : STRUCTURE,
         description : "default description",
         build_time : 1, 
         supply_cost : 1,
@@ -270,6 +276,7 @@ FighterStats = function() constructor{
     }
     barricade = { // a wall to 
         name : "default name",
+		entity_type : STRUCTURE,
         description : "default description",
         build_time : 1,
         supply_cost : 0,

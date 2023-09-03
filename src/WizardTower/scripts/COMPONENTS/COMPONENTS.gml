@@ -388,11 +388,11 @@ BasicUnitAI = function() constructor{
 				if(_cmd.type == "attack") _target = _cmd.value;
 				if(instance_exists(_cmd.value))
 				{	
-					if(xTo != _cmd.value.position[1]) xTo = _cmd.value.position[1];
-					if(yTo != _cmd.value.position[2]) yTo = _cmd.value.position[2];
+					if(owner.xTo != _cmd.value.position[1]) owner.xTo = _cmd.value.position[1];
+					if(owner.yTo != _cmd.value.position[2]) owner.yTo = _cmd.value.position[2];
 				} else {
-					if(xTo != _cmd.x) xTo = _cmd.x;
-					if(yTo != _cmd.y) yTo = _cmd.y;
+					if(owner.xTo != _cmd.x) owner.xTo = _cmd.x;
+					if(owner.yTo != _cmd.y) owner.yTo = _cmd.y;
 				}
 			}
 		} else {
