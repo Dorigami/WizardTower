@@ -97,14 +97,19 @@ function Update(){
     }
 }
 
-function DistanceTo(_other_entity){
+function DistanceTo(_other_entity, _tiles=false){
 	// returns distance between entities in terms of pixels
 	
 	var _selfpos = [position[1], position[2]];
 	var _otherpos = [_other_entity.position[1], _other_entity.position[2]];
 	if(size_check > 2) _selfpos = _other_entity.NearestCell(id, true);
 	if(_other_entity.size_check > 2) _otherpos = id.NearestCell(_other_entity, true);
-	return point_distance(_selfpos[0], _selfpos[1], _otherpos[0], _otherpos[1]) - _other_entity.collision_radius;
+	if(!_tiles)
+	{
+		return point_distance(_selfpos[0], _selfpos[1], _otherpos[0], _otherpos[1]) - _other_entity.collision_radius;
+	} else {
+		return abs(xx-_other_entity.xx) + abs(yy-_other_entity.yy);
+	}
 }
 function NearestCell(_other_entity, rtn_as_position=false){
     // this function assumes that the calling entity is of size 1x1 (occupies one tile)

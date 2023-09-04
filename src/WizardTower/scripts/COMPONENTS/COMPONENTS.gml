@@ -408,7 +408,7 @@ BasicUnitAI = function() constructor{
 				if(attack_target != noone) && (instance_exists(attack_target))
 				{
 					// target is valid if its occupying node is in range
-					if(owner.CheckAttackRange(attack_target) <= 1) _target = attack_target;
+					if(owner.DistanceTo(attack_target) <= 1) _target = attack_target;
 				} else {
 					attack_target = noone;
 				}
