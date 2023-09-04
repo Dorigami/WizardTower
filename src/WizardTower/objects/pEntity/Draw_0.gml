@@ -32,8 +32,23 @@ if(!is_undefined(ai))
 
 		draw_set_color(c_white);
 	}}
-	draw_text(position[1]+10, position[2]+10, string(_size));
-	
+	// display attack range
+	if(selected)
+	{
+		if(ds_list_size(checked_node_list) > 0)
+		{
+			var _c0 = c_blue;
+			var _c1 = c_aqua;
+			var _node=undefined;
+			for(var i=0;i<ds_list_size(checked_node_list);i++)
+			{
+				_node = checked_node_list[| i];
+				draw_set_alpha(0.2);
+				if(ds_list_size(_node.occupied_list) > 0){draw_set_color(_c0)} else {draw_set_color(_c1)}
+				draw_rectangle(_node.x-HALF_GRID,_node.y-HALF_GRID,_node.x+HALF_GRID,_node.y+HALF_GRID,false);
+			}
+		}
+	}
 }
 
 var _prog = 0;

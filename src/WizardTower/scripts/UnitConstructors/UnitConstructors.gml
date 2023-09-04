@@ -85,7 +85,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			moveable : true,
 			move_penalty : 0,
 			collision_radius : round(0.2*GRID_SIZE),
-			steering_mag : 0.2,
+			steering_mag : 0.3,
 			vel_force_conservation : 0.95,
 			vel_force : vect2(0,0),
 			vel_movement : vect2(0,0),

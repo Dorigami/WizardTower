@@ -30,7 +30,7 @@ FighterStats = function() constructor{
         strength : 3,
         defense : 1,
         speed : 2,
-        range : 2,
+        range : 5,
         tags : [],
         size : [1,1], // [width , height]
         los_radius : 4,

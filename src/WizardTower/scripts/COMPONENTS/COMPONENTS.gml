@@ -395,47 +395,46 @@ BasicUnitAI = function() constructor{
 					if(owner.yTo != _cmd.y) owner.yTo = _cmd.y;
 				}
 			}
-		} else {
-			// if there is no command, check if entity is a fighter and get first enemy in range
-			if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		}
+		// if there is no command, check if entity is a fighter and get first enemy in range
+		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		{
+			// resolve fighter behavior
+			with(owner.fighter)
 			{
-				// resolve fighter behavior
-				with(owner.fighter)
+				var _range = range == 0 ? owner.collision_radius+HALF_GRID : range*GRID_SIZE;
+					
+				// attack the current attack target, if possible
+				if(attack_target != noone) && (instance_exists(attack_target))
 				{
-					var _range = range == 0 ? owner.collision_radius+HALF_GRID : range*GRID_SIZE;
-					
-					// attack the current attack target, if possible
-					if(attack_target != noone) && (instance_exists(attack_target))
-					{
-						// target is valid if its occupying node is in range
-						if(owner.CheckAttackRange(attack_target) <= 1) _target = attack_target;
-					} else {
-						attack_target = noone;
-					}
-					// if there is no attack target, attack nearest enemy
-					if(_target == noone)
-					{
-						_target = enemies_in_range[| 0];
-						if(is_undefined(_target)) || (owner.CheckAttackRange(_target) > 1) || (!instance_exists(_target))
-						{
-							_target = noone;
-						}
-					}
-					// can't use retaliation target because structures cant move
-					
-					
-					// attack any enemy in range, but prioritize the attack command target
-					if(_target != noone) 
-					{
-						// attack valid target
-						if(attack_target != _target) attack_target = _target;
-						if(attack_index == -1) && (basic_cooldown_timer <= 0)
-						{
-							owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
-							UseBasic();
-						}
-					} 
+					// target is valid if its occupying node is in range
+					if(owner.CheckAttackRange(attack_target) <= 1) _target = attack_target;
+				} else {
+					attack_target = noone;
 				}
+				// if there is no attack target, attack nearest enemy
+				if(_target == noone)
+				{
+					_target = enemies_in_range[| 0];
+					if(is_undefined(_target)) || (owner.CheckAttackRange(_target) > 1) || (!instance_exists(_target))
+					{
+						_target = noone;
+					}
+				}
+				// can't use retaliation target because structures cant move
+					
+					
+				// attack any enemy in range, but prioritize the attack command target
+				if(_target != noone) 
+				{
+					// attack valid target
+					if(attack_target != _target) attack_target = _target;
+					if(attack_index == -1) && (basic_cooldown_timer <= 0)
+					{
+						owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
+						UseBasic();
+					}
+				} 
 			}
 		}
 	}

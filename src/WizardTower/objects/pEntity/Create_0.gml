@@ -106,14 +106,6 @@ function DistanceTo(_other_entity){
 	if(_other_entity.size_check > 2) _otherpos = id.NearestCell(_other_entity, true);
 	return point_distance(_selfpos[0], _selfpos[1], _otherpos[0], _otherpos[1]) - _other_entity.collision_radius;
 }
-function CheckAttackRange(entity){
-	// returns the ratio between distance to target entity and this entity's attack range (given that it is a Fighter)
-	// a value less than or equal to 1 means that the target is in range
-
-	// get ratio of fighter rage to distance from target entity
-	if(!instance_exists(entity)) exit;
-	return DistanceTo(entity) / (fighter.range == 0 ? collision_radius + HALF_GRID+4 : fighter.range*GRID_SIZE);
-}
 function NearestCell(_other_entity, rtn_as_position=false){
     // this function assumes that the calling entity is of size 1x1 (occupies one tile)
     // and other entity can be any size (i.e. 2x3, 5x5)
