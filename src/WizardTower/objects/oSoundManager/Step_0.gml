@@ -10,7 +10,8 @@ if(_size > 0)
 	{
 		var _snd = ds_queue_dequeue(sound_queue);
 		_size--;
-		switch(_snd.type)
+		
+		switch(audio_sound_get_audio_group(_snd.value))
 		{
 			case GameMusic:
 				
