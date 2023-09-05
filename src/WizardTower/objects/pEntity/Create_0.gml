@@ -32,7 +32,7 @@ function Update(){
 				image_index = 0;
 				image_speed = 0;
 			}
-			image_index += image_number/(_dur*FRAME_RATE);
+			image_index = min(image_number-1, image_index + image_number/(_dur*FRAME_RATE));
 
             _dir = !is_undefined(structure) ? 0 : attack_direction;
 		} else {

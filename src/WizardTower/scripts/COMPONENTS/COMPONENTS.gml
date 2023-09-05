@@ -134,6 +134,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
     static DealDamage = function(_damage, _other_fighter){
 		if(is_undefined(_other_fighter)) return false; //
 		if(!instance_exists(_other_fighter.owner)) return false;
+		if(!instance_exists(owner)) return false;
 		if(_other_fighter.hp <= 0) return false; // fighter is already dead
 		var _ent = _other_fighter.owner;
 		var _damClac = max(1, _damage - _other_fighter.defense);
@@ -371,11 +372,6 @@ Bunker = function(_capacity) constructor{
 BasicUnitAI = function() constructor{
     commands = ds_list_create(); // a list containing all command structs
 	owner = undefined;
-	
-	static GetAction = function(){
-		// check for command
-		show_debug_message("get action doesn't really have a use at the moment");
-	}
 	static Update = function(){
 		var _cmd = undefined;
 		var _target = noone;
@@ -402,13 +398,17 @@ BasicUnitAI = function() constructor{
 			// resolve fighter behavior
 			with(owner.fighter)
 			{
-				var _range = range == 0 ? owner.collision_radius+HALF_GRID : range*GRID_SIZE;
-					
 				// attack the current attack target, if possible
 				if(attack_target != noone) && (instance_exists(attack_target))
 				{
 					// target is valid if its occupying node is in range
-					if(owner.DistanceTo(attack_target) <= 1) _target = attack_target;
+					var _target_node = global.game_grid[# attack_target.xx, attack_target.yy];
+					if(ds_list_find_index(owner.checked_node_list,_target_node) > -1) 
+					{
+						_target = attack_target;
+					} else {
+						attack_target = noone;
+					}
 				} else {
 					attack_target = noone;
 				}
@@ -416,14 +416,15 @@ BasicUnitAI = function() constructor{
 				if(_target == noone)
 				{
 					_target = enemies_in_range[| 0];
-					if(is_undefined(_target)) || (owner.CheckAttackRange(_target) > 1) || (!instance_exists(_target))
+					if(is_undefined(_target))
 					{
 						_target = noone;
+					} else if(!instance_exists(_target)) {
+						_target = noone;
+						ds_list_delete(enemies_in_range, 0);
 					}
 				}
-				// can't use retaliation target because structures cant move
-					
-					
+				
 				// attack any enemy in range, but prioritize the attack command target
 				if(_target != noone) 
 				{
@@ -451,91 +452,70 @@ BasicUnitAI = function() constructor{
 BasicStructureAI = function() constructor{
     commands = ds_list_create();
 	owner = undefined;
-	static GetAction = function(){
-		// decide whether to attack or move
-		var _move = false;
-		var _attack = false;
-		var move_comm = command[$ "entity_comm_move"];
-		var Amove_comm = command[$ "entity_comm_Amove"];
-		var attack_comm = command[$ "entity_comm_attack"];
-		var defend_comm = command[$ "entity_comm_defend"];
-		var build_comm = command[$ "entity_comm_build"];
-		var bunker_comm = command[$ "entity_comm_bunker"];
-		if(!is_undefined(attack_comm)){
-
-	    } else if(!is_undefined(move_comm)){
-			// set rally point
-			var _xx = move_comm[0] div GRID_SIZE;
-			var _yy = move_comm[1] div GRID_SIZE;
-			owner.structure.rally_xx = _xx;
-			owner.structure.rally_yy = _yy;
-			command = {};
-		} else if(!is_undefined(Amove_comm)){
-			// set rally point
-			var _xx = Amove_comm[0] div GRID_SIZE;
-			var _yy = Amove_comm[1] div GRID_SIZE;
-			owner.structure.rally_xx = _xx;
-			owner.structure.rally_yy = _yy;
-			command = {};
-		} else if(defend_comm){
-
-		} else {
-			show_debug_message("ERROR: no command given for GetAction()");
-		}
-
-		if(_move){
-
-		} else if(_attack){
-
-		}	
-	}
 	static Update = function(){
+		var _cmd = undefined;
+		var _target = noone;
 		if(ds_list_size(commands) > 0)
 		{
 			//if(command_timer > 0) && (--command_timer == 0){
 			//	GetAction();
 			//	if(is_undefined(command)) command_timer_set_point = -1;
 			//}
-		} else {
-			// if there is no command, check if entity is a fighter and get first enemy in range
-			if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		} 
+		// if there is no command, check if entity is a fighter and get first enemy in range
+		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		{
+			// resolve fighter behavior
+			with(owner.fighter)
 			{
-				// resolve fighter behavior
-				with(owner.fighter)
+				// attack the current attack target, if possible
+				if(attack_target != noone) && (instance_exists(attack_target))
 				{
-					var _target = noone;
-					// attack the current attack target, if possible
-					if(attack_target != noone) && (instance_exists(attack_target)) && (point_distance(owner.position[1], owner.position[2],attack_target.position[1],attack_target.position[2]) <= range*GRID_SIZE)
+					// target is valid if its occupying node is in range
+					var _target_node = global.game_grid[# attack_target.xx, attack_target.yy];
+					if(ds_list_find_index(owner.checked_node_list,_target_node) > -1) 
 					{
 						_target = attack_target;
 					} else {
 						attack_target = noone;
 					}
-					// if there is no attack target, attack nearest enemy
-					if(_target == noone)
-					{
-						_target = enemies_in_range[| 0];
-						if(is_undefined(_target)) _target = noone;
-					}
-					// can't use retaliation target because structures cant move
-					
-					
-					// attack any enemy in range, but prioritize the attack command target
-					if(_target != noone) && (instance_exists(_target))
-					{
-						// attack valid target	
-						attack_target = _target;
-						if(attack_index == -1) && (basic_cooldown_timer <= 0)
-						{
-							owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
-							UseBasic();
-						}
-					} 
+				} else {
+					attack_target = noone;
 				}
+				// if there is no attack target, attack nearest enemy
+				if(_target == noone)
+				{
+					_target = enemies_in_range[| 0];
+					if(is_undefined(_target))
+					{
+						_target = noone;
+					} else if(!instance_exists(_target)) {
+						_target = noone;
+						ds_list_delete(enemies_in_range, 0);
+					}
+				}
+				
+				// attack any enemy in range, but prioritize the attack command target
+				if(_target != noone) 
+				{
+					// attack valid target
+					if(attack_target != _target) attack_target = _target;
+					if(attack_index == -1) && (basic_cooldown_timer <= 0)
+					{
+						owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
+						UseBasic();
+					}
+				} 
 			}
 		}
 	}
 	static Destroy = function(){
-		
+		// delete commands
+		for(var i=0; i<ds_list_size(commands); i++)
+		{
+			if(!is_undefined(commands[| i])) delete commands[| i];
+		}
+		// destroy command list
+		ds_list_destroy(commands);
 	}
 }

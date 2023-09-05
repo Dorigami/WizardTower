@@ -222,7 +222,7 @@ DebugActorAI = function() constructor{
 				//_entity.faction_list_index);
 				if(!is_undefined(_entity)) && (ds_list_size(_entity.ai.commands) == 0)
 				{
-					ds_list_add(_entity.ai.commands, new global.iEngine.Command("attack",_structure_entity,_structure_entity.x, _structure_entity.y));
+					ds_list_add(_entity.ai.commands, new global.iEngine.Command("move",-4,_structure_entity.x, _structure_entity.y));
 				}
 			}
 		}
