@@ -14,8 +14,8 @@
     {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","objectId":null,"propertyId":null,"value":"80",},
   ],
   "parent": {
-    "name": "Units",
-    "path": "folders/Objects/Entities/Units.yy",
+    "name": "Enemy Mobs",
+    "path": "folders/Objects/Entities/Units/Enemy Mobs.yy",
   },
   "parentObjectId": {
     "name": "pEntity",

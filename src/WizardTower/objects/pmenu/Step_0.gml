@@ -1,13 +1,7 @@
 /// @description Control the Button
 
-if(ds_stack_top(global.iGame.menuStack) != id) exit;
-if(!global.gamePaused)
+if(global.game_state != GameStates.PAUSE)
 {
-	// remove menu when escape is pressed
-	if(keyboard_check_pressed(vk_escape)) && (ds_stack_top(global.iGame.menuStack) == id) && (object_index != oUI)
-	{
-		instance_destroy();
-	}
 	// update controls
 	controlsCount = ds_list_size(controlsList)
 	if(controlsCount > 0)

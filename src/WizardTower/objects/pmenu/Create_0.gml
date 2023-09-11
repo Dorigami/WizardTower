@@ -303,7 +303,7 @@ controlsFocus = -1;
 controlsMap = ds_map_create();
 controlsList = ds_list_create();
 
-depth = BUTTONDEPTH;
+depth = global.iHUD.depth;
 image_speed = 0;
 image_index = 0;
 
@@ -324,4 +324,4 @@ gui = false;
 enabled = true;
 
 menuOpen = false;
-if(ds_exists(global.iGame.menuStack, ds_type_stack)) ds_stack_push(global.iGame.menuStack, id);
+

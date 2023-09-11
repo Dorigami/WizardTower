@@ -16,6 +16,7 @@
     {"name":"inst_614FA9F2","path":"rooms/rDebug/rDebug.yy",},
     {"name":"inst_14192F80","path":"rooms/rDebug/rDebug.yy",},
     {"name":"inst_52B71D95","path":"rooms/rDebug/rDebug.yy",},
+    {"name":"inst_7FF42781","path":"rooms/rDebug/rDebug.yy",},
   ],
   "isDnd": false,
   "layers": [
@@ -45,6 +46,7 @@
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_52B71D95","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"oSummoner","path":"objects/oSummoner/oSummoner.yy",},"properties":[
             {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","objectId":{"name":"pEntity","path":"objects/pEntity/pEntity.yy",},"propertyId":{"name":"faction","path":"objects/pEntity/pEntity.yy",},"value":"1",},
           ],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":480.0,"y":576.0,},
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_7FF42781","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"oCustomWaveSpawner","path":"objects/oCustomWaveSpawner/oCustomWaveSpawner.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":832.0,"y":384.0,},
       ],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
     {"resourceType":"GMRTileLayer","resourceVersion":"1.1","name":"Terrain2","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"properties":[],"tiles":{"SerialiseHeight":94,"SerialiseWidth":94,"TileCompressedData":[
 -600,-2147483648,1,0,-90,-2147483648,-4,0,3,-2147483648,0,0,-87,-2147483648,-7,0,-86,-2147483648,-8,0,-85,-2147483648,-9,0,-77,-2147483648,5,0,-2147483648,-2147483648,0,-2147483648,-24,0,-2,-2147483648,-11,0,-41,-2147483648,-57,0,-34,-2147483648,-60,0,-34,-2147483648,-61,0,-33,-2147483648,-61,0,-33,-2147483648,-61,0,-33,-2147483648,-61,0,-33,-2147483648,-46,0,-8,-2147483648,-7,0,-33,-2147483648,-7,0,1,-2147483648,-38,0,-7,-2147483648,-9,0,-32,-2147483648,-7,0,-2,-2147483648,-37,0,-7,-2147483648,-9,0,

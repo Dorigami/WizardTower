@@ -69,9 +69,9 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
     attack_index = -1; // this will either be 0 or 1, 0 for basic & 1 for active
 	attack_timer = -1;
 	retaliation_target = noone;
-    basic_cooldown_timer  = 0 ; // set to 100 after any attack, the attack itself will affect the rate
+    basic_cooldown_timer  = 0   ; // set to 100 after any attack, the attack itself will affect the rate
     basic_cooldown_rate   = 0.01;
-    active_cooldown_timer = 0 ; // set to 100 after any attack, the attack itself will affect the rate
+    active_cooldown_timer = 0   ; // set to 100 after any attack, the attack itself will affect the rate
     active_cooldown_rate  = 0.01;
     attack_move_penalty   = 0   ;
     

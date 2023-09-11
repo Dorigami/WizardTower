@@ -229,6 +229,221 @@ FighterStats = function() constructor{
             damage_obj : oSkeletonActive 
         }
     }
+    marcher = { // basic enemy unit
+        name : "default name",
+		entity_type : UNIT,
+        description : "default description",
+        build_time : 2,
+        supply_cost : 1,
+        supply_capacity : 0,
+        material_cost : 30,
+		material_reward : 100,
+        experience_reward : 100,
+		upgrade_reward : 100,
+        jump : 3,
+        hp : 4,
+        strength : 3,
+        defense : 1,
+        speed : 1,
+        range : 0,
+        tags : [],
+        size : [1,1], // [width , height]
+        los_radius : 4,
+        build_radius : 0,
+        abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+        obj : oSkeleton,
+        bunker_size : 0,
+        basic_attack : {
+            name : "Bone Slash",
+            cooldown : 2, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSkeletonBasic 
+        },
+        active_attack : {
+            name : "Throw Bone",
+            cooldown : 5, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSkeletonActive 
+        }
+    }
+    swarmer = { 
+        name : "default name",
+		entity_type : UNIT,
+        description : "default description",
+        build_time : 2,
+        supply_cost : 1,
+        supply_capacity : 0,
+        material_cost : 30,
+		material_reward : 100,
+        experience_reward : 100,
+		upgrade_reward : 100,
+        jump : 3,
+        hp : 4,
+        strength : 3,
+        defense : 1,
+        speed : 1,
+        range : 0,
+        tags : [],
+        size : [1,1], // [width , height]
+        los_radius : 4,
+        build_radius : 0,
+        abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+        obj : oSkeleton,
+        bunker_size : 0,
+        basic_attack : {
+            name : "Bone Slash",
+            cooldown : 2, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSkeletonBasic 
+        },
+        active_attack : {
+            name : "Throw Bone",
+            cooldown : 5, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSkeletonActive 
+        }
+    }
+    buildingkiller = { // basic enemy unit
+        name : "default name",
+		entity_type : UNIT,
+        description : "default description",
+        build_time : 2,
+        supply_cost : 1,
+        supply_capacity : 0,
+        material_cost : 30,
+		material_reward : 100,
+        experience_reward : 100,
+		upgrade_reward : 100,
+        jump : 3,
+        hp : 4,
+        strength : 3,
+        defense : 1,
+        speed : 1,
+        range : 0,
+        tags : [],
+        size : [1,1], // [width , height]
+        los_radius : 4,
+        build_radius : 0,
+        abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+        obj : oSkeleton,
+        bunker_size : 0,
+        basic_attack : {
+            name : "Bone Slash",
+            cooldown : 2, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSkeletonBasic 
+        },
+        active_attack : {
+            name : "Throw Bone",
+            cooldown : 5, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSkeletonActive 
+        }
+    }
+    unitkiller = { 
+        name : "default name",
+		entity_type : UNIT,
+        description : "default description",
+        build_time : 2,
+        supply_cost : 1,
+        supply_capacity : 0,
+        material_cost : 30,
+		material_reward : 100,
+        experience_reward : 100,
+		upgrade_reward : 100,
+        jump : 3,
+        hp : 4,
+        strength : 3,
+        defense : 1,
+        speed : 1,
+        range : 0,
+        tags : [],
+        size : [1,1], // [width , height]
+        los_radius : 4,
+        build_radius : 0,
+        abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+        obj : oSkeleton,
+        bunker_size : 0,
+        basic_attack : {
+            name : "Bone Slash",
+            cooldown : 2, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSkeletonBasic 
+        },
+        active_attack : {
+            name : "Throw Bone",
+            cooldown : 5, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSkeletonActive 
+        }
+    }
+    goliath = {
+        name : "default name",
+		entity_type : UNIT,
+        description : "default description",
+        build_time : 2,
+        supply_cost : 1,
+        supply_capacity : 0,
+        material_cost : 30,
+		material_reward : 100,
+        experience_reward : 100,
+		upgrade_reward : 100,
+        jump : 3,
+        hp : 4,
+        strength : 3,
+        defense : 1,
+        speed : 1,
+        range : 0,
+        tags : [],
+        size : [1,1], // [width , height]
+        los_radius : 4,
+        build_radius : 0,
+        abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+        obj : oSkeleton,
+        bunker_size : 0,
+        basic_attack : {
+            name : "Bone Slash",
+            cooldown : 2, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSkeletonBasic 
+        },
+        active_attack : {
+            name : "Throw Bone",
+            cooldown : 5, // delay, in seconds, between attacks
+            move_penalty : 1, // move speed reduced during attack
+            duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+            damage_point : 10, // damage is dealt after this step count
+            damage_value : 1,
+            damage_obj : oSkeletonActive 
+        }
+    }
 
     // STRUCTURES
     turret = {

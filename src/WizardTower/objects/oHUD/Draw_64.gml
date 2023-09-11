@@ -1,5 +1,5 @@
 /// @description 
-
+draw_set_font(fDefault)
 if(enable_minimap)
 {
 	draw_minimap();
