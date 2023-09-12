@@ -44,7 +44,7 @@
 	}
 	function SpawnCustomWave(){
 		with(container){
-			
+			var _x = 
 		}
 	}
 }
