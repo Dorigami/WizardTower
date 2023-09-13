@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSound",
   "resourceVersion": "1.0",
-  "name": "missile_impact",
+  "name": "skeleton_death",
   "audioGroupId": {
     "name": "SoundEffects",
     "path": "audiogroups/SoundEffects",
@@ -10,14 +10,14 @@
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 0.286304,
+  "duration": 0.810975,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",
   },
   "preload": false,
   "sampleRate": 44100,
-  "soundFile": "missile_impact.wav",
+  "soundFile": "skeleton_death.wav",
   "type": 0,
-  "volume": 0.37,
+  "volume": 0.34,
 }

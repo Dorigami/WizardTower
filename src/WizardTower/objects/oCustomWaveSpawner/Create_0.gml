@@ -44,7 +44,11 @@
 	}
 	function SpawnCustomWave(){
 		with(container){
-			var _x = 
+			var _x = global.game_grid_xorigin + global.game_grid_width*GRID_SIZE;
+			var _y = global.game_grid_yorigin + global.game_grid_height*random_range(0.05,0.95);
+			// make the marchers
+			var _fighterstats = global.iEngine.enemy_actor
+			ConstructUnit()
 		}
 	}
 }

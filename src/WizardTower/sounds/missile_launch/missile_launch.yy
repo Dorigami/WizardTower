@@ -19,5 +19,5 @@
   "sampleRate": 44100,
   "soundFile": "missile_launch.wav",
   "type": 0,
-  "volume": 0.08,
+  "volume": 0.32,
 }
