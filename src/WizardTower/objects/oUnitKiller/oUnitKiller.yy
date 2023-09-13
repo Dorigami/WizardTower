@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oUnitBuster",
+  "name": "oUnitKiller",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [

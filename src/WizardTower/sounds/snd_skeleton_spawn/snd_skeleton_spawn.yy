@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSound",
   "resourceVersion": "1.0",
-  "name": "_03_Claw_03",
+  "name": "snd_skeleton_spawn",
   "audioGroupId": {
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
@@ -17,7 +17,7 @@
   },
   "preload": false,
   "sampleRate": 44100,
-  "soundFile": "_03_Claw_03.wav",
+  "soundFile": "snd_skeleton_spawn.wav",
   "type": 0,
   "volume": 1.0,
 }

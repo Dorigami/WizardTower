@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oStructureBuster",
+  "name": "oBuildingKiller",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [

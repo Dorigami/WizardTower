@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSound",
   "resourceVersion": "1.0",
-  "name": "skeleton_death",
+  "name": "snd_skeleton_death",
   "audioGroupId": {
     "name": "SoundEffects",
     "path": "audiogroups/SoundEffects",
@@ -17,7 +17,7 @@
   },
   "preload": false,
   "sampleRate": 44100,
-  "soundFile": "skeleton_death.wav",
+  "soundFile": "snd_skeleton_death.wav",
   "type": 0,
   "volume": 0.34,
 }

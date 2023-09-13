@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSound",
   "resourceVersion": "1.0",
-  "name": "_22_Slash_04",
+  "name": "snd_skeleton_attack",
   "audioGroupId": {
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
@@ -17,7 +17,7 @@
   },
   "preload": false,
   "sampleRate": 44100,
-  "soundFile": "_22_Slash_04.wav",
+  "soundFile": "snd_skeleton_attack.wav",
   "type": 0,
   "volume": 1.0,
 }
