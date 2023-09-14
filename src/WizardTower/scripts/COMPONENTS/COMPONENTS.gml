@@ -159,6 +159,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 			
 			// create death effect if applicable
 			if(object_exists(_ent.fighter.death_object)) instance_create_layer(_ent.xTo, _ent.yTo, "Instances", _ent.fighter.death_object);
+			with(_other_fighter.owner){ if(sound_death != snd_empty) SoundCommand(sound_death, x, y) }
 			ds_queue_enqueue(global.iEngine.killing_floor,_ent);
 			return true; // fighter has been dealt a killing blow
 		} else {

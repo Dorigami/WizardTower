@@ -1,5 +1,11 @@
 Mian idea: Tower defense with towers that can move
 
+how money/xp will work
+	- The player has a set amount of money to start the match and will get money for defeating enemies.
+	- There there is only one resource used to purchase and upgrade the player's towers/units
+	- No persistent leveling across sessions
+
+
 Mechanics: 
 
 Prototying:
