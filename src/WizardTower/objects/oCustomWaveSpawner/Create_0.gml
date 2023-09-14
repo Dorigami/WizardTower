@@ -45,15 +45,102 @@
 	function SpawnCustomWave(){
 		with(container){
 			var _x = global.game_grid_xorigin + global.game_grid_width*GRID_SIZE;
-			var _y = global.game_grid_yorigin + global.game_grid_height*random_range(0.05,0.95);
-			var _str = "";
+			var _y = global.game_grid_yorigin + global.game_grid_height*GRID_SIZE*random_range(0.05,0.95);
+			var _cnt = 0, _pow = 0;
+			var type_strings = ["marcher", "swarmer","buildingkiller","unitkiller","goliath"];
 			var _fighterstats = undefined;
 			// make the marchers
-			_str = "marcher";
-			_fighterstats = global.iEngine.enemy_actor.fighter_stats[$ _str];
-			with(ConstructUnit(_x,_y,ENEMY_FACTION,_str))
+			for(var i=0;i<5;i++)
 			{
-			
+				switch(type_strings[i])
+				{
+					case "marcher":
+						_cnt = marcher_count;
+						_pow = marcher_power;
+						repeat(_cnt){
+						with(ConstructUnit(_x,_y,ENEMY_FACTION,type_strings[i])){
+							supply_cost = 2;
+						    material_cost = 20;
+							material_reward = 100;
+						    experience_reward = 100;
+							upgrade_reward = 100;
+						    hp = 8;
+						    strength = _pow;
+						    defense = 1;
+						    speed = 2;
+						    range = 5;
+						}}
+					break;
+					case "swarmer":
+						_cnt = swarmer_count;
+						_pow = swarmer_power;
+						repeat(_cnt){
+						with(ConstructUnit(_x,_y,ENEMY_FACTION,type_strings[i])){
+							supply_cost = 2;
+						    material_cost = 20;
+							material_reward = 100;
+						    experience_reward = 100;
+							upgrade_reward = 100;
+						    hp = 8;
+						    strength = _pow;
+						    defense = 1;
+						    speed = 2;
+						    range = 5;
+						}}
+					break;
+					case "buildingkiller":
+						_cnt = bldkiller_count;
+						_pow = bldkiller_power;
+						repeat(_cnt){
+						with(ConstructUnit(_x,_y,ENEMY_FACTION,type_strings[i])){
+							supply_cost = 2;
+						    material_cost = 20;
+							material_reward = 100;
+						    experience_reward = 100;
+							upgrade_reward = 100;
+						    hp = 8;
+						    strength = _pow;
+						    defense = 1;
+						    speed = 2;
+						    range = 5;
+						}}
+					break;
+					case "unitkiller":
+						_cnt = unitkiller_count;
+						_pow = unitkiller_power;
+						repeat(_cnt){
+						with(ConstructUnit(_x,_y,ENEMY_FACTION,type_strings[i])){
+							supply_cost = 2;
+						    material_cost = 20;
+							material_reward = 100;
+						    experience_reward = 100;
+							upgrade_reward = 100;
+						    hp = 8;
+						    strength = _pow;
+						    defense = 1;
+						    speed = 2;
+						    range = 5;
+						}}
+					break;
+					case "goliath":
+						_cnt = goliath_count;
+						_pow = goliath_power;
+						repeat(_cnt){
+						with(ConstructUnit(_x,_y,ENEMY_FACTION,type_strings[i])){
+							supply_cost = 2;
+						    material_cost = 20;
+							material_reward = 100;
+						    experience_reward = 100;
+							upgrade_reward = 100;
+						    hp = 8;
+						    strength = _pow;
+						    defense = 1;
+						    speed = 2;
+						    range = 5;
+						}}
+					break;
+				}
+
 			}
 		}
 	}

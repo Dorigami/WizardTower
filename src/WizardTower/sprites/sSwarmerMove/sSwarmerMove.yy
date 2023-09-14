@@ -14,6 +14,9 @@
   "For3D": false,
   "frames": [
     {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"63a01243-bed3-4475-b2d0-502788c6d0b3",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"f3d3d5fc-0a38-4157-80b9-8a147a5e9385",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"da2d371c-c17e-484b-b739-5949d308c855",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"0573c2fb-a785-4509-a61b-4e0af3f80b39",},
   ],
   "gridX": 0,
   "gridY": 0,
@@ -44,7 +47,7 @@
     "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 1.0,
+    "length": 4.0,
     "lockOrigin": false,
     "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "playback": 1,
@@ -56,6 +59,9 @@
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"63a01243-bed3-4475-b2d0-502788c6d0b3","path":"sprites/sSwarmerMove/sSwarmerMove.yy",},},},"Disabled":false,"id":"1c71f697-1f68-4b5b-a0af-fa588f89cf98","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"f3d3d5fc-0a38-4157-80b9-8a147a5e9385","path":"sprites/sSwarmerMove/sSwarmerMove.yy",},},},"Disabled":false,"id":"c89ad811-f537-4908-a371-bf9359659f5e","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"da2d371c-c17e-484b-b739-5949d308c855","path":"sprites/sSwarmerMove/sSwarmerMove.yy",},},},"Disabled":false,"id":"92aaa67d-8759-4d29-aa8b-0510de1df9a7","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"0573c2fb-a785-4509-a61b-4e0af3f80b39","path":"sprites/sSwarmerMove/sSwarmerMove.yy",},},},"Disabled":false,"id":"17c88a58-e421-4ee6-96b9-85e9662612e4","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

@@ -14,6 +14,9 @@
   "For3D": false,
   "frames": [
     {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"63a01243-bed3-4475-b2d0-502788c6d0b3",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"5a2b8c63-0154-4c38-91f2-ef870d35b53a",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"5f30bd46-0ecf-45fd-a5bf-9d9c47eeb89a",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"3cf6e9f1-90fd-4779-8b90-209f84c988fb",},
   ],
   "gridX": 0,
   "gridY": 0,
@@ -44,7 +47,7 @@
     "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 1.0,
+    "length": 4.0,
     "lockOrigin": false,
     "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "playback": 1,
@@ -56,6 +59,9 @@
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"63a01243-bed3-4475-b2d0-502788c6d0b3","path":"sprites/sUnitkillerDeath/sUnitkillerDeath.yy",},},},"Disabled":false,"id":"88d09162-7183-4e6c-8cd3-68656a7a6ad1","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"5a2b8c63-0154-4c38-91f2-ef870d35b53a","path":"sprites/sUnitkillerDeath/sUnitkillerDeath.yy",},},},"Disabled":false,"id":"e466e6c5-f454-4db6-93ca-95a1d846aa22","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"5f30bd46-0ecf-45fd-a5bf-9d9c47eeb89a","path":"sprites/sUnitkillerDeath/sUnitkillerDeath.yy",},},},"Disabled":false,"id":"44b3b461-89f4-41c9-89e4-618f7af72ab6","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"3cf6e9f1-90fd-4779-8b90-209f84c988fb","path":"sprites/sUnitkillerDeath/sUnitkillerDeath.yy",},},},"Disabled":false,"id":"d6577d56-ec32-4fc7-9643-bda5a7c973cf","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

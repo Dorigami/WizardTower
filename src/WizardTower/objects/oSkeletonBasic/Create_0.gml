@@ -1,5 +1,8 @@
 /// @description 
 
+sound_start = snd_empty;
+sound_damage_point = snd_skeleton_attack_basic;
+sound_end = snd_empty;
 
 
 // Inherit the parent event

@@ -14,6 +14,9 @@
   "For3D": false,
   "frames": [
     {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"63a01243-bed3-4475-b2d0-502788c6d0b3",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"ab0de065-5c09-439e-af04-7792fb4adeb6",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"906559a4-c85c-43de-ac96-2a9c8bff6b4a",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"5fd6cbd3-5463-4e4e-b4ea-83dcff415c92",},
   ],
   "gridX": 0,
   "gridY": 0,
@@ -44,7 +47,7 @@
     "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 1.0,
+    "length": 4.0,
     "lockOrigin": false,
     "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "playback": 1,
@@ -56,6 +59,9 @@
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"63a01243-bed3-4475-b2d0-502788c6d0b3","path":"sprites/sSwarmerDeath/sSwarmerDeath.yy",},},},"Disabled":false,"id":"82c69512-cd0d-47b6-b07f-95eeaf05c3e1","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ab0de065-5c09-439e-af04-7792fb4adeb6","path":"sprites/sSwarmerDeath/sSwarmerDeath.yy",},},},"Disabled":false,"id":"f9dd913c-480b-41ea-b0ad-b801d4bf123d","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"906559a4-c85c-43de-ac96-2a9c8bff6b4a","path":"sprites/sSwarmerDeath/sSwarmerDeath.yy",},},},"Disabled":false,"id":"9b38283f-21b0-4aba-8810-06c14e3293a6","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"5fd6cbd3-5463-4e4e-b4ea-83dcff415c92","path":"sprites/sSwarmerDeath/sSwarmerDeath.yy",},},},"Disabled":false,"id":"c9fc640e-85fb-4df0-b01e-8ea4bb2bf058","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

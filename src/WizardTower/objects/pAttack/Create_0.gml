@@ -20,3 +20,4 @@ xTo = 0;
 yTo = 0;
 
 
+if(sound_start != snd_empty) SoundCommand(sound_start,x,y);

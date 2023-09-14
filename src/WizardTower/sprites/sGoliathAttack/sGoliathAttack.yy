@@ -14,6 +14,9 @@
   "For3D": false,
   "frames": [
     {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"63a01243-bed3-4475-b2d0-502788c6d0b3",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"a934ed7e-cc60-4dee-b58c-42cf60597b59",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"3854c9b4-1ed5-483f-81e8-920dde279777",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"0581d31d-cb9c-4e35-8172-1d0fdd387316",},
   ],
   "gridX": 0,
   "gridY": 0,
@@ -44,7 +47,7 @@
     "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 1.0,
+    "length": 4.0,
     "lockOrigin": false,
     "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "playback": 1,
@@ -56,6 +59,9 @@
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"63a01243-bed3-4475-b2d0-502788c6d0b3","path":"sprites/sGoliathAttack/sGoliathAttack.yy",},},},"Disabled":false,"id":"1e729555-c6c3-4a72-9ed0-6b3ebe844c64","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a934ed7e-cc60-4dee-b58c-42cf60597b59","path":"sprites/sGoliathAttack/sGoliathAttack.yy",},},},"Disabled":false,"id":"164d6fd7-bdb2-45c1-a7fa-58844f1ba082","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"3854c9b4-1ed5-483f-81e8-920dde279777","path":"sprites/sGoliathAttack/sGoliathAttack.yy",},},},"Disabled":false,"id":"2578a2cc-8f36-4240-8436-e2d72520d9dc","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"0581d31d-cb9c-4e35-8172-1d0fdd387316","path":"sprites/sGoliathAttack/sGoliathAttack.yy",},},},"Disabled":false,"id":"fd201109-83b0-4911-80b8-a1120bc79d75","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

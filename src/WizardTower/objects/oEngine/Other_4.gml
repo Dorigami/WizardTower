@@ -26,7 +26,7 @@ if(room != rStartMenu) && (room != rInit) && (room != rShaderTest)
 	}
 	
 	// start music
-	SoundCommand(GameMusic, The_Verdant_Grove_LOOP);
+	SoundCommand(The_Verdant_Grove_LOOP,0,0);
 }
 
 if(instance_exists(global.iHUD)) global.iHUD.Init();
