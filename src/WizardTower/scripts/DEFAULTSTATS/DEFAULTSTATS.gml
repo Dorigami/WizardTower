@@ -251,7 +251,7 @@ FighterStats = function() constructor{
         los_radius : 4,
         build_radius : 0,
         abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
-        obj : oSkeleton,
+        obj : oMarcher,
         bunker_size : 0,
         basic_attack : {
             name : "Bone Slash",
@@ -294,7 +294,7 @@ FighterStats = function() constructor{
         los_radius : 4,
         build_radius : 0,
         abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
-        obj : oSkeleton,
+        obj : oSwarmer,
         bunker_size : 0,
         basic_attack : {
             name : "Bone Slash",
@@ -337,7 +337,7 @@ FighterStats = function() constructor{
         los_radius : 4,
         build_radius : 0,
         abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
-        obj : oSkeleton,
+        obj : oBuildingKiller,
         bunker_size : 0,
         basic_attack : {
             name : "Bone Slash",
@@ -380,7 +380,7 @@ FighterStats = function() constructor{
         los_radius : 4,
         build_radius : 0,
         abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
-        obj : oSkeleton,
+        obj : oUnitKiller,
         bunker_size : 0,
         basic_attack : {
             name : "Bone Slash",
@@ -423,7 +423,7 @@ FighterStats = function() constructor{
         los_radius : 4,
         build_radius : 0,
         abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
-        obj : oSkeleton,
+        obj : oGoliath,
         bunker_size : 0,
         basic_attack : {
             name : "Bone Slash",

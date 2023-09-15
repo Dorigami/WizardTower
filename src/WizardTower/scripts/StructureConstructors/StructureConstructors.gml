@@ -18,6 +18,10 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 		var _move = -1;
 		var _attack = -1;
 		var _death = -1;
+		var _snd_spawn = snd_empty;
+		var _snd_move = snd_empty;
+		var _snd_attack = snd_empty;
+		var _snd_death = snd_empty;
 		
 		// check arguments for validity
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct structure - type string invalid"); exit;}
@@ -116,6 +120,12 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			spr_move : _move,
 			spr_attack : _attack,
 			spr_death : _death,
+			
+			//sound
+			sound_spawn : _snd_spawn,
+			sound_move : _snd_move,
+			sound_attack : _snd_attack,
+			sound_death : _snd_death,
 			
 			// misc variables
 			material_reward : _stats.material_reward,

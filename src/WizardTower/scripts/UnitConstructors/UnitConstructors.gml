@@ -121,6 +121,10 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 				_move = sSkeletonMove; 
 				_attack = sSkeletonAttack;
 				_death = sSkeletonDeath;
+				_snd_spawn = snd_skeleton_spawn;
+				_snd_move = snd_empty;
+				_snd_attack = snd_skeleton_attack_basic;
+				_snd_death = snd_skeleton_death;
 				_steering_preference = SB_Horizontal;
 				break;
 		}
@@ -171,10 +175,10 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			spr_death : _death,
 			
 			//sound
-			snd_spawn : _snd_spawn,
-			snd_move : _snd_move,
-			snd_attack : _snd_attack,
-			snd_death : _snd_death,
+			sound_spawn : _snd_spawn,
+			sound_move : _snd_move,
+			sound_attack : _snd_attack,
+			sound_death : _snd_death,
 			
 			// misc variables 
 			material_reward : _stats.material_reward,

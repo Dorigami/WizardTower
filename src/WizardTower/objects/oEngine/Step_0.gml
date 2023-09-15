@@ -6,28 +6,6 @@ hud_action = global.iHUD.hud_get_action();
 mouse_action = handle_mouse();
 action = handle_keys(global.game_state);
 
-if(keyboard_check_pressed(ord("K")))
-{
-	show_debug_message("create test wave");
-	var _actor = actor_list[| 2];
-	var _path = _actor.ai.wave_paths[| irandom(max(0,ds_list_size(_actor.ai.wave_paths)-1))];
-	var _mob_size = 3;
-	if(!path_exists(_path)){
-		show_message("error spawning units: path doesn't exist");
-	} else {
-		var _node = global.game_grid[# 
-			(path_get_point_x(_path, 0)-global.game_grid_xorigin) div GRID_SIZE, 
-			(path_get_point_y(_path, 0)-global.game_grid_yorigin) div GRID_SIZE
-		];
-		// give units to the mob
-		repeat(_mob_size){
-			var _unit = ConstructUnit(_node.xx, _node.yy, 2, "skeleton");
-			_unit.member_of = id;
-			ds_list_add(members, _unit);
-		}
-	}
-}
-
 /*
 
 if(keyboard_check_pressed(vk_anykey))
