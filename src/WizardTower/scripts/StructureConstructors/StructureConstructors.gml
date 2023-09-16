@@ -43,24 +43,6 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 				_attack = -1;
 				_death = -1;
 				break;
-			case "lamp":
-				_idle = sLamp;
-				_move = -1; 
-				_attack = -1;
-				_death = -1;
-				break;
-			case "workshop":
-				_idle = sWorkshop;
-				_move = -1; 
-				_attack = -1;
-				_death = -1;
-				break;
-			case "armory":
-				_idle = sArmory;
-				_move = -1; 
-				_attack = -1;
-				_death = -1;
-				break;
 			case "turret":
 				_idle = sTurret;
 				_move = sTurret; 
