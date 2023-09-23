@@ -208,9 +208,9 @@ function room_start_init_abilities(){
 	{
 		switch(i)
 		{
-			case 0: _type = "buy_turret"; break; 
-			case 1: _type = "buy_barricade"; break; 
-			case 2: _type = "buy_sentry"; break; 
+			case 0: _type = "buy_barricade"; break; 
+			case 1: _type = "buy_mid_s_turret"; break; 
+			case 2: _type = "buy_lng_s_turret"; break; 
 			case 3: _type = "buy_shr_s_unit"; break; 
 			case 4: _type = "buy_shr_a_unit"; break; 
 			case 5: _type = "buy_shr_a_turret"; break; 
