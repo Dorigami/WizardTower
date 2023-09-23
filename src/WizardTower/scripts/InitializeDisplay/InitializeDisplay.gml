@@ -12,16 +12,16 @@ function InitializeDisplay(_asp, _zoom=2){
 	
 
 	// perfect pixel scaling
-		if(display_get_width() mod idealWidth != 0)
-		{
-			var d = round(display_get_width() / idealWidth);
-			idealWidth = display_get_width() / d;
-		}
-		if(display_get_height() mod idealHeight != 0)
-		{
-			var d = round(display_get_height() / idealHeight);
-			idealHeight = display_get_height() / d;
-		}
+	if(display_get_width() mod idealWidth != 0)
+	{
+		var d = round(display_get_width() / idealWidth);
+		idealWidth = display_get_width() / d;
+	}
+	if(display_get_height() mod idealHeight != 0)
+	{
+		var d = round(display_get_height() / idealHeight);
+		idealHeight = display_get_height() / d;
+	}
 
 	//check for odd numbers
 	if(idealWidth & 1) idealWidth++;

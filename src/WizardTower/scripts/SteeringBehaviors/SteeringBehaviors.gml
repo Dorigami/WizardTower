@@ -34,7 +34,7 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
 		uAng = speed_dir_to_vect2(1, point_direction(position[1], position[2], member_of.x, member_of.y));
 		_goal_desire = min(1.1, (dist/member_of.wander_radius)^2 - 0.2);
 		for(k=0;k<CS_RESOLUTION;k++)
-		{ 
+		{
 			_goal_map[k] += vect_dot(global.iEngine.cs_unit_vectors[k], uAng); 
 		}
 	}

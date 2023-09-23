@@ -12,6 +12,7 @@
     {"name":"Map Stuff","order":36,"path":"folders/Sprites/Map Stuff.yy",},
     {"name":"Structure Sprites","order":35,"path":"folders/Sprites/Structure Sprites.yy",},
     {"name":"Unit Sprites","order":33,"path":"folders/Sprites/Unit Sprites.yy",},
+    {"name":"Icons","order":42,"path":"folders/Sprites/Icons.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"s_engineer_move_dr","order":4,"path":"sprites/s_engineer_move_dr/s_engineer_move_dr.yy",},

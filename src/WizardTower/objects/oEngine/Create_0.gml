@@ -75,7 +75,7 @@ killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
 game_grid_heap.Initialize(global.game_grid);
 initial_player_abilities = array_create(9, undefined);
-current_player_abilities = array_create(9,undefined);
+current_player_abilities = array_create(9, undefined);
 zoom_delay_time = 10;
 
 // fill the unit vector array with unit vectors for each context steering directions
@@ -211,12 +211,12 @@ function room_start_init_abilities(){
 			case 0: _type = "buy_turret"; break; 
 			case 1: _type = "buy_barricade"; break; 
 			case 2: _type = "buy_sentry"; break; 
-			case 3: _type = ""; break; 
-			case 4: _type = ""; break; 
-			case 5: _type = ""; break; 
-			case 6: _type = ""; break; 
-			case 7: _type = ""; break; 
-			case 8: _type = ""; break; 
+			case 3: _type = "buy_shr_s_unit"; break; 
+			case 4: _type = "buy_shr_a_unit"; break; 
+			case 5: _type = "buy_shr_a_turret"; break; 
+			case 6: _type = "buy_lng_a_turret"; break; 
+			case 7: _type = "toggle_info"; break; 
+			case 8: _type = "sell_towers"; break; 
 		}
 		// create abilites and add them to initial and stored ability arrays
 		initial_player_abilities[i] = new Ability(_type);

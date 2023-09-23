@@ -195,7 +195,7 @@ Ability = function(_type="") constructor{
 	{
 		case "buy_turret":
 			name = _type;
-			icon = sImp;
+			icon = sBlankIcon;
 			script = BuilderCreateTurret;
 			args = [PLAYER_FACTION];
 			title = "Basic Turret";
@@ -204,7 +204,7 @@ Ability = function(_type="") constructor{
 			break;
 		case "buy_barricade":
 			name = _type;
-			icon = sImp;
+			icon = sBlankIcon;
 			script = BuilderCreateBarricade;
 			args = [PLAYER_FACTION];
 			title = "Basic Barricade";
@@ -213,7 +213,7 @@ Ability = function(_type="") constructor{
 			break;
 		case "buy_sentry":
 			name = _type;
-			icon = sImp;
+			icon = sBlankIcon;
 			script = BuilderCreateSentry;
 			args = [PLAYER_FACTION];
 			title = "Basic Sentry";
