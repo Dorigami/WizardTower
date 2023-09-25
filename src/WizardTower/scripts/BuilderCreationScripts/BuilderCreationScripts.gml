@@ -10,7 +10,7 @@ function BuilderCreate(_type_string, _faction){
 			blueprint_instance = noone;
 		}
 
-		var _type_arr = ["turret", "barricade", "sentry"];
+		var _type_arr = ["barricade","gunturret","sniperturret","barracks","dronesilo","flameturret","mortarturret"];
 		var _gridlock = true;
 		
 		// change state
@@ -39,14 +39,35 @@ function BuilderCreate(_type_string, _faction){
 	}
 } 
 
-function BuilderCreateBase(_faction){ BuilderCreate("base", _faction) }
-function BuilderCreateBarracks(_faction){ BuilderCreate("barracks", _faction) }
-function BuilderCreateTurret(_faction){ BuilderCreate("turret", _faction) }
-function BuilderCreateBarricade(_faction){ BuilderCreate("barricade", _faction) }
-function BuilderCreateSentry(_faction){ BuilderCreate("sentry", _faction) }
+//function BuilderCreateBase(_faction){ BuilderCreate("base", _faction) }
+//function BuilderCreateBarracks(_faction){ BuilderCreate("barracks", _faction) }
+//function BuilderCreateTurret(_faction){ BuilderCreate("turret", _faction) }
+//function BuilderCreateBarricade(_faction){ BuilderCreate("barricade", _faction) }
+//function BuilderCreateSentry(_faction){ BuilderCreate("sentry", _faction) }
+
+
 
 function BuildStateUnit(){ BuilderCreate("summoner", true) }
 function BuildStateStructure(){ BuilderCreate("conduit", false) }
+
+function BuilderCreateBarricade(_faction) { BuilderCreate("barricade", _faction) }
+function BuilderCreateGunTurret(_faction) { BuilderCreate("gunturret", _faction) }
+function BuilderCreateSniper(_faction) { BuilderCreate("sniperturret", _faction) }
+function BuilderCreateBarracks(_faction) { BuilderCreate("barracks", _faction) }
+function BuilderCreateBombDrone(_faction) { BuilderCreate("dronesilo", _faction) }
+function BuilderCreateFlameTurret(_faction) { BuilderCreate("flameturret", _faction) }
+function BuilderCreateMortarTurret(_faction) { BuilderCreate("mortarturret", _faction) }
+function ToggleEntityInfo(){
+    with(global.iHUD){ show_data_overlay = !show_data_overlay }
+	show_debug_message("data overlay is now: " + string(show_data_overlay));
+}
+function ToggleSellMode(){
+		// change state
+		global.game_state_previous = global.game_state;
+		global.game_state = GameStates.SELLING;
+		if(global.game_state_previous == GameStates.BUILDING) global.game_state_previous = GameStates.PLAY;
+}
+
 
 // light beam (basic)
 // spread firelight (active)

@@ -36,15 +36,15 @@ player_data_x = minimap_width+1
 player_data_y = player_data_height*3;
 
 // action stuff
-abilities_width = display_get_gui_height() div 2;
-abilities_height = display_get_gui_height() div 2;
+abilities_width = display_get_gui_height() / 2.75;
+abilities_height = display_get_gui_height() / 2.75;
 abilities_x = display_get_gui_width() - abilities_width-1; 
 abilities_y = display_get_gui_height() - abilities_height-1;
 abilities_buttons = array_create(9,0);
 for(var i=0;i<9;i++)
 {
 	var _struct = {
-		text : "Action\n"+string(i+1),
+		text : "[" + string(i+1) + "]",
 		gui : true,
 		action_index : i,
 		leftScript : set_my_action_ability,
@@ -65,6 +65,7 @@ minimap_view_bbox = array_create(4,0);
 player_data_bbox = array_create(4,0);
 
 // misc stuff
+show_data_overlay = false;
 show_selected_entities = false;
 show_wave_data = false;
 
@@ -84,7 +85,7 @@ function Init(){
 			abilities_bbox[1] = abilities_y;
 			abilities_bbox[2] = abilities_x + abilities_width;
 			abilities_bbox[3] = abilities_y + abilities_height;
-			var _sep = 36;
+			var _sep = 42;
 			var _cx = ((abilities_bbox[2]+abilities_bbox[0]) div 2) - 1.5*_sep;
 			var _cy = ((abilities_bbox[3]+abilities_bbox[1]) div 2) - 1.5*_sep;
 			for(var i=0;i<9;i++){

@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oConduit",
+  "name": "oFlameTurret",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [

@@ -57,49 +57,6 @@ FighterStats = function() constructor{
 		    damage_obj : oSummonerActive 
 		}
     }
-    spearbearer = { // melee fighter
-        name : "default name",
-		entity_type : UNIT,
-        description : "default description",
-        build_time : 2, // seconds
-        supply_cost : 2,
-        supply_capacity : 0,
-        material_cost : 20,
-		material_reward : 100,
-        experience_reward : 100,
-		upgrade_reward : 100,
-        jump : 3,
-        hp : 8,
-        strength : 3,
-        defense : 1,
-        speed : 2,
-        range : 2,
-        tags : [],
-        size : [1,1], // [width , height]
-        los_radius : 4,
-        build_radius : 0,
-        abilities : [ManualBasicAttack,ManualActiveAttack,-1,-1,-1,-1,-1,-1,-1],
-        obj : oSpearBearer,
-        bunker_size : 0,
-        basic_attack : {
-		    name : "Thrust Spear",
-		    cooldown : 5, // delay, in seconds, between attacks
-		    move_penalty : 0.8, // move speed reduced during attack
-		    duration : 0.5, // movement is reduced, other attacks cannot be done during this time
-		    damage_point : 10, // damage is dealt after this step count
-		    damage_value : 1,
-		    damage_obj : oSpearBasic 
-		},
-        active_attack : {
-		    name : "Throw Spear",
-		    cooldown : 5, // delay, in seconds, between attacks
-		    move_penalty : 0.8, // move speed reduced during attack
-		    duration : 1.5, // movement is reduced, other attacks cannot be done during this time
-		    damage_point : 10, // damage is dealt after this step count
-		    damage_value : 1,
-		    damage_obj : oSpearActive 
-		}
-    }
     sentry = { // mid-range fighter
         name : "default name",
 		entity_type : UNIT,
@@ -143,127 +100,311 @@ FighterStats = function() constructor{
 		    damage_obj : oSentryActive 
 		}
     }
-    torchbearer = { // long-range fighter
-        name : "default name",
-		entity_type : UNIT,
-        description : "default description",
-        build_time : 2,
-        supply_cost : 2,
-        supply_capacity : 0,
-        material_cost : 30,
-		material_reward : 100,
-        experience_reward : 100,
-		upgrade_reward : 100,
-        jump : 3,
-        hp : 10,
-        strength : 3,
-        defense : 1,
-        speed : 1,
-        range : 2,
-        tags : [],
-        size : [1,1], // [width , height]
-        los_radius : 4,
-        build_radius : 0,
-        abilities : [ManualBasicAttack,ManualActiveAttack,-1,-1,-1,-1,-1,-1,-1],
-        obj : oTorchBearer,
-        bunker_size : 0,
-        basic_attack : {
-		    name : "Immolate",
-		    cooldown : 5, // delay, in seconds, between attacks
-		    move_penalty : 0.8, // move speed reduced during attack
-		    duration : 0.2, // movement is reduced, other attacks cannot be done during this time
-		    damage_point : 10, // damage is dealt after this step count
-		    damage_value : 1,
-		    damage_obj : oTorchBasic 
-		},
-        active_attack : {
-		    name : "Firelight Beacon",
-		    cooldown : 5, // delay, in seconds, between attacks
-		    move_penalty : 0.8, // move speed reduced during attack
-		    duration : 1.5, // movement is reduced, other attacks cannot be done during this time
-		    damage_point : 10, // damage is dealt after this step count
-		    damage_value : 1,
-		    damage_obj : oTorchActive 
-		}
-    }
+
 /* ---- PLAYER STRUCTURES ---- */
-mid_s_turret = {name : "gunner turret"}
-lng_s_turret = {name : "sniper turret"}
-lng_a_turret = {name : "mortar turret"}
-shr_a_turret = {name : "flame turret"}
-shr_s_units = {name : "barracks"}
-shr_a_units = {name : "bomb drone silo"}
-def_s_turret = {name : "barricade"}
-    turret = {
-        name : "default name",
-		entity_type : STRUCTURE,
-        description : "default description",
-        build_time : 1,
-        supply_cost : 1,
-        supply_capacity : 0,
-        material_cost : 50,
-		material_reward : 100,
-        experience_reward : 100,
-		upgrade_reward : 100,
-        hp : 5,
-        strength : 3,
-        defense : 1,
-        speed : 0,
-        range : 4,
-        tags : [],
-        los_radius : 1,
-        build_radius : 0,
-        abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
-        obj : oTurret,
-        size : [1,1], // [width , height]
-        rally_offset : [0,3],
-        bunker_size : 0,
-        basic_attack : {
-            name : "Thrust Spear",
-            cooldown : 5, // delay, in seconds, between attacks
-            move_penalty : 0.8, // move speed reduced during attack
-            duration : 0.5, // movement is reduced, other attacks cannot be done during this time
-            damage_point : 10, // damage is dealt after this step count
-            damage_value : 1,
-            damage_obj : oTurretBasic 
-        },
-        active_attack : {
-            name : "Throw Spear",
-            cooldown : 5, // delay, in seconds, between attacks
-            move_penalty : 0.8, // move speed reduced during attack
-            duration : 1.5, // movement is reduced, other attacks cannot be done during this time
-            damage_point : 10, // damage is dealt after this step count
-            damage_value : 1,
-            damage_obj : oTurretActive 
-        }
+barricade = {
+	name : "barricade",
+    description : "default description",
+	entity_type : STRUCTURE,
+    build_time : 1,
+    supply_cost : 1,
+    supply_capacity : 0,
+    material_cost : 50,
+	material_reward : 100,
+    experience_reward : 100,
+	upgrade_reward : 100,
+    hp : 5,
+    strength : 3,
+    defense : 1,
+    speed : 0,
+    range : 4,
+    tags : [],
+    los_radius : 1,
+    build_radius : 0,
+    abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+    obj : oBarricade,
+    size : [1,1], // [width , height]
+    rally_offset : [0,3],
+    bunker_size : 0,
+    basic_attack : {
+        name : "Thrust Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretBasic 
+    },
+    active_attack : {
+        name : "Throw Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretActive 
     }
-    barricade = { // a wall to 
-        name : "default name",
-		entity_type : STRUCTURE,
-        description : "default description",
-        build_time : 1,
-        supply_cost : 0,
-        supply_capacity : 0,
-        material_cost : 10,
-		material_reward : 100,
-        experience_reward : 100,
-		upgrade_reward : 100,
-        hp : 20,
-        strength : 3,
-        defense : 1,
-        speed : 0,
-        range : 0,
-        tags : [],
-        los_radius : 1,
-        build_radius : 0,
-        abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
-        obj : oBarricade,
-        size : [1,1], // [width , height]
-        rally_offset : [0,3],
-        bunker_size : 0,
-        basic_attack : undefined,
-        active_attack : undefined
+}
+gunturret = {
+	name : "gunner turret",
+    description : "default description",
+	entity_type : STRUCTURE,
+    build_time : 1,
+    supply_cost : 1,
+    supply_capacity : 0,
+    material_cost : 50,
+	material_reward : 100,
+    experience_reward : 100,
+	upgrade_reward : 100,
+    hp : 5,
+    strength : 3,
+    defense : 1,
+    speed : 0,
+    range : 4,
+    tags : [],
+    los_radius : 1,
+    build_radius : 0,
+    abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+    obj : oGunTurret,
+    size : [1,1], // [width , height]
+    rally_offset : [0,3],
+    bunker_size : 0,
+    basic_attack : {
+        name : "Thrust Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretBasic 
+    },
+    active_attack : {
+        name : "Throw Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretActive 
     }
+}
+sniperturret = {
+	name : "sniper turret",
+    description : "default description",
+	entity_type : STRUCTURE,
+    build_time : 1,
+    supply_cost : 1,
+    supply_capacity : 0,
+    material_cost : 50,
+	material_reward : 100,
+    experience_reward : 100,
+	upgrade_reward : 100,
+    hp : 5,
+    strength : 3,
+    defense : 1,
+    speed : 0,
+    range : 4,
+    tags : [],
+    los_radius : 1,
+    build_radius : 0,
+    abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+    obj : oSniperTurret,
+    size : [1,1], // [width , height]
+    rally_offset : [0,3],
+    bunker_size : 0,
+    basic_attack : {
+        name : "Thrust Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretBasic 
+    },
+    active_attack : {
+        name : "Throw Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretActive 
+    }
+}
+barracks = {
+	name : "barracks",
+    description : "default description",
+	entity_type : STRUCTURE,
+    build_time : 1,
+    supply_cost : 1,
+    supply_capacity : 0,
+    material_cost : 50,
+	material_reward : 100,
+    experience_reward : 100,
+	upgrade_reward : 100,
+    hp : 5,
+    strength : 3,
+    defense : 1,
+    speed : 0,
+    range : 4,
+    tags : [],
+    los_radius : 1,
+    build_radius : 0,
+    abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+    obj : oBarracks,
+    size : [1,1], // [width , height]
+    rally_offset : [0,3],
+    bunker_size : 0,
+    basic_attack : {
+        name : "Thrust Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretBasic 
+    },
+    active_attack : {
+        name : "Throw Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretActive 
+    }
+}
+dronesilo = {
+	name : "Drone Silo",
+    description : "default description",
+	entity_type : STRUCTURE,
+    build_time : 1,
+    supply_cost : 1,
+    supply_capacity : 0,
+    material_cost : 50,
+	material_reward : 100,
+    experience_reward : 100,
+	upgrade_reward : 100,
+    hp : 5,
+    strength : 3,
+    defense : 1,
+    speed : 0,
+    range : 4,
+    tags : [],
+    los_radius : 1,
+    build_radius : 0,
+    abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+    obj : oDroneSilo,
+    size : [1,1], // [width , height]
+    rally_offset : [0,3],
+    bunker_size : 0,
+    basic_attack : {
+        name : "Thrust Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretBasic 
+    },
+    active_attack : {
+        name : "Throw Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretActive 
+    }	
+}
+flameturret = {
+	name : "flame turret",
+    description : "default description",
+	entity_type : STRUCTURE,
+    build_time : 1,
+    supply_cost : 1,
+    supply_capacity : 0,
+    material_cost : 50,
+	material_reward : 100,
+    experience_reward : 100,
+	upgrade_reward : 100,
+    hp : 5,
+    strength : 3,
+    defense : 1,
+    speed : 0,
+    range : 4,
+    tags : [],
+    los_radius : 1,
+    build_radius : 0,
+    abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+    obj : oFlameTurret,
+    size : [1,1], // [width , height]
+    rally_offset : [0,3],
+    bunker_size : 0,
+    basic_attack : {
+        name : "Thrust Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretBasic 
+    },
+    active_attack : {
+        name : "Throw Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretActive 
+    }
+}	
+mortarturret = {
+	name : "mortar turret",
+    description : "default description",
+	entity_type : STRUCTURE,
+    build_time : 1,
+    supply_cost : 1,
+    supply_capacity : 0,
+    material_cost : 50,
+	material_reward : 100,
+    experience_reward : 100,
+	upgrade_reward : 100,
+    hp : 5,
+    strength : 3,
+    defense : 1,
+    speed : 0,
+    range : 4,
+    tags : [],
+    los_radius : 1,
+    build_radius : 0,
+    abilities : [-1,-1,-1,-1,-1,-1,-1,-1,-1],
+    obj : oMortarTurret,
+    size : [1,1], // [width , height]
+    rally_offset : [0,3],
+    bunker_size : 0,
+    basic_attack : {
+        name : "Thrust Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretBasic 
+    },
+    active_attack : {
+        name : "Throw Spear",
+        cooldown : 5, // delay, in seconds, between attacks
+        move_penalty : 0.8, // move speed reduced during attack
+        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+        damage_point : 10, // damage is dealt after this step count
+        damage_value : 1,
+        damage_obj : oTurretActive 
+    }
+}
+
+
 /* ---- ENEMY UNITS ---- */
     skeleton = { // basic enemy unit
         name : "default name",

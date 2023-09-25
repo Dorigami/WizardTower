@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oBase",
+  "name": "oMortarTurret",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [
@@ -17,7 +17,10 @@
     "name": "Structures",
     "path": "folders/Objects/Entities/Structures.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "pEntity",
+    "path": "objects/pEntity/pEntity.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -34,8 +37,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sBase",
-    "path": "sprites/sBase/sBase.yy",
+    "name": "sConduit",
+    "path": "sprites/sConduit/sConduit.yy",
   },
   "spriteMaskId": null,
   "visible": true,

@@ -8,7 +8,7 @@ draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_color(c_green);
 
-var _arr = ["PAUSE", "PLAY", "BUILDING", "TARGETING", "VICTORY", "DEFEAT", "MAIN_MENU", "UPGRADE_MENU"];
+var _arr = ["PAUSE", "PLAY", "BUILDING", "SELLING","TARGETING", "VICTORY", "DEFEAT", "MAIN_MENU", "UPGRADE_MENU"];
 _str = _arr[global.game_state];
 draw_text(0, 0, "GAME STATE: " + _str);
 

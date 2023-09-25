@@ -26,6 +26,7 @@ enum GameStates {
     PAUSE,
     PLAY,
     BUILDING,
+	SELLING,
     TARGETING,
     VICTORY,
     DEFEAT,

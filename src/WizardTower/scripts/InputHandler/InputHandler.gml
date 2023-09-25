@@ -13,6 +13,8 @@ function handle_mouse(){
         return handle_targeting_mouse();
 	} else if(global.game_state == GameStates.BUILDING){
 		return handle_building_mouse();
+	} else if(global.game_state == GameStates.SELLING){
+		return handle_selling_mouse();
 	} else {
         return handle_default_mouse();
     }
@@ -117,6 +119,28 @@ function handle_building_mouse(){
     
     return {}
 }
+function handle_selling_mouse(){
+	// left mouse
+	if(mouse_check_button_released(mb_left)){
+		if(!keyboard_check(vk_shift)) return {escape : new Command("escape",true,0,0)}
+	} else if(mouse_check_button_pressed(mb_left)){
+		return {confirm_build_action : new Command("confirm_sell_action",true,0,0)}
+		show_debug_message("confirmed sell action")
+	}
+
+	// right mouse
+	if(mouse_check_button_released(mb_right)){
+        return {escape : new Command("escape",true,0,0)}
+    } 
+    else if(mouse_check_button_pressed(mb_right)){}
+
+	// middle mouse / wheel
+	if(mouse_check_button_pressed(mb_middle)){}
+    else if(mouse_wheel_up()){}
+    else if(mouse_wheel_down()){}
+    
+    return {}
+}
 
 function handle_targeting_mouse(){
 	// left mouse
@@ -163,6 +187,8 @@ function handle_keys(game_state){
         return handle_play_keys();
     } else if(game_state == GameStates.BUILDING){
         return handle_building_keys();
+    } else if(game_state == GameStates.SELLING){
+        return handle_selling_keys();
     } else if(game_state == GameStates.TARGETING){
         return handle_targeting_keys();
     } else if(game_state == GameStates.VICTORY){
@@ -257,6 +283,27 @@ function handle_building_keys(){
         {
             return {change_build_type : new Command("change_build_type", i, 0, 0)}
         }
+    }
+
+    // camera pan
+    var _move = [keyboard_check(ord("D")) - keyboard_check(ord("A")), keyboard_check(ord("S")) - keyboard_check(ord("W"))];
+    var _fast_pan = keyboard_check(vk_shift);
+    if(_move[0] != 0) || (_move[1] != 0) 
+    {
+        if(_fast_pan){
+            return {camera_fast_pan : new Command("camera_fast_pan",_move,0,0)};
+        } else {
+            return {camera_pan : new Command("camera_pan",_move,0,0)};
+        }
+    }
+
+    return {}
+}
+function handle_selling_keys(){
+    // cancel build location
+    if(keyboard_check_pressed(vk_escape))
+    {
+        return {escape : new Command("escape",true,0,0)}
     }
 
     // camera pan

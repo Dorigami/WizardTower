@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oTurret",
+  "name": "oSniperTurret",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [
@@ -37,8 +37,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sTurret",
-    "path": "sprites/sTurret/sTurret.yy",
+    "name": "sConduit",
+    "path": "sprites/sConduit/sConduit.yy",
   },
   "spriteMaskId": null,
   "visible": true,

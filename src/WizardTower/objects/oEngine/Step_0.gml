@@ -46,6 +46,8 @@ start_next_wave = action[$ "start_next_wave"];
 change_build_type = action[$ "change_build_type"];
 confirm_build_action = action[$ "confirm_build_action"];
 confirm_build_action_mouse = mouse_action[$ "confirm_build_action"];
+confirm_sell_action = action[$ "confirm_sell_action"];
+confirm_sell_action_mouse = mouse_action[$ "confirm_sell_action"];
 confirm_target_action = action[$ "confirm_target_action"];
 confirm_target_action_mouse = mouse_action[$ "confirm_target_action"];
 
@@ -230,6 +232,14 @@ if(!is_undefined(confirm_build_action)) || (!is_undefined(confirm_build_action_m
 		// cancel the build
 		escape = true;
 	}
+}
+if(!is_undefined(confirm_sell_action)) || (!is_undefined(confirm_sell_action_mouse))
+{
+	show_debug_message("Confirm Sell Action");
+
+	// cancel selling
+	escape = true;
+	
 }
 
 if(!is_undefined(confirm_target_action)) || (!is_undefined(confirm_target_action_mouse))

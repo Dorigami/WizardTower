@@ -24,13 +24,13 @@ Blueprint = function(_build_time) constructor{
 				// replace blueprint with structure
 				var _actor = global.iEngine.actor_list[| owner.faction];
 				var _stats = _actor.fighter_stats[$ owner.type_string];
-				show_debug_message("supply cost for {0}", _stats);
+				show_debug_message("supply cost for {0}, type is: {1}, owner is: {2}", _stats, owner.type_string, owner);
 				_actor.supply_limit += _stats.supply_capacity;
 				_actor.supply_in_queue -= _stats.supply_cost;
 				_actor.supply_current += _stats.supply_cost;
 				
 				// construct either a unit, or a structure
-				if(_stats.obj == oSentry) || (_stats.obj == oTorchBearer) || (_stats.obj == oSummoner) || (_stats.obj == oSpearBearer) || (_stats.obj == oSentry)
+				if(_stats.entity_type == UNIT)
 				{
 					var _ent = ConstructUnit(owner.xx, owner.yy, owner.faction, owner.type_string);
 					_ent.position[1] = owner.xTo;
@@ -40,7 +40,7 @@ Blueprint = function(_build_time) constructor{
 				} else {
 					ConstructStructure(owner.x, owner.y, owner.faction, owner.type_string);
 				}
-				with(owner) instance_destroy();
+				ds_queue_enqueue(global.iEngine.killing_floor,owner);
 			}
 		//}
 	}

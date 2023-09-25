@@ -191,43 +191,88 @@ Command = function(_type="", _value=undefined, _x=0, _y=0) constructor{
 }
 
 Ability = function(_type="") constructor{
+	
+	var _structure_list = ds_list_create();
+	ds_list_add(_structure_list,"barricade","gunturret","sniperturret","barracks","dronesilo","flameturret","mortarturret");
+	name = _type;
+	show_debug_message("type is {0}",_type);
+	if(ds_list_find_index(_structure_list,_type) > -1)
+	{
+		var _stats = global.iEngine.player_actor.fighter_stats[$ _type];
+		show_debug_message("stats is {0}", _stats);
+		values = {
+			cost : _stats.material_cost
+		}
+	}
 	switch(_type)
 	{
-		case "buy_turret":
-			name = _type;
-			icon = sBlankIcon;
-			script = BuilderCreateTurret;
-			args = [PLAYER_FACTION];
-			title = "Basic Turret";
-			description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
-			values = {};
-			break;
-		case "buy_barricade":
-			name = _type;
-			icon = sBlankIcon;
-			script = BuilderCreateBarricade;
-			args = [PLAYER_FACTION];
-			title = "Basic Barricade";
-			description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
-			values = {};
-			break;
-		case "buy_sentry":
-			name = _type;
-			icon = sBlankIcon;
-			script = BuilderCreateSentry;
-			args = [PLAYER_FACTION];
-			title = "Basic Sentry";
-			description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
-			values = {};
-			break;
-		default:
-			name = _type;
-			icon = sFollower2;
-			script = -1;
-			args = -1;
-			title = "Test Title";
-			description = "Test Description\nline 2\n line 3\nline 4\n line 5";
-			values = {};
-			break;
+		case "barricade":
+		    icon = sBarricadeIcon;
+		    script = BuilderCreateBarricade;
+		    args = [PLAYER_FACTION];
+		    title = "Basic Barricade";
+		    description = "Build this to keep enemies away from important strucutres\nline 2\n line 3\nline 4\n line 5";
+		break;
+		case "gunturret":
+		    icon = sGunTurretIcon;
+		    script = BuilderCreateGunTurret;
+		    args = [PLAYER_FACTION];
+		    title = "Basic Gun Turret";
+		    description = "Verstile, basic turret with moderate range.\nline 2\n line 3\nline 4\n line 5";
+		break;
+		case "sniperturret":
+		    icon = sSniperIcon;
+		    script = BuilderCreateSniper;
+		    args = [PLAYER_FACTION];
+		    title = "Basic Sniper Turret";
+		    description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
+		break;
+		case "barracks":
+		    icon = sBarracksIcon;
+		    script = BuilderCreateBarracks;
+		    args = [PLAYER_FACTION];
+		    title = "Basic Infantry Barracks";
+		    description = "Produces units that move as a squad\nline 2\n line 3\nline 4\n line 5";   
+		break;
+		case "dronesilo":
+		    icon = sBombDroneIcon;
+		    script = BuilderCreateBombDrone;
+		    args = [PLAYER_FACTION];
+		    title = "Basic Drone Silo";
+		    description = "Produces drones that fly into nearby enemies\nline 2\n line 3\nline 4\n line 5";     
+		break;
+		case "flameturret":
+		    icon = sFlameTurretIcon;
+		    script = BuilderCreateFlameTurret;
+		    args = [PLAYER_FACTION];
+		    title = "Basic Flame Turret";
+		    description = "Deals constant damage to nearby enemies\nline 2\n line 3\nline 4\n line 5";   
+		break;
+		case "mortarturret":
+		    icon = sMortarIcon;
+		    script = BuilderCreateMortarTurret;
+		    args = [PLAYER_FACTION];
+		    title = "Basic Mortar Turret";
+		    description = "Long range turret with area damage, but fires slowly\nline 2\n line 3\nline 4\n line 5";;     
+		break;
+		
+		// non-structure Abilities
+		case "toggle_info":
+		    icon = sInfoIcon;
+		    script = ToggleEntityInfo;
+		    args = [PLAYER_FACTION];
+		    title = "Toggle Info";
+		    description = "Show information for anything on screen.  Including health, attack range, enemy levels, etc... \nline 2\n line 3\nline 4\n line 5";
+		    values = {};  
+		break;
+		case "sell_towers":
+		    icon = sSellIcon;
+		    script = ToggleSellMode;
+		    args = [PLAYER_FACTION];
+		    title = "Sell Structures";
+		    description = "Enter \'Sell Mode\'.  Click on towers to sell them.  \nline 2\n line 3\nline 4\n line 5";
+		    values = {}; 
+		break;
 	}
+	ds_list_destroy(_structure_list);
 }
