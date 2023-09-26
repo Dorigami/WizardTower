@@ -37,8 +37,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sSkeletonIdle",
-    "path": "sprites/sSkeletonIdle/sSkeletonIdle.yy",
+    "name": "s_skeleton_idle",
+    "path": "sprites/s_skeleton_idle/s_skeleton_idle.yy",
   },
   "spriteMaskId": null,
   "visible": true,

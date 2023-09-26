@@ -1,7 +1,7 @@
 /// @description 
 
 sound_start = snd_empty;
-sound_damage_point = snd_skeleton_attack_basic;
+sound_damage_point = snd_skeleton_attack;
 sound_end = snd_empty;
 
 

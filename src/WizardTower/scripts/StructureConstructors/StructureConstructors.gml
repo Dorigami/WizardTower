@@ -14,14 +14,32 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 		var _node = _in_cell ? global.game_grid[# xx, yy] : undefined;
 		*/
 		var _node = global.game_grid[# _xx, _yy];
-		var _idle = -1;
-		var _move = -1;
-		var _attack = -1;
-		var _death = -1;
-		var _snd_spawn = snd_empty;
-		var _snd_move = snd_empty;
-		var _snd_attack = snd_empty;
-		var _snd_death = snd_empty;
+		// get animations for the entity
+		var _idle = asset_get_index("s_"+_type_string+"_idle");
+		var _move = asset_get_index("s_"+_type_string+"_move");
+		var _attack = asset_get_index("s_"+_type_string+"_attack");
+		var _death = asset_get_index("s_"+_type_string+"_death");
+		// get sound effects for entity
+		_asset = asset_get_index("snd_"+_type_string+"_spawn");
+		var _snd_spawn = _asset == -1 ? snd_empty : _asset;
+		_asset = asset_get_index("snd_"+_type_string+"_move");
+		var _snd_move = _asset == -1 ? snd_empty : _asset;
+		_asset = asset_get_index("snd_"+_type_string+"_attack");
+		var _snd_attack = _asset == -1 ? snd_empty : _asset;
+		_asset = asset_get_index("snd_"+_type_string+"_death");
+		var _snd_death = _asset == -1 ? snd_empty : _asset;
+		
+		// check if animations were found
+		if(_idle == -1) || (_move == -1) || (_attack == -1) || (_death == -1){
+			show_message("animation sprites not set correctly:"
+			+"\ntype string = "+_type_string
+			+"\nidle = "+string(_idle)
+			+"\nmove = "+string(_move)
+			+"\nattack = "+string(_attack)
+			+"\ndeath = "+string(_death)
+			);
+			game_end();
+		}
 		
 		// check arguments for validity
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct structure - type string invalid"); exit;}
@@ -31,29 +49,19 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 		// get attack parameters
 		switch(_type_string)
 		{
-			case "base":
-				_idle = sBase;
-				_move = -1; 
-				_attack = -1;
-				_death = -1;
-				break;
-			case "conduit":
-				_idle = sConduit;
-				_move = -1; 
-				_attack = -1;
-				_death = -1;
-				break;
-			case "turret":
-				_idle = sTurret;
-				_move = sTurret; 
-				_attack = sTurret;
-				_death = sTurret;
-				break;
 			case "barricade":
-				_idle = sBarricade;
-				_move = -1; 
-				_attack = -1;
-				_death = -1;
+				break;
+			case "gunturret":
+				break;
+			case "sniperturret":
+				break;
+			case "barracks":  
+				break;
+			case "dronesilo":   
+				break;
+			case "flameturret": 
+				break;
+			case "mortarturret":     
 				break;
 		}
 
@@ -98,6 +106,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			interest : 0,
 			
 			//animation
+			sprite_index : _idle,
 			spr_idle : _idle,
 			spr_move : _move,
 			spr_attack : _attack,

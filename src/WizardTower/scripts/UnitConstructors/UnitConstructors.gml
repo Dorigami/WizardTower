@@ -3,19 +3,37 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 	with(global.iEngine)
 	{
 		var _unit = undefined, _steering_preference = undefined, _blueprint_component = undefined, _fighter_component = undefined, _unit_component = undefined, _structure_component = undefined, _ai_component = undefined, _bunker_component = undefined, _interactable_component = undefined;
-		var _struct = undefined;
+		var _struct = undefined, _asset = -1;
 		var _actor = actor_list[| _faction];
 		var _stats = _actor.fighter_stats[$ _type_string];
 		var _in_cell = point_in_rectangle(_x div GRID_SIZE, _y div GRID_SIZE,0,0,global.game_grid_width-1, global.game_grid_height-1)
 		var _node = _in_cell ? global.game_grid[# _x div GRID_SIZE, _y div GRID_SIZE] : undefined;
-		var _idle = -1;
-		var _move = -1; 
-		var _attack = -1;
-		var _death = -1;
-		var _snd_spawn = snd_empty;
-		var _snd_move = snd_empty;
-		var _snd_attack = snd_empty;
-		var _snd_death = snd_empty;
+		// get animations for the entity
+		var _idle = asset_get_index("s_"+_type_string+"_idle");
+		var _move = asset_get_index("s_"+_type_string+"_move");
+		var _attack = asset_get_index("s_"+_type_string+"_attack");
+		var _death = asset_get_index("s_"+_type_string+"_death");
+		// get sound effects for entity
+		_asset = asset_get_index("snd_"+_type_string+"_spawn");
+		var _snd_spawn = _asset == -1 ? snd_empty : _asset;
+		_asset = asset_get_index("snd_"+_type_string+"_move");
+		var _snd_move = _asset == -1 ? snd_empty : _asset;
+		_asset = asset_get_index("snd_"+_type_string+"_attack");
+		var _snd_attack = _asset == -1 ? snd_empty : _asset;
+		_asset = asset_get_index("snd_"+_type_string+"_death");
+		var _snd_death = _asset == -1 ? snd_empty : _asset;
+		
+		// check if animations were found
+		if(_idle == -1) || (_move == -1) || (_attack == -1) || (_death == -1){
+			show_message("animation sprites not set correctly:"
+			+"\ntype string = "+_type_string
+			+"\nidle = "+string(_idle)
+			+"\nmove = "+string(_move)
+			+"\nattack = "+string(_attack)
+			+"\ndeath = "+string(_death)
+			);
+			game_end();
+		}
 		
 		// check the arguments for validity
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct unit - type string invalid"); exit;}
@@ -34,97 +52,23 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		switch(_type_string)
 		{
 			case "summoner":
-				_idle = sShieldIdle;
-				_move = sShieldMove; 
-				_attack = sShieldShoot;
-				_death = sShieldDeath;
-				_snd_spawn = snd_summoner_spawn;
-				_snd_move = snd_summoner_move;
-				_snd_attack = snd_summoner_attack_basic;
-				_snd_death = snd_summoner_death;
-				break;
-			case "spearbearer":
-				_idle = sSpearIdle;
-				_move = sSpearMove; 
-				_attack = sSpearShoot;
-				_death = sSpearDeath;
-				break;
-			case "sentry":
-				_idle = sLensIdle;
-				_move = sLensMove; 
-				_attack = sLensShoot;
-				_death = sLensDeath;
-				break;
-			case "torchbearer":
-				_idle = sTorchIdle;
-				_move = sTorchMove; 
-				_attack = sTorchShoot;
-				_death = sTorchDeath;
 				break;
 			case "marcher":
-				_idle = sMarcherIdle;
-				_move = sMarcherMove; 
-				_attack = sMarcherAttack;
-				_death = sMarcherDeath;
-				_snd_spawn = snd_skeleton_spawn;
-				_snd_move = snd_empty;
-				_snd_attack = snd_skeleton_attack_basic;
-				_snd_death = snd_skeleton_death;
 				_steering_preference = SB_Horizontal;
 				break;
 			case "swarmer":
-				_idle = sSwarmerIdle;
-				_move = sSwarmerMove; 
-				_attack = sSwarmerAttack;
-				_death = sSwarmerDeath;
-				_snd_spawn = snd_skeleton_spawn;
-				_snd_move = snd_empty;
-				_snd_attack = snd_skeleton_attack_basic;
-				_snd_death = snd_skeleton_death;
 				_steering_preference = SB_Horizontal;
 				break;
 			case "buildingkiller":
-				_idle = sBldkillerIdle;
-				_move = sBldkillerMove; 
-				_attack = sBldkillerAttack;
-				_death = sBldkillerDeath;
-				_snd_spawn = snd_skeleton_spawn;
-				_snd_move = snd_empty;
-				_snd_attack = snd_skeleton_attack_basic;
-				_snd_death = snd_skeleton_death;
 				_steering_preference = SB_Horizontal;
 				break;
 			case "unitkiller":
-				_idle = sUnitkillerIdle;
-				_move = sUnitkillerMove; 
-				_attack = sUnitkillerAttack;
-				_death = sUnitkillerDeath;
-				_snd_spawn = snd_skeleton_spawn;
-				_snd_move = snd_empty;
-				_snd_attack = snd_skeleton_attack_basic;
-				_snd_death = snd_skeleton_death;
 				_steering_preference = SB_Horizontal;
 				break;
 			case "goliath":
-				_idle = sGoliathIdle;
-				_move = sGoliathMove; 
-				_attack = sGoliathAttack;
-				_death = sGoliathDeath;
-				_snd_spawn = snd_skeleton_spawn;
-				_snd_move = snd_empty;
-				_snd_attack = snd_skeleton_attack_basic;
-				_snd_death = snd_skeleton_death;
 				_steering_preference = SB_Horizontal;
 				break;
 			case "skeleton":
-				_idle = sSkeletonIdle;
-				_move = sSkeletonMove; 
-				_attack = sSkeletonAttack;
-				_death = sSkeletonDeath;
-				_snd_spawn = snd_skeleton_spawn;
-				_snd_move = snd_empty;
-				_snd_attack = snd_skeleton_attack_basic;
-				_snd_death = snd_skeleton_death;
 				_steering_preference = SB_Horizontal;
 				break;
 		}
@@ -169,6 +113,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			interest : 0,
 			
 			//animation
+			sprite_index : _idle,
 			spr_idle : _idle,
 			spr_move : _move,
 			spr_attack : _attack,

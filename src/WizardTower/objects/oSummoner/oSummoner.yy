@@ -37,8 +37,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sShieldIdle",
-    "path": "sprites/sShieldIdle/sShieldIdle.yy",
+    "name": "s_summoner_idle",
+    "path": "sprites/s_summoner_idle/s_summoner_idle.yy",
   },
   "spriteMaskId": null,
   "visible": true,

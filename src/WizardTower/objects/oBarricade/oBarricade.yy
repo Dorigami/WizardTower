@@ -36,10 +36,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "sBarricade",
-    "path": "sprites/sBarricade/sBarricade.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

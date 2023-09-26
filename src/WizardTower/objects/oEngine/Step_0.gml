@@ -248,14 +248,13 @@ if(!is_undefined(confirm_target_action)) || (!is_undefined(confirm_target_action
 }
 
 if(!is_undefined(use_ability))
-{   show_debug_message("using ability {0}", use_ability.value);
+{   
 	var _ability = current_player_abilities[use_ability.value];
 	if(!is_instanceof(_ability, global.iEngine.Ability))
 	{
 		show_debug_message("can't get/run ability, no stored struct");
 		exit;
 	}
-	show_debug_message("use ability: {0}", _ability);
 	script_execute_array(_ability.script, _ability.args);
 }
 	
@@ -273,6 +272,10 @@ if(!is_undefined(escape)){
 					instance_destroy(blueprint_instance);
 					blueprint_instance = noone;
 				}
+				global.game_state = global.game_state_previous;
+				break;
+			case GameStates.SELLING:
+				show_debug_message("Cancel Selling State");
 				global.game_state = global.game_state_previous;
 				break;
 			case GameStates.TARGETING:

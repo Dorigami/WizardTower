@@ -30,8 +30,8 @@ function BuilderCreate(_type_string, _faction){
 			object : _stats.obj,
 			size : _stats.size,
 			collision_radius : round(0.6*GRID_SIZE),
-			sprite_index : object_get_sprite(_stats.obj),
-			mask_index : object_get_sprite(_stats.obj),
+			sprite_index : asset_get_index("s_"+_type_string+"_idle"),
+			mask_index : asset_get_index("s_"+_type_string+"_idle"),
 			faction : _faction,
 			type_arr : _type_arr}
 		blueprint_instance = instance_create_layer(_xx*GRID_SIZE, _yy*GRID_SIZE, "Instances", oBlueprint, _struct);
@@ -58,8 +58,10 @@ function BuilderCreateBombDrone(_faction) { BuilderCreate("dronesilo", _faction)
 function BuilderCreateFlameTurret(_faction) { BuilderCreate("flameturret", _faction) }
 function BuilderCreateMortarTurret(_faction) { BuilderCreate("mortarturret", _faction) }
 function ToggleEntityInfo(){
-    with(global.iHUD){ show_data_overlay = !show_data_overlay }
-	show_debug_message("data overlay is now: " + string(show_data_overlay));
+    with(global.iHUD){ 
+		show_data_overlay = !show_data_overlay 
+		show_debug_message("data overlay is now: " + string(show_data_overlay));
+	}
 }
 function ToggleSellMode(){
 		// change state
