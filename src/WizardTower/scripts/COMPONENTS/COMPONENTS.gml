@@ -151,8 +151,6 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 			// deal out rewards
 			var _actor = global.iEngine.actor_list[| owner.faction];
 			_actor.material += _other_fighter.owner.material_reward;
-			_actor.experience_points += _other_fighter.owner.experience_reward;
-			_actor.upgrade_points += _other_fighter.owner.upgrade_reward;
 			
 			// incrememnt kill count
 			kill_count++;
@@ -220,10 +218,9 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		ds_list_destroy(enemies_in_range);
 	}
 }
-Unit = function(_supply_cost, _abilities, _can_bunker=true) constructor{
+Unit = function(_supply_cost, _can_bunker=true) constructor{
     owner = undefined;
     supply_cost = _supply_cost;
-    abilities = _abilities;
     can_bunker = _can_bunker;
 	blueprint_instance = noone;
 	static Update = function(){

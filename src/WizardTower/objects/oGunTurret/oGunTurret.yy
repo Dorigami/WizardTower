@@ -36,10 +36,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "sTurret",
-    "path": "sprites/sTurret/sTurret.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

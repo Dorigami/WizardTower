@@ -44,7 +44,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		// create components
 		if(_stats.bunker_size > 0) _bunker_component = new Bunker(_stats.bunker_size);
 		_fighter_component = new Fighter(_stats.hp, _stats.strength, _stats.defense, _stats.speed, _stats.range, _stats.tags, _stats.basic_attack,_stats.active_attack);
-		_unit_component = new Unit(_stats.supply_cost, _stats.abilities, true); // the last argument sets "can_bunker"
+		_unit_component = new Unit(_stats.supply_cost, true); // the last argument sets "can_bunker"
 
 		// get animations and ai components
 		_ai_component = new BasicUnitAI();
@@ -126,15 +126,10 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			sound_death : _snd_death,
 			
 			// misc variables 
+			material_cost : _stats.material_cost,
 			material_reward : _stats.material_reward,
-	        experience_reward : _stats.experience_reward,
-			upgrade_reward : _stats.upgrade_reward,
 			faction : _faction,  
-			los_radius : _stats.los_radius,
-			los_polygon : ds_list_create(),
-			los_tiles : ds_list_create(), // a list of all offset coordinates for tiles within line of sight
 			engagement_radius : _stats.range,
-			build_radius : _stats.build_radius,
 			attack_direction : 0,
 
 			// polymorphic components

@@ -36,10 +36,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "sConduit",
-    "path": "sprites/sConduit/sConduit.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

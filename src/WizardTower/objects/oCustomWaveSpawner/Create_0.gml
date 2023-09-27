@@ -62,8 +62,6 @@
 							supply_cost = 2;
 						    material_cost = 20;
 							material_reward = 100;
-						    experience_reward = 100;
-							upgrade_reward = 100;
 						    hp = 8;
 						    strength = _pow;
 						    defense = 1;
@@ -79,8 +77,6 @@
 							supply_cost = 2;
 						    material_cost = 20;
 							material_reward = 100;
-						    experience_reward = 100;
-							upgrade_reward = 100;
 						    hp = 8;
 						    strength = _pow;
 						    defense = 1;
@@ -96,8 +92,6 @@
 							supply_cost = 2;
 						    material_cost = 20;
 							material_reward = 100;
-						    experience_reward = 100;
-							upgrade_reward = 100;
 						    hp = 8;
 						    strength = _pow;
 						    defense = 1;
@@ -113,8 +107,6 @@
 							supply_cost = 2;
 						    material_cost = 20;
 							material_reward = 100;
-						    experience_reward = 100;
-							upgrade_reward = 100;
 						    hp = 8;
 						    strength = _pow;
 						    defense = 1;
@@ -130,8 +122,6 @@
 							supply_cost = 2;
 						    material_cost = 20;
 							material_reward = 100;
-						    experience_reward = 100;
-							upgrade_reward = 100;
 						    hp = 8;
 						    strength = _pow;
 						    defense = 1;

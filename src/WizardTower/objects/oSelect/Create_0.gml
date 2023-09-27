@@ -12,15 +12,6 @@ function EmptySelection(_actor){
 	for(var i=0;i<_size;i++) _actor.selected_entities[| i].selected = false;
 
 	ds_list_clear(_actor.selected_entities);
-	global.iEngine.available_abilities_arr[0] = "-1";
-	global.iEngine.available_abilities_arr[1] = "-1";
-	global.iEngine.available_abilities_arr[2] = "-1";
-	global.iEngine.available_abilities_arr[3] = "-1";
-	global.iEngine.available_abilities_arr[4] = "-1";
-	global.iEngine.available_abilities_arr[5] = "-1";
-	global.iEngine.available_abilities_arr[6] = "-1";
-	global.iEngine.available_abilities_arr[7] = "-1";
-	global.iEngine.available_abilities_arr[8] = "-1";
 	
 	// update the hud for displaying selected entities
 	if(_actor.faction == PLAYER_FACTION)
@@ -53,7 +44,6 @@ function ConfirmSelection(){
 				// 1a) loop through to find the lowest actor/faction index.
 				// 1b) see if structures or units were selected.
 				_ent = _tmp[| i];
-				 
 				if(_faction_index != PLAYER_FACTION) && (_faction_index > _ent.faction) _faction_index = _ent.faction;
 				if(!_has_units) && (!is_undefined(_ent.unit)) { _has_units = true; }
 				if(!_has_structures) && (!is_undefined(_ent.structure)) { _has_structures = true; }
@@ -62,9 +52,7 @@ function ConfirmSelection(){
 				// 2) loop again, removing applicable IDs
 				_valid = true;
 				_ent = _tmp[| i];
-
 				if(_ent.faction != _faction_index) _valid = false;
-
 				if(_has_units) 
 				{   // only add units if a unit is among the entities
 					if(is_undefined(_ent.unit)) _valid = false;
@@ -72,19 +60,10 @@ function ConfirmSelection(){
 					// only add structures if there weren't any units among entities
 					if(is_undefined(_ent.structure)) _valid = false;
 				} 
-
 				if(_valid) {
 					_ent.selected = true;
 					ds_list_add(_plist, _ent);
 				}
-			}
-			// update the string to draw abilities to the screen
-			_ent = _plist[| 0];
-			with(_ent)
-			{
-				if(!is_undefined(unit)) var _abilities = unit.abilities;
-				if(!is_undefined(structure)) var _abilities = structure.abilities;
-				for(var i=0;i<9;i++) global.iEngine.available_abilities_arr[i] = _abilities[i] == -1 ? "-1" : script_get_name(_abilities[i]);
 			}
 		}
 	} else {
@@ -93,10 +72,6 @@ function ConfirmSelection(){
 		if(_ent != noone) {
 			_ent.selected = true;
 			ds_list_add(_plist, _ent);
-			// update the string to draw abilities to the screen
-			if(!is_undefined(_ent.unit)) var _abilities = _ent.unit.abilities;
-			if(!is_undefined(_ent.structure)) var _abilities = _ent.structure.abilities;
-			for(var i=0;i<9;i++) global.iEngine.available_abilities_arr[i] = _abilities[i] == -1 ? "-1" : script_get_name(_abilities[i]);
 		}
 	}
 

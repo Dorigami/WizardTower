@@ -19,7 +19,6 @@ color5 = make_colour_rgb(255,170,94);
 color6 = make_colour_rgb(255,212,163);
 color7 = make_colour_rgb(255,236,214);
 
-available_abilities_arr = ["-1","-1","-1","-1","-1","-1","-1","-1","-1"];
 ability_hotkeys = ["1","2","3","4","5","6","7","8","9"];
 keybinds_string = "escape - pause/unpause/cancel action\n" 
                 + "F3 - toggle debug view\n"

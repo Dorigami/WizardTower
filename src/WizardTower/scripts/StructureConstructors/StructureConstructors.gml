@@ -70,7 +70,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 		{
 			default:
 				_fighter_component = new Fighter(_stats.hp, _stats.strength, _stats.defense, _stats.speed, _stats.range, _stats.tags, _stats.basic_attack, _stats.active_attack);
-				_structure_component = new Structure(_stats.supply_capacity, _stats.abilities, _xx+_stats.rally_offset[0], _yy+_stats.rally_offset[1]);
+				_structure_component = new Structure(_stats.supply_capacity, _xx+_stats.rally_offset[0], _yy+_stats.rally_offset[1]);
 				_ai_component = new BasicStructureAI();
 			break;
 		}
@@ -119,15 +119,10 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			sound_death : _snd_death,
 			
 			// misc variables
+			material_cost : _stats.material_cost,
 			material_reward : _stats.material_reward,
-	        experience_reward : _stats.experience_reward,
-			upgrade_reward : _stats.upgrade_reward,
 			faction : _faction,
-			los_radius : _stats.los_radius,
-			los_polygon : ds_list_create(),
-			los_tiles : ds_list_create(), // a list of all offset coordinates for tiles within line of sight
 			engagement_radius : _stats.range,
-			build_radius : _stats.build_radius,
 
 			// polymorphic components
 			blueprint : _blueprint_component, 

@@ -30,3 +30,8 @@ with(global.iEngine)
 		}
 	}
 }
+if(global.game_state == GameStates.SELLING)
+{
+	draw_set_halign(fa_middle);
+	draw_text(0.5*display_get_gui_width(),0.5*display_get_gui_height(),"press confirm [E] to sell all seslected structures")
+}
