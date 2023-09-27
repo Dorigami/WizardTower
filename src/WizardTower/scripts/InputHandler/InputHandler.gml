@@ -273,7 +273,12 @@ function handle_building_keys(){
     } else if(keyboard_check_pressed(ord("E"))){
 		return {confirm_build_action : new Command("confirm_build_action",true,0,0)}
 	}
-
+    // abilities
+	for(var i=0; i<9; i++)
+	{
+		if(keyboard_check_pressed(ord(ability_hotkeys[i]))) return {use_ability : new Command("use_ability",i,0,0)}
+	}
+/*
     // select different entity type to build (accept num keys 1-9 on keyboard and/or numpad)
     var _ord = 0;
     for(var i=0; i<9; i++)
@@ -284,7 +289,7 @@ function handle_building_keys(){
             return {change_build_type : new Command("change_build_type", i, 0, 0)}
         }
     }
-
+*/
     // camera pan
     var _move = [keyboard_check(ord("D")) - keyboard_check(ord("A")), keyboard_check(ord("S")) - keyboard_check(ord("W"))];
     var _fast_pan = keyboard_check(vk_shift);

@@ -67,7 +67,18 @@ function ToggleSellMode(){
 		// change state
 		global.game_state_previous = global.game_state;
 		global.game_state = GameStates.SELLING;
-		if(global.game_state_previous == GameStates.BUILDING) global.game_state_previous = GameStates.PLAY;
+		if(global.game_state_previous == GameStates.BUILDING) 
+		{
+			with(global.iEngine)
+			{
+				global.game_state_previous = GameStates.PLAY;
+				if(instance_exists(blueprint_instance))
+				{
+					instance_destroy(blueprint_instance);
+					blueprint_instance = noone;
+				}
+			}
+		}
 }
 
 
