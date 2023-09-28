@@ -29,7 +29,7 @@
   "origin": 0,
   "parent": {
     "name": "DroneSilo",
-    "path": "folders/Sprites/Unit Sprites/DroneSilo.yy",
+    "path": "folders/Sprites/Entity Sprites/DroneSilo.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

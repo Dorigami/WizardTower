@@ -32,7 +32,7 @@
   "origin": 7,
   "parent": {
     "name": "Summoner",
-    "path": "folders/Sprites/Unit Sprites/Summoner.yy",
+    "path": "folders/Sprites/Entity Sprites/Summoner.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

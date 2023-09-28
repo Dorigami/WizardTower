@@ -123,6 +123,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			material_reward : _stats.material_reward,
 			faction : _faction,
 			engagement_radius : _stats.range,
+			entity_type : _stats.entity_type,
 
 			// polymorphic components
 			blueprint : _blueprint_component, 

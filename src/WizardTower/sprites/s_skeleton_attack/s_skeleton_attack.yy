@@ -33,7 +33,7 @@
   "origin": 9,
   "parent": {
     "name": "ENEMY UNITS",
-    "path": "folders/Sprites/Unit Sprites/ENEMY UNITS.yy",
+    "path": "folders/Sprites/Entity Sprites/ENEMY UNITS.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

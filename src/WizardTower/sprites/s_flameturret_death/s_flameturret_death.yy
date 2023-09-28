@@ -29,7 +29,7 @@
   "origin": 0,
   "parent": {
     "name": "FlameTurret",
-    "path": "folders/Sprites/Unit Sprites/FlameTurret.yy",
+    "path": "folders/Sprites/Entity Sprites/FlameTurret.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

@@ -13,6 +13,8 @@ function EmptySelection(_actor){
 
 	ds_list_clear(_actor.selected_entities);
 	
+	global.iEngine.sell_price = 0;
+	
 	// update the hud for displaying selected entities
 	if(_actor.faction == PLAYER_FACTION)
 	{
@@ -63,6 +65,13 @@ function ConfirmSelection(){
 				if(_valid) {
 					_ent.selected = true;
 					ds_list_add(_plist, _ent);
+					if(global.game_state == GameStates.SELLING)
+					{
+						if(_ent.faction == PLAYER_FACTION) && (_ent.entity_type == STRUCTURE)
+						{
+							global.iEngine.sell_price += _ent.material_cost;
+						}
+					}
 				}
 			}
 		}
@@ -72,6 +81,13 @@ function ConfirmSelection(){
 		if(_ent != noone) {
 			_ent.selected = true;
 			ds_list_add(_plist, _ent);
+			if(global.game_state == GameStates.SELLING)
+			{
+				if(_ent.faction == PLAYER_FACTION) && (_ent.entity_type == STRUCTURE)
+				{
+					global.iEngine.sell_price += _ent.material_cost;
+				}
+			}
 		}
 	}
 

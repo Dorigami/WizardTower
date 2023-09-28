@@ -29,7 +29,7 @@
   "origin": 0,
   "parent": {
     "name": "Barracks",
-    "path": "folders/Sprites/Unit Sprites/Barracks.yy",
+    "path": "folders/Sprites/Entity Sprites/Barracks.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

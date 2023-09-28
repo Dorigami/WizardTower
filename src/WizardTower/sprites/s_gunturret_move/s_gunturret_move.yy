@@ -29,7 +29,7 @@
   "origin": 0,
   "parent": {
     "name": "GunTurret",
-    "path": "folders/Sprites/Unit Sprites/GunTurret.yy",
+    "path": "folders/Sprites/Entity Sprites/GunTurret.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

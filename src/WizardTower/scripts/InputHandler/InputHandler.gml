@@ -122,17 +122,39 @@ function handle_building_mouse(){
 function handle_selling_mouse(){
 	// left mouse
 	if(mouse_check_button_released(mb_left)){
-		if(!keyboard_check(vk_shift)) return {escape : new Command("escape",true,0,0)}
-	} else if(mouse_check_button_pressed(mb_left)){
-		return {confirm_build_action : new Command("confirm_sell_action",true,0,0)}
-		show_debug_message("confirmed sell action")
-	}
-
+        if(global.iSelect.enabled){
+            return {select_confirm : new Command("select_confirm", true, 0, 0)}
+        } else {
+            return {left_release : new Command("left_release", true, mouse_x, mouse_y)}
+        }
+    } else if mouse_check_button_pressed(mb_left){
+        if(ds_stack_size(menu_stack) <= 1){
+            if(global.hud_focus == -1)
+            {
+                // start selection process
+                return {selecting : new Command("selecting",true,0,0)}
+            } else {
+                // do nothing (this may change later; action buttons will trigger as a seperate input)
+            }
+        } else {
+            return {left_click : new Command("left_click",true,mouse_x, mouse_y)}
+        }
+    }
 	// right mouse
 	if(mouse_check_button_released(mb_right)){
-        return {escape : new Command("escape",true,0,0)}
-    } 
-    else if(mouse_check_button_pressed(mb_right)){}
+        return { right_release : new Command("right_release",true,mouse_x, mouse_y) }
+    } else if(mouse_check_button_pressed(mb_right)){
+        if(global.iSelect.enabled){
+            return { select_cancel : new Command("select_cancel",true,0,0) }
+        } else {
+            if(global.hud_focus != -1){
+				show_debug_message("registering input");
+                return { right_click : new Command("right_click",true,mouse_x, mouse_y) }
+            } else {
+                return { escape : new Command("escape",true,0,0) }
+            }
+        }
+	}
 
 	// middle mouse / wheel
 	if(mouse_check_button_pressed(mb_middle)){}
@@ -305,12 +327,24 @@ function handle_building_keys(){
     return {}
 }
 function handle_selling_keys(){
-    // cancel build location
+    // cancel selling
     if(keyboard_check_pressed(vk_escape))
     {
         return {escape : new Command("escape",true,0,0)}
     }
-
+	
+    // confirm sell action
+    if(keyboard_check_pressed(ord("E")))
+    {
+        return {confirm_sell_action : new Command("confirm_sell_action",true,0,0)}
+    }
+	
+	// abilities
+	for(var i=0; i<9; i++)
+	{
+		if(keyboard_check_pressed(ord(ability_hotkeys[i]))) return {use_ability : new Command("use_ability",i,0,0)}
+	}
+	
     // camera pan
     var _move = [keyboard_check(ord("D")) - keyboard_check(ord("A")), keyboard_check(ord("S")) - keyboard_check(ord("W"))];
     var _fast_pan = keyboard_check(vk_shift);

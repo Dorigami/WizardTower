@@ -29,7 +29,7 @@
   "origin": 0,
   "parent": {
     "name": "MortarTurret",
-    "path": "folders/Sprites/Unit Sprites/MortarTurret.yy",
+    "path": "folders/Sprites/Entity Sprites/MortarTurret.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

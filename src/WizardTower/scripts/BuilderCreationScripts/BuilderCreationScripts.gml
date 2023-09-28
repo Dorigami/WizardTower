@@ -13,6 +13,9 @@ function BuilderCreate(_type_string, _faction){
 		var _type_arr = ["barricade","gunturret","sniperturret","barracks","dronesilo","flameturret","mortarturret"];
 		var _gridlock = true;
 		
+		// clear unit selection
+		with(global.iSelect)
+		
 		// change state
 		global.game_state_previous = global.game_state;
 		global.game_state = GameStates.BUILDING;
@@ -65,6 +68,8 @@ function ToggleEntityInfo(){
 }
 function ToggleSellMode(){
 		// change state
+		if(global.game_state == GameStates.SELLING) exit;
+		with(global.iSelect){EmptySelection(global.iEngine.player_actor)}
 		global.game_state_previous = global.game_state;
 		global.game_state = GameStates.SELLING;
 		if(global.game_state_previous == GameStates.BUILDING) 
