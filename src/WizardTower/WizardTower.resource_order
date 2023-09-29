@@ -9,8 +9,6 @@
     {"name":"Map Initialization","order":15,"path":"folders/Objects/Map Initialization.yy",},
     {"name":"Unit & Building Construction","order":22,"path":"folders/Scripts/Unit & Building Construction.yy",},
     {"name":"Tree Tutorial","order":7,"path":"folders/Shaders/Tree Tutorial.yy",},
-    {"name":"Icons","order":42,"path":"folders/Sprites/Icons.yy",},
-    {"name":"Map Stuff","order":36,"path":"folders/Sprites/Map Stuff.yy",},
     {"name":"Entity Sprites","order":33,"path":"folders/Sprites/Entity Sprites.yy",},
     {"name":"Barracks","order":49,"path":"folders/Sprites/Entity Sprites/Barracks.yy",},
     {"name":"Barricade","order":47,"path":"folders/Sprites/Entity Sprites/Barricade.yy",},
@@ -21,6 +19,8 @@
     {"name":"MortarTurret","order":52,"path":"folders/Sprites/Entity Sprites/MortarTurret.yy",},
     {"name":"SniperTurret","order":48,"path":"folders/Sprites/Entity Sprites/SniperTurret.yy",},
     {"name":"Summoner","order":53,"path":"folders/Sprites/Entity Sprites/Summoner.yy",},
+    {"name":"Icons","order":42,"path":"folders/Sprites/Icons.yy",},
+    {"name":"Map Stuff","order":36,"path":"folders/Sprites/Map Stuff.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"s_flameturret_move","order":1,"path":"sprites/s_flameturret_move/s_flameturret_move.yy",},
