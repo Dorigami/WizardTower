@@ -1,10 +1,13 @@
 {
   "FolderOrderSettings": [
     {"name":"Attack Objects","order":19,"path":"folders/Objects/Attack Objects.yy",},
+    {"name":"Structure Attacks","order":18,"path":"folders/Objects/Attack Objects/Structure Attacks.yy",},
+    {"name":"Unit Attacks","order":17,"path":"folders/Objects/Attack Objects/Unit Attacks.yy",},
     {"name":"Structures","order":8,"path":"folders/Objects/Entities/Structures.yy",},
     {"name":"Units","order":3,"path":"folders/Objects/Entities/Units.yy",},
     {"name":"Enemy Mobs","order":5,"path":"folders/Objects/Entities/Units/Enemy Mobs.yy",},
     {"name":"Map Initialization","order":15,"path":"folders/Objects/Map Initialization.yy",},
+    {"name":"Particles","order":1,"path":"folders/Particles.yy",},
     {"name":"Unit & Building Construction","order":22,"path":"folders/Scripts/Unit & Building Construction.yy",},
     {"name":"Tree Tutorial","order":7,"path":"folders/Shaders/Tree Tutorial.yy",},
     {"name":"Entity Sprites","order":33,"path":"folders/Sprites/Entity Sprites.yy",},
@@ -19,9 +22,6 @@
     {"name":"Summoner","order":53,"path":"folders/Sprites/Entity Sprites/Summoner.yy",},
     {"name":"Icons","order":42,"path":"folders/Sprites/Icons.yy",},
     {"name":"Map Stuff","order":36,"path":"folders/Sprites/Map Stuff.yy",},
-    {"name":"Particles","order":1,"path":"folders/Particles.yy",},
-    {"name":"Unit Attacks","order":17,"path":"folders/Objects/Attack Objects/Unit Attacks.yy",},
-    {"name":"Structure Attacks","order":18,"path":"folders/Objects/Attack Objects/Structure Attacks.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"s_flameturret_move","order":1,"path":"sprites/s_flameturret_move/s_flameturret_move.yy",},
