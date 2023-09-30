@@ -3,4 +3,4 @@
 alpha = 1;
 init = false;
 
-depth = global.iHUD.depth;
+depth = UPPERTEXDEPTH-1;

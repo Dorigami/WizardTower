@@ -240,12 +240,16 @@ if(!is_undefined(confirm_sell_action)) || (!is_undefined(confirm_sell_action_mou
 	if(global.iEngine.sell_price > 0)
 	{
 		for(var i=ds_list_size(player_actor.selected_entities)-1; i>=0; i--){
-			var _ent = player_actor.selected_entities[| i];
-			player_actor.material += _ent.material_cost;
-			instance_destroy(_ent)
-			ds_list_delete(player_actor.selected_entities, i);
-			//ds_queue_enqueue(killing_floor, _ent);
+			with(player_actor.selected_entities[| i])
+			{
+				other.player_actor.material += material_cost;
+				SellPuffCreate(position[1],position[2]);
+				CreateFloatNumber(x,bbox_top,"+$"+string(material_cost),FLOATTYPE.LINEAR,90,40,0.3);
+				ds_list_delete(other.player_actor.selected_entities, i);
+				instance_destroy();
+			}
 		}
+		SoundCommand(snd_sell,0,0);
 	}
 }
 

@@ -8,11 +8,13 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		var _stats = _actor.fighter_stats[$ _type_string];
 		var _in_cell = point_in_rectangle(_x div GRID_SIZE, _y div GRID_SIZE,0,0,global.game_grid_width-1, global.game_grid_height-1)
 		var _node = _in_cell ? global.game_grid[# _x div GRID_SIZE, _y div GRID_SIZE] : undefined;
+		
 		// get animations for the entity
 		var _idle = asset_get_index("s_"+_type_string+"_idle");
 		var _move = asset_get_index("s_"+_type_string+"_move");
 		var _attack = asset_get_index("s_"+_type_string+"_attack");
 		var _death = asset_get_index("s_"+_type_string+"_death");
+		
 		// get sound effects for entity
 		_asset = asset_get_index("snd_"+_type_string+"_spawn");
 		var _snd_spawn = _asset == -1 ? snd_empty : _asset;
@@ -52,6 +54,14 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		switch(_type_string)
 		{
 			case "summoner":
+				break;
+			case "drone":
+				_steering_preference = SB_Drone;
+				delete _ai_component; _ai_component = new StructureTiedUnitAI();
+				break;
+			case "marine":
+				_steering_preference = SB_Marine;
+				delete _ai_component; _ai_component = new StructureTiedUnitAI();
 				break;
 			case "marcher":
 				_steering_preference = SB_Horizontal;

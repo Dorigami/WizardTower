@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "Attack Objects",
+    "path": "folders/Objects/Attack Objects.yy",
   },
   "parentObjectId": null,
   "persistent": false,

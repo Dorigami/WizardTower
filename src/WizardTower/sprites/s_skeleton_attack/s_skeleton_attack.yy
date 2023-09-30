@@ -79,8 +79,8 @@
   "swatchColours": null,
   "swfPrecision": 2.525,
   "textureGroupId": {
-    "name": "Default",
-    "path": "texturegroups/Default",
+    "name": "Entity",
+    "path": "texturegroups/Entity",
   },
   "type": 0,
   "VTile": false,

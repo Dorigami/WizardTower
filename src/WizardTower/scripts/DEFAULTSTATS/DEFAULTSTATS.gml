@@ -16,9 +16,6 @@ FighterStats = function() constructor{
         range : 5,
         tags : [],
         size : [1,1], // [width , height]
-        //los_radius : 4,
-        //build_radius : 0,
-        //abilities : [ManualBasicAttack,ManualActiveAttack,-1,-1,-1,-1,-1,-1,-1],
         obj : oSummoner,
         bunker_size : 0,
         basic_attack : {
@@ -40,8 +37,8 @@ FighterStats = function() constructor{
 		    damage_obj : oSummonerActive 
 		}
     }
-    sentry = { // mid-range fighter
-        name : "default name",
+    marine = { // mid-range fighter
+        name : "Marine",
 		entity_type : UNIT,
         description : "default description",
         build_time : 2,
@@ -56,7 +53,7 @@ FighterStats = function() constructor{
         range : 3,
         tags : [],
         size : [1,1], // [width , height]
-        obj : oSentry,
+        obj : oMarine,
         bunker_size : 0,
         basic_attack : {
 			name : "Lens Flare",
@@ -65,7 +62,7 @@ FighterStats = function() constructor{
 			duration : 0.2, // movement is reduced, other attacks cannot be done during this time
 			damage_point : 1, // damage is dealt after this step count
 			damage_value : 1,
-			damage_obj : oSentryBasic 
+			damage_obj : oMarineBasic 
 		},
         active_attack : {
 		    name : "Focus Beam",
@@ -74,10 +71,46 @@ FighterStats = function() constructor{
 		    duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 		    damage_point : 10, // damage is dealt after this step count
 		    damage_value : 1,
-		    damage_obj : oSentryActive 
+		    damage_obj : oMarineActive 
 		}
     }
-
+    drone = { // mid-range fighter
+        name : "Drone",
+		entity_type : UNIT,
+        description : "default description",
+        build_time : 2,
+        supply_cost : 2,
+        supply_capacity : 0,
+        material_cost : 30,
+		material_reward : 100,
+        hp : 10,
+        strength : 3,
+        defense : 1,
+        speed : 1,
+        range : 3,
+        tags : [],
+        size : [1,1], // [width , height]
+        obj : oDrone,
+        bunker_size : 0,
+        basic_attack : {
+			name : "Lens Flare",
+			cooldown : 0.2, // delay, in seconds, between attacks
+			move_penalty : 0, // move speed reduced during attack
+			duration : 0.2, // movement is reduced, other attacks cannot be done during this time
+			damage_point : 1, // damage is dealt after this step count
+			damage_value : 1,
+			damage_obj : oDroneBasic 
+		},
+        active_attack : {
+		    name : "Focus Beam",
+		    cooldown : 5, // delay, in seconds, between attacks
+		    move_penalty : 0.8, // move speed reduced during attack
+		    duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+		    damage_point : 10, // damage is dealt after this step count
+		    damage_value : 1,
+		    damage_obj : oDroneActive 
+		}
+    }
 /* ---- PLAYER STRUCTURES ---- */
 	barricade = {
 		name : "barricade",
@@ -88,11 +121,11 @@ FighterStats = function() constructor{
 	    supply_capacity : 0,
 	    material_cost : 10,
 		material_reward : 100,
-	    hp : 5,
-	    strength : 3,
+	    hp : 50,
+	    strength : 0,
 	    defense : 1,
 	    speed : 0,
-	    range : 4,
+	    range : 0,
 	    tags : [],
 	    obj : oBarricade,
 	    size : [1,1], // [width , height]
@@ -105,7 +138,7 @@ FighterStats = function() constructor{
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretBasic 
+	        damage_obj : oGunTurretBasic 
 	    },
 	    active_attack : {
 	        name : "Throw Spear",
@@ -114,7 +147,7 @@ FighterStats = function() constructor{
 	        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretActive 
+	        damage_obj : oGunTurretActive 
 	    }
 	}
 	gunturret = {
@@ -143,7 +176,7 @@ FighterStats = function() constructor{
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretBasic 
+	        damage_obj : oGunTurretBasic 
 	    },
 	    active_attack : {
 	        name : "Throw Spear",
@@ -152,7 +185,7 @@ FighterStats = function() constructor{
 	        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretActive 
+	        damage_obj : oGunTurretActive 
 	    }
 	}
 	sniperturret = {
@@ -181,7 +214,7 @@ FighterStats = function() constructor{
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretBasic 
+	        damage_obj : oSniperBasic 
 	    },
 	    active_attack : {
 	        name : "Throw Spear",
@@ -190,7 +223,7 @@ FighterStats = function() constructor{
 	        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretActive 
+	        damage_obj : oSniperActive 
 	    }
 	}
 	barracks = {
@@ -219,7 +252,7 @@ FighterStats = function() constructor{
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretBasic 
+	        damage_obj : oBarracksBasic 
 	    },
 	    active_attack : {
 	        name : "Throw Spear",
@@ -228,7 +261,7 @@ FighterStats = function() constructor{
 	        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretActive 
+	        damage_obj : oBarracksActive 
 	    }
 	}
 	dronesilo = {
@@ -257,7 +290,7 @@ FighterStats = function() constructor{
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretBasic 
+	        damage_obj : oDroneSiloBasic 
 	    },
 	    active_attack : {
 	        name : "Throw Spear",
@@ -266,7 +299,7 @@ FighterStats = function() constructor{
 	        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretActive 
+	        damage_obj : oDroneSiloActive 
 	    }	
 	}
 	flameturret = {
@@ -295,7 +328,7 @@ FighterStats = function() constructor{
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretBasic 
+	        damage_obj : oFlameTurretBasic 
 	    },
 	    active_attack : {
 	        name : "Throw Spear",
@@ -304,7 +337,7 @@ FighterStats = function() constructor{
 	        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretActive 
+	        damage_obj : oFlameTurretActive 
 	    }
 	}	
 	mortarturret = {
@@ -333,7 +366,7 @@ FighterStats = function() constructor{
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretBasic 
+	        damage_obj : oMortarTurretBasic 
 	    },
 	    active_attack : {
 	        name : "Throw Spear",
@@ -342,7 +375,7 @@ FighterStats = function() constructor{
 	        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oTurretActive 
+	        damage_obj : oMortarTurretActive 
 	    }
 	}
 

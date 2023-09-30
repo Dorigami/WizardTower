@@ -24,7 +24,6 @@ Blueprint = function(_build_time) constructor{
 				// replace blueprint with structure
 				var _actor = global.iEngine.actor_list[| owner.faction];
 				var _stats = _actor.fighter_stats[$ owner.type_string];
-				show_debug_message("supply cost for {0}, type is: {1}, owner is: {2}", _stats, owner.type_string, owner);
 				_actor.supply_limit += _stats.supply_capacity;
 				_actor.supply_in_queue -= _stats.supply_cost;
 				_actor.supply_current += _stats.supply_cost;
@@ -45,7 +44,7 @@ Blueprint = function(_build_time) constructor{
 		//}
 	}
 	static Destroy = function(){
-		show_debug_message("Blueprint Entity has been destroyed.");
+		//show_debug_message("Blueprint Entity has been destroyed.");
 	}
 }
 
@@ -380,7 +379,7 @@ BasicUnitAI = function() constructor{
 			if(!is_undefined(_cmd))
 			{
 				if(_cmd.type == "attack") _target = _cmd.value;
-				if(instance_exists(_cmd.value))
+				if(instance_exists(_target))
 				{	
 					if(owner.xTo != _cmd.value.position[1]) owner.xTo = _cmd.value.position[1];
 					if(owner.yTo != _cmd.value.position[2]) owner.yTo = _cmd.value.position[2];
@@ -390,6 +389,70 @@ BasicUnitAI = function() constructor{
 				}
 			}
 		}
+		// if there is no command, check if entity is a fighter and get first enemy in range
+		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		{
+			// resolve fighter behavior
+			with(owner.fighter)
+			{
+				// attack the current attack target, if possible
+				if(attack_target != noone) && (instance_exists(attack_target))
+				{
+					// target is valid if its occupying node is in range
+					var _target_node = global.game_grid[# attack_target.xx, attack_target.yy];
+					if(ds_list_find_index(owner.checked_node_list,_target_node) > -1) 
+					{
+						_target = attack_target;
+					} else {
+						attack_target = noone;
+					}
+				} else {
+					attack_target = noone;
+				}
+				// if there is no attack target, attack nearest enemy
+				if(_target == noone)
+				{
+					_target = enemies_in_range[| 0];
+					if(is_undefined(_target))
+					{
+						_target = noone;
+					} else if(!instance_exists(_target)) {
+						_target = noone;
+						ds_list_delete(enemies_in_range, 0);
+					}
+				}
+				
+				// attack any enemy in range, but prioritize the attack command target
+				if(_target != noone) 
+				{
+					// attack valid target
+					if(attack_target != _target) attack_target = _target;
+					if(attack_index == -1) && (basic_cooldown_timer <= 0)
+					{
+						owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
+						UseBasic();
+					}
+				} 
+			}
+		}
+	}
+	static Destroy = function(){
+		// delete commands
+		for(var i=0; i<ds_list_size(commands); i++)
+		{
+			if(!is_undefined(commands[| i])) delete commands[| i];
+		}
+		// destroy command list
+		ds_list_destroy(commands);
+	}
+}
+StructureTiedUnitAI = function() constructor{
+    commands = ds_list_create(); // a list containing all command structs
+	owner = undefined;
+	static Update = function(){
+		// unit cannot be commanded by the player, will attack at will and move to structure's rally point
+		var _target = noone;
+
 		// if there is no command, check if entity is a fighter and get first enemy in range
 		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
 		{

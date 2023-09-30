@@ -54,7 +54,7 @@ for(var j=0; j<global.game_grid_height; j++){
 // other global variables
 global.unitSelection = ds_list_create();
 global.iEngine = id;
-global.iHUD = instance_create_layer(0,0,"Instances", oHUD);
+global.iHUD = instance_create_depth(0,0,UPPERTEXDEPTH-2, oHUD);
 global.iCamera = instance_create_layer(0, 0, "Instances", oCamera);
 global.iSelect = instance_create_layer(0, 0, "Instances", oSelect);
 global.iSound = instance_create_layer(0, 0, "Instances", oSoundManager);
@@ -77,6 +77,7 @@ initial_player_abilities = array_create(9, undefined);
 current_player_abilities = array_create(9, undefined);
 zoom_delay_time = 10;
 sell_price = 0;
+SellPuffInit();
 
 // fill the unit vector array with unit vectors for each context steering directions
 for(var i=0; i<CS_RESOLUTION; i++){

@@ -5,6 +5,8 @@
 #macro CANVAS_H sprite_get_height(sShaderCanvas)
 #macro FRAME_RATE 60
 #macro ROOM_START rDebug
+#macro UPPERTEXDEPTH -4000
+#macro LOWERTEXDEPTH 4000
 #macro EAST 0
 #macro NORTH 1
 #macro WEST 2
