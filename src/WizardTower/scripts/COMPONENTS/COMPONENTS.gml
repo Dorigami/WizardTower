@@ -244,7 +244,7 @@ Unit = function(_supply_cost, _can_bunker=true) constructor{
 
 	}
 }
-Structure = function(_sup_bonus, _abilities, _rally_xx, _rally_yy) constructor{
+Structure = function(_sup_bonus, _abilities, _rally_x, _rally_y) constructor{
 	build_ticket = undefined;
 	build_timer = -1;
 	build_timer_set_point = -1;
@@ -254,8 +254,8 @@ Structure = function(_sup_bonus, _abilities, _rally_xx, _rally_yy) constructor{
 	blueprint_instance = noone;
 	spawn_positions = [];
     abilities = _abilities;
-	rally_xx = _rally_xx;
-	rally_yy = _rally_yy;
+	rally_x = _rally_x;
+	rally_y = _rally_y;
 	static Update = function(){
 	    // check for node change
 	    CheckNodeChange(owner);
@@ -519,6 +519,82 @@ BasicStructureAI = function() constructor{
 		if(ds_list_size(commands) > 0)
 		{
 			//if(command_timer > 0) && (--command_timer == 0){
+			//	GetAction();
+			//	if(is_undefined(command)) command_timer_set_point = -1;
+			//}
+		} 
+		// if there is no command, check if entity is a fighter and get first enemy in range
+		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		{
+			// resolve fighter behavior
+			with(owner.fighter)
+			{
+				// attack the current attack target, if possible
+				if(attack_target != noone) && (instance_exists(attack_target))
+				{
+					// target is valid if its occupying node is in range
+					var _target_node = global.game_grid[# attack_target.xx, attack_target.yy];
+					if(ds_list_find_index(owner.checked_node_list,_target_node) > -1) 
+					{
+						_target = attack_target;
+					} else {
+						attack_target = noone;
+					}
+				} else {
+					attack_target = noone;
+				}
+				// if there is no attack target, attack nearest enemy
+				if(_target == noone)
+				{
+					_target = enemies_in_range[| 0];
+					if(is_undefined(_target))
+					{
+						_target = noone;
+					} else if(!instance_exists(_target)) {
+						_target = noone;
+						ds_list_delete(enemies_in_range, 0);
+					}
+				}
+				
+				// attack any enemy in range, but prioritize the attack command target
+				if(_target != noone) 
+				{
+					// attack valid target
+					if(attack_target != _target) attack_target = _target;
+					if(attack_index == -1) && (basic_cooldown_timer <= 0)
+					{
+						owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
+						UseBasic();
+					}
+				} 
+			}
+		}
+	}
+	static Destroy = function(){
+		// delete commands
+		for(var i=0; i<ds_list_size(commands); i++)
+		{
+			if(!is_undefined(commands[| i])) delete commands[| i];
+		}
+		// destroy command list
+		ds_list_destroy(commands);
+	}
+}
+SpawningStructureAI = function() constructor{
+    commands = ds_list_create();
+	owner = undefined;
+	static Update = function(){
+		var _cmd = undefined;
+		var _target = noone;
+		if(ds_list_size(commands) > 0)
+		{
+			_cmd = commands[| 0];
+			if(!is_undefined(_cmd))
+			{
+				owner.structure.rally_x = _cmd.x;
+				owner.structure.rally_y = _cmd.y;
+			}
+			if(command_timer > 0) && (--command_timer == 0){
 			//	GetAction();
 			//	if(is_undefined(command)) command_timer_set_point = -1;
 			//}
