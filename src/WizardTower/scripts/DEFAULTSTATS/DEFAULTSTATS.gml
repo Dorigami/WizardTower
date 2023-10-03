@@ -5,7 +5,7 @@ FighterStats = function() constructor{
 		entity_type : UNIT,
         description : "default description",
         build_time : 2, // seconds
-        supply_cost : 2,
+        supply_cost : 1,
         supply_capacity : 0,
         material_cost : 20,
 		material_reward : 100,
@@ -18,6 +18,7 @@ FighterStats = function() constructor{
         size : [1,1], // [width , height]
         obj : oSummoner,
         bunker_size : 0,
+		collision_radius : round(0.3*GRID_SIZE),
         basic_attack : {
 		    name : "Shield Bash",
 		    cooldown : 5, // delay, in seconds, between attacks
@@ -42,7 +43,7 @@ FighterStats = function() constructor{
 		entity_type : UNIT,
         description : "default description",
         build_time : 2,
-        supply_cost : 2,
+        supply_cost : 1,
         supply_capacity : 0,
         material_cost : 30,
 		material_reward : 100,
@@ -50,15 +51,16 @@ FighterStats = function() constructor{
         strength : 3,
         defense : 1,
         speed : 1,
-        range : 3,
+        range : 2,
         tags : [],
         size : [1,1], // [width , height]
         obj : oMarine,
         bunker_size : 0,
+		collision_radius : round(0.3*GRID_SIZE),
         basic_attack : {
 			name : "Lens Flare",
-			cooldown : 0.2, // delay, in seconds, between attacks
-			move_penalty : 0, // move speed reduced during attack
+			cooldown : 0.5, // delay, in seconds, between attacks
+			move_penalty : 1.0, // move speed reduced during attack
 			duration : 0.2, // movement is reduced, other attacks cannot be done during this time
 			damage_point : 1, // damage is dealt after this step count
 			damage_value : 1,
@@ -79,7 +81,7 @@ FighterStats = function() constructor{
 		entity_type : UNIT,
         description : "default description",
         build_time : 2,
-        supply_cost : 2,
+        supply_cost : 1,
         supply_capacity : 0,
         material_cost : 30,
 		material_reward : 100,
@@ -92,6 +94,7 @@ FighterStats = function() constructor{
         size : [1,1], // [width , height]
         obj : oDrone,
         bunker_size : 0,
+		collision_radius : round(0.3*GRID_SIZE),
         basic_attack : {
 			name : "Lens Flare",
 			cooldown : 0.2, // delay, in seconds, between attacks
@@ -129,8 +132,8 @@ FighterStats = function() constructor{
 	    tags : [],
 	    obj : oBarricade,
 	    size : [1,1], // [width , height]
-	    rally_offset : [0,3],
 	    bunker_size : 0,
+		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Thrust Spear",
 	        cooldown : 5, // delay, in seconds, between attacks
@@ -167,8 +170,8 @@ FighterStats = function() constructor{
 	    tags : [],
 	    obj : oGunTurret,
 	    size : [1,1], // [width , height]
-	    rally_offset : [0,3],
 	    bunker_size : 0,
+		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Thrust Spear",
 	        cooldown : 5, // delay, in seconds, between attacks
@@ -205,8 +208,8 @@ FighterStats = function() constructor{
 	    tags : [],
 	    obj : oSniperTurret,
 	    size : [1,1], // [width , height]
-	    rally_offset : [0,3],
 	    bunker_size : 0,
+		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Thrust Spear",
 	        cooldown : 5, // delay, in seconds, between attacks
@@ -232,7 +235,7 @@ FighterStats = function() constructor{
 		entity_type : STRUCTURE,
 	    build_time : 1,
 	    supply_cost : 1,
-	    supply_capacity : 0,
+	    supply_capacity : 5,
 	    material_cost : 10,
 		material_reward : 100,
 	    hp : 5,
@@ -243,15 +246,15 @@ FighterStats = function() constructor{
 	    tags : [],
 	    obj : oBarracks,
 	    size : [1,1], // [width , height]
-	    rally_offset : [0,3],
 	    bunker_size : 0,
+		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Thrust Spear",
 	        cooldown : 5, // delay, in seconds, between attacks
 	        move_penalty : 0.8, // move speed reduced during attack
-	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
-	        damage_point : 10, // damage is dealt after this step count
-	        damage_value : 1,
+	        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
+	        damage_point : 20, // damage is dealt after this step count
+	        damage_value : 0,
 	        damage_obj : oBarracksBasic 
 	    },
 	    active_attack : {
@@ -270,7 +273,7 @@ FighterStats = function() constructor{
 		entity_type : STRUCTURE,
 	    build_time : 1,
 	    supply_cost : 1,
-	    supply_capacity : 0,
+	    supply_capacity : 10,
 	    material_cost : 10,
 		material_reward : 100,
 	    hp : 5,
@@ -281,8 +284,8 @@ FighterStats = function() constructor{
 	    tags : [],
 	    obj : oDroneSilo,
 	    size : [1,1], // [width , height]
-	    rally_offset : [0,3],
 	    bunker_size : 0,
+		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Thrust Spear",
 	        cooldown : 5, // delay, in seconds, between attacks
@@ -319,8 +322,8 @@ FighterStats = function() constructor{
 	    tags : [],
 	    obj : oFlameTurret,
 	    size : [1,1], // [width , height]
-	    rally_offset : [0,3],
 	    bunker_size : 0,
+		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Thrust Spear",
 	        cooldown : 5, // delay, in seconds, between attacks
@@ -357,8 +360,8 @@ FighterStats = function() constructor{
 	    tags : [],
 	    obj : oMortarTurret,
 	    size : [1,1], // [width , height]
-	    rally_offset : [0,3],
 	    bunker_size : 0,
+		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Thrust Spear",
 	        cooldown : 5, // delay, in seconds, between attacks
@@ -399,6 +402,7 @@ FighterStats = function() constructor{
         size : [1,1], // [width , height]
         obj : oSkeleton,
         bunker_size : 0,
+		collision_radius : round(0.3*GRID_SIZE),
         basic_attack : {
             name : "Bone Slash",
             cooldown : 2, // delay, in seconds, between attacks
@@ -436,6 +440,7 @@ FighterStats = function() constructor{
         size : [1,1], // [width , height]
         obj : oMarcher,
         bunker_size : 0,
+		collision_radius : round(0.3*GRID_SIZE),
         basic_attack : {
             name : "Bone Slash",
             cooldown : 2, // delay, in seconds, between attacks
@@ -473,6 +478,7 @@ FighterStats = function() constructor{
         size : [1,1], // [width , height]
         obj : oSwarmer,
         bunker_size : 0,
+		collision_radius : round(0.3*GRID_SIZE),
         basic_attack : {
             name : "Bone Slash",
             cooldown : 2, // delay, in seconds, between attacks
@@ -510,6 +516,7 @@ FighterStats = function() constructor{
         size : [1,1], // [width , height]
         obj : oBuildingKiller,
         bunker_size : 0,
+		collision_radius : round(0.3*GRID_SIZE),
         basic_attack : {
             name : "Bone Slash",
             cooldown : 2, // delay, in seconds, between attacks
@@ -547,6 +554,7 @@ FighterStats = function() constructor{
         size : [1,1], // [width , height]
         obj : oUnitKiller,
         bunker_size : 0,
+		collision_radius : round(0.3*GRID_SIZE),
         basic_attack : {
             name : "Bone Slash",
             cooldown : 2, // delay, in seconds, between attacks
@@ -584,6 +592,7 @@ FighterStats = function() constructor{
         size : [1,1], // [width , height]
         obj : oGoliath,
         bunker_size : 0,
+		collision_radius : round(0.3*GRID_SIZE),
         basic_attack : {
             name : "Bone Slash",
             cooldown : 2, // delay, in seconds, between attacks

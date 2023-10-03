@@ -19,17 +19,17 @@ if(_size > 0)
 				{
 					// put sound back into queue
 					ds_queue_enqueue(sound_queue,_snd);
-					show_debug_message("re inserting music");
+					//show_debug_message("re inserting music");
 				} else {
 					// set next song then set up to fade into it
 					music_fade_next_song = _snd.value;
 					music_fade_direction = !audio_is_playing(music_fade_prev_song);
-					show_debug_message("game music given, fade state = {0}", music_fade_direction);
+					//show_debug_message("game music given, fade state = {0}", music_fade_direction);
 				}
 				break;
 				
 			case SoundEffects:
-				show_debug_message("sound effect given");
+				//show_debug_message("sound effect given");
 				if(!sndfx_load) 
 				{
 					// put sound back into queue
@@ -41,7 +41,7 @@ if(_size > 0)
 				}
 				break;
 			case HUDEffects:
-				show_debug_message("hud effect given");
+				//show_debug_message("hud effect given");
 				if(!hudfx_load) 
 				{
 					// put sound back into queue

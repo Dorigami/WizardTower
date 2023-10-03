@@ -83,12 +83,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 			{
 				attack_index = -1;
 				// reset move penalty
-				if(attack_index == 0)
-				{
-					owner.move_penalty -= basic_attack.move_penalty;
-				} else {
-					owner.move_penalty -= active_attack.move_penalty;
-				}
+				owner.attack_move_penalty = 0;
 			}
 		}
 		if(basic_cooldown_timer > 0) && (--basic_cooldown_timer == 0) {
@@ -108,9 +103,10 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		basic_cooldown_timer = 100;
 		basic_cooldown_rate = 100 / (basic_attack.cooldown*FRAME_RATE);
 		
-		owner.move_penalty += basic_attack.move_penalty;
+		owner.attack_move_penalty = basic_attack.move_penalty;
 		var _struct = {
 			creator : owner.fighter,
+			faction : owner.faction,
 			target : attack_target,
 			attackData : basic_attack,
 		}
@@ -122,9 +118,10 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		active_cooldown_timer = 100;
 		active_cooldown_rate = active_attack.cooldown*FRAME_RATE*0.01;
 		
-		owner.move_penalty += active_attack.move_penalty;
+		owner.attack_move_penalty = active_attack.move_penalty;
 		var _struct = {
 			creator : owner.fighter,
+			faction : owner.faction,
 			target : attack_target,
 			attackData : active_attack,
 		}
@@ -244,16 +241,17 @@ Unit = function(_supply_cost, _can_bunker=true) constructor{
 
 	}
 }
-Structure = function(_sup_bonus, _abilities, _rally_x, _rally_y) constructor{
+Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 	build_ticket = undefined;
 	build_timer = -1;
 	build_timer_set_point = -1;
     owner = undefined;
-	supply_bonus = _sup_bonus;
+	units = undefined;
+	supply_current = 0;
+	supply_capacity = _sup_cap;
 	build_queue = ds_queue_create();
 	blueprint_instance = noone;
 	spawn_positions = [];
-    abilities = _abilities;
 	rally_x = _rally_x;
 	rally_y = _rally_y;
 	static Update = function(){
@@ -263,7 +261,7 @@ Structure = function(_sup_bonus, _abilities, _rally_x, _rally_y) constructor{
 		if(is_undefined(build_ticket)) && (ds_queue_size(build_queue) > 0)
 		{
 			// get the build ticket and set timer
-			build_ticket = ds_queue_dequeue(build_queue)
+			build_ticket = ds_queue_dequeue(build_queue);
 			build_timer = build_ticket[1];
 			build_timer_set_point = build_timer;
 		}
@@ -320,6 +318,7 @@ Structure = function(_sup_bonus, _abilities, _rally_x, _rally_y) constructor{
 		var _ind = 0;
 		var _actor = global.iEngine.actor_list[| owner.faction];
 		var _entity = undefined;
+		if(!is_undefined(units)) && (ds_exists(units,ds_type_list)){ (ds_list_destroy(units)) }
 		ds_queue_destroy(build_queue);
 		with(owner)
 		{
@@ -451,8 +450,15 @@ StructureTiedUnitAI = function() constructor{
 	owner = undefined;
 	static Update = function(){
 		// unit cannot be commanded by the player, will attack at will and move to structure's rally point
+		//var _cmd = commands[| 0];
 		var _target = noone;
-
+		//if(ds_list_size(commands) > 0)
+		//{
+		//	if(!is_undefined(_cmd))
+		//	{
+		//		ds_list_delete(commands, 0);
+		//	}
+		//} 
 		// if there is no command, check if entity is a fighter and get first enemy in range
 		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
 		{
@@ -591,58 +597,38 @@ SpawningStructureAI = function() constructor{
 			_cmd = commands[| 0];
 			if(!is_undefined(_cmd))
 			{
-				owner.structure.rally_x = _cmd.x;
-				owner.structure.rally_y = _cmd.y;
+				ds_list_delete(commands, 0);
+				with(owner.structure)
+				{
+					// set rally point
+					owner.structure.rally_x = _cmd.x;
+					owner.structure.rally_y = _cmd.y;
+					
+					// give move command to the units controlled by this structure
+					for(var i=ds_list_size(units); i>0; i--)
+					{
+						var _inst = units[| i-1];
+						if(instance_exists(_inst))
+						{
+							_inst.xTo = _cmd.x;
+							_inst.yTo = _cmd.y;
+						}
+					}
+				}
 			}
-			if(command_timer > 0) && (--command_timer == 0){
-			//	GetAction();
-			//	if(is_undefined(command)) command_timer_set_point = -1;
-			//}
 		} 
 		// if there is no command, check if entity is a fighter and get first enemy in range
 		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
 		{
 			// resolve fighter behavior
 			with(owner.fighter)
-			{
-				// attack the current attack target, if possible
-				if(attack_target != noone) && (instance_exists(attack_target))
+			{	
+				// activate attack to spawn a unit
+				if(attack_index == -1) && (basic_cooldown_timer <= 0)
 				{
-					// target is valid if its occupying node is in range
-					var _target_node = global.game_grid[# attack_target.xx, attack_target.yy];
-					if(ds_list_find_index(owner.checked_node_list,_target_node) > -1) 
-					{
-						_target = attack_target;
-					} else {
-						attack_target = noone;
-					}
-				} else {
-					attack_target = noone;
+					owner.attack_direction = point_direction(owner.position[1], owner.position[2], owner.structure.rally_x, owner.structure.rally_y);
+					UseBasic();
 				}
-				// if there is no attack target, attack nearest enemy
-				if(_target == noone)
-				{
-					_target = enemies_in_range[| 0];
-					if(is_undefined(_target))
-					{
-						_target = noone;
-					} else if(!instance_exists(_target)) {
-						_target = noone;
-						ds_list_delete(enemies_in_range, 0);
-					}
-				}
-				
-				// attack any enemy in range, but prioritize the attack command target
-				if(_target != noone) 
-				{
-					// attack valid target
-					if(attack_target != _target) attack_target = _target;
-					if(attack_index == -1) && (basic_cooldown_timer <= 0)
-					{
-						owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
-						UseBasic();
-					}
-				} 
 			}
 		}
 	}

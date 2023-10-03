@@ -2,7 +2,7 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
 	// this function is assumed to be run inside of a unit entity
 	// will update current node as position changes
 	var i=0,j=0,k=0,v=0,interest=-100000000000,dist=0,ang=0,uAng=vect2(0,0),uVel=vect2(0,0);
-	var speed_limit = fighter.speed*max(0, 1-move_penalty); // move penalty represents debuffs that affect movement speed
+	var speed_limit = fighter.speed*max(0, 1-attack_move_penalty-external_move_penalty); // move penalty represents debuffs that affect movement speed
 	var speed_terrain_penalty = 0; // this is how much movement is slowed in the desired direction, based on game grid parameters
 	var _in_cell = point_in_rectangle(xx,yy,0,0,global.game_grid_width-1, global.game_grid_height-1)
 	var _node = _in_cell ? global.game_grid[# xx, yy] : undefined;
@@ -154,8 +154,11 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
 function SB_Marine(_goal_priority, _attack_priority, _density_priority, _discomfort_priority){
 	// this function is assumed to be run inside of a unit entity
 	// will update current node as position changes
+	
+	if(position[1] == xTo) && (position[2] == yTo) exit;
+	
 	var i=0,j=0,k=0,v=0,interest=-100000000000,dist=0,ang=0,uAng=vect2(0,0),uVel=vect2(0,0);
-	var speed_limit = fighter.speed*max(0, 1-move_penalty); // move penalty represents debuffs that affect movement speed
+	var speed_limit = fighter.speed*max(0, 1-attack_move_penalty-external_move_penalty); // move penalty represents debuffs that affect movement speed
 	var speed_terrain_penalty = 0; // this is how much movement is slowed in the desired direction, based on game grid parameters
 	var _in_cell = point_in_rectangle(xx,yy,0,0,global.game_grid_width-1, global.game_grid_height-1)
 	var _node = _in_cell ? global.game_grid[# xx, yy] : undefined;
@@ -180,11 +183,17 @@ function SB_Marine(_goal_priority, _attack_priority, _density_priority, _discomf
 	var _discomfort_max_value = 0;
 	
 //--// 1) get direction and weight pointing toward unit's goal (the goal here would be the mob controller that this unit is a member of)
-	uAng = vect2(-1, 0);
+	var goaldist = point_distance(position[1],position[2],xTo,yTo);
+	uAng = goaldist > collision_radius ? 
+			speed_dir_to_vect2(1,point_direction(position[1],position[2],xTo,yTo)) :
+			vect2(0, 0);
 	_goal_desire = 1;
-	for(k=0;k<CS_RESOLUTION;k++)
-	{ 
-		_goal_map[k] += vect_dot(global.iEngine.cs_unit_vectors[k], uAng); 
+	if(uAng[1] + uAng[2] != 0)
+	{
+		for(k=0;k<CS_RESOLUTION;k++)
+		{ 
+			_goal_map[k] += vect_dot(global.iEngine.cs_unit_vectors[k], uAng); 
+		}
 	}
 
 //--// 2) get direction and weight pointing toward nearest valid attack target
@@ -247,13 +256,20 @@ function SB_Marine(_goal_priority, _attack_priority, _density_priority, _discomf
 	// calculate new velocity with steering, there is no speed limit in cases where steering is pointed away from current velocity
 	steering = vect_multr(uAng, steering_mag);
 	vel_movement = vect_truncate(vect_add(vel_movement, steering), max(0, speed_limit*(1-speed_terrain_penalty)));
-	
-	// cancel movement in masked directions
-	for(i=0;i<CS_RESOLUTION;i++)
+	if(vect_len(vel_movement) > goaldist)
 	{
-		if(mask[i]) && (vect_dot(uVel,global.iEngine.cs_unit_vectors[i]) > 0)
+	    position[1] = xTo;
+	    position[2] = yTo;
+		vel_movement[1] = 0;
+		vel_movement[2] = 0;
+	} else {	
+		// cancel movement in masked directions
+		for(i=0;i<CS_RESOLUTION;i++)
 		{
-			vel_movement = vect_subtract(vel_movement, vect_proj(vel_movement, global.iEngine.cs_unit_vectors[i]));
+			if(mask[i]) && (vect_dot(uVel,global.iEngine.cs_unit_vectors[i]) > 0)
+			{
+				vel_movement = vect_subtract(vel_movement, vect_proj(vel_movement, global.iEngine.cs_unit_vectors[i]));
+			}
 		}
 	}
 
@@ -282,10 +298,15 @@ function SB_Marine(_goal_priority, _attack_priority, _density_priority, _discomf
 	ds_list_destroy(_col_list);
 }
 function SB_Drone(_goal_priority, _attack_priority, _density_priority, _discomfort_priority){
+	z = min(z+2,40);
+	show_debug_message("z = {0}", z);
 	// this function is assumed to be run inside of a unit entity
 	// will update current node as position changes
+	
+	if(position[1] == xTo) && (position[2] == yTo) exit;
+	
 	var i=0,j=0,k=0,v=0,interest=-100000000000,dist=0,ang=0,uAng=vect2(0,0),uVel=vect2(0,0);
-	var speed_limit = fighter.speed*max(0, 1-move_penalty); // move penalty represents debuffs that affect movement speed
+	var speed_limit = fighter.speed*max(0, 1-attack_move_penalty-external_move_penalty); // move penalty represents debuffs that affect movement speed
 	var speed_terrain_penalty = 0; // this is how much movement is slowed in the desired direction, based on game grid parameters
 	var _in_cell = point_in_rectangle(xx,yy,0,0,global.game_grid_width-1, global.game_grid_height-1)
 	var _node = _in_cell ? global.game_grid[# xx, yy] : undefined;
@@ -310,11 +331,17 @@ function SB_Drone(_goal_priority, _attack_priority, _density_priority, _discomfo
 	var _discomfort_max_value = 0;
 	
 //--// 1) get direction and weight pointing toward unit's goal (the goal here would be the mob controller that this unit is a member of)
-	uAng = vect2(-1, 0);
+	var goaldist = point_distance(position[1],position[2],xTo,yTo);
+	uAng = goaldist > collision_radius ? 
+			speed_dir_to_vect2(1,point_direction(position[1],position[2],xTo,yTo)) :
+			vect2(0, 0);
 	_goal_desire = 1;
-	for(k=0;k<CS_RESOLUTION;k++)
-	{ 
-		_goal_map[k] += vect_dot(global.iEngine.cs_unit_vectors[k], uAng); 
+	if(uAng[1] + uAng[2] != 0)
+	{
+		for(k=0;k<CS_RESOLUTION;k++)
+		{ 
+			_goal_map[k] += vect_dot(global.iEngine.cs_unit_vectors[k], uAng); 
+		}
 	}
 
 //--// 2) get direction and weight pointing toward nearest valid attack target
@@ -377,13 +404,20 @@ function SB_Drone(_goal_priority, _attack_priority, _density_priority, _discomfo
 	// calculate new velocity with steering, there is no speed limit in cases where steering is pointed away from current velocity
 	steering = vect_multr(uAng, steering_mag);
 	vel_movement = vect_truncate(vect_add(vel_movement, steering), max(0, speed_limit*(1-speed_terrain_penalty)));
-	
-	// cancel movement in masked directions
-	for(i=0;i<CS_RESOLUTION;i++)
+	if(vect_len(vel_movement) > goaldist)
 	{
-		if(mask[i]) && (vect_dot(uVel,global.iEngine.cs_unit_vectors[i]) > 0)
+	    position[1] = xTo;
+	    position[2] = yTo;
+		vel_movement[1] = 0;
+		vel_movement[2] = 0;
+	} else {	
+		// cancel movement in masked directions
+		for(i=0;i<CS_RESOLUTION;i++)
 		{
-			vel_movement = vect_subtract(vel_movement, vect_proj(vel_movement, global.iEngine.cs_unit_vectors[i]));
+			if(mask[i]) && (vect_dot(uVel,global.iEngine.cs_unit_vectors[i]) > 0)
+			{
+				vel_movement = vect_subtract(vel_movement, vect_proj(vel_movement, global.iEngine.cs_unit_vectors[i]));
+			}
 		}
 	}
 
@@ -416,7 +450,7 @@ function SB_Horizontal(_goal_priority, _attack_priority, _density_priority, _dis
 	// this function is assumed to be run inside of a unit entity
 	// will update current node as position changes
 	var i=0,j=0,k=0,v=0,interest=-100000000000,dist=0,ang=0,uAng=vect2(0,0),uVel=vect2(0,0);
-	var speed_limit = fighter.speed*max(0, 1-move_penalty); // move penalty represents debuffs that affect movement speed
+	var speed_limit = fighter.speed*max(0, 1-attack_move_penalty-external_move_penalty); // move penalty represents debuffs that affect movement speed
 	var speed_terrain_penalty = 0; // this is how much movement is slowed in the desired direction, based on game grid parameters
 	var _in_cell = point_in_rectangle(xx,yy,0,0,global.game_grid_width-1, global.game_grid_height-1)
 	var _node = _in_cell ? global.game_grid[# xx, yy] : undefined;
@@ -550,7 +584,7 @@ function SB_PlayerUnit(_goal_priority, _attack_priority, _density_priority, _dis
 	if(position[1] == xTo) && (position[2] == yTo) exit;
 	
 	var i=0,j=0,k=0,v=0,interest=-100000000000,dist=0,ang=0,uAng=vect2(0,0),uVel=vect2(0,0);
-	var speed_limit = fighter.speed*max(0, 1-move_penalty); // move penalty represents debuffs that affect movement speed
+	var speed_limit = fighter.speed*max(0, 1-attack_move_penalty-external_move_penalty); // move penalty represents debuffs that affect movement speed
 	var speed_terrain_penalty = 0; // this is how much movement is slowed in the desired direction, based on game grid parameters
 	var _in_cell = point_in_rectangle(xx,yy,0,0,global.game_grid_width-1, global.game_grid_height-1)
 	var _node = _in_cell ? global.game_grid[# xx, yy] : undefined;
@@ -754,102 +788,4 @@ function BlueprintSteering(){
 		y = position[2];
 	*/
 }
-function UnitSteering_Basic(){
-// this function is assumed to be run inside of a unit entity
-// will update current node as position changes
-	var _dirindex = 0;
-	var _map = undefined;
-	var _value = 0;
-	var validMove = false;
-	var speed_limit = fighter.speed*max(0, 1-move_penalty);
-
-	// don't steer when the goal is reached
-	if(point_distance(position[1], position[2], xTo,yTo) <= collision_radius) exit;
-
-	// clear context maps
-	for(var i=0;i<CS_RESOLUTION;i++) 
-	{
-		danger_map[i] = 0;
-		interest_map[i] = 0;
-		mask[i] = false;
-	}
-
-	ds_list_clear(global.interest_set);
-	ds_list_clear(global.danger_set);
-	interest = -10;
-
-	// calculate context maps
-	CS_Avoid_Obstructions();
-	CS_Move_To_Attack_Target();
-	CS_Move_To_Goal();
-
-	// combining interest and danger maps independantly to have an interest/danger pair
-	// combine interest set
-	for(var i=0; i<ds_list_size(global.interest_set); i++)
-	{
-		_map = global.interest_set[| i];
-		for(var j=0;j<CS_RESOLUTION;j++)
-		{
-			if(_map[j] > interest_map[j]) interest_map[j] = _map[j];
-		}
-	}
-	
-	// combine danger set
-	for(var i=0; i<ds_list_size(global.danger_set); i++)
-	{
-		_map = global.danger_set[| i];
-		for(var j=0;j<CS_RESOLUTION;j++){ 
-			if(_map[j] > danger_map[j]){ 
-				danger_map[j] = min(1, _map[j]) 
-			}
-		}
-	}
-
-	// get a preferred direction, weighing interest and danger together
-	for(var i=0;i<CS_RESOLUTION;i++) 
-	{
-		if(interest_map[i] <= 0) continue;
-		if(validMove == false) validMove = true;
-		_value = interest_map[i] - danger_map[i];
-		if(_value >= interest) 
-		{
-			_dirindex = i;
-			// in case of tied interest, pick one at random
-			if(_value == interest) && (random(1) < 0.5) continue;
-			// set new interest/direction to move
-			interest = _value;
-		} 
-	}
-
-	if(validMove)
-	{
-		// check if direction is masked
-		if(mask[_dirindex])
-		{
-			show_debug_message("desired direction is masked in dirIndex {0}\n v0={1} | direction = {2}",_dirindex,vel_movement,vect_direction(vel_movement));
-			vel_movement = vect_subtract(vel_movement, vect_mult(vel_movement, vect_proj(vel_movement, speed_dir_to_vect2(1,i*CS_RESOLUTION))));
-			show_debug_message("v1={0} | direction = {1}",vel_movement,vect_direction(vel_movement));
-			// vel_movement[1] = 0;
-			// vel_movement[2] = 0;
-		} else {
-			// calculate new velocity with steering
-			direction = _dirindex*(360 div CS_RESOLUTION);
-			steering = speed_dir_to_vect2(steering_mag, direction);
-			vel_movement = vect_truncate(vect_add(vel_movement, steering), speed_limit*(1-danger_map[_dirindex]));
-		}
-		// land on goal point
-		var _dist = point_distance(x,y,xTo,yTo); 
-		if(_dist < vect_len(vel_movement)) vel_movement = speed_dir_to_vect2(_dist, direction);
-	}	
-
-    // simulate friction(deceleration) with respect to outside influences on movement
-    if(vel_force[1] != 0) || (vel_force[2] != 0) vel_force = vect_multr(vel_force, vel_force_conservation);
-	
-    // update position based on velocities (forces and movement)
-    position[1] = clamp(position[1] + vel_force[1] + vel_movement[1], 0, global.game_grid_width*GRID_SIZE - 1);
-    position[2] = clamp(position[2] + vel_force[2] + vel_movement[2], 0, global.game_grid_height*GRID_SIZE - 1);
-	x = position[1];
-	y = position[2];
-}
-
 

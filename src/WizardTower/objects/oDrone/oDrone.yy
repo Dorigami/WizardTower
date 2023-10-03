@@ -2,7 +2,9 @@
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
   "name": "oDrone",
-  "eventList": [],
+  "eventList": [
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
+  ],
   "managed": true,
   "overriddenProperties": [
     {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","objectId":null,"propertyId":null,"value":"100",},
@@ -37,8 +39,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sSpearIdle",
-    "path": "sprites/sSpearIdle/sSpearIdle.yy",
+    "name": "s_drone_idle",
+    "path": "sprites/s_drone_idle/s_drone_idle.yy",
   },
   "spriteMaskId": null,
   "visible": true,

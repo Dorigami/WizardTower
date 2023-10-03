@@ -50,17 +50,17 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 
 		// get animations and ai components
 		_ai_component = new BasicUnitAI();
-		_steering_preference = UnitSteering_Basic;
 		switch(_type_string)
 		{
 			case "summoner":
+				_steering_preference = SB_PlayerUnit;
 				break;
 			case "drone":
 				_steering_preference = SB_Drone;
 				delete _ai_component; _ai_component = new StructureTiedUnitAI();
 				break;
 			case "marine":
-				_steering_preference = SB_Marine;
+				_steering_preference = SB_PlayerUnit;
 				delete _ai_component; _ai_component = new StructureTiedUnitAI();
 				break;
 			case "marcher":
@@ -83,12 +83,10 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 				break;
 		}
 
-		// allow unit to be controlled by the player if it belongs to the player
-		if(_faction == PLAYER_FACTION) _steering_preference = SB_PlayerUnit;
-
 		// create the entity
 		_struct = {
 			// cell or tile position
+			z : 0,
 			xx : _x div GRID_SIZE, 
 			yy : _y div GRID_SIZE,
 			my_node : _node,
@@ -104,8 +102,9 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			
 			// movement variables
 			moveable : true,
-			move_penalty : 0,
-			collision_radius : round(0.2*GRID_SIZE),
+			attack_move_penalty : 0,
+			external_move_penalty : 0,
+			collision_radius : _stats.collision_radius,
 			steering_mag : 0.3,
 			vel_force_conservation : 0.95,
 			vel_force : vect2(0,0),

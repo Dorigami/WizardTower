@@ -6,14 +6,22 @@ function Update(){
     // get desired direction
 	// weights = [goal, attack, density, discomfort]
 	var _movement_weights = [1,1,1,1];
-	if(!is_undefined(steering_behavior)) && (script_exists(steering_behavior)) script_execute_array(steering_behavior, _movement_weights);
+	if(!is_undefined(steering_behavior)) && (script_exists(steering_behavior)) 
+	{
+		show_debug_message("steering script for object [{1}] is: {0}", script_get_name(steering_behavior), object_get_name(object_index));
+		script_execute_array(steering_behavior, _movement_weights);
+	}
 	// steer toward desired direction
 
-
+	
 	// update position relative to the gui layer
 	if(visible){
 		gui_x = position[1] - camera_get_view_x(view_camera[0]);
 		gui_y = position[2] - camera_get_view_y(view_camera[0]);
+		if(z > 0) && (vect_len(vel_movement) > 0.005)
+		{
+			image_angle	= vect_direction(vel_movement);
+		}
 	}
 	
 	// animate
@@ -21,10 +29,12 @@ function Update(){
 	var _move_lim = 0.8;
 	var _spd = vect_len(vel_movement);
 	var _dir = vect_direction(vel_movement);
+	var _attacking = false;
     var _theta = 5; // this value will determine a deadzone where the sprite cannot flip their scaling
 	if(spr_idle != -1)
 	{
 		if(!is_undefined(fighter) && fighter.attack_index > -1){
+			_attacking = true;
 			var _dur = fighter.attack_index == 0 ? fighter.basic_attack.duration : fighter.active_attack.duration;
 			if(sprite_index != spr_attack) 
 			{
@@ -34,7 +44,7 @@ function Update(){
 			}
 			image_index = min(image_number-1, image_index + image_number/(_dur*FRAME_RATE));
 
-            _dir = !is_undefined(structure) ? 0 : attack_direction;
+            _dir = entity_type == STRUCTURE ? 0 : attack_direction;
 		} else {
             if(_spd <= _idle_lim)
             {
@@ -53,7 +63,7 @@ function Update(){
                 }
             }
         }
-		if(vect_len(vel_movement) > 0)
+		if((vect_len(vel_movement) > 0) || (_attacking)) && (z == 0)
 		{
 	        if(_dir > 90+_theta) && (_dir < 270-_theta){
 	            if(image_xscale != -1) image_xscale = -1;
@@ -191,7 +201,7 @@ function DensitySplat(){
 }
 
 // if(spr_idle != -1) sprite_index = spr_idle;
-
+shadow_scale = 0.5 * sprite_get_width(sprite_index) / sprite_get_width(sShadow);
 var _str = object_get_name(object_index);
 _str = string_lower(string_copy(_str,2,string_length(_str)-1));
 type_string = _str;

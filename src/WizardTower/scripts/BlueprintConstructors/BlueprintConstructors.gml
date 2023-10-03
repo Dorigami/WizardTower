@@ -27,6 +27,7 @@ function ConstructBlueprint(_x, _y, _faction, _type_string){
 		// create the entity
 		_struct = {
 			sprite_index : asset_get_index("s_"+_type_string+"_idle"),
+			z : 0,
 			xx : _xx,
 			yy : _yy,
 			xx_prev : _xx,

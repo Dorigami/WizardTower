@@ -45,32 +45,37 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct structure - type string invalid"); exit;}
 		if(is_undefined(_actor)) { show_debug_message("ERROR: construct structure - actor for faction {0} invalid", _faction); exit;}
 		if(VerifyBuildingArea(_x, _y, _stats.size[0], _stats.size[1]) == false) { show_debug_message("ERROR: construct structure - one or more of the nodes are occupied"); exit;}
-
-		// get attack parameters
+		
+		_fighter_component = new Fighter(_stats.hp, _stats.strength, _stats.defense, _stats.speed, _stats.range, _stats.tags, _stats.basic_attack, _stats.active_attack);
+		_structure_component = new Structure(_stats.supply_capacity, 
+						clamp(_x+lengthdir_x(_stats.collision_radius,270),global.game_grid_xorigin,global.game_grid_xorigin+global.game_grid_width*GRID_SIZE), 
+						clamp(_y+lengthdir_y(_stats.collision_radius,270),global.game_grid_yorigin,global.game_grid_yorigin+global.game_grid_height*GRID_SIZE));
+		if(_stats.bunker_size > 0) _bunker_component = new Bunker(_stats.bunker_size);
+		
 		switch(_type_string)
 		{
 			case "barricade":
+				_ai_component = new BasicStructureAI();
 				break;
 			case "gunturret":
+				_ai_component = new BasicStructureAI();
 				break;
 			case "sniperturret":
+				_ai_component = new BasicStructureAI();
 				break;
 			case "barracks":  
+				_ai_component = new SpawningStructureAI();
 				break;
 			case "dronesilo":   
+				_ai_component = new SpawningStructureAI();
 				break;
 			case "flameturret": 
+				_ai_component = new BasicStructureAI();
 				break;
-			case "mortarturret":     
+			case "mortarturret":  
+				_ai_component = new BasicStructureAI();
 				break;
-		}
-
-		if(_stats.bunker_size > 0) _bunker_component = new Bunker(_stats.bunker_size);
-		switch(_type_string)
-		{
 			default:
-				_fighter_component = new Fighter(_stats.hp, _stats.strength, _stats.defense, _stats.speed, _stats.range, _stats.tags, _stats.basic_attack, _stats.active_attack);
-				_structure_component = new Structure(_stats.supply_capacity, _xx+_stats.rally_offset[0], _yy+_stats.rally_offset[1]);
 				_ai_component = new BasicStructureAI();
 			break;
 		}
@@ -78,6 +83,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 		// create the entity
 		_struct = {
 			// cell or tile position
+			z : 0,
 			xx : _xx, 
 			yy : _yy,
 			xx_prev : _xx,
@@ -90,7 +96,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			// movement variables
 			moveable : false,
 			move_penalty : 0,
-			collision_radius : round(0.6*GRID_SIZE),
+			collision_radius : _stats.collision_radius,
 			vel_force_conservation : 0.95,
 			vel_force : vect2(0,0),
 			vel_movement : vect2(0,0),
@@ -132,7 +138,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			structure : _structure_component, 
 			bunker : _bunker_component, 
 			ai : _ai_component,
-			interactable : _interactable_component
+			interactable : _interactable_component,
 		}
 
 		_structure = instance_create_layer(_x, _y, "Instances", _stats.obj, _struct);
@@ -156,6 +162,10 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			_h = _stats.size[1]+2;
 			_cw = _w div 2;
 			_ch = _h div 2;
+			if(_structure_component.supply_capacity > 0)
+			{
+				_structure_component.units = ds_list_create();
+			}
 			for(var i=-_cw; i<_w-_cw; i++){
 			for(var j=-_ch; j<_h-_ch; j++){
 				// make sure we are looking at an edge position
