@@ -238,7 +238,12 @@ Unit = function(_supply_cost, _can_bunker=true) constructor{
 		}
 	}
 	static Destroy = function(){
-
+		// if unit is tied to a structure, remove it from structure's units list
+		if(instance_exists(owner.creator))
+		{
+			var _list = owner.creator.structure.units;
+			ds_list_delete(_list, ds_list_find_index(_list, owner.id));
+		}
 	}
 }
 Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
@@ -586,7 +591,7 @@ BasicStructureAI = function() constructor{
 		ds_list_destroy(commands);
 	}
 }
-SpawningStructureAI = function() constructor{
+BarracksAI = function() constructor{
     commands = ds_list_create();
 	owner = undefined;
 	static Update = function(){
@@ -617,6 +622,71 @@ SpawningStructureAI = function() constructor{
 				}
 			}
 		} 
+		// if there is no command, check if entity is a fighter and get first enemy in range
+		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		{
+			// resolve fighter behavior
+			with(owner.fighter)
+			{	
+				// activate attack to spawn a unit
+				if(attack_index == -1) && (basic_cooldown_timer <= 0)
+				{
+					owner.attack_direction = point_direction(owner.position[1], owner.position[2], owner.structure.rally_x, owner.structure.rally_y);
+					UseBasic();
+				}
+			}
+		}
+	}
+	static Destroy = function(){
+		// delete commands
+		for(var i=0; i<ds_list_size(commands); i++)
+		{
+			if(!is_undefined(commands[| i])) delete commands[| i];
+		}
+		// destroy command list
+		ds_list_destroy(commands);
+	}
+}
+DroneSiloAI = function() constructor{
+    commands = ds_list_create();
+	owner = undefined;
+	static Update = function(){
+		var _cmd = undefined;
+		var _target = noone;
+		if(ds_list_size(commands) > 0)
+		{
+			_cmd = commands[| 0];
+			if(!is_undefined(_cmd))
+			{
+				ds_list_delete(commands, 0);
+				with(owner.structure)
+				{
+					// set rally point
+					owner.structure.rally_x = _cmd.x;
+					owner.structure.rally_y = _cmd.y;
+					
+					// give move command to the units controlled by this structure
+					for(var i=ds_list_size(units); i>0; i--)
+					{
+						var _inst = units[| i-1];
+						if(instance_exists(_inst))
+						{
+							_inst.xTo = _cmd.x;
+							_inst.yTo = _cmd.y;
+						}
+					}
+				}
+			}
+		} 
+		// update follow positions for tied units
+		with(owner)
+		{
+			var _num = ds_list_size(structure.units);
+			for(var i=0;i<_num;i++)
+			{
+			
+			}
+		}
 		// if there is no command, check if entity is a fighter and get first enemy in range
 		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
 		{

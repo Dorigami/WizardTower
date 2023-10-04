@@ -64,10 +64,10 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 				_ai_component = new BasicStructureAI();
 				break;
 			case "barracks":  
-				_ai_component = new SpawningStructureAI();
+				_ai_component = new BarracksAI();
 				break;
 			case "dronesilo":   
-				_ai_component = new SpawningStructureAI();
+				_ai_component = new DroneSiloAI();
 				break;
 			case "flameturret": 
 				_ai_component = new BasicStructureAI();

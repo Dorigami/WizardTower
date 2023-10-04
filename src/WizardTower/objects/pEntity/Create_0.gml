@@ -76,6 +76,7 @@ function Update(){
     // update the healthbars' position
     if(visible)
     {
+		depth = LOWERTEXDEPTH - 0.3*y;
         if(!is_undefined(fighter)){
             basicattackbar_bbox[0] = bbox_left;
             basicattackbar_bbox[1] = bbox_top-4*bar_height;
