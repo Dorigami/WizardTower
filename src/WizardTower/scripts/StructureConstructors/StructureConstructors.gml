@@ -48,8 +48,8 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 		
 		_fighter_component = new Fighter(_stats.hp, _stats.strength, _stats.defense, _stats.speed, _stats.range, _stats.tags, _stats.basic_attack, _stats.active_attack);
 		_structure_component = new Structure(_stats.supply_capacity, 
-						clamp(_x+lengthdir_x(_stats.collision_radius,270),global.game_grid_xorigin,global.game_grid_xorigin+global.game_grid_width*GRID_SIZE), 
-						clamp(_y+lengthdir_y(_stats.collision_radius,270),global.game_grid_yorigin,global.game_grid_yorigin+global.game_grid_height*GRID_SIZE));
+						clamp(_x+lengthdir_x(_stats.collision_radius+15,270),global.game_grid_xorigin,global.game_grid_xorigin+global.game_grid_width*GRID_SIZE), 
+						clamp(_y+lengthdir_y(_stats.collision_radius+15,270),global.game_grid_yorigin,global.game_grid_yorigin+global.game_grid_height*GRID_SIZE));
 		if(_stats.bunker_size > 0) _bunker_component = new Bunker(_stats.bunker_size);
 		
 		switch(_type_string)

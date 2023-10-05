@@ -1,4 +1,4 @@
-function EnforceMinDistance(other_entity){
+function EnforceMinDistance(other_entity, _is_flyer=false){
 	// this function prevents unit-type entities from stacking on top of one another
 	// function will return false if the entities are too far apart, anf returns true if the min distance is enforced
 	// 
@@ -7,7 +7,9 @@ function EnforceMinDistance(other_entity){
 	var _diff = _mindistance-_dist; if(_diff <= 0) return false;
 	var _split = collision_radius / _mindistance;
 	var _dir = point_direction(position[1],position[2],other_entity.position[1],other_entity.position[2]);
-
+	
+	if(_is_flyer) && (other_entity.z == 0) exit;
+	
 	if(moveable)
 	{
 		position[1] += _diff*(1-_split)*dcos(_dir-180);
