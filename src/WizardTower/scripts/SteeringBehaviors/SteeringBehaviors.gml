@@ -298,12 +298,19 @@ function SB_Marine(_goal_priority, _attack_priority, _density_priority, _discomf
 	ds_list_destroy(_col_list);
 }
 function SB_Drone(_goal_priority, _attack_priority, _density_priority, _discomfort_priority){
-	z = min(z+2,40);
-	show_debug_message("z = {0}", z);
 	// this function is assumed to be run inside of a unit entity
 	// will update current node as position changes
 	
 	if(position[1] == xTo) && (position[2] == yTo) exit;
+	
+	// animate floating
+	if(float_enabled)
+	{
+		float_wave += float_wave_speed;
+		float_mod += 0.06*(1-float_mod);
+		z = float_mod*(float_height) + float_osc*sin(float_wave);
+		show_debug_message("osc = {0}",float_osc*sin(float_wave))
+	}
 	
 	var i=0,j=0,k=0,v=0,interest=-100000000000,dist=0,ang=0,uAng=vect2(0,0),uVel=vect2(0,0);
 	var speed_limit = fighter.speed*max(0, 1-attack_move_penalty-external_move_penalty); // move penalty represents debuffs that affect movement speed
@@ -366,11 +373,6 @@ function SB_Drone(_goal_priority, _attack_priority, _density_priority, _discomfo
 		// get entities of otherNode and enforce mindistance
 		v = ds_list_size(_otherNode.occupied_list);
 		if(v > 0){ for(k=0;k<v;k++) ds_list_add(_col_list, _otherNode.occupied_list[| k]) }
-
-		if(_otherNode.blocked) || (!_otherNode.walkable)
-		{
-			if(dist <= collision_radius+_halfgrid) if(!mask[ang div 8]) mask[ang div 8] = true;
-		}
 
 		for(k=0;k<CS_RESOLUTION;k++)
 		{ 
@@ -438,10 +440,10 @@ function SB_Drone(_goal_priority, _attack_priority, _density_priority, _discomfo
 	
 	for(i=0;i<ds_list_size(_col_list);i++)
 	{
-		EnforceMinDistance(_col_list[| i]);
+		EnforceMinDistance(_col_list[| i], true);
 	}
 	
-	EnforceTileCollision();
+	EnforceTileCollision(true);
 	
 	ds_list_destroy(_col_list);
 }

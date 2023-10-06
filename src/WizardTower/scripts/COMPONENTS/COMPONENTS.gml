@@ -242,6 +242,7 @@ Unit = function(_supply_cost, _can_bunker=true) constructor{
 		if(instance_exists(owner.creator))
 		{
 			var _list = owner.creator.structure.units;
+			owner.creator.structure.supply_current--;
 			ds_list_delete(_list, ds_list_find_index(_list, owner.id));
 		}
 	}
@@ -678,15 +679,7 @@ DroneSiloAI = function() constructor{
 				}
 			}
 		} 
-		// update follow positions for tied units
-		with(owner)
-		{
-			var _num = ds_list_size(structure.units);
-			for(var i=0;i<_num;i++)
-			{
-			
-			}
-		}
+		
 		// if there is no command, check if entity is a fighter and get first enemy in range
 		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
 		{
@@ -694,7 +687,7 @@ DroneSiloAI = function() constructor{
 			with(owner.fighter)
 			{	
 				// activate attack to spawn a unit
-				if(attack_index == -1) && (basic_cooldown_timer <= 0)
+				if(attack_index == -1) && (basic_cooldown_timer <= 0) && (ds_list_size(owner.structure.units) < owner.structure.supply_capacity)
 				{
 					owner.attack_direction = point_direction(owner.position[1], owner.position[2], owner.structure.rally_x, owner.structure.rally_y);
 					UseBasic();

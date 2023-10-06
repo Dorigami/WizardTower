@@ -24,6 +24,7 @@ function EnforceTileCollision(_is_flyer=false){
 		}
 	} else {
 		// flying entity collision
+		/*
 		if(_node.blocked)
 		{
 			show_debug_message("Tile collision occured at {0}, {1}", xx, yy);
@@ -43,5 +44,6 @@ function EnforceTileCollision(_is_flyer=false){
 				if(sign(vel_force[2]) != sign(dy)) vel_force[2] = 0;
 			}
 		}
+		*/
 	}
 }

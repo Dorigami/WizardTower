@@ -130,6 +130,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			faction : _faction,
 			engagement_radius : _stats.range,
 			entity_type : _stats.entity_type,
+			drone_destinations : _type_string == "drone" ? array_create(_stats.supply_capacity, noone) : undefined,
 
 			// polymorphic components
 			blueprint : _blueprint_component, 

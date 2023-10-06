@@ -8,7 +8,7 @@ function Update(){
 	var _movement_weights = [1,1,1,1];
 	if(!is_undefined(steering_behavior)) && (script_exists(steering_behavior)) 
 	{
-		show_debug_message("steering script for object [{1}] is: {0}", script_get_name(steering_behavior), object_get_name(object_index));
+		//show_debug_message("steering script for object [{1}] is: {0}", script_get_name(steering_behavior), object_get_name(object_index));
 		script_execute_array(steering_behavior, _movement_weights);
 	}
 	// steer toward desired direction
@@ -18,10 +18,6 @@ function Update(){
 	if(visible){
 		gui_x = position[1] - camera_get_view_x(view_camera[0]);
 		gui_y = position[2] - camera_get_view_y(view_camera[0]);
-		if(z > 0) && (vect_len(vel_movement) > 0.005)
-		{
-			image_angle	= vect_direction(vel_movement);
-		}
 	}
 	
 	// animate
@@ -63,7 +59,7 @@ function Update(){
                 }
             }
         }
-		if((vect_len(vel_movement) > 0) || (_attacking)) && (z == 0)
+		if((vect_len(vel_movement) > 0) || (_attacking))
 		{
 	        if(_dir > 90+_theta) && (_dir < 270-_theta){
 	            if(image_xscale != -1) image_xscale = -1;

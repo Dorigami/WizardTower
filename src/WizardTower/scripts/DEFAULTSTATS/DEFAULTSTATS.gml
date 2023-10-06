@@ -97,10 +97,10 @@ FighterStats = function() constructor{
 		collision_radius : round(0.3*GRID_SIZE),
         basic_attack : {
 			name : "Lens Flare",
-			cooldown : 0.2, // delay, in seconds, between attacks
+			cooldown : 10, // delay, in seconds, between attacks
 			move_penalty : 0, // move speed reduced during attack
-			duration : 0.2, // movement is reduced, other attacks cannot be done during this time
-			damage_point : 1, // damage is dealt after this step count
+			duration : 0.8, // movement is reduced, other attacks cannot be done during this time
+			damage_point : FRAME_RATE*0.9, // damage is dealt after this step count
 			damage_value : 1,
 			damage_obj : oDroneBasic 
 		},
@@ -273,7 +273,7 @@ FighterStats = function() constructor{
 		entity_type : STRUCTURE,
 	    build_time : 1,
 	    supply_cost : 1,
-	    supply_capacity : 10,
+	    supply_capacity : 1,
 	    material_cost : 10,
 		material_reward : 100,
 	    hp : 5,
