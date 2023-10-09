@@ -7,6 +7,7 @@ function EnforceMinDistance(other_entity, _is_flyer=false){
 	var _diff = _mindistance-_dist; if(_diff <= 0) return false;
 	var _split = collision_radius / _mindistance;
 	var _dir = point_direction(position[1],position[2],other_entity.position[1],other_entity.position[2]);
+	if(position[1] + position[2] - other_entity.position[1] - other_entity.position[2] == 0) { _dir = irandom(359) }
 	
 	if(_is_flyer) && (other_entity.z == 0) exit;
 	
