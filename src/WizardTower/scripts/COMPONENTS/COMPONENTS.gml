@@ -31,11 +31,7 @@ Blueprint = function(_build_time) constructor{
 				// construct either a unit, or a structure
 				if(_stats.entity_type == UNIT)
 				{
-					var _ent = ConstructUnit(owner.xx, owner.yy, owner.faction, owner.type_string);
-					_ent.position[1] = owner.xTo;
-					_ent.position[2] = owner.yTo;
-					_ent.x = owner.xTo;
-					_ent.y = owner.yTo;
+					var _ent = ConstructUnit(owner.xTo, owner.yTo, owner.faction, owner.type_string);
 				} else {
 					ConstructStructure(owner.x, owner.y, owner.faction, owner.type_string);
 				}

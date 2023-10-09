@@ -1,8 +1,8 @@
 function ConstructBlueprint(_x, _y, _faction, _type_string){
 	with(global.iEngine)
 	{
-		_x = clamp((_x div GRID_SIZE)*GRID_SIZE,global.game_grid_xorigin,global.game_grid_xorigin+global.game_grid_width*GRID_SIZE-1);
-		_y = clamp((_y div GRID_SIZE)*GRID_SIZE,global.game_grid_yorigin,global.game_grid_yorigin+global.game_grid_height*GRID_SIZE-1);
+		_x = clamp((_x div GRID_SIZE)*GRID_SIZE+HALF_GRID,global.game_grid_xorigin,global.game_grid_xorigin+global.game_grid_width*GRID_SIZE-1);
+		_y = clamp((_y div GRID_SIZE)*GRID_SIZE+HALF_GRID,global.game_grid_yorigin,global.game_grid_yorigin+global.game_grid_height*GRID_SIZE-1);
 		var _xx = _x div GRID_SIZE;
 		var _yy = _y div GRID_SIZE;
 		var _w, _h, _cw, _ch;

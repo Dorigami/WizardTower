@@ -184,6 +184,7 @@
     {"id":{"name":"s_barricade_death","path":"sprites/s_barricade_death/s_barricade_death.yy",},},
     {"id":{"name":"sFollower2","path":"sprites/sFollower2/sFollower2.yy",},},
     {"id":{"name":"sRadialOne","path":"sprites/sRadialOne/sRadialOne.yy",},},
+    {"id":{"name":"sFlameTurretAttack","path":"sprites/sFlameTurretAttack/sFlameTurretAttack.yy",},},
     {"id":{"name":"oMarine","path":"objects/oMarine/oMarine.yy",},},
     {"id":{"name":"_69_Enemy_death_01","path":"sounds/_69_Enemy_death_01/_69_Enemy_death_01.yy",},},
     {"id":{"name":"InitializeGameData","path":"scripts/InitializeGameData/InitializeGameData.yy",},},

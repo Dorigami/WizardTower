@@ -100,7 +100,7 @@ FighterStats = function() constructor{
 			cooldown : 10, // delay, in seconds, between attacks
 			move_penalty : 0, // move speed reduced during attack
 			duration : 0.8, // movement is reduced, other attacks cannot be done during this time
-			damage_point : FRAME_RATE*0.9, // damage is dealt after this step count
+			damage_point : FRAME_RATE*0.6, // damage is dealt after this step count
 			damage_value : 1,
 			damage_obj : oDroneBasic 
 		},
@@ -273,7 +273,7 @@ FighterStats = function() constructor{
 		entity_type : STRUCTURE,
 	    build_time : 1,
 	    supply_cost : 1,
-	    supply_capacity : 1,
+	    supply_capacity : 2,
 	    material_cost : 10,
 		material_reward : 100,
 	    hp : 5,
@@ -314,11 +314,11 @@ FighterStats = function() constructor{
 	    supply_capacity : 0,
 	    material_cost : 10,
 		material_reward : 100,
-	    hp : 5,
+	    hp : 20,
 	    strength : 3,
 	    defense : 1,
 	    speed : 0,
-	    range : 4,
+	    range : 1,
 	    tags : [],
 	    obj : oFlameTurret,
 	    size : [1,1], // [width , height]

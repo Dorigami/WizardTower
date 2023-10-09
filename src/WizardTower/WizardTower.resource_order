@@ -135,6 +135,7 @@
     {"name":"_13_Ice_explosion_01","order":19,"path":"sounds/_13_Ice_explosion_01/_13_Ice_explosion_01.yy",},
     {"name":"s_barricade_death","order":2,"path":"sprites/s_barricade_death/s_barricade_death.yy",},
     {"name":"sRadialOne","order":6,"path":"sprites/sRadialOne/sRadialOne.yy",},
+    {"name":"sFlameTurretAttack","order":43,"path":"sprites/sFlameTurretAttack/sFlameTurretAttack.yy",},
     {"name":"oMarine","order":2,"path":"objects/oMarine/oMarine.yy",},
     {"name":"_69_Enemy_death_01","order":34,"path":"sounds/_69_Enemy_death_01/_69_Enemy_death_01.yy",},
     {"name":"InitializeGameData","order":13,"path":"scripts/InitializeGameData/InitializeGameData.yy",},

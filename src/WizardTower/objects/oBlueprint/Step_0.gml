@@ -15,8 +15,8 @@ if(lock_to_grid)
 
 		xx = _xx;
 		yy = _yy;
-		x = (mouse_x div GRID_SIZE)*GRID_SIZE;
-		y = (mouse_y div GRID_SIZE)*GRID_SIZE;
+		x = (mouse_x div GRID_SIZE)*GRID_SIZE+HALF_GRID;
+		y = (mouse_y div GRID_SIZE)*GRID_SIZE+HALF_GRID;
 
 		rect = [
 			global.game_grid_xorigin + (xx-_cw)*GRID_SIZE,
