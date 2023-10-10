@@ -174,7 +174,7 @@ FighterStats = function() constructor{
 		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Thrust Spear",
-	        cooldown : 5, // delay, in seconds, between attacks
+	        cooldown : 2, // delay, in seconds, between attacks
 	        move_penalty : 0.8, // move speed reduced during attack
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
@@ -212,11 +212,11 @@ FighterStats = function() constructor{
 		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Thrust Spear",
-	        cooldown : 5, // delay, in seconds, between attacks
+	        cooldown : 6, // delay, in seconds, between attacks
 	        move_penalty : 0.8, // move speed reduced during attack
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
-	        damage_value : 1,
+	        damage_value : 6,
 	        damage_obj : oSniperBasic 
 	    },
 	    active_attack : {

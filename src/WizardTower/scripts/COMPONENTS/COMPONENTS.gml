@@ -626,7 +626,7 @@ BarracksAI = function() constructor{
 			with(owner.fighter)
 			{	
 				// activate attack to spawn a unit
-				if(attack_index == -1) && (basic_cooldown_timer <= 0)
+				if(attack_index == -1) && (basic_cooldown_timer <= 0) && (ds_list_size(owner.structure.units) < owner.structure.supply_capacity)
 				{
 					owner.attack_direction = point_direction(owner.position[1], owner.position[2], owner.structure.rally_x, owner.structure.rally_y);
 					UseBasic();

@@ -29,10 +29,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "sAttackBolt",
-    "path": "sprites/sAttackBolt/sAttackBolt.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }
