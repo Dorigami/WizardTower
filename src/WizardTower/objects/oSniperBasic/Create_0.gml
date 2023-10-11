@@ -30,3 +30,4 @@ visible = true;
 image_speed = 0.5;
 image_angle = point_direction(x,y,xend,yend);
 start_scale = point_distance(x,y,xend,yend) / sprite_get_width(spr_start);
+

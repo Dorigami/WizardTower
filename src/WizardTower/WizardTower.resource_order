@@ -84,7 +84,7 @@
     {"name":"s_marcher_idle","order":2,"path":"sprites/s_marcher_idle/s_marcher_idle.yy",},
     {"name":"oSwarmer","order":5,"path":"objects/oSwarmer/oSwarmer.yy",},
     {"name":"s_marine_move","order":2,"path":"sprites/s_marine_move/s_marine_move.yy",},
-    {"name":"_04_Fire_explosion_04_medium","order":18,"path":"sounds/_04_Fire_explosion_04_medium/_04_Fire_explosion_04_medium.yy",},
+    {"name":"snd_mortar_end","order":18,"path":"sounds/snd_mortar_end/snd_mortar_end.yy",},
     {"name":"GoToLevel","order":5,"path":"scripts/GoToLevel/GoToLevel.yy",},
     {"name":"DEFAULTSTATS","order":15,"path":"scripts/DEFAULTSTATS/DEFAULTSTATS.yy",},
     {"name":"oAttackPellet","order":14,"path":"objects/oAttackPellet/oAttackPellet.yy",},

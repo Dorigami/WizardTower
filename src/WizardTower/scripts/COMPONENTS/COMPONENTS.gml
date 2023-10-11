@@ -600,20 +600,28 @@ BarracksAI = function() constructor{
 			if(!is_undefined(_cmd))
 			{
 				ds_list_delete(commands, 0);
-				with(owner.structure)
+				// set rally point
+				var _limit = owner.fighter.range*GRID_SIZE;
+				var _len = point_distance(owner.position[1], owner.position[2], _cmd.x, _cmd.y)
+				if(_len > _limit)
 				{
-					// set rally point
+					var _dir = point_direction(owner.position[1], owner.position[2], _cmd.x, _cmd.y);
+					owner.structure.rally_x = owner.position[1] + lengthdir_x(_limit,_dir);
+					owner.structure.rally_y = owner.position[2] + lengthdir_y(_limit, _dir);
+				} else {
 					owner.structure.rally_x = _cmd.x;
 					owner.structure.rally_y = _cmd.y;
-					
+				}
+				with(owner.structure)
+				{
 					// give move command to the units controlled by this structure
 					for(var i=ds_list_size(units); i>0; i--)
 					{
 						var _inst = units[| i-1];
 						if(instance_exists(_inst))
 						{
-							_inst.xTo = _cmd.x;
-							_inst.yTo = _cmd.y;
+							_inst.xTo = rally_x;
+							_inst.yTo = rally_y;
 						}
 					}
 				}
@@ -644,6 +652,57 @@ BarracksAI = function() constructor{
 		ds_list_destroy(commands);
 	}
 }
+MortarTurretAI = function() constructor{
+    commands = ds_list_create();
+	owner = undefined;
+	static Update = function(){
+		var _cmd = undefined;
+		var _target = noone;
+		if(ds_list_size(commands) > 0)
+		{
+			_cmd = commands[| 0];
+			if(!is_undefined(_cmd))
+			{
+				ds_list_delete(commands, 0);
+				// set rally point
+				var _limit = owner.fighter.range*GRID_SIZE;
+				var _len = point_distance(owner.position[1], owner.position[2], _cmd.x, _cmd.y)
+				if(_len > _limit)
+				{
+					var _dir = point_direction(owner.position[1], owner.position[2], _cmd.x, _cmd.y);
+					owner.structure.rally_x = owner.position[1] + lengthdir_x(_limit,_dir);
+					owner.structure.rally_y = owner.position[2] + lengthdir_y(_limit, _dir);
+				} else {
+					owner.structure.rally_x = _cmd.x;
+					owner.structure.rally_y = _cmd.y;
+				}
+			}
+		} 
+		// if there is no command, check if entity is a fighter and get first enemy in range
+		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		{
+			// resolve fighter behavior
+			with(owner.fighter)
+			{	
+				// activate attack to spawn a unit
+				if(attack_index == -1) && (basic_cooldown_timer <= 0)
+				{
+					owner.attack_direction = point_direction(owner.position[1], owner.position[2], owner.structure.rally_x, owner.structure.rally_y);
+					UseBasic();
+				}
+			}
+		}
+	}
+	static Destroy = function(){
+		// delete commands
+		for(var i=0; i<ds_list_size(commands); i++)
+		{
+			if(!is_undefined(commands[| i])) delete commands[| i];
+		}
+		// destroy command list
+		ds_list_destroy(commands);
+	}
+}
 DroneSiloAI = function() constructor{
     commands = ds_list_create();
 	owner = undefined;
@@ -656,20 +715,28 @@ DroneSiloAI = function() constructor{
 			if(!is_undefined(_cmd))
 			{
 				ds_list_delete(commands, 0);
-				with(owner.structure)
+				// set rally point
+				var _limit = owner.fighter.range*GRID_SIZE;
+				var _len = point_distance(owner.position[1], owner.position[2], _cmd.x, _cmd.y)
+				if(_len > _limit)
 				{
-					// set rally point
+					var _dir = point_direction(owner.position[1], owner.position[2], _cmd.x, _cmd.y);
+					owner.structure.rally_x = owner.position[1] + lengthdir_x(_limit,_dir);
+					owner.structure.rally_y = owner.position[2] + lengthdir_y(_limit, _dir);
+				} else {
 					owner.structure.rally_x = _cmd.x;
 					owner.structure.rally_y = _cmd.y;
-					
+				}
+				with(owner.structure)
+				{
 					// give move command to the units controlled by this structure
 					for(var i=ds_list_size(units); i>0; i--)
 					{
 						var _inst = units[| i-1];
 						if(instance_exists(_inst))
 						{
-							_inst.xTo = _cmd.x;
-							_inst.yTo = _cmd.y;
+							_inst.xTo = rally_x;
+							_inst.yTo = rally_y;
 						}
 					}
 				}

@@ -129,7 +129,7 @@
     {"id":{"name":"s_marcher_idle","path":"sprites/s_marcher_idle/s_marcher_idle.yy",},},
     {"id":{"name":"oSwarmer","path":"objects/oSwarmer/oSwarmer.yy",},},
     {"id":{"name":"s_marine_move","path":"sprites/s_marine_move/s_marine_move.yy",},},
-    {"id":{"name":"_04_Fire_explosion_04_medium","path":"sounds/_04_Fire_explosion_04_medium/_04_Fire_explosion_04_medium.yy",},},
+    {"id":{"name":"snd_mortar_end","path":"sounds/snd_mortar_end/snd_mortar_end.yy",},},
     {"id":{"name":"GoToLevel","path":"scripts/GoToLevel/GoToLevel.yy",},},
     {"id":{"name":"DEFAULTSTATS","path":"scripts/DEFAULTSTATS/DEFAULTSTATS.yy",},},
     {"id":{"name":"oAttackPellet","path":"objects/oAttackPellet/oAttackPellet.yy",},},

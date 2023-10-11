@@ -73,7 +73,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 				_ai_component = new BasicStructureAI();
 				break;
 			case "mortarturret":  
-				_ai_component = new BasicStructureAI();
+				_ai_component = new MortarTurretAI();
 				break;
 			default:
 				_ai_component = new BasicStructureAI();

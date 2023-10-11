@@ -1,10 +1,10 @@
 {
   "resourceType": "GMSound",
   "resourceVersion": "1.0",
-  "name": "_04_Fire_explosion_04_medium",
+  "name": "snd_mortar_end",
   "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "name": "SoundEffects",
+    "path": "audiogroups/SoundEffects",
   },
   "bitDepth": 1,
   "bitRate": 128,
@@ -17,7 +17,7 @@
   },
   "preload": false,
   "sampleRate": 44100,
-  "soundFile": "_04_Fire_explosion_04_medium.wav",
+  "soundFile": "snd_mortar_end.wav",
   "type": 0,
   "volume": 1.0,
 }

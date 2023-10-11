@@ -356,7 +356,7 @@ FighterStats = function() constructor{
 	    strength : 3,
 	    defense : 1,
 	    speed : 0,
-	    range : 4,
+	    range : 7,
 	    tags : [],
 	    obj : oMortarTurret,
 	    size : [1,1], // [width , height]
@@ -364,11 +364,11 @@ FighterStats = function() constructor{
 		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Thrust Spear",
-	        cooldown : 5, // delay, in seconds, between attacks
+	        cooldown : 1, // delay, in seconds, between attacks
 	        move_penalty : 0.8, // move speed reduced during attack
-	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
-	        damage_point : 10, // damage is dealt after this step count
-	        damage_value : 1,
+	        duration : 1, // movement is reduced, other attacks cannot be done during this time
+	        damage_point : 0.5*FRAME_RATE, // damage is dealt after this step count
+	        damage_value : 3,
 	        damage_obj : oMortarTurretBasic 
 	    },
 	    active_attack : {
