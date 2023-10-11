@@ -61,7 +61,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.8.2.106",
+    "IDEVersion": "2023.8.2.108",
   },
   "resources": [
     {"id":{"name":"s_flameturret_move","path":"sprites/s_flameturret_move/s_flameturret_move.yy",},},
