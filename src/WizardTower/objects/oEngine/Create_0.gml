@@ -19,6 +19,13 @@ color5 = make_colour_rgb(255,170,94);
 color6 = make_colour_rgb(255,212,163);
 color7 = make_colour_rgb(255,236,214);
 
+time_check = current_time;
+time_check_total_step = 0;
+time_check_input = 0;
+time_check_entity_loop = 0;
+time_check_actor_loop = 0;
+time_check_misc = 0;
+
 ability_hotkeys = ["1","2","3","4","5","6","7","8","9"];
 keybinds_string = "escape - pause/unpause/cancel action\n" 
                 + "F3 - toggle debug view\n"

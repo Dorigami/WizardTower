@@ -1,5 +1,7 @@
 /// @description run game
 
+time_check = current_time;
+
 if(room == rShaderTest) exit;
 
 hud_action = global.iHUD.hud_get_action();
@@ -313,16 +315,9 @@ if(!is_undefined(escape)){
 		global.game_state = global.game_state_previous;
 	}
 }
-	
+time_check_input = current_time - time_check;
 if(global.game_state != GameStates.PAUSE)
 {
-/*
-// Entity Loop
-	with(pEntity)
-	{	// calculate the density field of units on the map
-		if(!is_undefined(unit))	DensitySplat();
-	}
-*/
 	with(pEntity)
 	{
 		EntityVisibility();
@@ -345,6 +340,7 @@ if(global.game_state != GameStates.PAUSE)
 		// do basic entity updates
 		Update();
 	}
+	time_check_entity_loop = current_time - time_check - time_check_input;
 	// Actor Loop
 	var _actor_size = ds_list_size(actor_list);
 	if(_actor_size > 0)
@@ -369,4 +365,6 @@ if(global.game_state != GameStates.PAUSE)
 			}
 		}
 	}
+	time_check_actor_loop = current_time - time_check - time_check_input - time_check_entity_loop;
 }
+time_check_total_step = current_time - time_check;

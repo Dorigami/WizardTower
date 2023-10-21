@@ -19,25 +19,24 @@ Blueprint = function(_build_time) constructor{
 	build_timer_set_point = _build_time*FRAME_RATE;
 	build_timer = -1;
 	static Update = function(){
-			if(++build_timer >= build_timer_set_point)
-			{
-				// replace blueprint with structure
-				var _actor = global.iEngine.actor_list[| owner.faction];
-				var _stats = _actor.fighter_stats[$ owner.type_string];
-				_actor.supply_limit += _stats.supply_capacity;
-				_actor.supply_in_queue -= _stats.supply_cost;
-				_actor.supply_current += _stats.supply_cost;
+		if(++build_timer >= build_timer_set_point)
+		{
+			// replace blueprint with structure
+			var _actor = global.iEngine.actor_list[| owner.faction];
+			var _stats = _actor.fighter_stats[$ owner.type_string];
+			_actor.supply_limit += _stats.supply_capacity;
+			_actor.supply_in_queue -= _stats.supply_cost;
+			_actor.supply_current += _stats.supply_cost;
 				
-				// construct either a unit, or a structure
-				if(_stats.entity_type == UNIT)
-				{
-					var _ent = ConstructUnit(owner.xTo, owner.yTo, owner.faction, owner.type_string);
-				} else {
-					ConstructStructure(owner.x, owner.y, owner.faction, owner.type_string);
-				}
-				ds_queue_enqueue(global.iEngine.killing_floor,owner);
+			// construct either a unit, or a structure
+			if(_stats.entity_type == UNIT)
+			{
+				var _ent = ConstructUnit(owner.xTo, owner.yTo, owner.faction, owner.type_string);
+			} else {
+				ConstructStructure(owner.x, owner.y, owner.faction, owner.type_string);
 			}
-		//}
+			ds_queue_enqueue(global.iEngine.killing_floor,owner);
+		}
 	}
 	static Destroy = function(){
 		//show_debug_message("Blueprint Entity has been destroyed.");
@@ -106,7 +105,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 			target : attack_target,
 			attackData : basic_attack,
 		}
-		instance_create_layer(owner.position[1],owner.position[2],"Instances", basic_attack.damage_obj, _struct);
+		instance_create_layer(owner.position[1], owner.position[2], "Instances", basic_attack.damage_obj, _struct);
 	}
 	static UseActive = function(){
 		attack_index = 1;
