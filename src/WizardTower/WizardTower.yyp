@@ -325,6 +325,7 @@
     {"id":{"name":"pButton","path":"objects/pButton/pButton.yy",},},
     {"id":{"name":"pathMob2","path":"paths/pathMob2/pathMob2.yy",},},
     {"id":{"name":"sEnemyGoal","path":"sprites/sEnemyGoal/sEnemyGoal.yy",},},
+    {"id":{"name":"RoomStartInitFunctions","path":"scripts/RoomStartInitFunctions/RoomStartInitFunctions.yy",},},
     {"id":{"name":"tsCol","path":"tilesets/tsCol/tsCol.yy",},},
     {"id":{"name":"Note1","path":"notes/Note1/Note1.yy",},},
     {"id":{"name":"s_dronesilo_attack","path":"sprites/s_dronesilo_attack/s_dronesilo_attack.yy",},},

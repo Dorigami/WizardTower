@@ -268,6 +268,7 @@
     {"name":"pButton","order":1,"path":"objects/pButton/pButton.yy",},
     {"name":"pathMob2","order":2,"path":"paths/pathMob2/pathMob2.yy",},
     {"name":"sEnemyGoal","order":38,"path":"sprites/sEnemyGoal/sEnemyGoal.yy",},
+    {"name":"RoomStartInitFunctions","order":36,"path":"scripts/RoomStartInitFunctions/RoomStartInitFunctions.yy",},
     {"name":"s_dronesilo_attack","order":1,"path":"sprites/s_dronesilo_attack/s_dronesilo_attack.yy",},
     {"name":"oMortarTurret","order":6,"path":"objects/oMortarTurret/oMortarTurret.yy",},
     {"name":"_22_Water_02","order":21,"path":"sounds/_22_Water_02/_22_Water_02.yy",},

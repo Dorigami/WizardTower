@@ -44,9 +44,11 @@ DEFAULTSTATS();
 STRUCTS();
 ActorAI();
 COMPONENTS();
+RoomStartInitFunctions();
 randomize();
 game_set_speed(FRAME_RATE, gamespeed_fps);
 InitializeDisplay(ASPECT_RATIO);
+
 // initialize game grid
 global.game_grid_xorigin = 0;
 global.game_grid_yorigin = 0;
@@ -105,273 +107,25 @@ window_set_fullscreen(false);
 if(ROOM_START == rShaderTest) instance_create_depth(0,0,0,oShaderTest);
 room_goto(ROOM_START);
 
-function room_start_init_game_grid(){
-	var _w=0, _h=0, i=0, j=0,_node=undefined;
-    var x1=room_width, x2=0, y1=room_height, y2=0;
-    global.game_grid_xorigin = undefined;
-    global.game_grid_yorigin = undefined;
-	with(oPlaySpace)
-	{
-		x1 = bbox_left div GRID_SIZE;
-		x2 = bbox_right div GRID_SIZE;
-		y1 = bbox_top div GRID_SIZE;
-		y2 = bbox_bottom div GRID_SIZE;
-		instance_destroy();
-	}
-	_w = x2-x1+1;
-	_h = y2-y1+1;
-	
-	// check for valid width & height
-	if(_w <= 0) || (_h <= 0)
-	{
-		show_message("playspace not set correctly.  please check the playspace object in the following room: [" + room_get_name(room) + "]"); 
-		game_end();
-	}
-	
-	// adjust the game grid if needed
-	ds_grid_resize(global.game_grid, _w, _h);
-	global.game_grid_xorigin = x1*GRID_SIZE;
-	global.game_grid_yorigin = y1*GRID_SIZE;
-	global.game_grid_width = _w;
-	global.game_grid_height = _h;
-
-	show_debug_message("game grid param origin: [{0}, {1}] | dimensions: [{2}, {3}]", 
-		global.game_grid_xorigin, 
-		global.game_grid_yorigin,
-		global.game_grid_width,
-		global.game_grid_height
-		);
-	// fill game grid with nodes	
-	for(i=0; i<_w; i++){
-	for(j=0; j<_h; j++){
-		_node = global.game_grid[# i, j]; 
-		if(!is_instanceof(_node, Node))
-		{
-			global.game_grid[# i, j] = new Node(i, j);
-		} else {
-			_node.walkable = true;
-			ds_list_clear(_node.occupied_list);
-			//update center position of the node
-			_node.x = global.game_grid_xorigin + (i*GRID_SIZE + (GRID_SIZE div 2));
-			_node.y = global.game_grid_yorigin + (j*GRID_SIZE + (GRID_SIZE div 2));
-		}
-	}}
-
-	// initialize the node heap
-	game_grid_heap.Initialize(global.game_grid);
-	
-	// update existing actors
-	for(var i=0;i<ds_list_size(actor_list);i++)
-	{
-		var _actor = actor_list[| i];
-		// ds_grid_resize(_actor.fov_map, global.game_grid_width, global.game_grid_height);
-		// ds_grid_resize(_actor.build_map, global.game_grid_width, global.game_grid_height);
-		// ds_grid_clear(_actor.build_map, 0);
-	}
-}
-
-function room_start_init_camera(){
-	// set camera position 
-	// NOTE: the game grid must initialize prior to updating the camera
-
-	var _x = global.game_grid_xorigin + GRID_SIZE*global.game_grid_width div 2;
-	var _y = global.game_grid_yorigin + GRID_SIZE*global.game_grid_height div 2;
-
-	with(global.iCamera)
-	{
-		cam = view_camera[0];
-
-		with(global.iEngine)
-		{
-			camera_set_view_size(other.cam,idealWidth*view_zoom, idealHeight*view_zoom);
-		}
-
-		follow = noone;
-		viewWidthHalf = round(0.5*camera_get_view_width(cam));
-		viewHeightHalf = round(0.5*camera_get_view_height(cam));
-
-
-		x = _x; y = _y;
-		xTo = x; yTo = y;
-	}
-}
-function room_start_init_player_stats(){
-	with(player_actor)
-	{
-		supply_limit = 40;
-		material = 200;
-		experience_points = 0;
-		upgrade_points = 0;
-		health = 20;
-		ds_list_clear(blueprints);
-		ds_list_clear(units);
-		ds_list_clear(structures);
-		ds_list_clear(control_groups);
-	}
-}
-function room_start_init_abilities(){
-	var _type = "";
-	var _ability = undefined;
-	for(var i=0;i<9;i++)
-	{
-		switch(i)
-		{
-			case 0: _type = "barricade"; break; 
-			case 1: _type = "gunturret"; break; 
-			case 2: _type = "sniperturret"; break; 
-			case 3: _type = "barracks"; break; 
-			case 4: _type = "dronesilo"; break; 
-			case 5: _type = "flameturret"; break; 
-			case 6: _type = "mortarturret"; break; 
-			case 7: _type = "toggle_info"; break; 
-			case 8: _type = "sell_towers"; break; 
-		}
-		// create abilites and add them to initial and stored ability arrays
-		initial_player_abilities[i] = new Ability(_type);
-		current_player_abilities[i] = variable_clone(initial_player_abilities[i]);
-	}
-}
-
-
-function room_start_init_entities(){
-	with(pEntity)
-	{
-		show_debug_message("type is: {0}, faction is: {1}, position is: [{2}] [{3}]", type_string, faction, x, y)
-		if(faction != PLAYER_FACTION)
-		{
-			//check for an actor, add it to the actor list if needed
-			var _actor = other.actor_list[| faction];
-			var _ai_component = undefined;
-			if(is_undefined(_actor)) || (!is_instanceof(_actor, other.Actor))
-			{
-				// create the enemy actor
-				_actor = new other.Actor(false, faction, 20, _ai_component);  // 'true' means that this actor is a player
-				ds_list_insert(other.actor_list, faction, _actor);
-			}
-			// set ai for the new actor
-			if(type_string == "base") 
-			{
-				_ai_component = actor_ai; // this ai component is set in the creation code of the entity in its room
-				_ai_component.owner = _actor;
-			}
-			_actor.ai = _ai_component;
-		}
-		var _fighterstats = global.iEngine.actor_list[| faction].fighter_stats;
-		_fighterstats = _fighterstats[$ type_string];
-		if(_fighterstats.entity_type == UNIT)
-		{
-			ConstructUnit(x, y, faction, type_string);
-		} else if(_fighterstats.entity_type == STRUCTURE){
-			ConstructStructure(x, y, faction, type_string);
-		}
-		instance_destroy();
-	}
-}
-
-
 /*
+// Entity Setup as Fluid Simulation
 
-function RoomStartInitMap(){
-    // initalize the map by setting sight lines, blocking nodes, setting location & size of the game grid, etc...
-	var _layer = layer_get_id("MapInit");
-	var _w=0, _h=0, i=0, j=0,_node=undefined;
-    var x1=room_width, x2=0, y1=room_height, y2=0;
-    global.game_grid_xorigin = undefined;
-    global.game_grid_yorigin = undefined;
-	if(layer_exists(_layer)) && (layer_tilemap_exists(_layer, layer_tilemap_get_id(_layer)))
-	{
-        //loop through all tiles, indicating the bounds of the level by checking which tiles are marked
-		var _ts = layer_tilemap_get_id(_layer);
+	using the infinite grid setup from the fluid simulation, we can simplify some of the proximity checking for entities:
+		- Create a spatial lookup for entity positions
+		- Create a spatial lookup for entity LoS
 
-        for(i=0; i<tilemap_get_width(_ts); i++){
-		for(j=0; j<tilemap_get_height(_ts); j++){
-			if(tilemap_get(_ts, i, j) > 0) 
-            {
-                if(x1 > i) x1 = i;
-                if(x2 < i) x2 = i;
-                if(y1 > j) y1 = j;
-                if(y2 < j) y2 = j;
-            } else { continue }
-		}}
+// movement will be influcnced by 4 factors(weights)
+	friendly target density (force pushing friendly units away from each other when too close)
+	enemy target density (force pushing hostile units away from each other when too close)
+	goal direction
+	enemies in LoS
 
-        _w = x2-x1+1;
-        _h = y2-y1+1;
-		
-        // check for valid width & height
-        if(_w <= 0) || (_h <= 0)
-        {
-			show_message("the MapInit tileset has no data.  Room cannot initialize [" + room_get_name(room) + "]"); 
-			game_end();
-		}
-		
-		// adjust the game grid if needed
-		ds_grid_resize(global.game_grid, _w, _h);
-        global.game_grid_xorigin = x1*GRID_SIZE;
-        global.game_grid_yorigin = y1*GRID_SIZE;
-		global.game_grid_width = _w;
-		global.game_grid_height = _h;
-		
-		// adjust size of the density maps
-		for(i=0;i<ds_list_size(faction_entity_density_maps);i++)
-		{
-			ds_grid_resize(faction_entity_density_maps[| i], _w, _h);
-		}
+// this is going to require:
+	- spatial_lookup_position
+	- lookup_radius_position
+	
+	- spatial_lookup_los
+	- lookup_radius_los
 
-		// initialize the node heap
-		game_grid_heap.Initialize(global.game_grid);
-		
-		for(i=0; i<_w; i++){
-		for(j=0; j<_h; j++){
-			_node = global.game_grid[# i, j]; 
-			if(!is_instanceof(_node, Node))
-			{
-				global.game_grid[# i, j] = new Node(i, j);
-			} else {
-                //update center position of the node
-                _node.x = global.game_grid_xorigin + (i*GRID_SIZE + (GRID_SIZE div 2));
-	            _node.y = global.game_grid_yorigin + (j*GRID_SIZE + (GRID_SIZE div 2));
-            }
-		}}
-		
-		// set blocked & block sight variables for each node
-		for(i=0; i<_w; i++){
-		for(j=0; j<_h; j++){
-			_node = global.game_grid[# i, j];
-			_node.blocked = tilemap_get(_ts, i+x1, j+y1) == 1 || tilemap_get(_ts, i+x1, j+y1) == 3;
-			_node.block_sight = tilemap_get(_ts, i+x1, j+y1) == 2 || tilemap_get(_ts, i+x1, j+y1) == 3;
-		}}
-		// update existing actors
-		for(var i=0;i<ds_list_size(actor_list);i++)
-		{
-			var _actor = actor_list[| i];
-			ds_grid_resize(_actor.fov_map, global.game_grid_width, global.game_grid_height);
-			ds_grid_clear(_actor.fov_map, VISION.UNSEEN);
-			ds_grid_resize(_actor.build_map, global.game_grid_width, global.game_grid_height);
-			ds_grid_clear(_actor.build_map, 0);
-		}
-        // destroy the map init stuff
-        layer_tilemap_destroy(_ts);
-        layer_destroy(_layer);
-        // initialize the fog of war if unit vision is disabled
-        if(global.fog_of_war == -1) || (!layer_tilemap_exists(fog_of_war_layer, global.fog_of_war)){
-            fog_of_war_layer = layer_create(-2000);
-            global.fog_of_war = layer_tilemap_create(fog_of_war_layer, 0, 0, tsFovFog, global.game_grid_width*GRID_SIZE, global.game_grid_height*GRID_SIZE);
-        }
-        if(!fog_of_war_enabled)
-        {
-            // set tiles of fog_of_war tileset, containing the game grid, to visable
-			for(i=0; i<tilemap_get_width(global.fog_of_war); i++){
-            for(j=0; j<tilemap_get_height(global.fog_of_war); j++){
-				if(i>=x1) && (i <= x2) && (j >= y1) && (j <= y2)
-				{
-					tilemap_set(global.fog_of_war, VISION.SIGHTED, i, j);
-				} else {
-					tilemap_set(global.fog_of_war, VISION.UNSEEN, i, j);
-				}
-			}}
-        }
-	} else {
-		show_debug_message("Can't init the map grid, layer doesn't exist\nlayer id = {0}\ntilemap id = {1}", layer_exists(_layer), layer_tilemap_exists(_layer, layer_tilemap_get_id(_layer)));
-	}
-}
+*/
 
