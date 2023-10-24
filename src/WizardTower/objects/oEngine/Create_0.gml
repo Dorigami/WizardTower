@@ -127,5 +127,12 @@ room_goto(ROOM_START);
 	- spatial_lookup_los
 	- lookup_radius_los
 
+should this be controlld by the engine?
+
+i could create a enemy controller.  would it replace the actor struct?  it doesn't need to.  i can have only work to update the spatial lookup and the entities can reference that seperately when they update
+
+the spatial lookup will only be used for the movement, will have a more basic solutions for attack ranges (probably what is already implemented)
+
+
 */
 

@@ -14,6 +14,8 @@
 #macro NONE -1
 #macro OUT 0
 #macro IN 1
+#macro KEY 0
+#macro VAL 1
 #macro GRID_SIZE 32
 #macro HALF_GRID GRID_SIZE div 2
 #macro ENEMY_FACTION 2
