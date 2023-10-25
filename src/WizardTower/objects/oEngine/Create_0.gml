@@ -67,6 +67,7 @@ global.iHUD = instance_create_depth(0,0,UPPERTEXDEPTH-2, oHUD);
 global.iCamera = instance_create_layer(0, 0, "Instances", oCamera);
 global.iSelect = instance_create_layer(0, 0, "Instances", oSelect);
 global.iSound = instance_create_layer(0, 0, "Instances", oSoundManager);
+global.iEntityFlow = instance_create_layer(0,0,"Instances",oEntityFlow);
 global.game_state = GameStates.PLAY;
 global.game_state_previous = global.game_state;
 global.mouse_focus = noone;

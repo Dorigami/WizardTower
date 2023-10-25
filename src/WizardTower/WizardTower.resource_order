@@ -131,7 +131,7 @@
     {"name":"sRadialThree","order":10,"path":"sprites/sRadialThree/sRadialThree.yy",},
     {"name":"sRadialTwo","order":9,"path":"sprites/sRadialTwo/sRadialTwo.yy",},
     {"name":"sBtnUpgrade","order":13,"path":"sprites/sBtnUpgrade/sBtnUpgrade.yy",},
-    {"name":"oUnitFlow","order":27,"path":"objects/oUnitFlow/oUnitFlow.yy",},
+    {"name":"oEntityFlow","order":27,"path":"objects/oEntityFlow/oEntityFlow.yy",},
     {"name":"s_barricade_idle","order":3,"path":"sprites/s_barricade_idle/s_barricade_idle.yy",},
     {"name":"pathMob1","order":1,"path":"paths/pathMob1/pathMob1.yy",},
     {"name":"_13_Ice_explosion_01","order":19,"path":"sounds/_13_Ice_explosion_01/_13_Ice_explosion_01.yy",},

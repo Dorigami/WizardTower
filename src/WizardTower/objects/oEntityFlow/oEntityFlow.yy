@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oUnitFlow",
+  "name": "oEntityFlow",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
   ],
@@ -12,7 +12,7 @@
     "path": "folders/Objects.yy",
   },
   "parentObjectId": null,
-  "persistent": false,
+  "persistent": true,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
   "physicsFriction": 0.2,
