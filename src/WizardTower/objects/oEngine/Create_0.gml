@@ -74,6 +74,7 @@ global.mouse_focus = noone;
 global.hud_focus = noone;
 global.danger_set = ds_list_create();
 global.interest_set = ds_list_create();
+entity_count_max = 200;
 cs_unit_vectors = array_create(CS_RESOLUTION, 0);
 action = {};
 mouse_action = {};
@@ -136,4 +137,9 @@ the spatial lookup will only be used for the movement, will have a more basic so
 
 
 */
-
+function entity_flow_init(){
+	var _struct = {
+		entity_count_max : entity_count_max,
+		spatial_lookup : array_create()
+	}
+}
