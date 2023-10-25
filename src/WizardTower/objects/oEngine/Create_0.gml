@@ -10,6 +10,22 @@
     need tilemap 'PathInit' that can indicate spawn locations
 */
 
+function entity_flow_init(){
+	var _st = {
+		entity_count_max : 200,
+		entity_smoothing_radius : 40,
+		particle_smoothing_radius : 60,
+		particle_separation : 50,
+		particle_viscosity : 2.5,
+		particle_target_density : 0.5,
+		particle_pressure_multiplier : 1.2,
+		spatial_lookup : array_create(0,noone),
+		start_indices : array_create(0,-1),
+	}
+	instance_create_layer(0,0,"Instances",oEntityFlow,_st);
+	return _st;
+}
+
 color0 = make_colour_rgb(13,43,69);
 color1 = make_colour_rgb(32,60,86);
 color2 = make_colour_rgb(84,78,104);
@@ -67,14 +83,12 @@ global.iHUD = instance_create_depth(0,0,UPPERTEXDEPTH-2, oHUD);
 global.iCamera = instance_create_layer(0, 0, "Instances", oCamera);
 global.iSelect = instance_create_layer(0, 0, "Instances", oSelect);
 global.iSound = instance_create_layer(0, 0, "Instances", oSoundManager);
-global.iEntityFlow = instance_create_layer(0,0,"Instances",oEntityFlow);
 global.game_state = GameStates.PLAY;
 global.game_state_previous = global.game_state;
 global.mouse_focus = noone;
 global.hud_focus = noone;
 global.danger_set = ds_list_create();
 global.interest_set = ds_list_create();
-entity_count_max = 200;
 cs_unit_vectors = array_create(CS_RESOLUTION, 0);
 action = {};
 mouse_action = {};
@@ -84,6 +98,7 @@ blueprint_instance = noone;
 killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
 game_grid_heap.Initialize(global.game_grid);
+entity_flow_struct = entity_flow_init();
 initial_player_abilities = array_create(9, undefined);
 current_player_abilities = array_create(9, undefined);
 zoom_delay_time = 10;
@@ -137,9 +152,4 @@ the spatial lookup will only be used for the movement, will have a more basic so
 
 
 */
-function entity_flow_init(){
-	var _struct = {
-		entity_count_max : entity_count_max,
-		spatial_lookup : array_create()
-	}
-}
+

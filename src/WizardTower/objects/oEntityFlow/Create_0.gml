@@ -29,5 +29,5 @@ function room_start_init_simulation(){
 			0, 0, particle_diameter/sprite_get_width(sParticle));
 	}}
 	InitParticles();
-	UpdateSmoothingRadius(particle_smoothing_radius);
+	UpdateSmoothingRadius(entity_smoothing_radius);
 }
