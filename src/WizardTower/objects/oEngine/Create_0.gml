@@ -10,15 +10,17 @@
     need tilemap 'PathInit' that can indicate spawn locations
 */
 
-function entity_flow_init(){
+function unit_flow_init(){
 	var _st = {
-		entity_count_max : 200,
-		entity_smoothing_radius : 40,
-		particle_smoothing_radius : 60,
-		particle_separation : 50,
-		particle_viscosity : 2.5,
-		particle_target_density : 0.5,
-		particle_pressure_multiplier : 1.2,
+		unit_count_current : 0,
+		unit_count_max : 200,
+		unit_smoothing_radius : 40,
+		unit_smoothing_radius : 60,
+		unit_separation : 50,
+		unit_viscosity : 2.5,
+		unit_target_density : 0.5,
+		unit_pressure_multiplier : 1.2,
+		unit_id_list : ds_list_create(),
 		spatial_lookup : array_create(0,noone),
 		start_indices : array_create(0,-1),
 	}
@@ -98,7 +100,7 @@ blueprint_instance = noone;
 killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
 game_grid_heap.Initialize(global.game_grid);
-entity_flow_struct = entity_flow_init();
+unit_flow_struct = entity_flow_init();
 initial_player_abilities = array_create(9, undefined);
 current_player_abilities = array_create(9, undefined);
 zoom_delay_time = 10;

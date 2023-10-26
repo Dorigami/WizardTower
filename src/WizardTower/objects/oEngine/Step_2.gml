@@ -13,6 +13,19 @@ while(ds_queue_size(killing_floor) > 0){
 		}
 		// destroy entity
 		instance_destroy(); 
+		
+		// maintin order in the unit_id_list for fluid flow
+		if(entity_type == UNIT)
+		{
+			var _list = unit_flow_struct.unit_id_list;
+			ds_list_delete(_list, index);
+			for(var i=0; i<ds_list_size(_list); i++)
+			{
+				var _inst = _list[| i];
+				if(_inst.index != i) _inst.index = i;
+				unit_flow_struct.unit_count_current--;
+			}
+		}
 	}
 }
 

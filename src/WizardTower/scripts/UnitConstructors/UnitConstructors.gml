@@ -41,6 +41,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct unit - type string invalid"); exit;}
 		// if(ds_list_size(_node.occupied_list) > 0) { show_debug_message("ERROR: construct unit - node is occupied"); exit;}
 		if(is_undefined(_actor)) { show_debug_message("ERROR: construct unit - actor for faction {0} invalid", _faction); exit;}
+		if(unit_flow_struct.unit_count_current == unit_flow_struct.unit_count_max) { show_debug_message("ERROR: unit spawn count reached! ct = ", unit_flow_struct.unit_count_current); exit;}
 		// if(_actor.supply_current + _actor.supply_in_queue + _stats.supply_cost > _actor.supply_limit) { show_debug_message("ERROR: construct unit - supply limit reached"); exit;}
 
 		// create components
@@ -86,6 +87,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		// create the entity
 		_struct = {
 			// cell or tile position
+			index : ds_list_size(unit_id_list),
 			z : 0,
 			xx : _x div GRID_SIZE, 
 			yy : _y div GRID_SIZE,
@@ -167,7 +169,9 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		_unit.faction_list_index = _actor.unit_count++;
 		// have entity occupy the node that it is spawning on
 		if(!is_undefined(_node)) ds_list_add(_node.occupied_list, _unit);
-
+		// add the unit to the list for fluid flow calculation
+		ds_list_add(unit_flow_struct.unit_id_list, _unit);
+		unit_flow_struct.unit_count_current++;
 		return _unit;
 	}
 }
