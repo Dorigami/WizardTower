@@ -60,8 +60,8 @@ function GetKeyFromHash(_hash, _len){
 	return sign(_rtn) == -1 ? _len + _rtn : _rtn;
 }
 function UpdateSpatialLookup(){
-	var _list = particle_list;
-	var _rad = particle_smoothing_radius;
+	var _list = unit_id_list;
+	var _rad = unit_smoothing_radius;
 	var _pt = undefined;
 	// create unordered spatial lookup
 	for(var i=0;i<particle_count;i++)
