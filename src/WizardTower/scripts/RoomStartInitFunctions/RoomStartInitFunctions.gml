@@ -27,6 +27,7 @@ function room_start_init_game_grid(){
 	global.game_grid_yorigin = y1*GRID_SIZE;
 	global.game_grid_width = _w;
 	global.game_grid_height = _h;
+	global.game_grid_center = vect2(x1 + (_w div 2), y1 + (_h div 2));
 
 	show_debug_message("game grid param origin: [{0}, {1}] | dimensions: [{2}, {3}]", 
 		global.game_grid_xorigin, 
@@ -60,6 +61,14 @@ function room_start_init_game_grid(){
 		// ds_grid_resize(_actor.fov_map, global.game_grid_width, global.game_grid_height);
 		// ds_grid_resize(_actor.build_map, global.game_grid_width, global.game_grid_height);
 		// ds_grid_clear(_actor.build_map, 0);
+	}
+	// update the entity flow object
+	with(oEntityFlow)
+	{
+		bbox[0] = x1;
+		bbox[1] = y1;
+		bbox[2] = x2;
+		bbox[3] = y2;
 	}
 }
 

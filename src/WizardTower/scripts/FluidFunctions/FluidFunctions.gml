@@ -66,8 +66,8 @@ function UpdateSpatialLookup(){
 	// create unordered spatial lookup
 	for(var i=0;i<particle_count;i++)
 	{
-		_pt = particle_list[| i]
-		spatial_lookup[i][VAL] = i
+		_pt = particle_list[| i];
+		spatial_lookup[i][VAL] = i;
 		spatial_lookup[i][KEY] = _pt.cellkey;
 	}
 	// sort by cell key
@@ -94,7 +94,7 @@ function ForEachPointInRadius(_function){
 	var _list = global.iSimulation.particle_list;
 	var _count = global.iSimulation.particle_count;
 	var _rad = global.iSimulation.particle_smoothing_radius;
-	var _center = global.iSimulation.sim_center;
+	var _center = global.game_grid_center;
 	var _pt = undefined;
 	var _key = 0, _cell_start_index = 0;
 	var _sqr_dist = 0;

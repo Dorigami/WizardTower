@@ -1,16 +1,7 @@
 /// @description create the spatial lookup
 
 
-sim_center = vect2(0,0);
-
-
 function room_start_init_simulation(){
-	sim_bbox[0] = 0;
-	sim_bbox[1] = 0;
-	sim_bbox[2] = 900;
-	sim_bbox[3] = 780;
-	sim_center[1] = 0.5*(sim_bbox[2]+sim_bbox[0]);
-	sim_center[2] = 0.5*(sim_bbox[3]+sim_bbox[1]);
 	image_xscale = sim_bbox[2] - sim_bbox[0];
 	image_yscale = sim_bbox[3] - sim_bbox[1];
 	image_blend = c_navy;
