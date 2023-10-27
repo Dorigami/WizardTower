@@ -14,7 +14,6 @@ function unit_flow_init(){
 	var _st = {
 		unit_count_current : 0,
 		unit_count_max : 200,
-		unit_smoothing_radius : 40,
 		unit_smoothing_radius : 60,
 		unit_separation : 50,
 		unit_viscosity : 2.5,

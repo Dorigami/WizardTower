@@ -88,6 +88,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		_struct = {
 			// cell or tile position
 			index : ds_list_size(unit_id_list),
+			cellkey : GetKeyFromHash(HashCell((global.game_grid_center[1]-_x) div unit_flow_struct.unit_smoothing_radius,(global.game_grid_center[2]-_y) div unit_flow_struct.unit_smoothing_radius),unit_flow_struct.unit_smoothing_radius),
 			z : 0,
 			xx : _x div GRID_SIZE, 
 			yy : _y div GRID_SIZE,
