@@ -24,6 +24,7 @@
     {"name":"Summoner","order":25,"path":"folders/Sprites/Entity Sprites/Summoner.yy",},
     {"name":"Icons","order":42,"path":"folders/Sprites/Icons.yy",},
     {"name":"Map Stuff","order":36,"path":"folders/Sprites/Map Stuff.yy",},
+    {"name":"HexagonalGridSystem","order":2,"path":"folders/HexagonalGridSystem.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"s_flameturret_move","order":1,"path":"sprites/s_flameturret_move/s_flameturret_move.yy",},
@@ -69,6 +70,7 @@
     {"name":"snd_sell","order":14,"path":"sounds/snd_sell/snd_sell.yy",},
     {"name":"sBtn128x64","order":5,"path":"sprites/sBtn128x64/sBtn128x64.yy",},
     {"name":"s_drone_attack","order":3,"path":"sprites/s_drone_attack/s_drone_attack.yy",},
+    {"name":"o_hex_grid","order":1,"path":"objects/o_hex_grid/o_hex_grid.yy",},
     {"name":"oFlameTurretActive","order":8,"path":"objects/oFlameTurretActive/oFlameTurretActive.yy",},
     {"name":"sTowerFrost2","order":37,"path":"sprites/sTowerFrost2/sTowerFrost2.yy",},
     {"name":"sLensDeath","order":12,"path":"sprites/sLensDeath/sLensDeath.yy",},
