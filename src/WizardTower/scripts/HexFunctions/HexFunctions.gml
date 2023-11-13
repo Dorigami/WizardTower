@@ -12,7 +12,6 @@
 #macro EVEN_R 1
 #macro ODD_Q 2
 #macro EVEN_Q 3
-#macro HEX_SIZE 30
 
 
 

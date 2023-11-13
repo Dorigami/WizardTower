@@ -45,6 +45,7 @@ if(room == rHexTest)
 	room_start_init_abilities();
 	room_start_init_entities();
 	
+	
 	InitHexagonalGrid(POINTYTOP, ODD_R, 32, room_width div 2, room_height div 2);
 }
 if(instance_exists(global.iHUD)) global.iHUD.Init();
