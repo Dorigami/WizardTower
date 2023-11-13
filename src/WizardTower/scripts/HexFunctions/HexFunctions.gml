@@ -30,7 +30,8 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy){
 		axial_direction_vectors : [
 			vect2(1,0),vect2(1,-1),vect2(0,-1),
 			vect2(-1,0),vect2(-1,1),vect2(0,1)
-		]
+		],
+		
 	}
 	global.i_hex_grid = instance_create_layer(0,0,"Instances",o_hex_grid,_struct);
 }
