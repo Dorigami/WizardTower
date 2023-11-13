@@ -1,7 +1,7 @@
 /// @description 
 
 
-if(room != rStartMenu) && (room != rInit) && (room != rShaderTest)
+if(room != rStartMenu) && (room != rInit) && (room != rShaderTest) && (room != rHexTest)
 {
 	//debug view
 	dbg_view("processing times",true);
@@ -38,4 +38,13 @@ if(room != rStartMenu) && (room != rInit) && (room != rShaderTest)
 	SoundCommand(The_Verdant_Grove_LOOP,0,0);
 }
 
+if(room == rHexTest)
+{
+	room_start_init_game_grid();
+	room_start_init_camera();
+	room_start_init_abilities();
+	room_start_init_entities();
+	
+	InitHexagonalGrid(POINTYTOP, ODD_R, 32, room_width div 2, room_height div 2);
+}
 if(instance_exists(global.iHUD)) global.iHUD.Init();

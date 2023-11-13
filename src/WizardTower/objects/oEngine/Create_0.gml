@@ -55,7 +55,7 @@ keybinds_string = "escape - pause/unpause/cancel action\n"
                 + " - use ability 1 ["+ability_hotkeys[0]+"]  |  2 ["+ability_hotkeys[1]+"]  |  3 ["+ability_hotkeys[2]+"]\n"
                 + "                       4 ["+ability_hotkeys[3]+"]  |  5 ["+ability_hotkeys[4]+"]  |  6 ["+ability_hotkeys[5]+"]\n"
                 + "                       7 ["+ability_hotkeys[6]+"]  |  8 ["+ability_hotkeys[7]+"]  |  9 ["+ability_hotkeys[8]+"]\n"
-
+HexFunctions();	
 MACROS();
 DEFAULTSTATS();
 STRUCTS();
@@ -99,7 +99,6 @@ blueprint_instance = noone;
 killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
 game_grid_heap.Initialize(global.game_grid);
-unit_flow_struct = entity_flow_init();
 initial_player_abilities = array_create(9, undefined);
 current_player_abilities = array_create(9, undefined);
 zoom_delay_time = 10;
