@@ -13,15 +13,31 @@
 #macro ODD_Q 2
 #macro EVEN_Q 3
 
+// node types
+#macro NULLNODE 0
+#macro PATHNODE 1
+#macro INDESTRUCTABLE 2
+#macro BUILDNODE 3
+#macro NOBUILDNODE 4
 
-
+HexNode = function(grid_obj, q, r) constructor{
+	position = hex_to_pixel(q, r);
+	coord = vect2(q,r);
+	adjacent_nodes = [
+		hex_get(vect_add(vect2(q, r), axial_direction_vectors[0])),
+		hex_get(vect_add(vect2(q, r), axial_direction_vectors[1])),
+		hex_get(vect_add(vect2(q, r), axial_direction_vectors[2])),
+		hex_get(vect_add(vect2(q, r), axial_direction_vectors[3])),
+		hex_get(vect_add(vect2(q, r), axial_direction_vectors[4])),
+		hex_get(vect_add(vect2(q, r), axial_direction_vectors[5]))];
+}
 
 function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy){
 	// _type determines whether it uses pointy-top or flat-top hexagons
 	// _offset determines how the tiles' position will be offset (Q refers to column offset & R refere to row offset)
 	// _size represents the 'radius' of a circle which contains the hexagon
 	var _struct = {
-		type : _tile_type,
+		hex_type : _tile_type,
 		hex_size : _size,
 		offset_type : _offset_type,
 		origin :  vect2(_ox, _oy),
@@ -40,7 +56,7 @@ function calc_hex_corner(center, size, i, type){
 	// center is a vector2 of the center of the hexagon
 
     var angle_deg = 60 * i - (30*type) // will offset angle when pointy-top is used
-    var angle_rad = PI / 180 * angle_deg
+    var angle_rad = pi / 180 * angle_deg
     return vect2(center[1] + size * cos(angle_rad), center[2] + size * sin(angle_rad))
 }
 
@@ -71,7 +87,7 @@ function axial_linedraw(p0, p1){
 	var cube1 = axial_to_cube(p1);
 	for(var i=0;i<=n;i++)
 	{
-		arr[i] = cube_round(cube_lerp(cube0, cube1, i/N));
+		arr[i] = cube_round(cube_lerp(cube0, cube1, i/n));
 	}
 	return arr;
 }
@@ -173,6 +189,12 @@ function axial_to_cube(hex_vect){
 }
 
 //--// extra functionality, for specific game purpose
+function hex_create(q, r){
+	var _node = new HexNode(self, q, r);
+}
+
+function hex_get(hex_vect){
+}
 
 function InstanceMoveToHex(_id, ){
 

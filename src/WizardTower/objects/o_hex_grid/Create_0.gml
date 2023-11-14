@@ -10,3 +10,6 @@ if(room != rHexTest)
 }
 
 
+function add_hex_node(){
+
+}
