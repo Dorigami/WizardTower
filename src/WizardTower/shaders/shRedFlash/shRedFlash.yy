@@ -3,8 +3,8 @@
   "resourceVersion": "1.0",
   "name": "shRedFlash",
   "parent": {
-    "name": "Shaders",
-    "path": "folders/Shaders.yy",
+    "name": "Test Shaders",
+    "path": "folders/Shaders/Test Shaders.yy",
   },
   "type": 1,
 }
