@@ -9,12 +9,14 @@ function room_start_init_game_grid(){
 		x2 = bbox_right div GRID_SIZE;
 		y1 = bbox_top div GRID_SIZE;
 		y2 = bbox_bottom div GRID_SIZE;
+		show_debug_message("playspace found \nx = {0}, {1}\ny = {2}, {3}\n", x1, x2, y1, y2);
 		instance_destroy();
 	}
 	_w = x2-x1+1;
 	_h = y2-y1+1;
 	
 	// check for valid width & height
+	show_debug_message("width = {0}, height = {1}", _w, _h)
 	if(_w <= 0) || (_h <= 0)
 	{
 		show_message("playspace not set correctly.  please check the playspace object in the following room: [" + room_get_name(room) + "]"); 

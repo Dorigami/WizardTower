@@ -51,6 +51,12 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy){
 		],
 		
 	}
-	global.i_hex_grid = instance_create_layer(0,0,"Instances",o_hex_grid,_struct);
+	global.i_hex_grid = instance_create_layer(_ox, _oy, "Instances",o_hex_grid, _struct);
+	with(global.iCamera){
+		xTo = _ox;
+		yTo = _oy;
+		x = _ox;
+		y = _oy;
+	}
 }
 

@@ -2,9 +2,16 @@
 // You can write your code in this editor
 
 shader_set(shWireHex);
-shader_set_uniform_f(umouseX, texelW*(mouse_hex_pos[1] - mouse_x));
-shader_set_uniform_f(umouseY, texelH*(mouse_hex_pos[2] - mouse_y));
-shader_set_uniform_f(uresW, texelW*wire_width);
-shader_set_uniform_f(uresH, texelH*wire_height);
-draw_sprite(sWireHex, 0, mouse_hex_pos[1], mouse_hex_pos[2]);
+
+SendWireHexVariables();
+
+draw_sprite(sWireHex, 0, x, y);
+
 shader_reset();
+
+
+// show the current hex cell of the mouse position
+if(keyboard_check(vk_alt))
+{
+	draw_text(mouse_x,mouse_y+10,"["+string(mouse_hex_coord[1])+", "+string(mouse_hex_coord[2])+"]")
+}

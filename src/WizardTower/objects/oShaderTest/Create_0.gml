@@ -71,7 +71,7 @@ room_set_viewport(rShaderTest,0,true,0,0,CANVAS_W, CANVAS_H);
 
 ShadeInitializeDisplay(1);
 
-shader = sh_tree_tutorial;
+shader = sh_custom;
 switch(shader)
 {
 	case sh_tree_tutorial:

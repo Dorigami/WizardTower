@@ -11,12 +11,11 @@ uniform float resH;
 
 void main()
 {
-	vec2 uv = (v_vTexcoord/vec2(resW,resH))*2.0 - 1.0;
+	vec2 uv = v_vTexcoord / vec2(resW,resH);
 	vec4 color = texture2D( gm_BaseTexture, v_vTexcoord );
+	color = vec4(0.0,0.0,0.0,1.0);
 	
-	float dist = distance(vec2(mouseX,mouseY), uv) / 0.5;
-	
-	if(color.a > 0.) color.a = smoothstep(1., 0., dist);
+	color.r = uv.x;
 	
     gl_FragColor = color;
 }
