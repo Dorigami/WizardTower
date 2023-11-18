@@ -178,3 +178,5 @@ function hex_get(hex_vect){
 function InstanceMoveToHex(_id, ){
 
 }
+
+instance_create_layer(0,0,"Instances", oShaderTest);

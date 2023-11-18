@@ -83,6 +83,7 @@ switch(shader)
 	default:
 		shader_draw_script = -1; break;
 }
+depth = -4000;
 umouseX = shader_get_uniform(shader, "mouseX");
 umouseY = shader_get_uniform(shader, "mouseY");
 uTime = shader_get_uniform(shader, "iTime");
@@ -93,4 +94,4 @@ texelH = texture_get_texel_height(sprite_get_texture(sShaderCanvas,0));
 
 with(pButton) instance_destroy();
 with(oHUD) instance_destroy();
-with(oCamera) instance_destroy();
+//with(oCamera) instance_destroy();
