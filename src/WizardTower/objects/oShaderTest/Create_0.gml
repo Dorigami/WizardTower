@@ -3,7 +3,7 @@
 function ShadeInitializeDisplay(_asp){
 	// static resolution
 	show_debug_message("Initialize Display: asp ratio = {0}", _asp);
-	aspect_ratio_ = _asp;
+	aspect_ratio = _asp;
 	idealWidth = CANVAS_W;
 	idealHeight = round(idealWidth / _asp);
 	
@@ -94,4 +94,4 @@ texelH = texture_get_texel_height(sprite_get_texture(sShaderCanvas,0));
 
 with(pButton) instance_destroy();
 with(oHUD) instance_destroy();
-//with(oCamera) instance_destroy();
+with(oCamera) instance_destroy();

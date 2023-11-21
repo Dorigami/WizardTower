@@ -1,27 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-umouseX = shader_get_uniform(shWireHex, "mouseX");
-umouseY = shader_get_uniform(shWireHex, "mouseY");
-texelW = texture_get_texel_width(sprite_get_texture(sWireHex,0));
-texelH = texture_get_texel_height(sprite_get_texture(sWireHex,0));
-uresW = shader_get_uniform(shWireHex, "resW");
-uresH = shader_get_uniform(shWireHex, "resH");
-
-mouse_uv = vect2(0,0);
-wire_width = texelW*sprite_get_width(sWireHex);
-wire_height = texelH*sprite_get_height(sWireHex);
-function UpdateWireHexVariables(){
-	mouse_uv[1] = texelW*(mouse_x-x);
-	mouse_uv[2] = texelH*(mouse_y-y);
-}
-function SendWireHexVariables(){
-	shader_set_uniform_f(umouseX, mouse_uv[1]);
-	shader_set_uniform_f(umouseY, mouse_uv[2]);
-	shader_set_uniform_f(uresW, wire_width);
-	shader_set_uniform_f(uresH, wire_height);
-}
-
 if(room != rHexTest)
 {
 	show_debug_message("o_hex_grid: wrong room, grid is destroyed");
@@ -30,12 +9,16 @@ if(room != rHexTest)
 	show_debug_message("o_hex_grid: room is correct");
 }
 
+// hex map variables
+hex_hash_loaded_file_name = "";
+hex_hash_table = {};
+
 
 function calc_hex_corner(center, i){
 	// center is a vector2 of the center of the hexagon
 
-    var angle_deg = 60 * i - (30*hex_type) // will offset angle when pointy-top is used
-    var angle_rad = pi / 180 * angle_deg
+    var angle_deg = 60 * i - (30*hex_type); // will offset angle when pointy-top is used
+    var angle_rad = pi / 180 * angle_deg;
     return vect2(center[1] + hex_size * cos(angle_rad), center[2] + hex_size * sin(angle_rad))
 }
 
@@ -175,8 +158,5 @@ function hex_create(q, r){
 function hex_get(hex_vect){
 }
 
-function InstanceMoveToHex(_id, ){
 
-}
 
-instance_create_layer(0,0,"Instances", oShaderTest);

@@ -2,11 +2,11 @@ function InitializeDisplay(_asp, _zoom=2){
 	//// dynamic resolution
 		//idealWidth = 0;
 		//idealHeight = RESOLUTION_H;
-		//aspect_ratio_ = display_get_width() / display_get_height();
-		//idealWidth = round(idealHeight*aspect_ratio_);
+		//aspect_ratio = display_get_width() / display_get_height();
+		//idealWidth = round(idealHeight*aspect_ratio);
 	// static resolution
 	show_debug_message("Initialize Display: asp ratio = {0}", _asp);
-	aspect_ratio_ = _asp;
+	aspect_ratio = _asp;
 	idealWidth = RESOLUTION_W;
 	idealHeight = round(idealWidth / _asp);
 	
