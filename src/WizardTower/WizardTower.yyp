@@ -381,6 +381,7 @@
     {"id":{"name":"snd_skeleton_attack","path":"sounds/snd_skeleton_attack/snd_skeleton_attack.yy",},},
     {"id":{"name":"snd_win","path":"sounds/snd_win/snd_win.yy",},},
     {"id":{"name":"oStartMenu","path":"objects/oStartMenu/oStartMenu.yy",},},
+    {"id":{"name":"o_hex_grid_interaction","path":"objects/o_hex_grid_interaction/o_hex_grid_interaction.yy",},},
     {"id":{"name":"CreateFloatNumber","path":"scripts/CreateFloatNumber/CreateFloatNumber.yy",},},
     {"id":{"name":"s_skeleton_death","path":"sprites/s_skeleton_death/s_skeleton_death.yy",},},
     {"id":{"name":"s_marcher_attack","path":"sprites/s_marcher_attack/s_marcher_attack.yy",},},

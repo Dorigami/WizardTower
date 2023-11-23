@@ -27,7 +27,7 @@ Button = function(_text, _bbox, _scr) constructor{
 	static Init = function(){
 		creator = o_hex_grid_save_load_menu.id;
 		index = ds_list_size(o_hex_grid.button_list);
-		ds_list_add(o_hex_grid.button_list);
+		ds_list_add(o_hex_grid.button_list, self);
 	}
 	static Update = function(){
 		if(point_in_rectangle(creator.mouse_gui_x,creator.mouse_gui_y,bbox[0],bbox[1],bbox[2],bbox[3]))

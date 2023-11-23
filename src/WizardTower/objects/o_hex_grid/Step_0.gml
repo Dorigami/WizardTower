@@ -13,5 +13,5 @@ if(keyboard_check_pressed(vk_alt))
 		with(o_hex_grid_wire_display) instance_destroy();
 	}
 }
-layer_tilemap_create()
+
 

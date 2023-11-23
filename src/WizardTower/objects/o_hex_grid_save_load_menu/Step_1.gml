@@ -27,8 +27,8 @@ for(var i=ds_list_size(option_list)-1; i>=0; i++){
 
 if(mouse_check_button_pressed(mb_left))
 {
-	if(button_focus > -1)
-	{} else if(optio)
+	//if(button_focus > -1)
+	//{} else if(optio)
 }
 
 

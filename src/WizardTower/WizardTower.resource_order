@@ -318,6 +318,7 @@
     {"name":"snd_skeleton_attack","order":29,"path":"sounds/snd_skeleton_attack/snd_skeleton_attack.yy",},
     {"name":"snd_win","order":5,"path":"sounds/snd_win/snd_win.yy",},
     {"name":"oStartMenu","order":5,"path":"objects/oStartMenu/oStartMenu.yy",},
+    {"name":"o_hex_grid_interaction","order":5,"path":"objects/o_hex_grid_interaction/o_hex_grid_interaction.yy",},
     {"name":"CreateFloatNumber","order":32,"path":"scripts/CreateFloatNumber/CreateFloatNumber.yy",},
     {"name":"s_skeleton_death","order":21,"path":"sprites/s_skeleton_death/s_skeleton_death.yy",},
     {"name":"pEntity","order":7,"path":"objects/pEntity/pEntity.yy",},
