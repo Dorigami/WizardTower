@@ -11,7 +11,13 @@ if(room != rHexTest)
 
 // hex map variables
 hex_hash_loaded_file_name = "";
-hex_hash_table = {};
+hex_hash_table = ds_map_create();
+
+
+/*
+	ds map : store index for each hex node
+*/
+
 
 
 function calc_hex_corner(center, i){
