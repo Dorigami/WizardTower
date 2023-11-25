@@ -22,18 +22,6 @@
 #macro BUILDNODE 3
 #macro NOBUILDNODE 4
 
-HexNode = function(grid_obj, q, r) constructor{
-	position = hex_to_pixel(q, r);
-	coord = vect2(q,r);
-	adjacent_nodes = [
-		hex_get(vect_add(vect2(q, r), axial_direction_vectors[0])),
-		hex_get(vect_add(vect2(q, r), axial_direction_vectors[1])),
-		hex_get(vect_add(vect2(q, r), axial_direction_vectors[2])),
-		hex_get(vect_add(vect2(q, r), axial_direction_vectors[3])),
-		hex_get(vect_add(vect2(q, r), axial_direction_vectors[4])),
-		hex_get(vect_add(vect2(q, r), axial_direction_vectors[5]))];
-}
-
 function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width, _max_height){
 	// _type determines whether it uses pointy-top or flat-top hexagons
 	// _offset determines how the tiles' position will be offset (Q refers to column offset & R refere to row offset)
@@ -61,12 +49,40 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 		x = _ox;
 		y = _oy;
 	}
+	
+	// create all data structures
 	with(global.i_hex_grid){
-		// calc the width of the grid
+		var _cellcount = hexgrid_width_max*hexgrid_height_max;
+		
+		hex_hash_loaded_file_name = "";
+		hexmap = ds_map_create(); // stores index values to be used
+
+		// calc the width and height of the grid
 		hexgrid_width_pixels = hexgrid_width_max*h_spacing;
 		hexgrid_height_pixels = hexgrid_height_max*v_spacing;
 		show_debug_message("0. {0}\n1. {1}\n2. {2}\n3. {3}\n4. {4}\n5. {5}",hexgrid_width_pixels,hexgrid_width_max,h_spacing,hexgrid_height_pixels,hexgrid_height_max,v_spacing);
 	
+		// set data arrays
+		hexgrid_enabled_list = ds_list_create();
+		hexarr_enabled = array_create(_cellcount,1);
+		hexarr_positions = array_create(_cellcount,1);
+		
+		// create the hex nodes / determine the index values for each node
+		var ind = 0;
+		var qmin = (hexgrid_width_max div 2);
+		// var qmax = hexgrid_width_max + qmin - (hexgrid_width_max % 2);
+		var rmin = (hexgrid_height_max div 2);
+		// var rmax = hexgrid_height_max + rmin - (hexgrid_height_max % 2);
+		show_debug_message("column limits = [min:{0}, max:{1}]\nrow limits = [min:{2}, max:{3}]",qmin,0,rmin,0);
+		for(var i=0; i<hexgrid_height_max; i++){
+		for(var j=0; j<hexgrid_width_max; j++){
+			var r = i - rmin;
+			var q = j-floor(r/2) - qmin;
+			ds_map_add(hexmap, hex_get_key([2,q,r]), ind);
+			show_debug_message("node is [q:{0}, r:{1}]", q, r);
+			hexarr_enabled[++ind] = false;
+			hexarr_positions[ind] = hex_to_pixel([2,q,r], true);
+		}}
 	}
 }
 

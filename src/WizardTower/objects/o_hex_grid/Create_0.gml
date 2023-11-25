@@ -9,21 +9,7 @@ if(room != rHexTest)
 	show_debug_message("o_hex_grid: room is correct");
 }
 
-// grid varaibles
-hexmap_list_enabled = ds_list_create();
-
-// hex array variables (arrays store data relevant to each hex node, based on index)
-hex_hash_loaded_file_name = "";
-hexmap = ds_map_create(); // stores index values to be used
-hexarr_enabled = [];
-hexarr_positions = [];
-
-
-/*
-	ds map : store index for each hex node
-*/
-
-
+instance_create_layer(x,y,"Instances",o_hex_grid_interaction,{creator : id});
 
 function calc_hex_corner(center, i){
 	// center is a vector2 of the center of the hexagon
@@ -128,24 +114,26 @@ function hex_in_intersection(vec0, rad0, vec1, rad1){
 }
 
 //--// misc conversion functions
-function hex_to_pixel(hex){
+function hex_to_pixel(hex, _absolute=false){
 	if(hex_type == POINTYTOP)
 	{
-		return vect2(hex_size*(sqrt(3)*hex[1] + sqrt(3)*hex[2]/2),
-					 hex_size*(3*hex[2]/2));
+		return vect2(x*_absolute + (hex_size*(sqrt(3)*hex[1] + sqrt(3)*hex[2]/2)),
+					 y*_absolute + (hex_size*(3*hex[2]/2)));
 	} else {
-		return vect2(hex_size*(3*hex[1]/2),
-					 hex_size*(sqrt(3)*hex[1]/2 + sqrt(3)*hex[2]));
+		return vect2(x*_absolute + (hex_size*(3*hex[1]/2)),
+					 y*_absolute + (hex_size*(sqrt(3)*hex[1]/2 + sqrt(3)*hex[2])));
 	}
 }
 function pixel_to_hex(point){
+	var dx = point[1] - x;
+	var dy = point[2] - y;
 	if(hex_type == POINTYTOP)
 	{
-		var v = vect2((sqrt(3)/3*point[1] - point[2]/3)/hex_size,
-					 (2*point[2])/(3*hex_size));
+		var v = vect2((sqrt(3)/3*dx - dy/3)/hex_size,
+					 (2*dy)/(3*hex_size));
 	} else {
-		var v = vect2((2*point[1]) / (hex_size*3),
-					 (-point[1]/3 + sqrt(3)*point[2]/3) / hex_size);
+		var v = vect2((2*dx) / (hex_size*3),
+					 (-dx/3 + sqrt(3)*dy/3) / hex_size);
 	}
 	return axial_round(v);
 }
@@ -162,10 +150,42 @@ function axial_to_cube(hex_vect){
 }
 
 //--// extra functionality, for specific game purpose
-function hex_create(q, r){	
-	ds_map_add(hexmap,q.r,)
+function hex_enable_index(index){
+	if(hexarr_enabled[index] == false)
+	{
+		hexarr_enabled[index] = true;
+		ds_list_add(hexgrid_enabled_list, index);
+	}
 }
-function hex_enable(){
+function hex_enable_coord(hex){
+	var key = hex_get_key(hex);
+	var index = hexmap[? key];
+	if(hexarr_enabled[index] == false)
+	{
+		hexarr_enabled[index] = true;
+		ds_list_add(hexgrid_enabled_list, index);
+	}
+}
+function hex_disable_index(index){
+	if(hexarr_enabled[index] == true)
+	{
+		hexarr_enabled[index] = false;
+		ds_list_delete(hexgrid_enabled_list, ds_list_find_index(hexgrid_enabled_list, index));
+	}
+}
+function hex_disable_coord(hex){
+	var key = hex_get_key(hex);
+	var index = hexmap[? key];
+	if(hexarr_enabled[index] == true)
+	{
+		hexarr_enabled[index] = false;
+		ds_list_delete(hexgrid_enabled_list, ds_list_find_index(hexgrid_enabled_list, index));
+	}
+}
+function hex_get_key(hex){
+	var q = hex[1];
+	var r = hex[2];
+	return string(q) + "." + string(r);
 }
 function hex_get(hex_vect){
 }

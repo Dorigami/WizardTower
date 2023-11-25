@@ -1,6 +1,7 @@
 /// @description 
 
 grid_id = noone;
+current_index = 0;
 with(o_hex_grid) other.grid_id = id;
 
 
