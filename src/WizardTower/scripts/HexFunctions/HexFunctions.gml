@@ -34,7 +34,7 @@ HexNode = function(grid_obj, q, r) constructor{
 		hex_get(vect_add(vect2(q, r), axial_direction_vectors[5]))];
 }
 
-function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy){
+function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width, _max_height){
 	// _type determines whether it uses pointy-top or flat-top hexagons
 	// _offset determines how the tiles' position will be offset (Q refers to column offset & R refere to row offset)
 	// _size represents the 'radius' of a circle which contains the hexagon
@@ -49,7 +49,10 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy){
 			vect2(1,0),vect2(1,-1),vect2(0,-1),
 			vect2(-1,0),vect2(-1,1),vect2(0,1)
 		],
-		
+		hexgrid_width_max : _max_width,
+		hexgrid_height_max : _max_height,
+		hexgrid_height_pixels : 0,
+		hexgrid_width_pixels : 0,
 	}
 	global.i_hex_grid = instance_create_layer(_ox, _oy, "Instances",o_hex_grid, _struct);
 	with(global.iCamera){
@@ -57,6 +60,13 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy){
 		yTo = _oy;
 		x = _ox;
 		y = _oy;
+	}
+	with(global.i_hex_grid){
+		// calc the width of the grid
+		hexgrid_width_pixels = hexgrid_width_max*h_spacing;
+		hexgrid_height_pixels = hexgrid_height_max*v_spacing;
+		show_debug_message("0. {0}\n1. {1}\n2. {2}\n3. {3}\n4. {4}\n5. {5}",hexgrid_width_pixels,hexgrid_width_max,h_spacing,hexgrid_height_pixels,hexgrid_height_max,v_spacing);
+	
 	}
 }
 

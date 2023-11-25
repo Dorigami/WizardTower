@@ -9,9 +9,14 @@ if(room != rHexTest)
 	show_debug_message("o_hex_grid: room is correct");
 }
 
-// hex map variables
+// grid varaibles
+hexmap_list_enabled = ds_list_create();
+
+// hex array variables (arrays store data relevant to each hex node, based on index)
 hex_hash_loaded_file_name = "";
-hex_hash_table = ds_map_create();
+hexmap = ds_map_create(); // stores index values to be used
+hexarr_enabled = [];
+hexarr_positions = [];
 
 
 /*
@@ -157,10 +162,11 @@ function axial_to_cube(hex_vect){
 }
 
 //--// extra functionality, for specific game purpose
-function hex_create(q, r){
-	var _node = new HexNode(self, q, r);
+function hex_create(q, r){	
+	ds_map_add(hexmap,q.r,)
 }
-
+function hex_enable(){
+}
 function hex_get(hex_vect){
 }
 

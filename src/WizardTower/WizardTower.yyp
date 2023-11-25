@@ -310,6 +310,7 @@
     {"id":{"name":"ptSellingPuff","path":"particles/ptSellingPuff/ptSellingPuff.yy",},},
     {"id":{"name":"HexFunctions","path":"scripts/HexFunctions/HexFunctions.yy",},},
     {"id":{"name":"enemy_hurt","path":"sounds/enemy_hurt/enemy_hurt.yy",},},
+    {"id":{"name":"sWireHexSingle","path":"sprites/sWireHexSingle/sWireHexSingle.yy",},},
     {"id":{"name":"oBarracks","path":"objects/oBarracks/oBarracks.yy",},},
     {"id":{"name":"sTowerMinigun1","path":"sprites/sTowerMinigun1/sTowerMinigun1.yy",},},
     {"id":{"name":"pathMob4","path":"paths/pathMob4/pathMob4.yy",},},
