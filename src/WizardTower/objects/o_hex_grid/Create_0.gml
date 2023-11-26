@@ -187,8 +187,7 @@ function hex_get_key(hex){
 	var r = hex[2];
 	return string(q) + "." + string(r);
 }
-function hex_get(hex_vect){
+function hex_add_row(){
 }
-
 
 

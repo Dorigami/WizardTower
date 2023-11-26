@@ -1,5 +1,7 @@
 /// @description 
 
+controls_string = "[T/Y] add/remove column\n[G/H] add/remove row\n[U] open save/load menu"
+
 grid_id = noone;
 current_index = 0;
 with(o_hex_grid) other.grid_id = id;

@@ -70,18 +70,15 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 		// create the hex nodes / determine the index values for each node
 		var ind = 0;
 		var qmin = (hexgrid_width_max div 2);
-		// var qmax = hexgrid_width_max + qmin - (hexgrid_width_max % 2);
 		var rmin = (hexgrid_height_max div 2);
-		// var rmax = hexgrid_height_max + rmin - (hexgrid_height_max % 2);
-		show_debug_message("column limits = [min:{0}, max:{1}]\nrow limits = [min:{2}, max:{3}]",qmin,0,rmin,0);
 		for(var i=0; i<hexgrid_height_max; i++){
 		for(var j=0; j<hexgrid_width_max; j++){
 			var r = i - rmin;
 			var q = j-floor(r/2) - qmin;
 			ds_map_add(hexmap, hex_get_key([2,q,r]), ind);
-			show_debug_message("node is [q:{0}, r:{1}]", q, r);
-			hexarr_enabled[++ind] = false;
+			hexarr_enabled[ind] = false;
 			hexarr_positions[ind] = hex_to_pixel([2,q,r], true);
+			ind++;
 		}}
 	}
 }
