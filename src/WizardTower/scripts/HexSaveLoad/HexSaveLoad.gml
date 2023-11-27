@@ -4,7 +4,7 @@ with(o_hex_grid_save_load_menu)
 	var _filename = global.i_hex_grid.hexmap_loaded_filename;
 	if(_save_as) || (_filename == "")
 	{
-		_filename = get_string("enter the name to save as (file extenstion not necessary)\nLeave empty to cancel", "Level0");
+		_filename = get_string("Enter the name to save as (file extenstion not necessary)\nLeave empty to cancel", "Level0");
 	}
 	if(_filename == "") exit;
 	if(global.i_hex_grid.hexmap_loaded_filename != _filename) global.i_hex_grid.hexmap_loaded_filename = _filename
@@ -67,7 +67,35 @@ with(o_hex_grid_save_load_menu)
 }
 
 function hex_map_load(_filename){
+with(o_hex_grid_save_load_menu)
+{
+	if(_filename == "")
+	{
+		_filename = get_string("Enter the name of the mao to load in.  (file extenstion not necessary)\nLeave empty to cancel", "Level0");
+	}
+	if(_filename == "") exit;
+	if(global.i_hex_grid.hexmap_loaded_filename != _filename) global.i_hex_grid.hexmap_loaded_filename = _filename
+	if(string_pos(".map",_filename) > 0) _filename = string_copy(_filename,1,string_length(_filename)-4);
+	var _line = "";
+	var _struct = undefined;
+	var _file = file_text_open_read(hexmap_directory + _filename + ".map");
+	
+	_line = file_text_readln(_file);
+	_struct = json_parse(_line);
+with(global.i_hex_grid)
+{
+			hex_type = _struct.hex_type;
+			hex_size : hex_size;
+			offset_type : offset_type;
+			h_spacing : h_spacing;
+			v_spacing : v_spacing;
+			hexgrid_width_max : hexgrid_width_max;
+			hexgrid_height_max : hexgrid_height_max;
+			hexgrid_width_pixels : hexgrid_width_pixels;
+			hexgrid_height_pixels : hexgrid_height_pixels;
+}
 	show_debug_message("Loaded Hex Map [{0}]",_filename);
+}
 }
 
 function hex_map_delete(_filename){
