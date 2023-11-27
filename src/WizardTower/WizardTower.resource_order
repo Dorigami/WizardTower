@@ -287,6 +287,7 @@
     {"name":"oDroneSilo","order":4,"path":"objects/oDroneSilo/oDroneSilo.yy",},
     {"name":"s_swarmer_death","order":13,"path":"sprites/s_swarmer_death/s_swarmer_death.yy",},
     {"name":"sTowerSpotter1Top","order":25,"path":"sprites/sTowerSpotter1Top/sTowerSpotter1Top.yy",},
+    {"name":"array_to_ds_list","order":37,"path":"scripts/array_to_ds_list/array_to_ds_list.yy",},
     {"name":"s_mortarturret_death","order":2,"path":"sprites/s_mortarturret_death/s_mortarturret_death.yy",},
     {"name":"s_goliath_move","order":11,"path":"sprites/s_goliath_move/s_goliath_move.yy",},
     {"name":"s_mortarturret_attack","order":3,"path":"sprites/s_mortarturret_attack/s_mortarturret_attack.yy",},

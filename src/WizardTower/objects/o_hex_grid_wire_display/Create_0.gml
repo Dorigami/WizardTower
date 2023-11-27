@@ -1,6 +1,6 @@
 /// @description 
 
-controls_string = "[T/Y] add/remove column\n[G/H] add/remove row\n[U] open save/load menu"
+controls_string = "[T/Y] set/remove goal node -YELLOW-\n[G/H] set/remove spawn node -BLUE-\n[U] open save/load menu\n"
 
 grid_id = noone;
 current_index = 0;

@@ -1,5 +1,13 @@
 /// @description 
 
+if(keyboard_check_pressed(hotkey_saveload)){
+	var _exists = instance_exists(o_hex_grid_save_load_menu);
+	with(o_hex_grid_save_load_menu) instance_destroy();
+	if(!_exists) instance_create_layer(0,0,"Instances",o_hex_grid_save_load_menu);
+}
+
+if(instance_exists(o_hex_grid_save_load_menu)) exit;
+
 // enable a node
 if(mouse_check_button_pressed(mb_left))
 {
@@ -34,15 +42,18 @@ if(mouse_check_button_pressed(mb_left))
 		}
 	}
 }
-if(keyboard_check_pressed(hotkey_addc))
-{
-} else if(keyboard_check_pressed(hotkey_remc)){
-} else if(keyboard_check_pressed(hotkey_addr)){
-} else if(keyboard_check_pressed(hotkey_remr)){
-} else if(keyboard_check_pressed(hotkey_saveload)){
-	var _exists = instance_exists(o_hex_grid_save_load_menu);
-	with(o_hex_grid_save_load_menu) instance_destroy();
-	if(!_exists) instance_create_layer(0,0,"Instances",o_hex_grid_save_load_menu);
+if(keyboard_check_pressed(hotkey_setgoal)){
+	with(creator) hex_set_goal(mouse_hex_coord);
+	
+} else if(keyboard_check_pressed(hotkey_remgoal)){
+	with(creator) hex_remove_goal(mouse_hex_coord);
+	
+} else if(keyboard_check_pressed(hotkey_setspawn)){
+	with(creator) hex_set_spawn(mouse_hex_coord);
+	
+} else if(keyboard_check_pressed(hotkey_remspawn)){
+	with(creator) hex_remove_spawn(mouse_hex_coord);
+	
 }
 
 

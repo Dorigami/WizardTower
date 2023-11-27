@@ -158,8 +158,7 @@ function hex_enable_index(index){
 	}
 }
 function hex_enable_coord(hex){
-	var key = hex_get_key(hex);
-	var index = hexmap[? key];
+	var index = hex_get_index(hex);
 	if(hexarr_enabled[index] == false)
 	{
 		hexarr_enabled[index] = true;
@@ -174,8 +173,7 @@ function hex_disable_index(index){
 	}
 }
 function hex_disable_coord(hex){
-	var key = hex_get_key(hex);
-	var index = hexmap[? key];
+	var index = hex_get_index(hex);
 	if(hexarr_enabled[index] == true)
 	{
 		hexarr_enabled[index] = false;
@@ -187,7 +185,85 @@ function hex_get_key(hex){
 	var r = hex[2];
 	return string(q) + "." + string(r);
 }
-function hex_add_row(){
+function hex_get_index(hex){
+	return hexmap[? hex_get_key(hex)]
 }
 
-
+function hex_set_goal(hex){
+	var ind = hex_get_index(hex);
+	if(!is_undefined(ind)) && (hexarr_is_goal[ind] == false)
+	{
+		// set as goal
+		ds_list_add(hexgrid_goal_list, ind);
+		hexarr_is_goal[ind] = true;
+		// disable as spawn if previously enabled
+		if(hexarr_is_spawn[ind])
+		{
+			hexarr_is_spawn[ind] = false;
+			ds_list_delete(hexgrid_spawn_list, ds_list_find_index(hexgrid_spawn_list, ind));
+		}
+		// make sure node is enabled
+		if(hexarr_enabled[ind] == false)
+		{
+			hex_enable_index(ind);
+		}
+		show_debug_message("Node {0} set as goal", mouse_hex_coord);
+	} else {
+		show_debug_message("Cannot set node {0} as goal, node is already a goal", mouse_hex_coord);
+	}
+}
+function hex_remove_goal(hex){
+	var ind = hex_get_index(hex);
+	if(!is_undefined(ind)) && (hexarr_is_goal[ind] == true)
+	{
+		ds_list_delete(hexgrid_goal_list, ds_list_find_index(hexgrid_goal_list, ind));
+		hexarr_is_goal[ind] = false;
+		if(hexarr_is_spawn[ind])
+		{
+			hexarr_is_spawn[ind] = false;
+			ds_list_delete(hexgrid_spawn_list, ds_list_find_index(hexgrid_spawn_list, ind));
+		}
+		show_debug_message("Node {0} removed as goal", mouse_hex_coord);
+	} else {
+		show_debug_message("Cannot set remove {0} as goal, node is already a goal", mouse_hex_coord);
+	}
+}
+function hex_set_spawn(hex){
+	var ind = hex_get_index(hex);
+	if(!is_undefined(ind)) && (hexarr_is_spawn[ind] == false)
+	{
+		// set as spawn
+		ds_list_add(hexgrid_spawn_list, ind);
+		hexarr_is_spawn[ind] = true;
+		// disable as goal if previously enabled
+		if(hexarr_is_goal[ind])
+		{
+			hexarr_is_goal[ind] = false;
+			ds_list_delete(hexgrid_goal_list, ds_list_find_index(hexgrid_goal_list, ind));
+		}
+		// make sure node is enabled
+		if(hexarr_enabled[ind] == false)
+		{
+			hex_enable_index(ind);
+		}
+		show_debug_message("Node {0} set as spawn", mouse_hex_coord);
+	} else {
+		show_debug_message("Cannot set node {0} as goal, node is already a goal", mouse_hex_coord);
+	}
+}
+function hex_remove_spawn(hex){
+	var ind = hex_get_index(hex);
+	if(!is_undefined(ind)) && (hexarr_is_spawn[ind] == true)
+	{
+		ds_list_delete(hexgrid_spawn_list, ds_list_find_index(hexgrid_spawn_list, ind));
+		hexarr_is_spawn[ind] = false;
+		if(hexarr_is_goal[ind])
+		{
+			hexarr_is_goal[ind] = false;
+			ds_list_delete(hexgrid_goal_list, ds_list_find_index(hexgrid_goal_list, ind));
+		}
+		show_debug_message("Node {0} removed as spawn", mouse_hex_coord);
+	} else {
+		show_debug_message("Cannot set node {0} as goal, node is already a goal", mouse_hex_coord);
+	}
+}

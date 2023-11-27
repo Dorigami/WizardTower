@@ -6,7 +6,7 @@ mouse_hex_pos = hex_to_pixel(mouse_hex_coord, true);
 
 if(keyboard_check_pressed(vk_alt))
 {
-	instance_create_layer(0,0,"Instances",o_hex_grid_wire_display)
+	instance_create_depth(0,0,depth-1,o_hex_grid_wire_display)
 } else {
 	if(keyboard_check_released(vk_alt))
 	{

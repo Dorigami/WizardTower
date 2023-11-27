@@ -37,6 +37,16 @@ function room_start_init_game_grid(){
 		global.game_grid_width,
 		global.game_grid_height
 		);
+		
+	// set movement bounds for camera
+	with(global.iCamera)
+	{
+		cam_bounds[0] = global.game_grid_xorigin;
+		cam_bounds[1] = global.game_grid_yorigin;
+		cam_bounds[2] = global.game_grid_xorigin + GRID_SIZE*global.game_grid_width;
+		cam_bounds[3] = global.game_grid_yorigin + GRID_SIZE*global.game_grid_height;
+	}
+	
 	// fill game grid with nodes	
 	for(i=0; i<_w; i++){
 	for(j=0; j<_h; j++){

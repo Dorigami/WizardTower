@@ -11,8 +11,8 @@ if(instance_exists(follow))
 
 // keep camera inside the room
 var _margin = 0.5; // this is a percentage of the view size that will be a buffer between the camera and the edge of the playspace
-xTo = clamp(xTo, global.game_grid_xorigin + viewWidthHalf*_margin, global.game_grid_xorigin + GRID_SIZE*global.game_grid_width - viewWidthHalf*_margin);
-yTo = clamp(yTo, global.game_grid_yorigin + viewHeightHalf*_margin, global.game_grid_yorigin + GRID_SIZE*global.game_grid_height - viewHeightHalf*_margin);
+xTo = clamp(xTo, cam_bounds[0] + viewWidthHalf*_margin, cam_bounds[2] - viewWidthHalf*_margin);
+yTo = clamp(yTo, cam_bounds[1] + viewHeightHalf*_margin, cam_bounds[3] - viewHeightHalf*_margin);
 
 // update object position
 x += floor(pan_rate*(xTo - x));

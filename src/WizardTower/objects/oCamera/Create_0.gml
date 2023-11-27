@@ -17,3 +17,5 @@ zoom_rate = 0.15;
 shakeLength = 0;
 shakeMagnitude = 0;
 shakeRemain = 0;
+
+cam_bounds = [0,0,0,0];
