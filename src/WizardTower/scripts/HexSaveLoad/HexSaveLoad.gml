@@ -7,8 +7,8 @@ with(o_hex_grid_save_load_menu)
 		_filename = get_string("Enter the name to save as (file extenstion not necessary)\nLeave empty to cancel", "Level0");
 	}
 	if(_filename == "") exit;
-	if(global.i_hex_grid.hexmap_loaded_filename != _filename) global.i_hex_grid.hexmap_loaded_filename = _filename
 	if(string_pos(".map",_filename) > 0) _filename = string_copy(_filename,1,string_length(_filename)-4);
+	if(global.i_hex_grid.hexmap_loaded_filename != _filename) global.i_hex_grid.hexmap_loaded_filename = _filename;
 	var _file = file_text_open_write(hexmap_directory + _filename + ".map");
 	
 	// create a ds list of all strings to be written to the file
@@ -58,51 +58,95 @@ with(o_hex_grid_save_load_menu)
 	file_text_close(_file);
 	
 	// update the save/load menu if open
-	with(o_hex_grid_save_load_menu)
-	{
-		update_options();
-	}
-	show_debug_message("Saved Hex Map [{0}]",_filename);
+	update_options();
+	
+	show_debug_message("Saved Hex Map [ {0} ]",_filename);
 }
 }
 
-function hex_map_load(_filename){
+function hex_map_load(){
 with(o_hex_grid_save_load_menu)
 {
-	if(_filename == "")
-	{
-		_filename = get_string("Enter the name of the mao to load in.  (file extenstion not necessary)\nLeave empty to cancel", "Level0");
-	}
-	if(_filename == "") exit;
-	if(global.i_hex_grid.hexmap_loaded_filename != _filename) global.i_hex_grid.hexmap_loaded_filename = _filename
+	//if(_filename == "")
+	//{
+	//	_filename = get_string("Enter the name of the mao to load in.  (file extenstion not necessary)\nLeave empty to cancel", "Level0");
+	//}
+	var _filename = option_list[| option_clicked].text;
+	if(_filename == "") || (option_clicked == -1) exit;
 	if(string_pos(".map",_filename) > 0) _filename = string_copy(_filename,1,string_length(_filename)-4);
-	var _line = "";
+	if(global.i_hex_grid.hexmap_loaded_filename != _filename) global.i_hex_grid.hexmap_loaded_filename = _filename;
+	var _temp_list = ds_list_create();
 	var _struct = undefined;
 	var _file = file_text_open_read(hexmap_directory + _filename + ".map");
 	
-	_line = file_text_readln(_file);
-	_struct = json_parse(_line);
-with(global.i_hex_grid)
-{
-			hex_type = _struct.hex_type;
-			hex_size : hex_size;
-			offset_type : offset_type;
-			h_spacing : h_spacing;
-			v_spacing : v_spacing;
-			hexgrid_width_max : hexgrid_width_max;
-			hexgrid_height_max : hexgrid_height_max;
-			hexgrid_width_pixels : hexgrid_width_pixels;
-			hexgrid_height_pixels : hexgrid_height_pixels;
-}
-	show_debug_message("Loaded Hex Map [{0}]",_filename);
+	
+	with(global.i_hex_grid)
+	{
+		// get general variables
+		_struct = json_parse(file_text_readln(_file));
+		hex_type = _struct.hex_type;
+		hex_size = _struct.hex_size;
+		offset_type = _struct.offset_type;
+		h_spacing = _struct.h_spacing;
+		v_spacing = _struct.v_spacing;
+		hexgrid_width_max = _struct.hexgrid_width_max;
+		hexgrid_height_max = _struct.hexgrid_height_max;
+		hexgrid_width_pixels = _struct.hexgrid_width_pixels;
+		hexgrid_height_pixels = _struct.hexgrid_height_pixels;
+		// get the ds_map of the hex grid
+		ds_map_read(hexmap, file_text_readln(_file))
+		// get the ds_lists
+		ds_list_read(hexgrid_enabled_list, file_text_readln(_file));
+		ds_list_read(hexgrid_spawn_list, file_text_readln(_file));
+		ds_list_read(hexgrid_goal_list, file_text_readln(_file));
+		// set array data
+		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_spawn = ds_list_to_array(_temp_list);
+		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_goal = ds_list_to_array(_temp_list);
+		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_enabled = ds_list_to_array(_temp_list);
+		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_positions = ds_list_to_array(_temp_list);
+	} 
+	ds_list_destroy(_temp_list);
+	delete _struct;
+	file_text_close(_file);
+	
+	show_debug_message("Loaded Hex Map [ {0} ]",_filename);
 }
 }
 
-function hex_map_delete(_filename){
-	show_debug_message("Deleted Hex Map [{0}]",_filename);
+function hex_map_delete(){
+with(o_hex_grid_save_load_menu)
+{
+	var _filename = option_list[| option_clicked].text;
+	if(_filename == "") || (option_clicked == -1) exit;
+	if(string_pos(".map",_filename) > 0) _filename = string_copy(_filename,1,string_length(_filename)-4);
+	
+	file_delete(hexmap_directory + _filename + ".map");
+	
+	// update the save/load menu if open
+	update_options();
+	
+	show_debug_message("Deleted Hex Map [ {0} ]",_filename);
 }
-function hex_map_rename(_filename){
-	show_debug_message("Can't quite rename at this point: [{0}]",_filename);
+}
+function hex_map_rename(){
+with(o_hex_grid_save_load_menu)
+{
+	if(is_undefined(option_list[| option_clicked]))
+	{
+		show_message("you must select a file first");
+		exit;
+	} else {
+		var _currentname = option_list[| option_clicked].text;
+		var _loadedname = global.i_hex_grid.hexmap_loaded_filename;
+		var _filename = get_string("Current file Selected is: " + _currentname + "\nEnter a replacement name in the field below (file extenstion not necessary)\nLeave empty to cancel", "");
+	}
+	if(_filename == "") exit;
+	if(string_pos(".map",_filename) > 0) _filename = string_copy(_filename,1,string_length(_filename)-4);
+	if(_currentname == _loadedname){ global.i_hex_grid.hexmap_loaded_filename = _filename }
+	file_rename(hexmap_directory + _currentname + ".map",hexmap_directory + _filename + ".map");
+	option_list[| option_clicked].text = _filename;
+	show_debug_message("Rename Complete: [ {0} ] to [ {1} ]", _currentname, _filename);
+}
 }
 function hex_map_get_saved_names(){
 	with(o_hex_grid_save_load_menu)
@@ -112,7 +156,7 @@ function hex_map_get_saved_names(){
 		var _filename = file_find_first(hexmap_directory+"*.map", fa_directory);
 		while(_filename != "")
 		{
-			arr[++i] = _filename;
+			arr[++i] = string_copy(_filename,1,string_length(_filename)-4);
 			_filename = file_find_next();
 		}
 		file_find_close();

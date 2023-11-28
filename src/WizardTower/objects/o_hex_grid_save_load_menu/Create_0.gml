@@ -11,6 +11,7 @@ function menu_update(){
 }
 function update_options(){
 	// clear existing options
+	option_clicked = -1;
 	while(ds_list_size(option_list) > 0)
 	{
 		delete option_list[| 0];

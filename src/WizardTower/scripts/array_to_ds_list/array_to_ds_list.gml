@@ -8,3 +8,13 @@ function array_to_ds_list(_arr, _ds_list){
 	ds_list_destroy(_temp_list);
 	return _ds_list;
 }
+function ds_list_to_array(_ds_list)
+{
+	var size = ds_list_size(_ds_list);
+	var arr = array_create(size, 0);
+	for(var i=0;i<size;i++)
+	{
+		arr[i] = _ds_list[| i];
+	}
+	return arr;
+}
