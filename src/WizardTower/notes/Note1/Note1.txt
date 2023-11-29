@@ -33,3 +33,10 @@ pEntity = {
 	}
 	hp = stats.health;
 }
+
+
+11/28/2023
+enemy manager ideas
+
+
+

@@ -104,6 +104,17 @@ with(o_hex_grid_save_load_menu)
 		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_goal = ds_list_to_array(_temp_list);
 		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_enabled = ds_list_to_array(_temp_list);
 		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_positions = ds_list_to_array(_temp_list);
+		// update bounds for camera based on the new map
+		with(global.iCamera){
+			xTo = other.origin[1];
+			yTo = other.origin[2];
+			x = xTo;
+			y = yTo;
+			cam_bounds[0] = other.x - (other.h_spacing div 2);
+			cam_bounds[1] = other.y - (other.v_spacing div 2);
+			cam_bounds[2] = other.x + other.hexgrid_width_pixels - (other.h_spacing div 2);
+			cam_bounds[3] = other.y + other.hexgrid_height_pixels - (other.v_spacing div 2);
+		}
 	} 
 	ds_list_destroy(_temp_list);
 	delete _struct;

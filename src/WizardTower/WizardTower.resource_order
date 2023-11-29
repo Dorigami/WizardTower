@@ -101,6 +101,7 @@
     {"name":"s_sniper_shot_end","order":5,"path":"sprites/s_sniper_shot_end/s_sniper_shot_end.yy",},
     {"name":"btnInventory","order":3,"path":"objects/btnInventory/btnInventory.yy",},
     {"name":"s_unitkiller_idle","order":18,"path":"sprites/s_unitkiller_idle/s_unitkiller_idle.yy",},
+    {"name":"oEnemyLevelData","order":28,"path":"objects/oEnemyLevelData/oEnemyLevelData.yy",},
     {"name":"missile_impact","order":8,"path":"sounds/missile_impact/missile_impact.yy",},
     {"name":"oBarracksBasic","order":5,"path":"objects/oBarracksBasic/oBarracksBasic.yy",},
     {"name":"InitializeDisplay","order":19,"path":"scripts/InitializeDisplay/InitializeDisplay.yy",},

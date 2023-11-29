@@ -145,6 +145,7 @@
     {"id":{"name":"s_sniper_shot_end","path":"sprites/s_sniper_shot_end/s_sniper_shot_end.yy",},},
     {"id":{"name":"btnInventory","path":"objects/btnInventory/btnInventory.yy",},},
     {"id":{"name":"s_unitkiller_idle","path":"sprites/s_unitkiller_idle/s_unitkiller_idle.yy",},},
+    {"id":{"name":"oEnemyLevelData","path":"objects/oEnemyLevelData/oEnemyLevelData.yy",},},
     {"id":{"name":"missile_impact","path":"sounds/missile_impact/missile_impact.yy",},},
     {"id":{"name":"oBarracksBasic","path":"objects/oBarracksBasic/oBarracksBasic.yy",},},
     {"id":{"name":"InitializeDisplay","path":"scripts/InitializeDisplay/InitializeDisplay.yy",},},
