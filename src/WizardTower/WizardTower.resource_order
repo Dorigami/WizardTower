@@ -51,6 +51,7 @@
     {"name":"sTorchDeath","order":15,"path":"sprites/sTorchDeath/sTorchDeath.yy",},
     {"name":"sTowerLaser2","order":26,"path":"sprites/sTowerLaser2/sTowerLaser2.yy",},
     {"name":"_30_Earth_02","order":23,"path":"sounds/_30_Earth_02/_30_Earth_02.yy",},
+    {"name":"EnemyLevelDataCallScripts","order":38,"path":"scripts/EnemyLevelDataCallScripts/EnemyLevelDataCallScripts.yy",},
     {"name":"s32x32","order":27,"path":"sprites/s32x32/s32x32.yy",},
     {"name":"pMenu","order":10,"path":"objects/pMenu/pMenu.yy",},
     {"name":"sBtnPlaceholder","order":22,"path":"sprites/sBtnPlaceholder/sBtnPlaceholder.yy",},

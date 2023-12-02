@@ -92,6 +92,7 @@
     {"id":{"name":"sTorchDeath","path":"sprites/sTorchDeath/sTorchDeath.yy",},},
     {"id":{"name":"sTowerLaser2","path":"sprites/sTowerLaser2/sTowerLaser2.yy",},},
     {"id":{"name":"_30_Earth_02","path":"sounds/_30_Earth_02/_30_Earth_02.yy",},},
+    {"id":{"name":"EnemyLevelDataCallScripts","path":"scripts/EnemyLevelDataCallScripts/EnemyLevelDataCallScripts.yy",},},
     {"id":{"name":"s32x32","path":"sprites/s32x32/s32x32.yy",},},
     {"id":{"name":"pMenu","path":"objects/pMenu/pMenu.yy",},},
     {"id":{"name":"sBtnPlaceholder","path":"sprites/sBtnPlaceholder/sBtnPlaceholder.yy",},},
