@@ -1,5 +1,5 @@
-function SB_hex_movement(){
-
+function SB_hex_random_movement(_goal_priority, _attack_priority, _density_priority, _discomfort_priority){
+	if()
 }
 
 function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _discomfort_priority){
