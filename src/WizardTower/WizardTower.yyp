@@ -143,6 +143,7 @@
     {"id":{"name":"fFloatText","path":"fonts/fFloatText/fFloatText.yy",},},
     {"id":{"name":"sTowerIntel","path":"sprites/sTowerIntel/sTowerIntel.yy",},},
     {"id":{"name":"oDeath","path":"objects/oDeath/oDeath.yy",},},
+    {"id":{"name":"oEnemyLevelDataSpawner","path":"objects/oEnemyLevelDataSpawner/oEnemyLevelDataSpawner.yy",},},
     {"id":{"name":"s_sniper_shot_end","path":"sprites/s_sniper_shot_end/s_sniper_shot_end.yy",},},
     {"id":{"name":"btnInventory","path":"objects/btnInventory/btnInventory.yy",},},
     {"id":{"name":"s_unitkiller_idle","path":"sprites/s_unitkiller_idle/s_unitkiller_idle.yy",},},

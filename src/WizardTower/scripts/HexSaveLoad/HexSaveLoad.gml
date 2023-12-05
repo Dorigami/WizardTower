@@ -112,7 +112,7 @@ with(o_hex_grid_save_load_menu)
 			y = yTo;
 			cam_bounds[0] = other.x - (other.h_spacing div 2);
 			cam_bounds[1] = other.y - (other.v_spacing div 2);
-			cam_bounds[2] = other.x + other.hexgrid_width_pixels - (other.h_spacing div 2);
+			cam_bounds[2] = other.x + other.hexgrid_width_pixels;
 			cam_bounds[3] = other.y + other.hexgrid_height_pixels - (other.v_spacing div 2);
 		}
 	} 

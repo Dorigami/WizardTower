@@ -1,6 +1,6 @@
 /// @description 
 
-
+draw_set_font(fDefault);
 draw_set_color(c_black);
 draw_set_alpha(1);
 draw_rectangle(menu_bbox[0],menu_bbox[1]-14,menu_bbox[2],menu_bbox[3],false);

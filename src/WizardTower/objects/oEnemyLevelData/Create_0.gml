@@ -4,14 +4,16 @@
 
 level_content = undefined;
 level_started = false;
-wave_count = 0;
-wave_count_max = 0;
+level_timeline = timeline_add();
+wave_index = 0;
+wave_total_count = 0;
 wave_duration = 10;
 wave_duration_check = current_time;
 force_next_wave = false;
+wave_has_ended = false;
 init = false;
-wave_structs = ds_list_create();
-
+wave_structs_list = ds_list_create();
+faction = ENEMY_FACTION;
 
 // Command Queue for objects to interface with
 command_queue = ds_queue_create();
@@ -20,11 +22,22 @@ command_queue = ds_queue_create();
 EnemyLevelDataCallScripts();
 
 // internal scripts
-
-function start_level(){
-	level_started = true;
-	wave_count = 0;
-}
 function start_wave(_ind){
+		var _wave_content = wave_structs_list[| _ind];
+		show_debug_message("startwavetimeline: ind={0} | content={1", _ind, _wave_content);
+		if(is_undefined(_wave_content)){ show_debug_message("ERROR: startwavetimeline - wave {0} is undefined", wave_index); exit; }
+		var _struct = {
+			owner : id, // the object being created will have this to reference the actor making it
+			wave_data : wave_structs_list[| wave_index],
+			wave_index : wave_index
+		}
+		// if wave already has an instance, remove it
+		if(instance_exists(_wave_content.instance)) instance_destroy(_wave_content.instance);
+		// create the timeline manager to spawn enemies from a given wave
+		_wave_content.instance = instance_create_layer(0, 0, "Instances", oWaveTimeline, _struct);
+}
 
+function level_moment(){
+	start_wave(++wave_index);
+	show_debug_message("level moment has occurred");
 }

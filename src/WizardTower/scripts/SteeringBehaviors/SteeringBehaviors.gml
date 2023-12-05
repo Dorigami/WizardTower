@@ -1,3 +1,7 @@
+function SB_hex_movement(){
+
+}
+
 function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _discomfort_priority){
 	// this function is assumed to be run inside of a unit entity
 	// will update current node as position changes

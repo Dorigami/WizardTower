@@ -147,10 +147,20 @@ if(!is_undefined(move_command)){
 
 if(!is_undefined(start_next_wave))
 {
-	show_debug_message("starting next wave");	
-	if(!is_undefined(enemy_actor.ai)) && (is_instanceof(enemy_actor.ai, DebugActorAI)) && (!enemy_actor.ai.start_next_wave)
+	show_debug_message("starting next wave");
+	with(oEnemyLevelData)
 	{
-		enemy_actor.ai.start_next_wave = true;
+		var _command = undefined;
+		if(!level_started)
+		{
+			// give command to start the level
+			_command = new other.Command("start_level",true,0,0);
+		} else {
+			// give command to force next wave
+			_command = new other.Command("force_next_wave",true,0,0);
+		}
+		// send command to be handled
+		if(!is_undefined(_command)) ds_queue_enqueue(command_queue, _command);
 	}
 }
 

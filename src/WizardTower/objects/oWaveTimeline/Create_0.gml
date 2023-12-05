@@ -17,16 +17,21 @@
 function SpawnMoment(){
 	var _arr = moment_list[| moment_index++];
 	show_debug_message("Moment {0} reached in timeline.  array is: {1}", moment_index-1, _arr);
-	for(var i=0; i<array_length(_arr); i++) 
-	{
-		var _unit = ConstructUnit(_arr[i][1], _arr[i][2], owner.faction, _arr[i][0])
-		ds_list_add(entity_list, _unit);
+	
+	var _struct = {
+		owner : id,
+		wave_index : wave_index,
+		spawn_index : 0,
+		spawn_data : _arr,
+		spawn_node_index : _arr[0]
 	}
+	ds_list_add(spawner_list, instance_create_layer(0,0,"Instances",oEnemyLevelDataSpawner,_struct));
 	
 	// check if the timeline finished
 	if(moment_index >= moment_count)
 	{
-		owner.ai.wave_instance = noone;
+		var _wave_content = owner.wave_structs_list[| wave_index];
+		_wave_content.instance = noone;
 		instance_destroy();
 	}
 }
@@ -45,6 +50,7 @@ moment_index = 0;
 moment_count = array_length(wave_keys);
 moment_list = ds_list_create();
 entity_list = ds_list_create();
+spawner_list = ds_list_create();
 
 // let the hud object know to display wave data
 with(global.iHUD)
@@ -85,5 +91,5 @@ moment_count -= _non_time_keys;
 timeline_index = wave_timeline;
 timeline_running = true;
 
-show_debug_message("moment count:{0} | running:{1}, name:{2} | max_moment:{3}",moment_count, timeline_running, timeline_get_name(timeline_index), timeline_max_moment(timeline_index));
+show_debug_message("moment count:{0} | running:{1}, name:{2} | max_moment:{3}", moment_count, timeline_running, timeline_get_name(timeline_index), timeline_max_moment(timeline_index));
 

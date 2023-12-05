@@ -279,6 +279,7 @@ DebugActorAI = function() constructor{
 	}
 	static Update = function(){
 		var _all_complete = true, i;
+		// timer to start next wave
 		if(wave_timer > 0)
 		{
 			if(--wave_timer <= 0)

@@ -205,10 +205,10 @@ function draw_player_data(){
 function draw_wave_data(){
 	// display wave count & enemies remaining
 	var _actor = global.iEngine.enemy_actor;
+	with(oEnemyLevelData) var _id = id;
 	draw_set_valign(fa_bottom);
 	draw_set_halign(fa_right);
 	draw_text(player_data_bbox[2], player_data_bbox[3]-4, 
-	  "WAVE = [" + string(_actor.ai.wave_index) + " / " + string(array_length(_actor.ai.wave_keys)) + "]\n" 
-	+ "enemies remaining = [" + string(ds_list_size(_actor.units) + ds_list_size(_actor.structures))+"]");
+	  "WAVE = [" + string(_id.wave_index) + " / " + string(ds_list_size(_id.wave_structs_list)) + "]");
 }
 
