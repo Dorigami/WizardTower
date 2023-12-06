@@ -62,6 +62,7 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 		hexarr_is_goal = array_create(_cellcount,0);
 		hexarr_enabled = array_create(_cellcount,1);
 		hexarr_positions = array_create(_cellcount,1);
+		hexarr_hexes = array_create(_cellcount,1);
 		
 		// create the hex nodes / determine the index values for each node
 		var ind = 0;
@@ -86,6 +87,7 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 			ds_map_add(hexmap, hex_get_key([2,q,r]), ind);
 			hexarr_enabled[ind] = false;
 			hexarr_positions[ind] = hex_to_pixel([2,q,r], true);
+			hexarr_hexes[ind] = vect2(q,r);
 			ind++;
 		}}
 		
@@ -102,3 +104,23 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 	}
 }
 
+function hex_find_nearest_goal(hex)
+{
+	with(global.i_hex_grid)
+	{
+		var _size = ds_list_size(hexgrid_spawn_list);
+		if(_size == 0)
+		{
+			return undefined;
+		} else {
+			var _lowest_dist = 0;
+			var _lowest_index = hexgrid_spawn_list[| 0];
+			var _new_dist = 0;
+			for(var i=1;i<_size;i++)
+			{
+				
+				_new_dist = axial_distance();
+			}
+		}
+	}
+}

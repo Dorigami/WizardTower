@@ -49,7 +49,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		_unit_component = new Unit(_stats.supply_cost, true); // the last argument sets "can_bunker"
 
 		// get animations and ai components
-		_ai_component = new BasicUnitAI();
+		_ai_component = new BasicEnemyAI();
 		switch(_type_string)
 		{
 			case "summoner":
@@ -64,22 +64,22 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 				delete _ai_component; _ai_component = new StructureTiedUnitAI();
 				break;
 			case "marcher":
-				_steering_preference = SB_Horizontal;
+				_steering_preference = SB_hex_enemy;
 				break;
 			case "swarmer":
-				_steering_preference = SB_Horizontal;
+				_steering_preference = SB_hex_enemy;
 				break;
 			case "buildingkiller":
-				_steering_preference = SB_Horizontal;
+				_steering_preference = SB_hex_enemy;
 				break;
 			case "unitkiller":
-				_steering_preference = SB_Horizontal;
+				_steering_preference = SB_hex_enemy;
 				break;
 			case "goliath":
-				_steering_preference = SB_Horizontal;
+				_steering_preference = SB_hex_enemy;
 				break;
 			case "skeleton":
-				_steering_preference = SB_Horizontal;
+				_steering_preference = SB_hex_enemy;
 				break;
 		}
 
@@ -87,12 +87,6 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		_struct = {
 			// cell or tile position
 			z : 0,
-			xx : _x div GRID_SIZE, 
-			yy : _y div GRID_SIZE,
-			my_node : _node,
-			xx_prev : _x div GRID_SIZE,
-			yy_prev : _y div GRID_SIZE,
-			my_node_prev : _node,
 			xTo : _x,
 			yTo : _y, 
 			xAnchor : _x,
@@ -111,6 +105,8 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			vel_movement : vect2(0,0),
 			steering : vect2(0,0),
 			position : vect2(_x, _y),
+			hex : vect2(0,0),
+			hex_prev : vect2(0,0),
 			
 			// steering behavior
 			member_of : noone,

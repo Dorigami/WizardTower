@@ -366,9 +366,10 @@ Bunker = function(_capacity) constructor{
 	}
 }
 
-BasicUnitAI = function() constructor{
+BasicEnemyAI = function() constructor{
     commands = ds_list_create(); // a list containing all command structs
 	owner = undefined;
+	action_timer = 10;
 	static Update = function(){
 		var _cmd = undefined;
 		var _target = noone;
@@ -389,53 +390,20 @@ BasicUnitAI = function() constructor{
 				}
 			}
 		}
-		// if there is no command, check if entity is a fighter and get first enemy in range
-		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		// run actions at a limited time interval
+		if(action_timer > -1)
 		{
-			// resolve fighter behavior
-			with(owner.fighter)
+			if(--action_timer == 0)
 			{
-				// attack the current attack target, if possible
-				if(attack_target != noone) && (instance_exists(attack_target))
-				{
-					// target is valid if its occupying node is in range
-					var _target_node = global.game_grid[# attack_target.xx, attack_target.yy];
-					if(ds_list_find_index(owner.checked_node_list,_target_node) > -1) 
-					{
-						_target = attack_target;
-					} else {
-						attack_target = noone;
-					}
-				} else {
-					attack_target = noone;
-				}
-				// if there is no attack target, attack nearest enemy
-				if(_target == noone)
-				{
-					_target = enemies_in_range[| 0];
-					if(is_undefined(_target))
-					{
-						_target = noone;
-					} else if(!instance_exists(_target)) {
-						_target = noone;
-						ds_list_delete(enemies_in_range, 0);
-					}
-				}
-				
-				// attack any enemy in range, but prioritize the attack command target
-				if(_target != noone) 
-				{
-					// attack valid target
-					if(attack_target != _target) attack_target = _target;
-					if(attack_index == -1) && (basic_cooldown_timer <= 0)
-					{
-						owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
-						UseBasic();
-					}
-				} 
+				// decide which node to go to 
+				// if the node has a player structure attack it
+				// if the node has a player unit attack it
+				// if there are too many entities at the node, pick a different one
 			}
 		}
 	}
+	static Move = function(){}
+	static Attack = function(){}
 	static Destroy = function(){
 		// delete commands
 		for(var i=0; i<ds_list_size(commands); i++)

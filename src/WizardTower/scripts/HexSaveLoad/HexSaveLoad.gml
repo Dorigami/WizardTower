@@ -42,7 +42,8 @@ with(o_hex_grid_save_load_menu)
 			ds_list_write(array_to_ds_list(hexarr_is_spawn, _temp_list)),
 			ds_list_write(array_to_ds_list(hexarr_is_goal, _temp_list)),
 			ds_list_write(array_to_ds_list(hexarr_enabled, _temp_list)),
-			ds_list_write(array_to_ds_list(hexarr_positions, _temp_list))
+			ds_list_write(array_to_ds_list(hexarr_positions, _temp_list)),
+			ds_list_write(array_to_ds_list(hexarr_hexes, _temp_list))
 		);
 	}
 	// write strings to the file
@@ -104,6 +105,7 @@ with(o_hex_grid_save_load_menu)
 		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_goal = ds_list_to_array(_temp_list);
 		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_enabled = ds_list_to_array(_temp_list);
 		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_positions = ds_list_to_array(_temp_list);
+		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_hexes = ds_list_to_array(_temp_list);
 		// update bounds for camera based on the new map
 		with(global.iCamera){
 			xTo = other.origin[1];
