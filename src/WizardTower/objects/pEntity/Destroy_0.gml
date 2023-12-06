@@ -60,6 +60,9 @@ if(!is_undefined(unit)){
     ds_list_delete(_actor.units, faction_list_index);
     _actor.unit_count--;
 
+	// delete the hex_path_list
+	if(ds_exists(owner.hex_path_list, ds_type_list)) ds_list_destroy(owner.hex_path_list);
+
     // clear id from occupy cells
 	_ind = ds_list_find_index(global.game_grid[# xx, yy].occupied_list, id);
 	if( _ind != -1) ds_list_delete(global.game_grid[# xx, yy].occupied_list, _ind);

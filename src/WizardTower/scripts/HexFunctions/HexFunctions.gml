@@ -124,3 +124,7 @@ function hex_find_nearest_goal(hex)
 		}
 	}
 }
+
+function hex_find_path_for_unit(_entity, _goal_hex_index){
+
+}

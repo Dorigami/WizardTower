@@ -369,7 +369,7 @@ Bunker = function(_capacity) constructor{
 BasicEnemyAI = function() constructor{
     commands = ds_list_create(); // a list containing all command structs
 	owner = undefined;
-	action_timer = 10;
+	action_timer = 20;
 	static Update = function(){
 		var _cmd = undefined;
 		var _target = noone;
@@ -390,20 +390,41 @@ BasicEnemyAI = function() constructor{
 				}
 			}
 		}
-		// run actions at a limited time interval
+		//--// run actions at a limited time interval
 		if(action_timer > -1)
 		{
 			if(--action_timer == 0)
 			{
 				// decide which node to go to 
+				var _goal_hex = hex_find_nearest_goal(owner.hex);
+				if(is_undefined(_goal_hex)){ show_debug_message("no goal for enemy to move to"); action_timer = 5*FRAME_RATE; exit; }
+				var _desired_hex_index = 0;
+				
+				// if owner has no 'path' to the goal, get one
+				
+				// reference the 'path' to get hte desired node 
+				
 				// if the node has a player structure attack it
+				
 				// if the node has a player unit attack it
+				
 				// if there are too many entities at the node, pick a different one
+				
+				// move to the desired node
+				
 			}
 		}
 	}
-	static Move = function(){}
-	static Attack = function(){}
+	static Move = function(_point){
+		action_timer = FRAME_RATE;
+		owner.xTo = _point[1];
+		owner.yTo = _point[2];
+		show_debug_message("enemy is moving");
+	}
+	static Attack = function(){
+		action_timer = FRAME_RATE;
+		show_debug_message("enemy is attacking");
+	}
 	static Destroy = function(){
 		// delete commands
 		for(var i=0; i<ds_list_size(commands); i++)

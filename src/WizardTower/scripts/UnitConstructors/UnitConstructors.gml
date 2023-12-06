@@ -107,6 +107,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			position : vect2(_x, _y),
 			hex : vect2(0,0),
 			hex_prev : vect2(0,0),
+			hex_path_list : ds_list_create(),
 			
 			// steering behavior
 			member_of : noone,
