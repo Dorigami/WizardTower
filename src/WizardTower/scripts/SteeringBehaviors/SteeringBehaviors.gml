@@ -614,58 +614,25 @@ function CheckNodeChange(_entity){
 		var _new_hex = undefined;
 		with(global.i_hex_grid)
 		{
-			_new_hex = pixel_to_hex(other.owner.position);
+			_new_hex = pixel_to_hex(other.position);
 		}
 		// leave script unless the node location has changed
-		if(is_undefined(_new_hex)) exit;
-		if(array_equals(_new_hex, owner.hex)) exit;
-		
-		xx = (position[1]-global.game_grid_xorigin) div GRID_SIZE;
-		yy = (position[2]-global.game_grid_yorigin) div GRID_SIZE;
-		if(!point_in_rectangle(xx,yy,0,0,global.game_grid_width-1,global.game_grid_height-1)) exit;
-		if(xx != xx_prev) || (yy != yy_prev)
+		if(is_undefined(_new_hex)) || (array_equals(_new_hex, hex)) return false;
+		// update hex & hex_prev
+		hex_prev = hex;
+		hex = _new_hex;
+		with(global.i_hex_grid)
 		{
-			var _newnode = global.game_grid[# xx, yy];
-			var _oldnode = global.game_grid[# xx_prev, yy_prev];
-			// check if new node is walkable, if so resolve collision
-			
-			// remove id from previous node
-			if(!is_undefined(_oldnode))
-			{
-				ds_list_delete(_oldnode.occupied_list, ds_list_find_index(_oldnode.occupied_list, id));
-			}
-			
-			ds_list_add(_newnode.occupied_list, id);
-			xx_prev = xx;
-			yy_prev = yy;
-			if(!is_undefined(fighter)) 
-			{
-				fighter.FindEnemies();
-			
-				var _range = 8;
-				var _node = undefined;
-				for(var i=-_range;i<=_range;i++){
-				for(var j=-_range;j<=_range;j++){
-					if(!point_in_rectangle(xx+i, yy+j,0,0,global.game_grid_width-1,global.game_grid_height-1)) continue;
-					_node = global.game_grid[# xx+i, yy+j];
-					var _size = ds_list_size(_node.occupied_list);
-					if(_size == 0) continue;
-					for(var k=0; k<_size; k++)
-					{
-						_node.occupied_list[| k].fighter.FindEnemies();
-					}
-				}}
-			}
-			if(xx == 0) && (faction == ENEMY_FACTION)
-			{
-				with(oEnemyGoal)
-				{
-					enable_collision_checking = true;
-				}
-			}
-			return true;
+			var _hex_index = hex_get_index(other.hex);
+			var _hex_prev_index = hex_get_index(other.hex_prev);
+			var _list = hexarr_containers[_hex_index];
+			var _list_prev = hexarr_containers[_hex_prev_index];
 		}
-		return false;
+		// remove entity ID from old container list
+		ds_list_delete(_list_prev, ds_list_find_index(_list_prev, id));
+		// add entity ID to new container list
+		ds_list_add(_list, id);
+		// run fighter update
 	}
 }
 function BlueprintSteering(){

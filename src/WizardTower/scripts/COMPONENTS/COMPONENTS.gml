@@ -396,30 +396,96 @@ BasicEnemyAI = function() constructor{
 			if(--action_timer == 0)
 			{
 				// decide which node to go to 
-				var _goal_hex = hex_find_nearest_goal(owner.hex);
+				var _start_hex = owner.hex;
+				var _goal_hex = hex_find_nearest_goal(_start_hex);
+				show_debug_message("starting at {0} | going to {1}",_start_hex, _goal_hex);
 				if(is_undefined(_goal_hex)){ show_debug_message("no goal for enemy to move to"); action_timer = 5*FRAME_RATE; exit; }
-				var _desired_hex_index = 0;
 				
-				// if owner has no 'path' to the goal, get one
 				
-				// reference the 'path' to get hte desired node 
+				// find which direction points toward the goal node
+				with(global.i_hex_grid)
+				{
+					var _desired_hex_index = hex_get_index(_start_hex);
+					var _direction_index = point_direction(0,0,_goal_hex[1]-_start_hex[1], _goal_hex[2]-_start_hex[2]) div 60;
+					var _hex_index = hexarr_neighbors[_desired_hex_index][_direction_index];
+					if(other.MoveValidate(_hex_index))
+					{
+						// move to the most ideal neighbor
+						_desired_hex_index = _hex_index;
+					} else {
+						// loop through neighbors, picking the first valid one found
+						var _offset = 0;
+						for(var i=1;i<4;i++)
+						{
+							// check clockwise neighbor
+							_offset = _direction_index-i;
+							if(_offset < 0) _offset += 6;
+							_hex_index = hexarr_neighbors[_desired_hex_index][_offset];
+							if(other.MoveValidate(_hex_index))
+							{
+								// this is a desireable neighbor
+								_desired_hex_index = _hex_index;
+								break;
+							} 
+							
+							if(i == 3){// this means that none of the neighbors are valid
+								_desired_hex_index = undefined;
+								break;
+							}
+							
+							// check counter-clockwise neighbor
+							_offset = _direction_index+i;
+							if(_offset > 5) _offset -= 6;
+							_hex_index = hexarr_neighbors[_desired_hex_index][_offset]
+							if(other.MoveValidate(_hex_index))
+							{
+								// this is a desireable neighbor
+								_desired_hex_index = _hex_index;
+								break;
+							} 
+						}
+					}
+				}
+
+			//--// if owner has no 'path' to the goal, get one
 				
-				// if the node has a player structure attack it
+			//--// reference the 'path' to get hte desired node 
 				
-				// if the node has a player unit attack it
+			//--// if the node has a player structure attack it
 				
-				// if there are too many entities at the node, pick a different one
+			//--// if the node has a player unit attack it
 				
-				// move to the desired node
+			//--// if there are too many entities at the node, pick a different one
 				
+			//--// move to the desired node
+				if(is_undefined(_desired_hex_index))
+				{
+					action_timer = 20;
+					exit;
+				} else {
+					var _point = global.i_hex_grid.hexarr_positions[_desired_hex_index];
+					Move(_point);
+				}
 			}
 		}
 	}
+	static MoveValidate = function(_hex_index){
+		// this will return true if the enemy can move there, will return false otherwise
+		with(global.i_hex_grid)
+		{
+			if(is_undefined(_hex_index)) return false;
+			if(ds_list_size(hexarr_containers[_hex_index]) >= 4)
+			{
+				show_debug_message("too many entities at location")
+				return false;
+			}
+			return hexarr_enabled[_hex_index];
+		}
+	}
 	static Move = function(_point){
-		action_timer = FRAME_RATE;
+		action_timer = 3*FRAME_RATE/owner.fighter.speed;
 		owner.xTo = _point[1];
 		owner.yTo = _point[2];
-		show_debug_message("enemy is moving");
 	}
 	static Attack = function(){
 		action_timer = FRAME_RATE;

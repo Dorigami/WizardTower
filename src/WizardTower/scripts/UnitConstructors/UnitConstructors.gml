@@ -7,7 +7,6 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		var _actor = actor_list[| _faction];
 		var _stats = _actor.fighter_stats[$ _type_string];
 		var _in_cell = point_in_rectangle(_x div GRID_SIZE, _y div GRID_SIZE,0,0,global.game_grid_width-1, global.game_grid_height-1)
-		var _node = _in_cell ? global.game_grid[# _x div GRID_SIZE, _y div GRID_SIZE] : undefined;
 		
 		// get animations for the entity
 		var _idle = asset_get_index("s_"+_type_string+"_idle");
@@ -39,7 +38,6 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		
 		// check the arguments for validity
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct unit - type string invalid"); exit;}
-		// if(ds_list_size(_node.occupied_list) > 0) { show_debug_message("ERROR: construct unit - node is occupied"); exit;}
 		if(is_undefined(_actor)) { show_debug_message("ERROR: construct unit - actor for faction {0} invalid", _faction); exit;}
 		// if(_actor.supply_current + _actor.supply_in_queue + _stats.supply_cost > _actor.supply_limit) { show_debug_message("ERROR: construct unit - supply limit reached"); exit;}
 
@@ -83,6 +81,13 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 				break;
 		}
 
+		// get the hex that this unit will spawn into
+		with(global.i_hex_grid)
+		{
+			var _hex = pixel_to_hex(vect2(_x,_y));
+			var _hex_index = hex_get_index(_hex);
+			var _hex_list = is_undefined(_hex_index) ? undefined : hexarr_containers[_hex_index];
+		}
 		// create the entity
 		_struct = {
 			// cell or tile position
@@ -105,8 +110,8 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			vel_movement : vect2(0,0),
 			steering : vect2(0,0),
 			position : vect2(_x, _y),
-			hex : vect2(0,0),
-			hex_prev : vect2(0,0),
+			hex : _hex,
+			hex_prev : _hex,
 			hex_path_list : ds_list_create(),
 			
 			// steering behavior
@@ -163,7 +168,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		// set index with the actors structure list
 		_unit.faction_list_index = _actor.unit_count++;
 		// have entity occupy the node that it is spawning on
-		if(!is_undefined(_node)) ds_list_add(_node.occupied_list, _unit);
+		if(!is_undefined(_hex_list)) ds_list_add(_hex_list, _unit);
 		return _unit;
 	}
 }

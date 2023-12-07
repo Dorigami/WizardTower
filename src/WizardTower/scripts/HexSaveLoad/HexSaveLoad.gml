@@ -43,7 +43,9 @@ with(o_hex_grid_save_load_menu)
 			ds_list_write(array_to_ds_list(hexarr_is_goal, _temp_list)),
 			ds_list_write(array_to_ds_list(hexarr_enabled, _temp_list)),
 			ds_list_write(array_to_ds_list(hexarr_positions, _temp_list)),
-			ds_list_write(array_to_ds_list(hexarr_hexes, _temp_list))
+			ds_list_write(array_to_ds_list(hexarr_hexes, _temp_list)),
+			ds_list_write(array_to_ds_list(hexarr_neighbors, _temp_list)),
+			ds_list_write(array_to_ds_list(hexarr_containers, _temp_list)),
 		);
 	}
 	// write strings to the file
@@ -65,16 +67,24 @@ with(o_hex_grid_save_load_menu)
 }
 }
 
-function hex_map_load(){
+function hex_map_load(_var_filename=""){
 with(o_hex_grid_save_load_menu)
 {
-	//if(_filename == "")
-	//{
-	//	_filename = get_string("Enter the name of the mao to load in.  (file extenstion not necessary)\nLeave empty to cancel", "Level0");
-	//}
-	var _filename = option_list[| option_clicked].text;
-	if(_filename == "") || (option_clicked == -1) exit;
-	if(string_pos(".map",_filename) > 0) _filename = string_copy(_filename,1,string_length(_filename)-4);
+	if(_var_filename != ""){
+		// use pre-determined filename to load a map
+		if(string_pos(".map",_var_filename) > 0) _var_filename = string_copy(_var_filename,1,string_length(_var_filename)-4);
+		if(file_exists(hexmap_directory + _var_filename + ".map"))
+		{
+			var _filename = _var_filename;
+		} else { show_debug_message("ERROR: cannot load hexmap file, doesn't exist [{0}]",_var_filename); exit; }
+	} else {
+		// use the selected menu item to load a map
+		if(option_clicked < 0){ show_message("You must select a file to load."); exit; }
+	
+		var _filename = option_list[| option_clicked].text;
+		if(_filename == "") || (option_clicked == -1) exit;
+		if(string_pos(".map",_filename) > 0) _filename = string_copy(_filename,1,string_length(_filename)-4);
+	}
 	if(global.i_hex_grid.hexmap_loaded_filename != _filename) global.i_hex_grid.hexmap_loaded_filename = _filename;
 	var _temp_list = ds_list_create();
 	var _struct = undefined;
@@ -103,9 +113,11 @@ with(o_hex_grid_save_load_menu)
 		// set array data
 		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_spawn = ds_list_to_array(_temp_list);
 		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_goal = ds_list_to_array(_temp_list);
-		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_enabled = ds_list_to_array(_temp_list);
-		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_positions = ds_list_to_array(_temp_list);
-		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_is_hexes = ds_list_to_array(_temp_list);
+		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_enabled = ds_list_to_array(_temp_list);
+		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_positions = ds_list_to_array(_temp_list);
+		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_hexes = ds_list_to_array(_temp_list);
+		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_neighbors = ds_list_to_array(_temp_list);
+		ds_list_read(_temp_list, file_text_readln(_file)); hexarr_containers = ds_list_to_array(_temp_list);
 		// update bounds for camera based on the new map
 		with(global.iCamera){
 			xTo = other.origin[1];

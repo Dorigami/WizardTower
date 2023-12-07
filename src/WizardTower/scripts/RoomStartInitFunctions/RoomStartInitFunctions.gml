@@ -74,14 +74,6 @@ function room_start_init_game_grid(){
 		// ds_grid_resize(_actor.build_map, global.game_grid_width, global.game_grid_height);
 		// ds_grid_clear(_actor.build_map, 0);
 	}
-	// update the entity flow object
-	with(oEntityFlow)
-	{
-		bbox[0] = x1;
-		bbox[1] = y1;
-		bbox[2] = x2;
-		bbox[3] = y2;
-	}
 }
 
 function room_start_init_camera(){

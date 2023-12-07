@@ -63,6 +63,8 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 		hexarr_enabled = array_create(_cellcount,1);
 		hexarr_positions = array_create(_cellcount,1);
 		hexarr_hexes = array_create(_cellcount,1);
+		hexarr_neighbors = array_create(_cellcount,1);
+		hexarr_containers = array_create(_cellcount,1);
 		
 		// create the hex nodes / determine the index values for each node
 		var ind = 0;
@@ -88,9 +90,30 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 			hexarr_enabled[ind] = false;
 			hexarr_positions[ind] = hex_to_pixel([2,q,r], true);
 			hexarr_hexes[ind] = vect2(q,r);
+			hexarr_containers[ind] = ds_list_create();
 			ind++;
 		}}
 		
+		// once the node indexes have been calculated, give each node an array to hold indexes if neighbor nodes
+		for(var i=0; i<hexgrid_height_max; i++){
+		for(var j=0; j<hexgrid_width_max; j++){
+			var r = i;
+			var q = j - floor(r/2);
+			
+			// get the hex node so we can give it neighbors
+			var _hex = vect2(q,r);
+			var _ind = hex_get_index(_hex);
+			// instantiate the array
+			hexarr_neighbors[_ind] = array_create(6,0);
+			// get index numbers for each neighbor node
+			for(var k=0;k<6;k++)
+			{
+				var _hex_neighbor = vect_add(_hex, axial_direction_vectors[k]);
+				hexarr_neighbors[_ind][k] = hex_get_index(_hex_neighbor);
+			}
+		}}
+		
+		// update the bounds of the camera to be limited to the hex grid
 		with(global.iCamera){
 			xTo = _ox;
 			yTo = _oy;
@@ -102,25 +125,45 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 			cam_bounds[3] = other.y + other.hexgrid_height_pixels - (other.v_spacing div 2);
 		}
 	}
+	// load in the default map
+	with(instance_create_layer(0,0,"Instances",o_hex_grid_save_load_menu))
+	{
+		hex_map_load("Default Layout");
+		instance_destroy();
+	}
 }
 
 function hex_find_nearest_goal(hex)
 {
+	// this will return either, undefined, or the hex of the nearest goal node
 	with(global.i_hex_grid)
 	{
-		var _size = ds_list_size(hexgrid_spawn_list);
+		var _size = ds_list_size(hexgrid_goal_list);
 		if(_size == 0)
 		{
+			// there are no goals to persue
 			return undefined;
 		} else {
-			var _lowest_dist = 0;
-			var _lowest_index = hexgrid_spawn_list[| 0];
-			var _new_dist = 0;
+			// compare distance to each available spawn node
+			var _lowest_index = hexgrid_goal_list[| 0];
+			if(_lowest_index == hex_get_index(hex)) return undefined; // cancel search if hex is already a goal
+			var _lowest_dist = axial_distance(hex, hexarr_hexes[_lowest_index]);
+			//show_debug_message("current target goal/distance: {0} / {1}", _lowest_index,_lowest_dist);
+			var _new_index = 0;
+			var _new_dist = infinity;
 			for(var i=1;i<_size;i++)
 			{
-				
-				_new_dist = axial_distance();
+				_new_index = hexgrid_goal_list[| i];
+				if(_new_index == hex_get_index(hex)) return undefined; // cancel search if hex is already a goal
+				_new_dist = axial_distance(hex, hexarr_hexes[_new_index]);
+				if(_new_dist<_lowest_dist)
+				{
+					_lowest_index = _new_index;
+					_lowest_dist = _new_dist;
+				}
 			}
+			// return the hex of the nearest node
+			return hexarr_hexes[_lowest_index];
 		}
 	}
 }
