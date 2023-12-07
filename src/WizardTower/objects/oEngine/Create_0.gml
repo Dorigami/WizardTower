@@ -10,23 +10,6 @@
     need tilemap 'PathInit' that can indicate spawn locations
 */
 
-function unit_flow_init(){
-	var _st = {
-		unit_count_current : 0,
-		unit_count_max : 200,
-		unit_smoothing_radius : 60,
-		unit_separation : 50,
-		unit_viscosity : 2.5,
-		unit_target_density : 0.5,
-		unit_pressure_multiplier : 1.2,
-		unit_id_list : ds_list_create(),
-		spatial_lookup : array_create(0,noone),
-		start_indices : array_create(0,-1),
-	}
-	instance_create_layer(0,0,"Instances",oEntityFlow,_st);
-	return _st;
-}
-
 color0 = make_colour_rgb(13,43,69);
 color1 = make_colour_rgb(32,60,86);
 color2 = make_colour_rgb(84,78,104);
@@ -124,32 +107,4 @@ window_set_fullscreen(false);
 if(ROOM_START == rShaderTest) instance_create_depth(0,0,0,oShaderTest);
 room_goto(ROOM_START);
 
-/*
-// Entity Setup as Fluid Simulation
-
-	using the infinite grid setup from the fluid simulation, we can simplify some of the proximity checking for entities:
-		- Create a spatial lookup for entity positions
-		- Create a spatial lookup for entity LoS
-
-// movement will be influcnced by 4 factors(weights)
-	friendly target density (force pushing friendly units away from each other when too close)
-	enemy target density (force pushing hostile units away from each other when too close)
-	goal direction
-	enemies in LoS
-
-// this is going to require:
-	- spatial_lookup_position
-	- lookup_radius_position
-	
-	- spatial_lookup_los
-	- lookup_radius_los
-
-should this be controlld by the engine?
-
-i could create a enemy controller.  would it replace the actor struct?  it doesn't need to.  i can have only work to update the spatial lookup and the entities can reference that seperately when they update
-
-the spatial lookup will only be used for the movement, will have a more basic solutions for attack ranges (probably what is already implemented)
-
-
-*/
 

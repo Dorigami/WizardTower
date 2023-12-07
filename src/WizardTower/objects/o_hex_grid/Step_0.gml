@@ -14,4 +14,18 @@ if(keyboard_check_pressed(vk_alt))
 	}
 }
 
+// check for enemies that get to any of the spawn nodes, then deal damage to the player if they have made it
+var _size = ds_list_size(hexgrid_goal_list);
+if(_size > 0)
+{
+	// loop over each goal node
+	for(var ind=0;ind<_size;ind++)
+	{
+		var _goal_index = hexgrid_goal_list[| ind];
+		// check ti see if any enemies are in the node
+		if(){}
+	}
+}
+
+
 
