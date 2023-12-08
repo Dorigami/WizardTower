@@ -23,7 +23,10 @@ if(_size > 0)
 	{
 		var _goal_index = hexgrid_goal_list[| ind];
 		// check ti see if any enemies are in the node
-		if(){}
+		if(ds_list_size(hexarr_containers[_goal_index]) > 0)
+		{
+			
+		}
 	}
 }
 
