@@ -22,10 +22,16 @@ if(_size > 0)
 	for(var ind=0;ind<_size;ind++)
 	{
 		var _goal_index = hexgrid_goal_list[| ind];
+		var _container = hexarr_containers[_goal_index];
+		var _container_size = ds_list_size(_container);
 		// check ti see if any enemies are in the node
-		if(ds_list_size(hexarr_containers[_goal_index]) > 0)
+		if(_container_size > 0)
 		{
-			
+			var _inst = noone;
+			for(var i=0;i<_container_size;i++)
+			{
+				_inst = _container[| i];
+			}
 		}
 	}
 }
