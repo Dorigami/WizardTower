@@ -398,8 +398,7 @@ BasicEnemyAI = function() constructor{
 				// decide which node to go to 
 				var _start_hex = owner.hex;
 				var _goal_hex = hex_find_nearest_goal(_start_hex);
-				show_debug_message("starting at {0} | going to {1}",_start_hex, _goal_hex);
-				if(is_undefined(_goal_hex)){ show_debug_message("no goal for enemy to move to"); action_timer = 5*FRAME_RATE; exit; }
+				if(is_undefined(_goal_hex)){ show_debug_message("ERROR: enemy ai component, no goal for enemy to move to"); action_timer = 5*FRAME_RATE; exit; }
 				
 				
 				// find which direction points toward the goal node

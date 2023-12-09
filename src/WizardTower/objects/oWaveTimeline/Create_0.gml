@@ -16,7 +16,7 @@
 // function to spawn entities from the timeline
 function SpawnMoment(){
 	var _arr = moment_list[| moment_index++];
-	show_debug_message("Moment {0} reached in timeline.  array is: {1}", moment_index-1, _arr);
+	show_debug_message("Moment {0} reached in wave timeline.  array is: {1}", moment_index-1, _arr);
 	
 	var _struct = {
 		owner : id,
