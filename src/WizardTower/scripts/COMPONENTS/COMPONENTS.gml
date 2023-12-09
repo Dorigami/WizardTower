@@ -483,7 +483,7 @@ BasicEnemyAI = function() constructor{
 		}
 	}
 	static Move = function(_point){
-		action_timer = 3*FRAME_RATE/owner.fighter.speed;
+		action_timer = 2*FRAME_RATE/owner.fighter.speed;
 		owner.xTo = _point[1];
 		owner.yTo = _point[2];
 	}

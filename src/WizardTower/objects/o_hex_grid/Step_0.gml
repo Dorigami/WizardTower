@@ -31,6 +31,13 @@ if(_size > 0)
 			for(var i=0;i<_container_size;i++)
 			{
 				_inst = _container[| i];
+				if(!instance_exists(_inst)) || (_inst.faction != ENEMY_FACTION) continue;
+				var _dist = point_distance(hexarr_positions[_goal_index][1],hexarr_positions[_goal_index][2],_inst.position[1], _inst.position[2]);
+				if(_dist <= 10)
+				{
+					// deal damage to the player & remove this enemy from playspace
+					with(_inst){ HurtPlayerBySupply(); instance_destroy(); }
+				}
 			}
 		}
 	}
