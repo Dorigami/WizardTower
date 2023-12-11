@@ -66,6 +66,7 @@
     {"name":"oMortarTurretActive","order":10,"path":"objects/oMortarTurretActive/oMortarTurretActive.yy",},
     {"name":"oSummonerActive","order":6,"path":"objects/oSummonerActive/oSummonerActive.yy",},
     {"name":"oMortarTurretBasic","order":11,"path":"objects/oMortarTurretBasic/oMortarTurretBasic.yy",},
+    {"name":"oVictoryMenu","order":30,"path":"objects/oVictoryMenu/oVictoryMenu.yy",},
     {"name":"Ludum_Dare_28___Track_4","order":15,"path":"sounds/Ludum_Dare_28___Track_4/Ludum_Dare_28___Track_4.yy",},
     {"name":"sHexTileType","order":48,"path":"sprites/sHexTileType/sHexTileType.yy",},
     {"name":"snd_sell","order":14,"path":"sounds/snd_sell/snd_sell.yy",},

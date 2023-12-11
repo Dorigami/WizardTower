@@ -151,7 +151,7 @@ if(!is_undefined(start_next_wave))
 	with(oEnemyLevelData)
 	{
 		var _command = undefined;
-		if(!level_started)
+		if(!timeline_running)
 		{
 			// give command to start the level
 			_command = new other.Command("start_level",true,0,0);

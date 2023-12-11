@@ -52,7 +52,6 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 		// calc the width and height of the grid
 		hexgrid_width_pixels = hexgrid_width_max*h_spacing;
 		hexgrid_height_pixels = hexgrid_height_max*v_spacing;
-		show_debug_message("0. {0}\n1. {1}\n2. {2}\n3. {3}\n4. {4}\n5. {5}",hexgrid_width_pixels,hexgrid_width_max,h_spacing,hexgrid_height_pixels,hexgrid_height_max,v_spacing);
 	
 		// set data arrays
 		hexgrid_enabled_list = ds_list_create();

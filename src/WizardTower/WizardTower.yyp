@@ -109,6 +109,7 @@
     {"id":{"name":"oMortarTurretActive","path":"objects/oMortarTurretActive/oMortarTurretActive.yy",},},
     {"id":{"name":"oSummonerActive","path":"objects/oSummonerActive/oSummonerActive.yy",},},
     {"id":{"name":"oMortarTurretBasic","path":"objects/oMortarTurretBasic/oMortarTurretBasic.yy",},},
+    {"id":{"name":"oVictoryMenu","path":"objects/oVictoryMenu/oVictoryMenu.yy",},},
     {"id":{"name":"Ludum_Dare_28___Track_4","path":"sounds/Ludum_Dare_28___Track_4/Ludum_Dare_28___Track_4.yy",},},
     {"id":{"name":"sHexTileType","path":"sprites/sHexTileType/sHexTileType.yy",},},
     {"id":{"name":"snd_sell","path":"sounds/snd_sell/snd_sell.yy",},},

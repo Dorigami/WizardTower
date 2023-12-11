@@ -1,11 +1,12 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oEnemyLevelDataSpawner",
+  "name": "oVictoryMenu",
   "eventList": [
-    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,},
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
-    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":1,"isDnD":false,},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":2,"isDnD":false,},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":1,"eventType":2,"isDnD":false,},
   ],
   "managed": true,
   "overriddenProperties": [],
@@ -13,7 +14,10 @@
     "name": "Objects",
     "path": "folders/Objects.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "pMenu",
+    "path": "objects/pMenu/pMenu.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

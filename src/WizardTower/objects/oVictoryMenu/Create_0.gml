@@ -3,7 +3,7 @@
 event_inherited();
 
 // title fade in variables
-title = "VICTORY!!!"
+title = "WIZARD TOWER"
 intro = true;
 titleAlpha = 0;
 optionAlpha = 0;

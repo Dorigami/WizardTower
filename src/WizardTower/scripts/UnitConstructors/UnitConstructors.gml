@@ -1,5 +1,5 @@
 function ConstructUnit(_x, _y, _faction, _type_string){
-	show_debug_message("Constructing UNIT: xx = {0} | yy = {1} | faction = {2} | string = {3}", _x, _y, _faction, _type_string);
+	//show_debug_message("Constructing UNIT: xx = {0} | yy = {1} | faction = {2} | string = {3}", _x, _y, _faction, _type_string);
 	with(global.iEngine)
 	{
 		var _unit = undefined, _steering_preference = undefined, _blueprint_component = undefined, _fighter_component = undefined, _unit_component = undefined, _structure_component = undefined, _ai_component = undefined, _bunker_component = undefined, _interactable_component = undefined;

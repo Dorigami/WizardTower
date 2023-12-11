@@ -1,38 +1,26 @@
 /// @description
 
 /*
-	wave_content
-	wave_index = 0; // used to get the spawn data (content) for the wave corresponding to this index
-    wave_keys = variable_struct_get_names(wave_content); // array of keys for accessing the spawn data for specific waves
-	wave_content_end = false;
-	wave_content_timer = -1;
-	wave_content_index = 0; // used in the moment spawn function to create the entities
-	wave_content_keys = variable_struct_get_names(wave_content[$ wave_keys[wave_index]]);
-	wave_running = false;
-	wave_complete = false;
-	wave_timeline = undefined;
+	Data Set By Creator/Owner:
+		owner
+		wave_data
+		wave_index
 */
 
 // function to spawn entities from the timeline
 function SpawnMoment(){
 	var _arr = moment_list[| moment_index++];
-	show_debug_message("Moment {0} reached in wave timeline.  array is: {1}", moment_index-1, _arr);
-	
-	var _struct = {
-		owner : id,
-		wave_index : wave_index,
-		spawn_index : 0,
-		spawn_data : _arr,
-		spawn_node_index : _arr[0]
-	}
-	ds_list_add(spawner_list, instance_create_layer(0,0,"Instances",oEnemyLevelDataSpawner,_struct));
-	
-	// check if the timeline finished
-	if(moment_index >= moment_count)
+	// show_debug_message("Moment {0} reached in wave{1} timeline.  array is: {2}", moment_index-1, wave_index, _arr);
+	// the last timestamp will contain an empty array, so make sure we dont make a spawner for it
+	if(array_length(_arr) > 0)
 	{
-		var _wave_content = owner.wave_structs_list[| wave_index];
-		_wave_content.instance = noone;
-		instance_destroy();
+		var _struct = {
+			owner : id,
+			wave_index : wave_index,
+			spawn_data : _arr,
+			spawn_node_index : _arr[0]
+		}
+		ds_list_add(spawner_list, instance_create_layer(0,0,"Instances",oEnemyLevelDataSpawner,_struct));
 	}
 }
 
@@ -47,7 +35,7 @@ var _step = 0;
 wave_keys = variable_struct_get_names(wave_data);
 wave_timeline = timeline_add();
 moment_index = 0;
-moment_count = array_length(wave_keys);
+moment_count = 0;
 moment_list = ds_list_create();
 entity_list = ds_list_create();
 spawner_list = ds_list_create();
@@ -59,7 +47,7 @@ with(global.iHUD)
 }
 
 // add moments to the timeline
-for(var j=0; j<moment_count; j++)
+for(var j=0; j<array_length(wave_keys); j++)
 {
 	_name = wave_keys[j];
 	if(string_count("ms", _name) == 1){
@@ -69,27 +57,17 @@ for(var j=0; j<moment_count; j++)
 
 		timeline_moment_add_script(wave_timeline, _step, SpawnMoment);
 		ds_list_add(moment_list, wave_data[$ wave_keys[j]]);
-		show_debug_message("moment added to wave timeline | step = {0} | array = {1}", _step, wave_data[$ wave_keys[j]])
-	} else {
-		show_debug_message("NON TIME KEY FOUND");
-		// keep count of non time keys
-		_non_time_keys++;
-		// get general timer for the wave
-		if(_name == "time")
-		{
-			//set wave timer for the actor
-			_step = round(wave_data[$ "time"]*FRAME_RATE*0.001);
-			owner.ai.wave_timer = _step;
-		}
+		moment_count++;
+		//show_debug_message("moment added to wave timeline | step = {0} | array = {1}", _step, wave_data[$ wave_keys[j]])
 	}
 }
 
-// decrease the moment count based on number of non time keys
-moment_count -= _non_time_keys;
-
 // set and start timeline
 timeline_index = wave_timeline;
+timeline_position = 0;
+timeline_loop = false;
 timeline_running = true;
 
-show_debug_message("moment count:{0} | running:{1}, name:{2} | max_moment:{3}", moment_count, timeline_running, timeline_get_name(timeline_index), timeline_max_moment(timeline_index));
+//show_debug_message("Wave {0} Created", wave_index);
+//show_debug_message("moment count:{0} | running:{1}, name:{2} | max_moment:{3}", moment_count, timeline_running, timeline_get_name(timeline_index), timeline_max_moment(timeline_index));
 
