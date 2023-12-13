@@ -4,7 +4,7 @@ time_check = current_time;
 
 if(room == rShaderTest) exit;
 
-//hud_action = global.iHUD.hud_get_action();
+hud_action = global.iHUD.hud_get_action();
 mouse_action = handle_mouse();
 action = handle_keys(global.game_state);
 
@@ -206,16 +206,9 @@ if(!is_undefined(confirm_build_action)) || (!is_undefined(confirm_build_action_m
 		{
 			show_debug_message("build criteria met");
 			// create the blueprint entity for the builder to target
-			_ent = ConstructBlueprint(mouse_x, mouse_y, PLAYER_FACTION, blueprint_instance.type_string);
+			_ent = ConstructBlueprint(blueprint_instance.x, blueprint_instance.y, PLAYER_FACTION, blueprint_instance.type_string);
 			if(is_undefined(_ent)) exit;
-			if(!blueprint_instance.lock_to_grid)
-			{
-				_ent.x = mouse_x;
-				_ent.y = mouse_y;
-			} 
-			_ent.xTo = mouse_x;
-			_ent.yTo = mouse_y;
-			
+
 			// update supply and material
 			_actor.supply_in_queue += _stats.supply_cost;
 			_actor.material -= _stats.material_cost;

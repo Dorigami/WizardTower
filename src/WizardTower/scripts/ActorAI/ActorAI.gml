@@ -263,9 +263,9 @@ DebugActorAI = function() constructor{
 					for(k=0;k<array_length(_unit_arr);k++)
 					{
 						// set x value to the right edge of the game grid
-						_unit_arr[k][1] = global.game_grid_xorigin + global.game_grid_width*GRID_SIZE + GRID_SIZE;
+						_unit_arr[k][1] = global.game_grid_bbox[0] + global.game_grid_width*GRID_SIZE + GRID_SIZE;
 						// set y value to a random value within vertical bounds of the game grid
-						_unit_arr[k][2] = global.game_grid_yorigin + irandom(global.game_grid_height)*GRID_SIZE ;
+						_unit_arr[k][2] = global.game_grid_bbox[1] + irandom(global.game_grid_height)*GRID_SIZE ;
 					}
 					struct_set(_struct, _arr[j], _unit_arr);
 				}

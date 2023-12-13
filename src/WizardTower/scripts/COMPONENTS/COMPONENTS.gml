@@ -27,11 +27,18 @@ Blueprint = function(_build_time) constructor{
 			_actor.supply_limit += _stats.supply_capacity;
 			_actor.supply_in_queue -= _stats.supply_cost;
 			_actor.supply_current += _stats.supply_cost;
-				
+			
+			//remove from occupying hex node
+			with(global.i_hex_grid)
+			{
+				var _container = hexarr_containers[hex_get_index(other.owner.hex)];
+				ds_list_delete(_container, ds_list_find_index(_container, other.owner));
+			}
+			
 			// construct either a unit, or a structure
 			if(_stats.entity_type == UNIT)
 			{
-				var _ent = ConstructUnit(owner.xTo, owner.yTo, owner.faction, owner.type_string);
+				ConstructUnit(owner.x, owner.y, owner.faction, owner.type_string);
 			} else {
 				ConstructStructure(owner.x, owner.y, owner.faction, owner.type_string);
 			}
@@ -168,6 +175,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		_yy = owner.yy;
 		ds_list_clear(owner.checked_node_list);
 		ds_list_clear(enemies_in_range);
+/*
 		// loop through all nodes in range
 		for(i=-_cell_offset; i<=_cell_offset; i++){
 		for(j=-_cell_offset; j<=_cell_offset; j++){
@@ -198,6 +206,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 				}
 			}
 		}}
+*/
 		if(ds_list_size(enemies_in_range) == 0)
 		{
 			return noone;
@@ -277,6 +286,7 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 					var _pos = spawn_positions;
 					for(var i=0;i<array_length(_pos);i++)
 					{
+						/*
 						var _node = global.game_grid[# _pos[i][0], _pos[i][1]];
 						if(!is_undefined(_node)) && (instance_exists(_node.occupied_list))
 						{
@@ -290,6 +300,7 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 							build_ticket = undefined;
 							break;
 						}
+						*/
 					}
 				} else {
 					// wait for a spot to open up near the structure
@@ -301,6 +312,7 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 	static CheckSpawnLocations = function(){
 		var _count = 0;
 		show_debug_message("spawn location size = "+ string(array_length(spawn_positions)))
+		/*
 		for(var i=0;i<array_length(spawn_positions);i++)
 		{
 			if(!is_undefined(spawn_positions[i]))
@@ -312,6 +324,7 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 				}
 			}
 		}
+		*/
 		return _count;
 	}
 	static Destroy = function(){
@@ -332,27 +345,6 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 		    }
 		    ds_list_delete(_actor.structures, faction_list_index);
 		    _actor.structure_count--;
-
-		    // clear id from occupy cells
-		    if(size_check == 2){
-				_ind = ds_list_find_index(global.game_grid[# xx, yy].occupied_list, id);
-				if( _ind != -1) ds_list_delete(global.game_grid[# xx, yy].occupied_list, _ind);
-				global.game_grid[# xx, yy].walkable = true;
-		    } else {
-				var _w = size[0];
-				var _h = size[1];
-				var _cw = _w div 2;
-				var _ch = _h div 2;
-				for(var i=-_cw; i<_w-_cw; i++){
-				for(var j=-_ch; j<_h-_ch; j++){
-					if(point_in_rectangle(xx+i, yy+j, 0, 0, global.game_grid_width-1, global.game_grid_height-1)) 
-					{
-						_ind = ds_list_find_index(global.game_grid[# xx+i, yy+j].occupied_list, id);
-						if( _ind != -1) ds_list_delete(global.game_grid[# xx+i, yy+j].occupied_list, _ind);
-						global.game_grid[# xx+i, yy+j].walkable = true;
-					}
-				}}
-		    }
 		}
 	}
 }
@@ -524,7 +516,7 @@ StructureTiedUnitAI = function() constructor{
 				if(attack_target != noone) && (instance_exists(attack_target))
 				{
 					// target is valid if its occupying node is in range
-					var _target_node = global.game_grid[# attack_target.xx, attack_target.yy];
+					var _target_node = noone;
 					if(ds_list_find_index(owner.checked_node_list,_target_node) > -1) 
 					{
 						_target = attack_target;
@@ -594,7 +586,7 @@ BasicStructureAI = function() constructor{
 				if(attack_target != noone) && (instance_exists(attack_target))
 				{
 					// target is valid if its occupying node is in range
-					var _target_node = global.game_grid[# attack_target.xx, attack_target.yy];
+					var _target_node = noone;
 					if(ds_list_find_index(owner.checked_node_list,_target_node) > -1) 
 					{
 						_target = attack_target;

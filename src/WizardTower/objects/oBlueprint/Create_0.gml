@@ -13,7 +13,9 @@
 */
 
 cantplace = false;
-rect = [x, y, x+GRID_SIZE, y+GRID_SIZE];
+hex = vect2(0,0);
+hex_index = undefined;
+
 position_update_timer = -1;
 position_update_time = 3;
 for(var i=0;i<size[0];i++)
@@ -21,13 +23,20 @@ for(var i=0;i<size[0];i++)
 	node_grid = []
 }
 function CheckPlacement(){
-	if(lock_to_grid)
+	// check the hex grid for structures or enemies
+	with(global.i_hex_grid)
 	{
-		return collision_rectangle(rect[0],rect[1],rect[2],rect[3],pEntity,false,true) || collision_rectangle(rect[0],rect[1],rect[2],rect[3],oBlueprint,false,true);
-	} else {
-		return collision_circle(x,y,collision_radius,pEntity,false,true) || collision_circle(x,y,collision_radius,oBlueprint,false,true);
+		var _container = hexarr_containers[other.hex_index];
+		var _inst = noone;
+		for(var i=0;i<ds_list_size(_container);i++)
+		{
+			_inst = _container[| i];
+			if(is_undefined(_inst)) continue; // ignore
+			if(!is_undefined(_inst.structure)) return true; // bad placement
+			if(_inst.faction == ENEMY_FACTION) return true; // bad placement
+		}
 	}
-	//return collision_point(x+0.5*GRID_SIZE, y+0.5*GRID_SIZE, pEntity, false, false);
+	return false; // good placement
 }
 
 if(!object_exists(object)) instance_destroy();

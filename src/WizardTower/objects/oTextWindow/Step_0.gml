@@ -3,7 +3,6 @@
 // fade out when target is lost
 if(target == noone)
 {
-	show_debug_message("fading out");
 	// fade out and destroy
 	alpha_ = max(0, alpha_ - 0.05);
 	image_alpha = alpha_;

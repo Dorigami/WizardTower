@@ -125,12 +125,12 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
     // update position based on velocities (forces and movement)
     position[1] = clamp(
 					position[1] + vel_force[1] + vel_movement[1], 
-					global.game_grid_xorigin, 
-					global.game_grid_xorigin + global.game_grid_width*GRID_SIZE - 1);
+					global.game_grid_bbox[0], 
+					global.game_grid_bbox[0] + global.game_grid_width*GRID_SIZE - 1);
     position[2] = clamp(
 					position[2] + vel_force[2] + vel_movement[2], 
-					global.game_grid_yorigin, 
-					global.game_grid_yorigin + global.game_grid_height*GRID_SIZE - 1);
+					global.game_grid_bbox[1], 
+					global.game_grid_bbox[1] + global.game_grid_height*GRID_SIZE - 1);
 	x = position[1];
 	y = position[2];
 	
@@ -144,7 +144,7 @@ function SB_pathlover(_goal_priority, _attack_priority, _density_priority, _disc
 	ds_list_destroy(_col_list);
 	
 	// complete route
-	if(position[1] <= global.game_grid_xorigin+1)
+	if(position[1] <= global.game_grid_bbox[0]+1)
 	{
 		HurtPlayer();
 		instance_destroy();
@@ -279,12 +279,12 @@ function SB_Marine(_goal_priority, _attack_priority, _density_priority, _discomf
     // update position based on velocities (forces and movement)
     position[1] = clamp(
 					position[1] + vel_force[1] + vel_movement[1], 
-					global.game_grid_xorigin, 
-					global.game_grid_xorigin + global.game_grid_width*GRID_SIZE - 1);
+					global.game_grid_bbox[0], 
+					global.game_grid_bbox[0] + global.game_grid_width*GRID_SIZE - 1);
     position[2] = clamp(
 					position[2] + vel_force[2] + vel_movement[2], 
-					global.game_grid_yorigin, 
-					global.game_grid_yorigin + global.game_grid_height*GRID_SIZE - 1);
+					global.game_grid_bbox[1], 
+					global.game_grid_bbox[1] + global.game_grid_height*GRID_SIZE - 1);
 	x = position[1];
 	y = position[2];
 	
@@ -429,12 +429,12 @@ function SB_Drone(_goal_priority, _attack_priority, _density_priority, _discomfo
     // update position based on velocities (forces and movement)
     position[1] = clamp(
 					position[1] + vel_force[1] + vel_movement[1], 
-					global.game_grid_xorigin, 
-					global.game_grid_xorigin + global.game_grid_width*GRID_SIZE - 1);
+					global.game_grid_bbox[0], 
+					global.game_grid_bbox[0] + global.game_grid_width*GRID_SIZE - 1);
     position[2] = clamp(
 					position[2] + vel_force[2] + vel_movement[2], 
-					global.game_grid_yorigin, 
-					global.game_grid_yorigin + global.game_grid_height*GRID_SIZE - 1);
+					global.game_grid_bbox[1], 
+					global.game_grid_bbox[1] + global.game_grid_height*GRID_SIZE - 1);
 	x = position[1];
 	y = position[2];
 	
@@ -604,12 +604,12 @@ function SB_PlayerUnit(_goal_priority, _attack_priority, _density_priority, _dis
     // update position based on velocities (forces and movement)
     position[1] = clamp(
 					position[1] + vel_force[1] + vel_movement[1], 
-					global.game_grid_xorigin, 
-					global.game_grid_xorigin + global.game_grid_width*GRID_SIZE - 1);
+					global.game_grid_bbox[0], 
+					global.game_grid_bbox[0] + global.game_grid_width*GRID_SIZE - 1);
     position[2] = clamp(
 					position[2] + vel_force[2] + vel_movement[2], 
-					global.game_grid_yorigin, 
-					global.game_grid_yorigin + global.game_grid_height*GRID_SIZE - 1);
+					global.game_grid_bbox[1], 
+					global.game_grid_bbox[1] + global.game_grid_height*GRID_SIZE - 1);
 	x = position[1];
 	y = position[2];
 	
@@ -629,18 +629,19 @@ function CheckNodeChange(_entity){
 		// this function is assumed to be run inside of a unit entity
 		// will update current node as position changes
 		var _new_hex = undefined;
+		var _hex_index = undefined;
 		with(global.i_hex_grid)
 		{
 			_new_hex = pixel_to_hex(other.position);
+			_hex_index = hex_get_index(other.hex);
 		}
 		// leave script unless the node location has changed
-		if(is_undefined(_new_hex)) || (array_equals(_new_hex, hex)) return false;
+		if(is_undefined(_hex_index)) || (array_equals(_new_hex, hex)) return false;
 		// update hex & hex_prev
 		hex_prev = hex;
 		hex = _new_hex;
 		with(global.i_hex_grid)
 		{
-			var _hex_index = hex_get_index(other.hex);
 			var _hex_prev_index = hex_get_index(other.hex_prev);
 			var _list = hexarr_containers[_hex_index];
 			var _list_prev = hexarr_containers[_hex_prev_index];

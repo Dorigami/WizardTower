@@ -1,6 +1,8 @@
 function EnforceTileCollision(_is_flyer=false){
+	show_debug_message("ERROR: cannot enforce tile collisions.  must be reworked to use hex grid");
+	exit;
 	if(!point_in_rectangle(xx, yy, 0, 0, global.game_grid_width-1, global.game_grid_height-1)) exit;
-	var _node = global.game_grid[# xx, yy];
+	var _node = undefined;// global.game_grid[# xx, yy];
 	if(!_is_flyer){
 		// grounded entity collision
 		if(!_node.walkable) || (_node.blocked)

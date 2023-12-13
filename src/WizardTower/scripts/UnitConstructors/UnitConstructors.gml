@@ -88,6 +88,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			var _hex_index = hex_get_index(_hex);
 			var _hex_list = is_undefined(_hex_index) ? undefined : hexarr_containers[_hex_index];
 		}
+		
 		// create the entity
 		_struct = {
 			// cell or tile position

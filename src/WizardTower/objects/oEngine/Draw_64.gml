@@ -10,7 +10,7 @@ draw_set_color(c_green);
 
 var _arr = ["PAUSE", "PLAY", "BUILDING", "SELLING","TARGETING", "VICTORY", "DEFEAT", "MAIN_MENU", "UPGRADE_MENU"];
 _str = _arr[global.game_state];
-draw_text(0, 0, "GAME STATE: " + _str);
+draw_text(0, 8, "GAME STATE: " + _str);
 
 if(global.game_state == GameStates.PAUSE)
 {

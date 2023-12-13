@@ -3,6 +3,7 @@
 // update hex position for the mouse
 mouse_hex_coord = pixel_to_hex([2, mouse_x, mouse_y]);
 mouse_hex_pos = hex_to_pixel(mouse_hex_coord, true);
+mouse_hex_index = hex_get_index(mouse_hex_coord);
 
 if(keyboard_check_pressed(vk_alt))
 {
@@ -24,7 +25,7 @@ if(_size > 0)
 		var _goal_index = hexgrid_goal_list[| ind];
 		var _container = hexarr_containers[_goal_index];
 		var _container_size = ds_list_size(_container);
-		// check ti see if any enemies are in the node
+		// check to see if any enemies are in the node
 		if(_container_size > 0)
 		{
 			var _inst = noone;

@@ -118,6 +118,7 @@
     {"name":"sTowerFrost1","order":36,"path":"sprites/sTowerFrost1/sTowerFrost1.yy",},
     {"name":"snd_empty","order":36,"path":"sounds/snd_empty/snd_empty.yy",},
     {"name":"EnemyComponentsAI","order":21,"path":"scripts/EnemyComponentsAI/EnemyComponentsAI.yy",},
+    {"name":"hud_minimap_functions","order":39,"path":"scripts/hud_minimap_functions/hud_minimap_functions.yy",},
     {"name":"oFlameTurretBasic","order":9,"path":"objects/oFlameTurretBasic/oFlameTurretBasic.yy",},
     {"name":"s_unitkiller_move","order":19,"path":"sprites/s_unitkiller_move/s_unitkiller_move.yy",},
     {"name":"CreateButton","order":4,"path":"scripts/CreateButton/CreateButton.yy",},

@@ -50,16 +50,17 @@ game_set_speed(FRAME_RATE, gamespeed_fps);
 InitializeDisplay(ASPECT_RATIO);
 
 // initialize game grid
-global.game_grid_xorigin = 0;
-global.game_grid_yorigin = 0;
+global.game_grid_bbox = [0,0,0,0];
 global.game_grid_width = 10;
 global.game_grid_height = 10;
-global.game_grid = ds_grid_create(global.game_grid_width, global.game_grid_height);
-for(var i=0; i<global.game_grid_width;  i++){
-for(var j=0; j<global.game_grid_height; j++){
-    var _node = new Node(i,j);
-    global.game_grid[# i, j] = _node;
-}}
+/*
+	global.game_grid = ds_grid_create(global.game_grid_width, global.game_grid_height);
+	for(var i=0; i<global.game_grid_width;  i++){
+	for(var j=0; j<global.game_grid_height; j++){
+	    var _node = new Node(i,j);
+	    global.game_grid[# i, j] = _node;
+	}}
+*/
 // other global variables
 global.unitSelection = ds_list_create();
 global.iEngine = id;
@@ -81,12 +82,13 @@ menu_stack = ds_stack_create();
 blueprint_instance = noone;
 killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
-game_grid_heap.Initialize(global.game_grid);
 initial_player_abilities = array_create(9, undefined);
 current_player_abilities = array_create(9, undefined);
 zoom_delay_time = 10;
 sell_price = 0;
+ParticleSystemsInit();
 SellPuffInit();
+StructureSpawnPuffInit();
 
 // fill the unit vector array with unit vectors for each context steering directions
 for(var i=0; i<CS_RESOLUTION; i++){

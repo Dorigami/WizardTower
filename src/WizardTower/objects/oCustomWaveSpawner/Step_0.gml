@@ -22,8 +22,8 @@ if(dragging[0])
 event_inherited();
 
 
-x = clamp(x,global.game_grid_xorigin,global.game_grid_xorigin+global.game_grid_width*GRID_SIZE-1);
-y = clamp(y,global.game_grid_yorigin,global.game_grid_yorigin+global.game_grid_height*GRID_SIZE-1);
+x = clamp(x,global.game_grid_bbox[0],global.game_grid_bbox[0]+global.game_grid_width*GRID_SIZE-1);
+y = clamp(y,global.game_grid_bbox[1],global.game_grid_bbox[1]+global.game_grid_height*GRID_SIZE-1);
 
 tab_bbox[0] = x;
 tab_bbox[1] = y-tab_hgt;

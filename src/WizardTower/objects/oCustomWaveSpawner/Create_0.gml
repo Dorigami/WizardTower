@@ -44,8 +44,8 @@
 	}
 	function SpawnCustomWave(){
 		with(container){
-			var _x = global.game_grid_xorigin + global.game_grid_width*GRID_SIZE;
-			var _y = global.game_grid_yorigin + global.game_grid_height*GRID_SIZE*random_range(0.05,0.95);
+			var _x = global.game_grid_bbox[0] + global.game_grid_width*GRID_SIZE;
+			var _y = global.game_grid_bbox[1] + global.game_grid_height*GRID_SIZE*random_range(0.05,0.95);
 			var _cnt = 0, _pow = 0;
 			var type_strings = ["marcher", "swarmer","buildingkiller","unitkiller","goliath"];
 			var _fighterstats = undefined;

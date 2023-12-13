@@ -163,6 +163,7 @@
     {"id":{"name":"sTowerFrost1","path":"sprites/sTowerFrost1/sTowerFrost1.yy",},},
     {"id":{"name":"snd_empty","path":"sounds/snd_empty/snd_empty.yy",},},
     {"id":{"name":"EnemyComponentsAI","path":"scripts/EnemyComponentsAI/EnemyComponentsAI.yy",},},
+    {"id":{"name":"hud_minimap_functions","path":"scripts/hud_minimap_functions/hud_minimap_functions.yy",},},
     {"id":{"name":"oFlameTurretBasic","path":"objects/oFlameTurretBasic/oFlameTurretBasic.yy",},},
     {"id":{"name":"s_unitkiller_move","path":"sprites/s_unitkiller_move/s_unitkiller_move.yy",},},
     {"id":{"name":"CreateButton","path":"scripts/CreateButton/CreateButton.yy",},},

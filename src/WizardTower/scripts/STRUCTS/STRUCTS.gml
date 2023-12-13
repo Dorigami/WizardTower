@@ -29,9 +29,6 @@ Actor = function(_player=false, _faction=NEUTRAL_FACTION, _apm=0, _ai=undefined)
     structures = ds_list_create();
 	structure_count = 0;
     control_groups = ds_list_create();
-    fov_map = ds_grid_create(global.game_grid_width, global.game_grid_height);
-    fov_edges = ds_list_create();
-    build_map = ds_grid_create(global.game_grid_width, global.game_grid_height);
 }
 
 //  spearbearer, physical dps (throw spear dealing damage, unit can't attack while on cooldown but can retrieve the spear to reset the cooldown)
@@ -51,8 +48,8 @@ Node = function(_xx, _yy) constructor{
 	// scalar values (and average velocity)
 	xx = _xx;
 	yy = _yy;
-	x = global.game_grid_xorigin + (_xx*GRID_SIZE + (GRID_SIZE div 2));
-	y = global.game_grid_yorigin + (_yy*GRID_SIZE + (GRID_SIZE div 2));
+	x = global.game_grid_bbox[0] + (_xx*GRID_SIZE + (GRID_SIZE div 2));
+	y = global.game_grid_bbox[1] + (_yy*GRID_SIZE + (GRID_SIZE div 2));
 
     // heap variables
     HeapIndex = 0;
@@ -96,10 +93,10 @@ NodeHeap = function() constructor
 	maxHeapSize = global.game_grid_width*global.game_grid_height;
 	items = array_create(maxHeapSize, -1);
 
-	static Initialize = function(_grid=undefined){
-        if(!is_undefined(_grid)) && (ds_exists(_grid,ds_type_grid))
+	static Initialize = function(index_array=undefined){
+        if(!is_undefined(index_array)) && (is_array(index_array))
         {
-            maxHeapSize = ds_grid_width(_grid)*ds_grid_height(_grid);
+            maxHeapSize = array_length(index_array);
         }
         items = array_create(maxHeapSize, undefined);
 		currentItemCount = 0;

@@ -1,37 +1,38 @@
 function ConstructBlueprint(_x, _y, _faction, _type_string){
 	with(global.iEngine)
 	{
-		_x = clamp((_x div GRID_SIZE)*GRID_SIZE+HALF_GRID,global.game_grid_xorigin,global.game_grid_xorigin+global.game_grid_width*GRID_SIZE-1);
-		_y = clamp((_y div GRID_SIZE)*GRID_SIZE+HALF_GRID,global.game_grid_yorigin,global.game_grid_yorigin+global.game_grid_height*GRID_SIZE-1);
-		var _xx = _x div GRID_SIZE;
-		var _yy = _y div GRID_SIZE;
 		var _w, _h, _cw, _ch;
 		var _blueprint = undefined, _blueprint_component = undefined, _fighter_component = undefined, _unit_component = undefined, _structure_component = undefined, _ai_component = undefined, _bunker_component = undefined, _interactable_component = undefined;
 		var _struct = undefined;
 		var _actor = actor_list[| _faction];
 		var _stats = _actor.fighter_stats[$ _type_string];
-		var _node = global.game_grid[# clamp(_x div GRID_SIZE,0,global.game_grid_width-1), clamp(_y div GRID_SIZE,0,global.game_grid_height-1)];
+		var _node = undefined; // global.game_grid[# clamp(_x div GRID_SIZE,0,global.game_grid_width-1), clamp(_y div GRID_SIZE,0,global.game_grid_height-1)];
 		var _idle = -1;
 		var _move = -1; 
 		var _attack = -1;
 		var _death = -1;
-		show_debug_message("x={0}, y={1}, xx={2}, yy={3}", _x,_y,_xx,_yy)
+	
 		// check arguments for validity
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct blueprint - type string invalid"); exit;}
 		if(is_undefined(_actor)) { show_debug_message("ERROR: construct blueprint - actor for faction {0} invalid", _faction); exit;}
-		if(VerifyBuildingArea(_x, _y, _stats.size[0], _stats.size[1]) == false) { show_debug_message("ERROR: construct blueprint - one or more of the nodes are occupied"); exit;}
+		if(VerifyBuildingArea(_x, _y) == false) { show_debug_message("ERROR: construct blueprint - one or more of the nodes are occupied"); exit;}
 
 		// create blueprint component
 		_blueprint_component = new Blueprint(_stats.build_time);
+
+		// get the hex that this unit will spawn into
+		with(global.i_hex_grid)
+		{
+			var _hex = pixel_to_hex(vect2(_x,_y));
+			var _pos = hex_to_pixel(_hex);
+			var _hex_index = hex_get_index(_hex);
+			var _hex_list = is_undefined(_hex_index) ? undefined : hexarr_containers[_hex_index];
+		}
 
 		// create the entity
 		_struct = {
 			sprite_index : asset_get_index("s_"+_type_string+"_idle"),
 			z : 0,
-			xx : _xx,
-			yy : _yy,
-			xx_prev : _xx,
-			yy_prev : _yy,
 			xTo : _x,
 			yTo : _y,
 			size : _stats.size,
@@ -53,7 +54,9 @@ function ConstructBlueprint(_x, _y, _faction, _type_string){
 			vel_force : vect2(0,0),
 			vel_movement : vect2(0,0),
 			position : vect2(_x, _y),
-
+			hex : _hex,
+			hex_prev : _hex,
+			hex_path_list : ds_list_create(),
 			
 			//animation
 			spr_idle : _idle,
@@ -70,18 +73,8 @@ function ConstructBlueprint(_x, _y, _faction, _type_string){
 		ds_list_add(_actor.blueprints, _blueprint);
 		// set index with the actors structure list
 		_blueprint.faction_list_index = _actor.blueprint_count++;
-		// have structure occupy applicable nodes
-		_w = _stats.size[0];
-		_h = _stats.size[1];
-		_cw = _w div 2;
-		_ch = _h div 2;
-		for(var i=-_cw; i<_w-_cw; i++){
-		for(var j=-_ch; j<_h-_ch; j++){
-			if(point_in_rectangle(_xx+i,_yy+j,0,0,global.game_grid_width-1,global.game_grid_height-1))
-			{
-				global.game_grid[# _xx+i, _yy+j].occupied_blueprint = _blueprint;
-			}
-		}}
+		// have entity occupy the node that it is spawning on
+		if(!is_undefined(_hex_list)) ds_list_add(_hex_list, _blueprint);
 		
 		return _blueprint;
 	}

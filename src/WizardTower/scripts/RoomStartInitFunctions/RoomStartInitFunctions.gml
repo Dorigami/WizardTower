@@ -1,8 +1,8 @@
 function room_start_init_game_grid(){
 	var _w=0, _h=0, i=0, j=0,_node=undefined;
     var x1=room_width, x2=0, y1=room_height, y2=0;
-    global.game_grid_xorigin = undefined;
-    global.game_grid_yorigin = undefined;
+    global.game_grid_bbox[0] = undefined;
+    global.game_grid_bbox[1] = undefined;
 	with(oPlaySpace)
 	{
 		x1 = bbox_left div GRID_SIZE;
@@ -24,16 +24,15 @@ function room_start_init_game_grid(){
 	}
 	
 	// adjust the game grid if needed
-	ds_grid_resize(global.game_grid, _w, _h);
-	global.game_grid_xorigin = x1*GRID_SIZE;
-	global.game_grid_yorigin = y1*GRID_SIZE;
+	global.game_grid_bbox[0] = x1*GRID_SIZE;
+	global.game_grid_bbox[1] = y1*GRID_SIZE;
 	global.game_grid_width = _w;
 	global.game_grid_height = _h;
 	global.game_grid_center = vect2(x1 + (_w div 2), y1 + (_h div 2));
 
 	show_debug_message("game grid param origin: [{0}, {1}] | dimensions: [{2}, {3}]", 
-		global.game_grid_xorigin, 
-		global.game_grid_yorigin,
+		global.game_grid_bbox[0], 
+		global.game_grid_bbox[1],
 		global.game_grid_width,
 		global.game_grid_height
 		);
@@ -41,30 +40,14 @@ function room_start_init_game_grid(){
 	// set movement bounds for camera
 	with(global.iCamera)
 	{
-		cam_bounds[0] = global.game_grid_xorigin;
-		cam_bounds[1] = global.game_grid_yorigin;
-		cam_bounds[2] = global.game_grid_xorigin + GRID_SIZE*global.game_grid_width;
-		cam_bounds[3] = global.game_grid_yorigin + GRID_SIZE*global.game_grid_height;
+		cam_bounds[0] = global.game_grid_bbox[0];
+		cam_bounds[1] = global.game_grid_bbox[1];
+		cam_bounds[2] = global.game_grid_bbox[0] + GRID_SIZE*global.game_grid_width;
+		cam_bounds[3] = global.game_grid_bbox[1] + GRID_SIZE*global.game_grid_height;
 	}
-	
-	// fill game grid with nodes	
-	for(i=0; i<_w; i++){
-	for(j=0; j<_h; j++){
-		_node = global.game_grid[# i, j]; 
-		if(!is_instanceof(_node, Node))
-		{
-			global.game_grid[# i, j] = new Node(i, j);
-		} else {
-			_node.walkable = true;
-			ds_list_clear(_node.occupied_list);
-			//update center position of the node
-			_node.x = global.game_grid_xorigin + (i*GRID_SIZE + (GRID_SIZE div 2));
-			_node.y = global.game_grid_yorigin + (j*GRID_SIZE + (GRID_SIZE div 2));
-		}
-	}}
 
 	// initialize the node heap
-	game_grid_heap.Initialize(global.game_grid);
+	game_grid_heap.Initialize();
 	
 	// update existing actors
 	for(var i=0;i<ds_list_size(actor_list);i++)
@@ -80,8 +63,8 @@ function room_start_init_camera(){
 	// set camera position 
 	// NOTE: the game grid must initialize prior to updating the camera
 
-	var _x = global.game_grid_xorigin + GRID_SIZE*global.game_grid_width div 2;
-	var _y = global.game_grid_yorigin + GRID_SIZE*global.game_grid_height div 2;
+	var _x = global.game_grid_bbox[0] + GRID_SIZE*global.game_grid_width div 2;
+	var _y = global.game_grid_bbox[1] + GRID_SIZE*global.game_grid_height div 2;
 
 	with(global.iCamera)
 	{

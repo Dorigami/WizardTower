@@ -41,9 +41,12 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 		hexgrid_width_pixels : 0,
 	}
 	global.i_hex_grid = instance_create_layer(_ox, _oy, "Instances",o_hex_grid, _struct);
+	global.game_grid_width = _max_width;
+	global.game_grid_height = _max_height;
 	
 	// create all data structures
 	with(global.i_hex_grid){
+		depth = LOWERTEXDEPTH;
 		var _cellcount = hexgrid_width_max*hexgrid_height_max;
 		
 		hexmap_loaded_filename = "";
@@ -92,7 +95,7 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 			hexarr_containers[ind] = ds_list_create();
 			ind++;
 		}}
-		
+
 		// once the node indexes have been calculated, give each node an array to hold indexes if neighbor nodes
 		for(var i=0; i<hexgrid_height_max; i++){
 		for(var j=0; j<hexgrid_width_max; j++){
@@ -112,24 +115,41 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 			}
 		}}
 		
-		// update the bounds of the camera to be limited to the hex grid
+		// update the game grid bounds & the bounds of the camera to be limited to the hex grid
+		var _bbox = [0,0,0,0];
+		_bbox[0] = x - (h_spacing div 2);
+		_bbox[1] = y - (v_spacing div 2);
+		_bbox[2] = x + hexgrid_width_pixels;
+		_bbox[3] = y + hexgrid_height_pixels - (v_spacing div 2);
 		with(global.iCamera){
 			xTo = _ox;
 			yTo = _oy;
 			x = _ox;
 			y = _oy;
-			cam_bounds[0] = other.x - (other.h_spacing div 2);
-			cam_bounds[1] = other.y - (other.v_spacing div 2);
-			cam_bounds[2] = other.x + other.hexgrid_width_pixels;
-			cam_bounds[3] = other.y + other.hexgrid_height_pixels - (other.v_spacing div 2);
+			array_copy(cam_bounds, 0, _bbox, 0, 4);
 		}
+		global.game_grid_bbox[0] = _bbox[0];
+		global.game_grid_bbox[1] = _bbox[1];
+		global.game_grid_width = _bbox[2] - _bbox[0];
+		global.game_grid_height = _bbox[3] - _bbox[1];
+		
+		// initialize the node heap for pathfinding using the hex grid
+		other.game_grid_heap.Initialize(hexarr_hexes);
 	}
+	
 	// load in the default map
 	with(instance_create_layer(0,0,"Instances",o_hex_grid_save_load_menu))
 	{
 		hex_map_load("Default Layout");
 		instance_destroy();
 	}
+	with(o_hex_grid)
+{
+			for(var i=0;i<array_length(hexarr_containers);i++)
+			{
+				show_debug_message("List exists at index {0}?: {1}",i, ds_exists(hexarr_containers[i], ds_type_list));
+			}
+}
 }
 
 function hex_find_nearest_goal(hex)

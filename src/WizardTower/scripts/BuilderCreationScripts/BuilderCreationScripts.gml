@@ -15,6 +15,9 @@ function BuilderCreate(_type_string, _faction){
 		
 		// clear unit selection
 		with(global.iSelect)
+		{
+		
+		}
 		
 		// change state
 		global.game_state_previous = global.game_state;
@@ -22,32 +25,26 @@ function BuilderCreate(_type_string, _faction){
 		if(global.game_state_previous == GameStates.BUILDING) global.game_state_previous = GameStates.PLAY;
 		
 		// initialize state
-		var _xx = mouse_x div GRID_SIZE; _xx = clamp(_xx,0,global.game_grid_width-1);
-		var _yy = mouse_y div GRID_SIZE; _yy = clamp(_yy,0,global.game_grid_height-1);
+		var _hex = global.i_hex_grid.mouse_hex_coord;
+		var _pos = global.i_hex_grid.mouse_hex_pos;
+		
 		show_debug_message("creating blueprint, type string is {0}", _type_string)
 		var _struct = {
 			lock_to_grid : _gridlock,
-			xx : _xx,
-			yy : _yy,
+			hex : _hex,
 			type_string : _type_string,
 			object : _stats.obj,
+			entity_type : _stats.entity_type,
 			size : _stats.size,
 			collision_radius : round(0.6*GRID_SIZE),
 			sprite_index : asset_get_index("s_"+_type_string+"_idle"),
 			mask_index : asset_get_index("s_"+_type_string+"_idle"),
 			faction : _faction,
 			type_arr : _type_arr}
-		blueprint_instance = instance_create_layer(_xx*GRID_SIZE, _yy*GRID_SIZE, "Instances", oBlueprint, _struct);
+		blueprint_instance = instance_create_layer(_pos[1], _pos[2], "Instances", oBlueprint, _struct);
 		show_debug_message("blueprint's type string is: {0}", blueprint_instance.type_string);
 	}
 } 
-
-//function BuilderCreateBase(_faction){ BuilderCreate("base", _faction) }
-//function BuilderCreateBarracks(_faction){ BuilderCreate("barracks", _faction) }
-//function BuilderCreateTurret(_faction){ BuilderCreate("turret", _faction) }
-//function BuilderCreateBarricade(_faction){ BuilderCreate("barricade", _faction) }
-//function BuilderCreateSentry(_faction){ BuilderCreate("sentry", _faction) }
-
 
 
 function BuildStateUnit(){ BuilderCreate("summoner", true) }

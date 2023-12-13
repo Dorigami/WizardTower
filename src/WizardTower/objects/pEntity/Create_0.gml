@@ -139,9 +139,9 @@ function NearestCell(_other_entity, rtn_as_position=false){
                         _other_entity.yy+_size[1]-yc-1); // southern tile limit
     }
     if(rtn_as_position){
-		var _node = global.game_grid[# _rtn[0], _rtn[1]]
-		_rtn[0] = _node.x;
-		_rtn[1] = _node.y;
+		// var _node = global.game_grid[# _rtn[0], _rtn[1]]
+		_rtn[0] = 0;// _node.x;
+		_rtn[1] = 0;// _node.y;
 	}
 	return _rtn;
 	
@@ -156,8 +156,8 @@ function DensitySplat(){
     // 'splat' the density values
     var _grid = global.iEngine.faction_entity_density_maps[| faction];
     var half_grid = GRID_SIZE div 2;
-    var _x = position[1] - global.game_grid_xorigin;
-    var _y = position[2] - global.game_grid_yorigin;
+    var _x = position[1] - global.game_grid_bbox[0];
+    var _y = position[2] - global.game_grid_bbox[1];
 //--//var density_falloff = 0.9;
 
     // find closest cell center whose coordinates are both less than that of the person (cell is refered to as 'A')

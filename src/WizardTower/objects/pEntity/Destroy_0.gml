@@ -23,6 +23,8 @@ if(selected){
 
 // if the entity is a blueprint, remove it from that faction's blueprint list
 if(!is_undefined(blueprint)){
+	// delete the hex_path_list
+	if(ds_exists(hex_path_list, ds_type_list)) ds_list_destroy(hex_path_list);
     _diff = _actor.blueprint_count - faction_list_index;
     if(_diff > 1){
         for(var i=1; i<_diff; i++){
@@ -32,24 +34,19 @@ if(!is_undefined(blueprint)){
     }
     ds_list_delete(_actor.blueprints, faction_list_index);
     _actor.blueprint_count--;
-
+	
     // clear id from occupy cells
-    if(size_check == 2){
-        if(point_in_rectangle(xx, yy, 0, 0, global.game_grid_width-1, global.game_grid_height-1)) global.game_grid[# xx, yy].occupied_blueprint = noone;
-    } else {
-		var _w = size[0];
-		var _h = size[1];
-		var _cw = _w div 2;
-		var _ch = _h div 2;
-		for(var i=-_cw; i<_w-_cw; i++){
-		for(var j=-_ch; j<_h-_ch; j++){
-			if(point_in_rectangle(xx+i, yy+j, 0, 0, global.game_grid_width-1, global.game_grid_height-1)) global.game_grid[# xx+i, yy+j].occupied_blueprint = noone;
-		}}
-    }
+	with(global.i_hex_grid)
+	{
+		var _hex_index =  hex_get_index(other.hex);
+		var _hex_container = hexarr_containers[_hex_index];
+		var _container_index = ds_list_find_index(_hex_container, other.id);
+	}
+	if( _container_index != -1) ds_list_delete(_hex_container, _container_index);
 } 
 
 // if the entity is a unit, remove it from that faction's unit list
-if(!is_undefined(unit)){
+if(!is_undefined(unit)) || (!is_undefined(structure)){
 	// delete the hex_path_list
 	if(ds_exists(hex_path_list, ds_type_list)) ds_list_destroy(hex_path_list);
 
