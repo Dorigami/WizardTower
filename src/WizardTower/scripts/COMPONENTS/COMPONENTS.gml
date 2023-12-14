@@ -175,6 +175,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		_yy = owner.yy;
 		ds_list_clear(owner.checked_node_list);
 		ds_list_clear(enemies_in_range);
+		owner.
 /*
 		// loop through all nodes in range
 		for(i=-_cell_offset; i<=_cell_offset; i++){
@@ -266,7 +267,10 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 	rally_y = _rally_y;
 	static Update = function(){
 	    // check for node change
-	    CheckNodeChange(owner);
+	    if(CheckNodeChange(owner))
+		{
+			if(!global.iEngine.recalc_enemies_in_range) global.iEngine.recalc_enemies_in_range = true;
+		}
 		// handle build queue
 		if(is_undefined(build_ticket)) && (ds_queue_size(build_queue) > 0)
 		{

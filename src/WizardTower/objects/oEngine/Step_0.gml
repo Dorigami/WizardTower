@@ -343,6 +343,15 @@ if(global.game_state != GameStates.PAUSE)
 		// do basic entity updates
 		Update();
 	}
+	// refresh enemies_in_range for all fighters
+	if(recalc_enemies_in_range)
+	{
+		recalc_enemies_in_range = false;
+		with(pEntity)
+		{
+			if(!is_undefined(fighter)) fighter.FindEnemies();
+		}
+	}
 	time_check_entity_loop = current_time - time_check - time_check_input;
 	// Actor Loop
 	var _actor_size = ds_list_size(actor_list);

@@ -4,6 +4,7 @@
 if(room != rStartMenu) && (room != rInit) && (room != rShaderTest)
 {
 	//debug view
+	/*
 	dbg_view("processing times",true);
 	dbg_section("Engine Step Timings (ms)");
 	dbg_watch(ref_create(global.iEngine, "time_check_input"),"Inputs");
@@ -11,6 +12,7 @@ if(room != rStartMenu) && (room != rInit) && (room != rShaderTest)
 	dbg_watch(ref_create(global.iEngine, "time_check_actor_loop"),"Actor Loop");
 	dbg_watch(ref_create(global.iEngine, "time_check_misc"),"Misc");
 	dbg_watch(ref_create(global.iEngine, "time_check_total_step"),"Total");
+	*/
 	
 	room_start_init_game_grid();
 	room_start_init_camera();

@@ -22,7 +22,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		_asset = asset_get_index("snd_"+_type_string+"_attack");
 		var _snd_attack = _asset == -1 ? snd_empty : _asset;
 		_asset = asset_get_index("snd_"+_type_string+"_death");
-		var _snd_death = _asset == -1 ? snd_empty : _asset;
+		var _snd_death = _asset == -1 ? snd_enemy_death_default : _asset;
 		
 		// check if animations were found
 		if(_idle == -1) || (_move == -1) || (_attack == -1) || (_death == -1){

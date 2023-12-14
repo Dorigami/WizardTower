@@ -38,16 +38,19 @@ if(!is_undefined(ai))
 	// display attack range
 	if(selected)
 	{
-		if(ds_list_size(checked_node_list) > 0)
+		if(array_length(nodes_in_range) > 0)
 		{
 			var _c0 = c_blue;
 			var _c1 = c_aqua;
-			var _node=undefined;
-			for(var i=0;i<ds_list_size(checked_node_list);i++)
+			var _pos = [2,0,0];
+			var _index = 0;
+			for(var i=0;i<array_length(nodes_in_range);i++)
 			{
-				_node = checked_node_list[| i];
+				_pos = global.i_hex_grid.hex_to_pixel(nodes_in_range[i])
+				_node = nodes_in_range[| i];
 				draw_set_alpha(0.2);
 				if(ds_list_size(_node.occupied_list) > 0){draw_set_color(_c0)} else {draw_set_color(_c1)}
+				draw_sprite(sHexRangeIndicator,0,_pos[1], _pos[2]);
 				draw_rectangle(_node.x-HALF_GRID,_node.y-HALF_GRID,_node.x+HALF_GRID,_node.y+HALF_GRID,false);
 			}
 		}

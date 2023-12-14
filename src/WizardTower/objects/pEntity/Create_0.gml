@@ -204,7 +204,7 @@ _str = string_lower(string_copy(_str,2,string_length(_str)-1));
 type_string = _str;
 faction_list_index = -1; // this index is set through the unit constructor script
 selected = false;
-checked_node_list = ds_list_create();
+nodes_in_range = ds_list_create();
 
 // shader stuff
 upixelH = shader_get_uniform(shOutline, "pixelH");

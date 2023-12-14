@@ -143,13 +143,6 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 		hex_map_load("Default Layout");
 		instance_destroy();
 	}
-	with(o_hex_grid)
-{
-			for(var i=0;i<array_length(hexarr_containers);i++)
-			{
-				show_debug_message("List exists at index {0}?: {1}",i, ds_exists(hexarr_containers[i], ds_type_list));
-			}
-}
 }
 
 function hex_find_nearest_goal(hex)

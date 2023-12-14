@@ -82,6 +82,7 @@ menu_stack = ds_stack_create();
 blueprint_instance = noone;
 killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
+recalc_enemies_in_range = false;
 initial_player_abilities = array_create(9, undefined);
 current_player_abilities = array_create(9, undefined);
 zoom_delay_time = 10;

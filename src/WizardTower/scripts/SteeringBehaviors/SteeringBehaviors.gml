@@ -629,28 +629,44 @@ function CheckNodeChange(_entity){
 		// this function is assumed to be run inside of a unit entity
 		// will update current node as position changes
 		var _new_hex = undefined;
-		var _hex_index = undefined;
+		var _new_index = undefined;
+		var _new_list = undefined;
+		var _old_hex = undefined;
+		var _old_index = undefined;
+		var _old_list = undefined;
+		
 		with(global.i_hex_grid)
 		{
 			_new_hex = pixel_to_hex(other.position);
-			_hex_index = hex_get_index(other.hex);
+			_new_index = hex_get_index(_new_hex);
 		}
+		
 		// leave script unless the node location has changed
-		if(is_undefined(_hex_index)) || (array_equals(_new_hex, hex)) return false;
-		// update hex & hex_prev
-		hex_prev = hex;
-		hex = _new_hex;
+		if(is_undefined(_new_index)) || (array_equals(_new_hex, hex)) return false;
+	
+		// get necessary data
 		with(global.i_hex_grid)
 		{
-			var _hex_prev_index = hex_get_index(other.hex_prev);
-			var _list = hexarr_containers[_hex_index];
-			var _list_prev = hexarr_containers[_hex_prev_index];
+			_old_hex = other.hex;
+			_old_index = hex_get_index(_old_hex);
+			_old_list = hexarr_containers[_old_index];
+			_new_list = hexarr_containers[_new_index];
 		}
-		// remove entity ID from old container list
-		ds_list_delete(_list_prev, ds_list_find_index(_list_prev, id));
-		// add entity ID to new container list
-		ds_list_add(_list, id);
+		
+		//add to new list
+		ds_list_add(_new_list, id)
+		//remove from old list
+		ds_list_delete(_old_list, ds_list_find_index(_old_list, id));
+		
+		// update hex references
+		hex_prev = _old_hex;
+		hex = _new_hex;
+		
 		// run fighter update
+		
+		// indicate that the hex node has changed
+		with(global.i_hex_grid)
+		return true;
 	}
 }
 function BlueprintSteering(){

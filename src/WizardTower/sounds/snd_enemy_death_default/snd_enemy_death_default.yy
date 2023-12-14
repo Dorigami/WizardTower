@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSound",
   "resourceVersion": "1.0",
-  "name": "_25_Wind_01",
+  "name": "snd_enemy_death_default",
   "audioGroupId": {
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
@@ -17,7 +17,7 @@
   },
   "preload": false,
   "sampleRate": 44100,
-  "soundFile": "_25_Wind_01.wav",
+  "soundFile": "snd_enemy_death_default.wav",
   "type": 0,
   "volume": 1.0,
 }
