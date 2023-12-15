@@ -168,51 +168,32 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		return false; // fighter is still alive
 	}
 	static FindEnemies = function(){
-		var i, j, _xx, _yy, _node, entity, list, index=0;
+		var i, j, _xx, _yy, _hex_count, _hex, _container, _entity;
 		var _cell_offset = max(1,range);
 		var _limit = range <= 0 ? owner.collision_radius+HALF_GRID : range*GRID_SIZE;
 		_xx = owner.xx;
 		_yy = owner.yy;
-		ds_list_clear(owner.checked_node_list);
 		ds_list_clear(enemies_in_range);
-		owner.
-/*
-		// loop through all nodes in range
-		for(i=-_cell_offset; i<=_cell_offset; i++){
-		for(j=-_cell_offset; j<=_cell_offset; j++){
-			if(point_distance(_xx,_yy, _xx+i, _yy+j) <= _cell_offset+0.5) && (point_in_rectangle(_xx+i, _yy+j,0,0,global.game_grid_width-1,global.game_grid_height-1)){
-				// get possible enemy
-				_node = global.game_grid[# _xx+i, _yy+j];
-				ds_list_add(owner.checked_node_list, _node);
-				list = _node.occupied_list;
-				if(ds_list_size(list) == 0) continue;
-				for(var k=0; k<ds_list_size(list); k++)
+		_hex_count = array_length(owner.nodes_in_range);
+		if(_hex_count == 0)
+		{
+			return 0;
+		} else {
+			// loop through each hex node that is in range of the current entity
+			for(i=0; i<_hex_count; i++)
+			{
+				_container = global.i_hex_grid.hexarr_containers[owner.nodes_in_range[i]];
+				for(j=0;j<ds_list_size(_container);j++)
 				{
-					index = 0;
-					entity = list[| k];
-					// see if it is a fighter and if it is an enemy faction
-					if(owner.DistanceTo(entity) <= _limit) && (!is_undefined(entity.fighter)) && (entity.faction != owner.faction) && (ds_list_find_index(enemies_in_range, entity) == -1){
-						// sort the new found entity base on distance from this fighter (does account for the size of the owner entity)
-						while(!is_undefined(enemies_in_range[| index]))
-						{
-							if(owner.DistanceTo(enemies_in_range[| index]) > owner.DistanceTo(entity)){
-								break;
-							} else {
-								index++;
-							}
-						}
-						// insert enemy at index location
-						ds_list_insert(enemies_in_range, index, entity);
-					}
+					// get entity occupying the hex node
+					_entity = _container[| j];
+					// validate the entity as an enemy
+					if(is_undefined(_entity)) || (!instance_exists(_entity)) || (_entity.faction != owner.faction) continue;
+					// entity is valid as an enemy, add it to the list
+					ds_list_add(enemies_in_range, _entity);
 				}
 			}
-		}}
-*/
-		if(ds_list_size(enemies_in_range) == 0)
-		{
-			return noone;
-		} else {
-			return enemies_in_range[| 0];
+			return ds_list_size(enemies_in_range);
 		}
 	}
 	static Destroy = function(){
@@ -521,7 +502,7 @@ StructureTiedUnitAI = function() constructor{
 				{
 					// target is valid if its occupying node is in range
 					var _target_node = noone;
-					if(ds_list_find_index(owner.checked_node_list,_target_node) > -1) 
+					if(array_length(owner.nodes_in_range) > 0) 
 					{
 						_target = attack_target;
 					} else {
@@ -591,7 +572,7 @@ BasicStructureAI = function() constructor{
 				{
 					// target is valid if its occupying node is in range
 					var _target_node = noone;
-					if(ds_list_find_index(owner.checked_node_list,_target_node) > -1) 
+					if(array_length(owner.nodes_in_range) > 0) 
 					{
 						_target = attack_target;
 					} else {
