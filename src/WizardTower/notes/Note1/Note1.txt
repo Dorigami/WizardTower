@@ -39,4 +39,19 @@ pEntity = {
 enemy manager ideas
 
 
+12/24/2023
+
+hex the hex grid is in place, player towers work and enemy spawns/level data work.  the next thing 
+needed to complete the loop will need to be:
+	- Enemy Attacks on player owned entities
+	- Menu for victory game state
+	- Menu for defeat game state
+	- Main menu 
+	- Minimap
+	
+	- Get a Narrative/Theme
+	- Final Animations
+	- Final Sound effects
+	- start putting in the good menu icons
+
 

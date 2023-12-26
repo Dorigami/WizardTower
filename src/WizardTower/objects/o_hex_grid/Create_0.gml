@@ -19,7 +19,6 @@ function calc_hex_corner(center, i){
     return vect2(center[1] + hex_size * cos(angle_rad), center[2] + hex_size * sin(angle_rad))
 }
 
-
 //--// direction & neighbors
 function axial_direction(_ind){
 	return axial_direction_vectors[_ind];
@@ -88,10 +87,11 @@ function hex_in_radius(vect, rad){
 	{
 		for(r=max(-rad, -q-rad); r<=min(rad, -q+rad); r++)
 		{
-			array_push(arr, vect_add(vect, [2, q, r]));
+			var _new_hex = vect_add(vect, [2, q, r]);
+			if(!is_undefined(hex_get_index(_new_hex))) { array_push(arr, _new_hex) }
 		}
 	}
-	return array_length(arr) == 0 ? -1 : arr;
+	return arr;
 }
 function hex_in_intersection(vec0, rad0, vec1, rad1){
 	// vect is the axial coordinates to use as the center point

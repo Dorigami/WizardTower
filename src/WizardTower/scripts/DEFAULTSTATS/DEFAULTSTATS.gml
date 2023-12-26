@@ -166,7 +166,7 @@ FighterStats = function() constructor{
 	    strength : 3,
 	    defense : 1,
 	    speed : 0,
-	    range : 4,
+	    range : 2,
 	    tags : [],
 	    obj : oGunTurret,
 	    size : [1,1], // [width , height]
@@ -204,7 +204,7 @@ FighterStats = function() constructor{
 	    strength : 3,
 	    defense : 1,
 	    speed : 0,
-	    range : 4,
+	    range : 2,
 	    tags : [],
 	    obj : oSniperTurret,
 	    size : [1,1], // [width , height]
@@ -242,7 +242,7 @@ FighterStats = function() constructor{
 	    strength : 3,
 	    defense : 1,
 	    speed : 0,
-	    range : 4,
+	    range : 2,
 	    tags : [],
 	    obj : oBarracks,
 	    size : [1,1], // [width , height]
@@ -280,7 +280,7 @@ FighterStats = function() constructor{
 	    strength : 3,
 	    defense : 1,
 	    speed : 0,
-	    range : 4,
+	    range : 2,
 	    tags : [],
 	    obj : oDroneSilo,
 	    size : [1,1], // [width , height]
@@ -356,7 +356,7 @@ FighterStats = function() constructor{
 	    strength : 3,
 	    defense : 1,
 	    speed : 0,
-	    range : 7,
+	    range : 3,
 	    tags : [],
 	    obj : oMortarTurret,
 	    size : [1,1], // [width , height]

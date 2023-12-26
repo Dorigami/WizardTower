@@ -40,16 +40,28 @@ if(!is_undefined(ai))
 	{
 		if(array_length(nodes_in_range) > 0)
 		{
-			var _pos = [2,0,0];
+			var _hex = [2, 0, 0]; 
+			var _pos = [2, 0, 0];
 			var _index = 0;
-			var _container = undefined;
-			draw_set_alpha(0.2);
+			var _container = -1;
+			draw_set_alpha(0.1);
 			draw_set_alpha(c_white);
 			for(var i=0;i<array_length(nodes_in_range);i++)
 			{
-				_pos = global.i_hex_grid.hex_to_pixel(nodes_in_range[i]);
-				_container = global.i_hex_grid.hexarr_containers[nodes_in_range[i]];
-				draw_sprite(sHexRangeIndicator, ds_list_size(_container) > 0, _pos[1], _pos[2]);
+				_hex = nodes_in_range[i];
+				with(global.i_hex_grid)
+				{
+					_index = hex_get_index(_hex);
+					_pos = hex_to_pixel(other.nodes_in_range[i], true);
+					if(is_undefined(_index)) { show_debug_message("hex index in range doesn't exist: hex={0} index={1}", _hex, _index); continue; }
+					//show_debug_message("he data collected: index={0}, position={1}, container={2}", _index, _pos, hexarr_containers);
+					_container = hexarr_containers[_index];
+					
+				}
+				if(ds_exists(_container, ds_type_list))
+				{
+					draw_sprite(sHexRangeIndicator, ds_list_size(_container) > 0, _pos[1], _pos[2]);
+				}
 			}
 		}
 	}

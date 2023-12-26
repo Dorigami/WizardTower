@@ -85,18 +85,24 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		with(global.i_hex_grid)
 		{
 			var _hex = pixel_to_hex(vect2(_x,_y));
+			var _pos = hex_to_pixel(_hex, true);
 			var _hex_index = hex_get_index(_hex);
 			var _hex_list = is_undefined(_hex_index) ? undefined : hexarr_containers[_hex_index];
+			// get a hex node that isn't it current node so that we can check for a node change
+			var _node_change_check = hexarr_hexes[hexgrid_enabled_list[| 0]];
+			if(is_undefined(_node_change_check)){ show_debug_message("there are no hex nodes to place the entity"); exit; }
+			if(array_equals(_node_change_check, _hex)) { _node_change_check = hexarr_hexes[hexgrid_enabled_list[| 1]] } 
+			if(is_undefined(_node_change_check)){ show_debug_message("there are no hex nodes to place the entity"); exit; }
 		}
 		
 		// create the entity
 		_struct = {
 			// cell or tile position
 			z : 0,
-			xTo : _x,
-			yTo : _y, 
-			xAnchor : _x,
-			yAnchor : _y, 
+			xTo : _pos[1],
+			yTo : _pos[2], 
+			xAnchor : _pos[1],
+			yAnchor : _pos[2], 
 			size : _stats.size,
 			size_check : _stats.size[0]+_stats.size[1],
 			
@@ -110,8 +116,8 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			vel_force : vect2(0,0),
 			vel_movement : vect2(0,0),
 			steering : vect2(0,0),
-			position : vect2(_x, _y),
-			hex : _hex,
+			position : _pos,
+			hex : _node_change_check,
 			hex_prev : _hex,
 			hex_path_list : ds_list_create(),
 			
@@ -156,7 +162,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			interactable : _interactable_component
 		}
 
-		_unit = instance_create_layer(_x, _y, "Instances", _stats.obj, _struct);
+		_unit = instance_create_layer(_pos[1], _pos[2], "Instances", _stats.obj, _struct);
 
 		// set owner for each component
 		if(!is_undefined(_bunker_component)) _bunker_component.owner = _unit;
@@ -168,8 +174,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		ds_list_add(_actor.units, _unit);
 		// set index with the actors structure list
 		_unit.faction_list_index = _actor.unit_count++;
-		// have entity occupy the node that it is spawning on
-		if(!is_undefined(_hex_list)) ds_list_add(_hex_list, _unit);
+
 		return _unit;
 	}
 }

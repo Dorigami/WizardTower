@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSound",
   "resourceVersion": "1.0",
-  "name": "_15_Impact_flesh_02",
+  "name": "snd_structure_move_defaukt",
   "audioGroupId": {
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
@@ -10,14 +10,14 @@
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 0.666667,
+  "duration": 1.333333,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",
   },
   "preload": false,
   "sampleRate": 44100,
-  "soundFile": "_15_Impact_flesh_02.wav",
+  "soundFile": "snd_structure_move_defaukt.wav",
   "type": 0,
   "volume": 1.0,
 }

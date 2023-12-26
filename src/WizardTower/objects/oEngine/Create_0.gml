@@ -53,14 +53,7 @@ InitializeDisplay(ASPECT_RATIO);
 global.game_grid_bbox = [0,0,0,0];
 global.game_grid_width = 10;
 global.game_grid_height = 10;
-/*
-	global.game_grid = ds_grid_create(global.game_grid_width, global.game_grid_height);
-	for(var i=0; i<global.game_grid_width;  i++){
-	for(var j=0; j<global.game_grid_height; j++){
-	    var _node = new Node(i,j);
-	    global.game_grid[# i, j] = _node;
-	}}
-*/
+
 // other global variables
 global.unitSelection = ds_list_create();
 global.iEngine = id;
@@ -84,7 +77,7 @@ killing_floor = ds_queue_create();
 game_grid_heap = new NodeHeap();
 recalc_enemies_in_range = false;
 initial_player_abilities = array_create(9, undefined);
-current_player_abilities = array_create(9, undefined);
+current_player_abilities = array_create(9, undefined); 
 zoom_delay_time = 10;
 sell_price = 0;
 ParticleSystemsInit();

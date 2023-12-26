@@ -100,6 +100,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		}
 	}
 	static UseBasic = function(){
+		show_debug_message("UseBasic for object:{0} [1]", object_get_name(owner.object_index), owner.id);
 		attack_index = 0;
 		attack_timer = ceil(basic_attack.duration*FRAME_RATE);
 		basic_cooldown_timer = 100;
@@ -115,6 +116,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		instance_create_layer(owner.position[1], owner.position[2], "Instances", basic_attack.damage_obj, _struct);
 	}
 	static UseActive = function(){
+		show_debug_message("UseActive for object:{0} [1]", object_get_name(owner.object_index), owner.id);
 		attack_index = 1;
 		attack_timer = ceil(active_attack.duration*FRAME_RATE);
 		active_cooldown_timer = 100;
@@ -168,27 +170,29 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		return false; // fighter is still alive
 	}
 	static FindEnemies = function(){
-		var i, j, _xx, _yy, _hex_count, _hex, _container, _entity;
-		var _cell_offset = max(1,range);
-		var _limit = range <= 0 ? owner.collision_radius+HALF_GRID : range*GRID_SIZE;
-		_xx = owner.xx;
-		_yy = owner.yy;
+		var i, j, _xx, _yy, _hex_count, _hex, _container, _hex_index, _entity;
+		var _nodes_in_range = owner.nodes_in_range;
+		var _nodes_in_range_count = array_length(_nodes_in_range);
 		ds_list_clear(enemies_in_range);
-		_hex_count = array_length(owner.nodes_in_range);
-		if(_hex_count == 0)
+		
+		if(_nodes_in_range_count == 0)
 		{
 			return 0;
 		} else {
 			// loop through each hex node that is in range of the current entity
-			for(i=0; i<_hex_count; i++)
+			for(i=0; i<_nodes_in_range_count; i++)
 			{
-				_container = global.i_hex_grid.hexarr_containers[owner.nodes_in_range[i]];
+				with(global.i_hex_grid)
+				{
+					_hex_index = hex_get_index(_nodes_in_range[i]);
+					_container = global.i_hex_grid.hexarr_containers[_hex_index];
+				}
 				for(j=0;j<ds_list_size(_container);j++)
 				{
 					// get entity occupying the hex node
 					_entity = _container[| j];
 					// validate the entity as an enemy
-					if(is_undefined(_entity)) || (!instance_exists(_entity)) || (_entity.faction != owner.faction) continue;
+					if(is_undefined(_entity)) || (!instance_exists(_entity)) || (_entity.faction == owner.faction) continue;
 					// entity is valid as an enemy, add it to the list
 					ds_list_add(enemies_in_range, _entity);
 				}
@@ -218,7 +222,7 @@ Unit = function(_supply_cost, _can_bunker=true) constructor{
 		if(localFrame >= _totalFrames)
 		{
 			animationEnd = true;
-			localFrame -= _totalFrames
+			localFrame -= _totalFrames;
 		} else {
 			animationEnd = false;
 		}
@@ -238,7 +242,7 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 	build_timer = -1;
 	build_timer_set_point = -1;
     owner = undefined;
-	units = undefined;
+	units = ds_list_create();
 	supply_current = 0;
 	supply_capacity = _sup_cap;
 	build_queue = ds_queue_create();
@@ -358,7 +362,7 @@ BasicEnemyAI = function() constructor{
 			{
 				if(_cmd.type == "attack") _target = _cmd.value;
 				if(instance_exists(_target))
-				{	
+				{
 					if(owner.xTo != _cmd.value.position[1]) owner.xTo = _cmd.value.position[1];
 					if(owner.yTo != _cmd.value.position[2]) owner.yTo = _cmd.value.position[2];
 				} else {
@@ -452,7 +456,7 @@ BasicEnemyAI = function() constructor{
 			if(is_undefined(_hex_index)) return false;
 			if(ds_list_size(hexarr_containers[_hex_index]) >= 4)
 			{
-				show_debug_message("too many entities at location")
+				show_debug_message("too many entities at location");
 				return false;
 			}
 			return hexarr_enabled[_hex_index];
@@ -570,13 +574,12 @@ BasicStructureAI = function() constructor{
 				// attack the current attack target, if possible
 				if(attack_target != noone) && (instance_exists(attack_target))
 				{
-					// target is valid if its occupying node is in range
-					var _target_node = noone;
-					if(array_length(owner.nodes_in_range) > 0) 
+					// check if enemy is still in range
+					if(ds_list_find_index(enemies_in_range, attack_target) == -1)
 					{
-						_target = attack_target;
-					} else {
 						attack_target = noone;
+					} else {
+						_target = attack_target;
 					}
 				} else {
 					attack_target = noone;
@@ -593,7 +596,7 @@ BasicStructureAI = function() constructor{
 						ds_list_delete(enemies_in_range, 0);
 					}
 				}
-				
+
 				// attack any enemy in range, but prioritize the attack command target
 				if(_target != noone) 
 				{
@@ -604,14 +607,14 @@ BasicStructureAI = function() constructor{
 						owner.attack_direction = point_direction(owner.position[1], owner.position[2], _target.position[1], _target.position[2]);
 						UseBasic();
 					}
-				} 
+				}
 			}
 		}
 	}
 	static Destroy = function(){
 		// delete commands
 		for(var i=0; i<ds_list_size(commands); i++)
-		{
+		{ 
 			if(!is_undefined(commands[| i])) delete commands[| i];
 		}
 		// destroy command list
@@ -636,6 +639,8 @@ BarracksAI = function() constructor{
 				if(_len > _limit)
 				{
 					var _dir = point_direction(owner.position[1], owner.position[2], _cmd.x, _cmd.y);
+					var _point = vect2(_cmd.x, _cmd.y);
+					
 					owner.structure.rally_x = owner.position[1] + lengthdir_x(_limit,_dir);
 					owner.structure.rally_y = owner.position[2] + lengthdir_y(_limit, _dir);
 				} else {

@@ -19,13 +19,13 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 		var _death = asset_get_index("s_"+_type_string+"_death");
 		// get sound effects for entity
 		_asset = asset_get_index("snd_"+_type_string+"_spawn");
-		var _snd_spawn = _asset == -1 ? snd_empty : _asset;
+		var _snd_spawn = _asset == -1 ? snd_structure_spawn_default : _asset;
 		_asset = asset_get_index("snd_"+_type_string+"_move");
-		var _snd_move = _asset == -1 ? snd_empty : _asset;
+		var _snd_move = _asset == -1 ? snd_structure_move_defaukt : _asset;
 		_asset = asset_get_index("snd_"+_type_string+"_attack");
-		var _snd_attack = _asset == -1 ? snd_empty : _asset;
+		var _snd_attack = _asset == -1 ? snd_structure_attack_default : _asset;
 		_asset = asset_get_index("snd_"+_type_string+"_death");
-		var _snd_death = _asset == -1 ? snd_empty : _asset;
+		var _snd_death = _asset == -1 ? snd_structure_death_default : _asset;
 		
 		// check if animations were found
 		if(_idle == -1) || (_move == -1) || (_attack == -1) || (_death == -1){
@@ -83,7 +83,11 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			var _pos = hex_to_pixel(_hex, true);
 			var _hex_index = hex_get_index(_hex);
 			var _hex_list = is_undefined(_hex_index) ? undefined : hexarr_containers[_hex_index];
-			show_debug_message("hex: {0}\npos: {1}", _hex, _pos);
+			// get a hex node that isn't it current node so that we can check for a node change
+			var _node_change_check = hexarr_hexes[hexgrid_enabled_list[| 0]];
+			if(is_undefined(_node_change_check)){ show_debug_message("there are no hex nodes to place the entity"); exit; }
+			if(array_equals(_node_change_check, _hex)) { _node_change_check = hexarr_hexes[hexgrid_enabled_list[| 1]] } 
+			if(is_undefined(_node_change_check)){ show_debug_message("there are no hex nodes to place the entity"); exit; }
 		}
 		
 		// create the entity
@@ -103,7 +107,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			vel_force : vect2(0,0),
 			vel_movement : vect2(0,0),
 			position : _pos,
-			hex : _hex,
+			hex : _node_change_check, // the hex is not set so tha the node change function will trigger
 			hex_prev : _hex,
 			hex_path_list : ds_list_create(),
 			
@@ -149,6 +153,9 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 
 		_structure = instance_create_layer(_pos[1], _pos[2], "Instances", _stats.obj, _struct);
 
+		// run node change for the new entity
+		CheckNodeChange(_structure);
+
 		// create particle effect on structure
 		StructureSpawnPuffCreate(_pos[1], _pos[2])
 		
@@ -163,15 +170,12 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			var _arr_size = (_stats.size[0]+2)*(_stats.size[1]+2) - (_stats.size[0])*(_stats.size[1]);
 			var _ind=0, _xxx=0, _yyy=0;
 			_structure_component.spawn_positions = array_create(_arr_size, undefined);
-	
 		}
 
 		// give structure to actor
 		ds_list_add(_actor.structures, _structure);
 		// set index with the actors structure list
 		_structure.faction_list_index = _actor.structure_count++;
-		// have entity occupy the node that it is spawning on
-		if(!is_undefined(_hex_list)) ds_list_add(_hex_list, _structure);
 		
 		return _structure; 
 	}
