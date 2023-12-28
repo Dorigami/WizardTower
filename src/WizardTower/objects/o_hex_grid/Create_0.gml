@@ -9,7 +9,7 @@ if(room != rHexTest)
 	show_debug_message("o_hex_grid: room is correct");
 }
 
-instance_create_layer(x,y,"Instances",o_hex_grid_interaction,{creator : id});
+//instance_create_layer(x,y,"Instances",o_hex_grid_interaction,{creator : id});
 
 function calc_hex_corner(center, i){
 	// center is a vector2 of the center of the hexagon
@@ -45,7 +45,7 @@ function axial_linedraw(p0, p1){
 	var cube1 = axial_to_cube(p1);
 	for(var i=0;i<=n;i++)
 	{
-		arr[i] = cube_round(cube_lerp(cube0, cube1, i/n));
+		arr[i] = cube_to_axial(cube_round(cube_lerp(cube0, cube1, i/n)));
 	}
 	return arr;
 }

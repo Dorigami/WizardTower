@@ -166,15 +166,15 @@ function SB_Marine(_goal_priority, _attack_priority, _density_priority, _discomf
 	position[1] += 0.12*(xTo-position[1]);
 	position[2] += 0.12*(yTo-position[2]);
 
-	// update position
-	x = position[1];
-	y = position[2];
-
 	// collide with all entities within the same node
 	for(var i=0;i<ds_list_size(_col_list);i++)
 	{
 		EnforceMinDistance(_col_list[| i]);
 	}
+
+	// update position
+	x = position[1];
+	y = position[2];
 	
 	ds_list_destroy(_col_list);
 }
@@ -207,15 +207,16 @@ function SB_Drone(_goal_priority, _attack_priority, _density_priority, _discomfo
 	position[1] += 0.12*(xTo-position[1]);
 	position[2] += 0.12*(yTo-position[2]);
 
-	// update position
-	x = position[1];
-	y = position[2];
-
 	// collide with all entities within the same node
 	for(var i=0;i<ds_list_size(_col_list);i++)
 	{
 		EnforceMinDistance(_col_list[| i], true);
 	}
+
+	// update position
+	x = position[1];
+	y = position[2];
+
 	// EnforceTileCollisiosn(True)
 	ds_list_destroy(_col_list);
 }
@@ -235,15 +236,15 @@ function SB_hex_enemy(_goal_priority, _attack_priority, _density_priority, _disc
 	position[1] += 0.12*(xTo-position[1]);
 	position[2] += 0.12*(yTo-position[2]);
 
-	// update position
-	x = position[1];
-	y = position[2];
-
 	// collide with all entities within the same node
 	for(var i=0;i<ds_list_size(_col_list);i++)
 	{
 		EnforceMinDistance(_col_list[| i]);
 	}
+
+	// update position
+	x = position[1];
+	y = position[2];
 	
 	ds_list_destroy(_col_list);
 }

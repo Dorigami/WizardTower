@@ -634,21 +634,18 @@ BarracksAI = function() constructor{
 			{
 				ds_list_delete(commands, 0);
 				// set rally point
-				var _limit = owner.fighter.range*GRID_SIZE;
-				var _len = point_distance(owner.position[1], owner.position[2], _cmd.x, _cmd.y)
-				if(_len > _limit)
+				with(global.i_hex_grid)
 				{
-					var _dir = point_direction(owner.position[1], owner.position[2], _cmd.x, _cmd.y);
-					var _point = vect2(_cmd.x, _cmd.y);
-					
-					owner.structure.rally_x = owner.position[1] + lengthdir_x(_limit,_dir);
-					owner.structure.rally_y = owner.position[2] + lengthdir_y(_limit, _dir);
-				} else {
-					owner.structure.rally_x = _cmd.x;
-					owner.structure.rally_y = _cmd.y;
+					var _nodes = axial_linedraw(pixel_to_hex(other.owner.position), pixel_to_hex(vect2(_cmd.x, _cmd.y)));
+					show_debug_message("owner:{0}, target:{1}\nnode positions:{2}",other.owner.position, vect2(_cmd.x, _cmd.y), _nodes);
+					var _pos = vect_add(other.owner.position, _nodes[min(array_length(_nodes), other.owner.fighter.range)]);
+					var _hex_pos =  pixel_to_hex(_pos);
 				}
+
 				with(owner.structure)
 				{
+					rally_x = _hex_pos[1];
+					rally_y = _hex_pos[2];
 					// give move command to the units controlled by this structure
 					for(var i=ds_list_size(units); i>0; i--)
 					{
@@ -751,19 +748,19 @@ DroneSiloAI = function() constructor{
 			{
 				ds_list_delete(commands, 0);
 				// set rally point
-				var _limit = owner.fighter.range*GRID_SIZE;
-				var _len = point_distance(owner.position[1], owner.position[2], _cmd.x, _cmd.y)
-				if(_len > _limit)
+				var _hex_radius = global.i_hex_grid.hex_size;
+				var _limit = 0.4*_hex_radius + owner.fighter.range*_hex_radius;
+				var _dist_vect = vect_truncate(vect_subtract(vect2(_cmd.x, _cmd.y), owner.position), _limit);
+				var _hex_pos = vect_add(owner.position, _dist_vect);
+				with(global.i_hex_grid)
 				{
-					var _dir = point_direction(owner.position[1], owner.position[2], _cmd.x, _cmd.y);
-					owner.structure.rally_x = owner.position[1] + lengthdir_x(_limit,_dir);
-					owner.structure.rally_y = owner.position[2] + lengthdir_y(_limit, _dir);
-				} else {
-					owner.structure.rally_x = _cmd.x;
-					owner.structure.rally_y = _cmd.y;
+					_hex_pos =  hex_to_pixel(pixel_to_hex(_hex_pos), true);
 				}
+
 				with(owner.structure)
 				{
+					rally_x = _hex_pos[1];
+					rally_y = _hex_pos[2];
 					// give move command to the units controlled by this structure
 					for(var i=ds_list_size(units); i>0; i--)
 					{
