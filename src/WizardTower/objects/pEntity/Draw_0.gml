@@ -60,6 +60,7 @@ if(!is_undefined(ai))
 				}
 				if(ds_exists(_container, ds_type_list))
 				{
+					draw_set_alpha(0.2);
 					draw_sprite(sHexRangeIndicator, ds_list_size(_container) > 0, _pos[1], _pos[2]);
 				}
 			}

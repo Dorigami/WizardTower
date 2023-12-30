@@ -467,6 +467,10 @@ BasicEnemyAI = function() constructor{
 		owner.xTo = _point[1];
 		owner.yTo = _point[2];
 	}
+	static GetAttackTarget = function(){
+		var _target = noone;
+		return _target;
+	}
 	static Attack = function(){
 		action_timer = FRAME_RATE;
 		show_debug_message("enemy is attacking");
@@ -636,10 +640,25 @@ BarracksAI = function() constructor{
 				// set rally point
 				with(global.i_hex_grid)
 				{
-					var _nodes = axial_linedraw(pixel_to_hex(other.owner.position), pixel_to_hex(vect2(_cmd.x, _cmd.y)));
-					show_debug_message("owner:{0}, target:{1}\nnode positions:{2}",other.owner.position, vect2(_cmd.x, _cmd.y), _nodes);
-					var _pos = vect_add(other.owner.position, _nodes[min(array_length(_nodes), other.owner.fighter.range)]);
-					var _hex_pos =  pixel_to_hex(_pos);
+					var _nodes = other.owner.nodes_in_range;
+					show_debug_message("NODES: {0}", _nodes);
+					var _shortest_dist = 1000;
+					var _shortest_hex = undefined;
+					var _hex_in_range = vect2(0,0);
+					var _target_hex = pixel_to_hex(vect2(_cmd.x,_cmd.y));
+					var _dist = 0;
+					for(var i=0;i<array_length(_nodes);i++)
+					{
+						_dist = point_distance(_nodes[i][1], _nodes[i][2], _target_hex[1], _target_hex[2]);
+						if(_dist <= _shortest_dist)
+						{
+							// set this hex as the closest to the target hex node
+							_shortest_dist = _dist;
+							_shortest_hex = _nodes[i];
+						}
+					}
+					if(is_undefined(_shortest_hex)){ show_debug_message("shortest hex was undefined for some reason"); exit;}
+					var _hex_pos =  hex_to_pixel(_shortest_hex, true);
 				}
 
 				with(owner.structure)
@@ -748,13 +767,27 @@ DroneSiloAI = function() constructor{
 			{
 				ds_list_delete(commands, 0);
 				// set rally point
-				var _hex_radius = global.i_hex_grid.hex_size;
-				var _limit = 0.4*_hex_radius + owner.fighter.range*_hex_radius;
-				var _dist_vect = vect_truncate(vect_subtract(vect2(_cmd.x, _cmd.y), owner.position), _limit);
-				var _hex_pos = vect_add(owner.position, _dist_vect);
 				with(global.i_hex_grid)
 				{
-					_hex_pos =  hex_to_pixel(pixel_to_hex(_hex_pos), true);
+					var _nodes = other.owner.nodes_in_range;
+					show_debug_message("NODES: {0}", _nodes);
+					var _shortest_dist = 1000;
+					var _shortest_hex = undefined;
+					var _hex_in_range = vect2(0,0);
+					var _target_hex = pixel_to_hex(vect2(_cmd.x,_cmd.y));
+					var _dist = 0;
+					for(var i=0;i<array_length(_nodes);i++)
+					{
+						_dist = point_distance(_nodes[i][1], _nodes[i][2], _target_hex[1], _target_hex[2]);
+						if(_dist <= _shortest_dist)
+						{
+							// set this hex as the closest to the target hex node
+							_shortest_dist = _dist;
+							_shortest_hex = _nodes[i];
+						}
+					}
+					if(is_undefined(_shortest_hex)){ show_debug_message("shortest hex was undefined for some reason"); exit;}
+					var _hex_pos =  hex_to_pixel(_shortest_hex, true);
 				}
 
 				with(owner.structure)
