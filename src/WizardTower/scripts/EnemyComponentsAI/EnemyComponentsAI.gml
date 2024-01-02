@@ -1,4 +1,4 @@
-function MarcherGetTarget(_inst){
+function marcher_get_target(_inst){
 	// this must be given an instance id
 	var _target = noone;
 	with(_inst)
@@ -46,15 +46,15 @@ function MarcherGetTarget(_inst){
 	}
 	return _target;
 }
-function GoliathGetTarget(){
+function swarmer_get_target(){
 
 }
-function GoliathGetTarget(){
+function unitkiller_get_target(){
 
 }
-function GoliathGetTarget(){
+function buildingkiller_get_target(){
 
 }
-function GoliathGetTarget(){
+function goliath_get_target(){
 
 }

@@ -434,7 +434,17 @@ BasicEnemyAI = function() constructor{
 			//--// if the node has a player structure attack it
 				
 			//--// if the node has a player unit attack it
+			var _new_target = noone;
+			switch(owner.object_index)	
+			{
+				case oGoliath:
+					_new_target = goliath_get_target(owner);
+					break;
+				case oBuildingKiller:
+					break;
 				
+			}
+			if(owner.fighter.attack_target == noone) && (_new_target != )
 			//--// if there are too many entities at the node, pick a different one
 				
 			//--// move to the desired node
