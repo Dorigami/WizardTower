@@ -100,6 +100,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		}
 	}
 	static UseBasic = function(){
+		// this function needs to return the cooldown time(measured in steps) for enemy ai to function correctly
 		show_debug_message("UseBasic for object:{0} [1]", object_get_name(owner.object_index), owner.id);
 		attack_index = 0;
 		attack_timer = ceil(basic_attack.duration*FRAME_RATE);
@@ -114,6 +115,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 			attackData : basic_attack,
 		}
 		instance_create_layer(owner.position[1], owner.position[2], "Instances", basic_attack.damage_obj, _struct);
+		return basic_attack.cooldown*FRAME_RATE;
 	}
 	static UseActive = function(){
 		show_debug_message("UseActive for object:{0} [1]", object_get_name(owner.object_index), owner.id);
@@ -211,14 +213,70 @@ Unit = function(_supply_cost, _can_bunker=true) constructor{
 	blueprint_instance = noone;
 	static Update = function(){
 		// check for node change
-		CheckNodeChange(owner) 
+		CheckNodeChange(owner); 
 	}
 	static Animate = function(){
 		var _totalFrames = image_number / 4;
 		image_index = localFrame + (CARDINAL_DIR * _totalFrames);
 		localFrame += sprite_get_speed(sprite_index) / FRAME_RATE;
 	
-		// if animation would loop on next game step
+		// if animation would loop on next game stepd	
+		if(localFrame >= _totalFrames)
+		{
+			animationEnd = true;
+			localFrame -= _totalFrames;
+		} else {
+			animationEnd = false;
+		}
+	}
+	static Destroy = function(){
+		// if unit is tied to a structure, remove it from structure's units list
+		if(instance_exists(owner.creator))
+		{
+			var _list = owner.creator.structure.units;
+			owner.creator.structure.supply_current--;
+			ds_list_delete(_list, ds_list_find_index(_list, owner.id));
+		}
+	}
+}
+UnitEnemy = function(_supply_cost, _can_bunker=true) constructor{
+    owner = undefined;
+    supply_cost = _supply_cost;
+    can_bunker = _can_bunker;
+	blueprint_instance = noone;
+	static Update = function(){
+		// check for node change
+		if(CheckNodeChange(owner))
+		{
+			// reset ai action timer if the new node has a valid target
+			var _target = noone;
+			switch(owner.object_index)	
+			{
+				case oGoliath:
+					_target = goliath_get_target(owner);
+					break;
+				case oBuildingKiller:
+					_target = buildingkiller_get_target(owner);
+					break;
+				case oUnitKiller:
+					_target = unitkiller_get_target(owner);
+					break;
+				case oSwarmer:
+					_target = swarmer_get_target(owner);
+					break;
+				default:
+					_target = marcher_get_target(owner);
+					break;
+			}
+			if(_target != noone) owner.ai.action_timer = 1;
+		}
+	}
+	static Animate = function(){
+		var _totalFrames = image_number / 4;
+		image_index = localFrame + (CARDINAL_DIR*_totalFrames);
+		localFrame += sprite_get_speed(sprite_index) / FRAME_RATE;
+	
+		// if animation would loop on next game stepd	
 		if(localFrame >= _totalFrames)
 		{
 			animationEnd = true;
@@ -433,18 +491,10 @@ BasicEnemyAI = function() constructor{
 				
 			//--// if the node has a player structure attack it
 				
-			//--// if the node has a player unit attack it
-			var _new_target = noone;
-			switch(owner.object_index)	
-			{
-				case oGoliath:
-					_new_target = goliath_get_target(owner);
-					break;
-				case oBuildingKiller:
-					break;
+			//--// if the node has a player unit attack it (targeting behavior changes based on the enemy type)
+				// attack target if one exists, and exit loop if successful
+				if(Attack()) exit;
 				
-			}
-			if(owner.fighter.attack_target == noone) && (_new_target != )
 			//--// if there are too many entities at the node, pick a different one
 				
 			//--// move to the desired node
@@ -482,8 +532,45 @@ BasicEnemyAI = function() constructor{
 		return _target;
 	}
 	static Attack = function(){
-		action_timer = FRAME_RATE;
-		show_debug_message("enemy is attacking");
+		// attack any enemy in range, but prioritize the attack command target
+		with(owner.fighter) 
+		{
+			// attack valid target
+			if(attack_index == -1) && (basic_cooldown_timer <= 0)
+			{
+				switch(owner.object_index)	
+				{
+					case oGoliath:
+						goliath_get_target(owner);
+						break;
+					case oBuildingKiller:
+						buildingkiller_get_target(owner);
+						break;
+					case oUnitKiller:
+						unitkiller_get_target(owner);
+						break;
+					case oSwarmer:
+						swarmer_get_target(owner);
+						break;
+					default:
+						marcher_get_target(owner);
+						break;
+				}
+				
+				if(attack_target != noone)
+				{
+					// set attack direction for the entity
+					owner.attack_direction = point_direction(owner.position[1], owner.position[2], attack_target.position[1], attack_target.position[2]);
+					// set action timer for AI so the entity wont do anything during attack cooldown
+					other.action_timer = UseBasic();
+					// indicate that attack was successful
+					return true;
+				} else { return false; }
+			} else {
+				// indicate that attack failed
+				return false;
+			}
+		} 
 	}
 	static Destroy = function(){
 		// delete commands

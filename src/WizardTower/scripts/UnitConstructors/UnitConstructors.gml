@@ -44,7 +44,6 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		// create components
 		if(_stats.bunker_size > 0) _bunker_component = new Bunker(_stats.bunker_size);
 		_fighter_component = new Fighter(_stats.hp, _stats.strength, _stats.defense, _stats.speed, _stats.range, _stats.tags, _stats.basic_attack,_stats.active_attack);
-		_unit_component = new Unit(_stats.supply_cost, true); // the last argument sets "can_bunker"
 
 		// get animations and ai components
 		_ai_component = new BasicEnemyAI();
@@ -52,29 +51,37 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 		{
 			case "summoner":
 				_steering_preference = SB_PlayerUnit;
+				_unit_component = new Unit(_stats.supply_cost, true); // the last argument sets "can_bunker"
 				break;
 			case "drone":
 				_steering_preference = SB_Drone;
 				delete _ai_component; _ai_component = new StructureTiedUnitAI();
+				_unit_component = new Unit(_stats.supply_cost, true); // the last argument sets "can_bunker"
 				break;
 			case "marine":
 				_steering_preference = SB_PlayerUnit;
 				delete _ai_component; _ai_component = new StructureTiedUnitAI();
+				_unit_component = new Unit(_stats.supply_cost, true); // the last argument sets "can_bunker"
 				break;
 			case "marcher":
 				_steering_preference = SB_hex_enemy;
+				_unit_component = new UnitEnemy(_stats.supply_cost, true); // the last argument sets "can_bunker"
 				break;
 			case "swarmer":
 				_steering_preference = SB_hex_enemy;
+				_unit_component = new UnitEnemy(_stats.supply_cost, true); // the last argument sets "can_bunker"
 				break;
 			case "buildingkiller":
 				_steering_preference = SB_hex_enemy;
+				_unit_component = new UnitEnemy(_stats.supply_cost, true); // the last argument sets "can_bunker"
 				break;
 			case "unitkiller":
 				_steering_preference = SB_hex_enemy;
+				_unit_component = new UnitEnemy(_stats.supply_cost, true); // the last argument sets "can_bunker"
 				break;
 			case "goliath":
 				_steering_preference = SB_hex_enemy;
+				_unit_component = new UnitEnemy(_stats.supply_cost, true); // the last argument sets "can_bunker"
 				break;
 			case "skeleton":
 				_steering_preference = SB_hex_enemy;
