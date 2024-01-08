@@ -101,7 +101,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 	}
 	static UseBasic = function(){
 		// this function needs to return the cooldown time(measured in steps) for enemy ai to function correctly
-		show_debug_message("UseBasic for object:{0} [1]", object_get_name(owner.object_index), owner.id);
+		// show_debug_message("UseBasic for object:{0} [1]", object_get_name(owner.object_index), owner.id);
 		attack_index = 0;
 		attack_timer = ceil(basic_attack.duration*FRAME_RATE);
 		basic_cooldown_timer = 100;
@@ -118,7 +118,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		return basic_attack.cooldown*FRAME_RATE;
 	}
 	static UseActive = function(){
-		show_debug_message("UseActive for object:{0} [1]", object_get_name(owner.object_index), owner.id);
+		// show_debug_message("UseActive for object:{0} [1]", object_get_name(owner.object_index), owner.id);
 		attack_index = 1;
 		attack_timer = ceil(active_attack.duration*FRAME_RATE);
 		active_cooldown_timer = 100;
@@ -134,7 +134,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		instance_create_layer(owner.position[1],owner.position[2],"Instances", active_attack.damage_obj, _struct);
 	}
     static DealDamage = function(_damage, _other_fighter){
-		if(is_undefined(_other_fighter)) return false; //
+		if(is_undefined(_other_fighter)) return false; 
 		if(!instance_exists(_other_fighter.owner)) return false;
 		if(!instance_exists(owner)) return false;
 		if(_other_fighter.hp <= 0) return false; // fighter is already dead

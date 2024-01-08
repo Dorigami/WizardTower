@@ -182,7 +182,7 @@ function Init(){
 }
 
 function draw_minimap(){
-	draw_set_alpha(0.3);
+	draw_set_alpha(0.3*image_alpha);
 	draw_set_color(c_black);
 	// show the area allocated to the minimap
 	draw_rectangle(minimap_bbox[0],minimap_bbox[1],minimap_bbox[2],minimap_bbox[3],false);
@@ -218,7 +218,7 @@ function draw_minimap(){
 
 }
 function draw_abilities(){
-	draw_set_alpha(0.3);
+	draw_set_alpha(0.3*image_alpha);
 	draw_set_color(c_aqua);
 	draw_rectangle(abilities_bbox[0],abilities_bbox[1],abilities_bbox[2],abilities_bbox[3],false);
 }
@@ -246,9 +246,41 @@ function draw_wave_data(){
 	var _id = undefined;
 	with(oEnemyLevelData) _id = id;
 	if(is_undefined(_id)) exit;
+	draw_set_alpha(image_alpha)
 	draw_set_valign(fa_bottom);
 	draw_set_halign(fa_right);
 	draw_text(player_data_bbox[2], player_data_bbox[3]-4, 
 	  "WAVE = [" + string(_id.wave_index) + " / " + string(ds_list_size(_id.wave_structs_list)) + "]");
 }
-
+function Hide(){
+	enable_minimap = false;
+	enable_abilities = false;
+	enable_player_data = false;
+	show_data_overlay = false;
+	show_selected_entities = false;
+	show_wave_data = false;
+	for(var i=0;i<array_length(abilities_buttons); i++)
+	{
+		with(abilities_buttons[i])
+		{
+			enabled = false;
+			image_alpha = 0;
+		}
+	}
+}
+function Show(){
+	enable_minimap = false;
+	enable_abilities = false;
+	enable_player_data = false;
+	show_data_overlay = false;
+	show_selected_entities = false;
+	show_wave_data = false;
+	for(var i=0;i<array_length(abilities_buttons); i++)
+	{
+		with(abilities_buttons[i])
+		{
+			enabled = true;
+			image_alpha = 1;
+		}
+	}
+}

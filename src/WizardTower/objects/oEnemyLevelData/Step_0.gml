@@ -102,8 +102,7 @@ if(global.game_state == GameStates.PLAY)
 		}
 		if(all_waves_complete)
 		{
-			show_debug_message("Level Complete !!!!!!!!!!!!!!!");
-			global.game_state = GameStates.VICTORY;
+			set_game_victory();
 			with(oWaveTimeline) instance_destroy();
 		}
 	}

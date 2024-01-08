@@ -128,13 +128,19 @@ function unitkiller_get_target(_inst){
 				for(var i=0; i<ds_list_size(enemies_in_range); i++)
 				{
 					var _enemy = enemies_in_range[| i];
-					if(!is_undefined(_enemy)) && instance_exists(_enemy) && (_enemy.object_index == oBarricade)
+					if(!is_undefined(_enemy)) && instance_exists(_enemy)
 					{
-						// target the closest barricade
+						// target the any entity
 						if(_target == noone) { 
 							_target = _enemy;
-						} else {
-							// pick new enemy instead if it's closer
+						} else if(_enemy.entity_type == UNIT){
+							// prioritize entities that are units, over barricades
+							if(point_distance(other.position[1], other.position[2], _enemy.position[1], _enemy.position[2]) < point_distance(other.position[1], other.position[2], _target.position[1], _target.position[2]))
+							{
+								_target = _enemy;
+							}
+						} else if(_enemy.object_index == oBarricade){
+							// settle for barricade as target if there are no units in range
 							if(point_distance(other.position[1], other.position[2], _enemy.position[1], _enemy.position[2]) < point_distance(other.position[1], other.position[2], _target.position[1], _target.position[2]))
 							{
 								_target = _enemy;
@@ -179,7 +185,7 @@ function buildingkiller_get_target(_inst){
 				for(var i=0; i<ds_list_size(enemies_in_range); i++)
 				{
 					var _enemy = enemies_in_range[| i];
-					if(!is_undefined(_enemy)) && instance_exists(_enemy) && (_enemy.object_index == oBarricade)
+					if(!is_undefined(_enemy)) && instance_exists(_enemy) && (_enemy.entity_type == STRUCTURE)
 					{
 						// target the closest barricade
 						if(_target == noone) { 
@@ -230,7 +236,7 @@ function goliath_get_target(_inst){
 				for(var i=0; i<ds_list_size(enemies_in_range); i++)
 				{
 					var _enemy = enemies_in_range[| i];
-					if(!is_undefined(_enemy)) && instance_exists(_enemy) && (_enemy.object_index == oBarricade)
+					if(!is_undefined(_enemy)) && instance_exists(_enemy)
 					{
 						// target the closest barricade
 						if(_target == noone) { 

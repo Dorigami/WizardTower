@@ -1,5 +1,11 @@
 /// @description 
 
+with(oCamera)
+{
+	other.x = x;
+	other.y = y;
+}
+
 event_inherited();
 
 // player input
@@ -20,22 +26,12 @@ if(!intro)
 		controlsFocus--;
 		if(controlsFocus < 1) controlsFocus = ds_list_size(controlsList) - 1;
 		controlsList[| controlsFocus].focus = true;
-		if(!global.muteSound)
-		{
-			//audio_sound_gain(sndSelectionChange,global.sfxVolume,0);
-			//audio_play_sound(sndSelectionChange,10,false);
-		}
 	}
 	if(keyDown)
 	{
 		//decrease or loop the controlsFocus
 		controlsFocus++;
 		if(controlsFocus >= ds_list_size(controlsList)) controlsFocus = 1;
-		if(!global.muteSound)
-		{
-			//audio_sound_gain(sndSelectionChange,global.sfxVolume,0);
-			//audio_play_sound(sndSelectionChange,10,false);
-		}
 	}
 
 	if(controlsFocus > 0)
@@ -65,7 +61,9 @@ if(intro) // intro handling
 		controlsList[| 1].enabled = true;
 		controlsList[| 2].enabled = true;
 	}
+	
 	// fade in the options & title
+	backdrop_alpha = min(0.40, backdrop_alpha+0.009);
 	if(alarm[0] == -1) titleAlpha = min(1,titleAlpha+0.006);
 	if(alarm[1] == -1) optionAlpha = min(1,optionAlpha+0.008);
 	controlsList[| 0].alpha = titleAlpha;
@@ -74,10 +72,14 @@ if(intro) // intro handling
 	// end intro when the text is full opacity
 	if(titleAlpha == 1) && (optionAlpha == 1) 
 	{
+		show_debug_message("FADE IN DONE")
 		intro = false;
 		controlsFocus = 1
 		controlsList[| 1].enabled = true;
 		controlsList[| 2].enabled = true;
+		controlsList[| 3].enabled = true;
 	}
+} else {
+	show_debug_message("image alpha is: {0}", image_alpha);
 }
 
