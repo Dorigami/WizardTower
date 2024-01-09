@@ -23,9 +23,9 @@ var _height = room_height; //display_get_gui_height();
 
 LabelAdd(x-(0.6*string_width(title)),0.3*_height,id,0,"title",,title);
 var _sprite = sBtn40x32;
-ButtonAdd(0,0,id,1,"play",_sprite,,"Restart",,GoToLevel,[rHexTest]);
-ButtonAdd(x-(0.5*sprite_get_width(_sprite)),0.6*_height,id,2,"play",_sprite,,"Credits",,victory_menu_show_credits,[rHexTest]);
-ButtonAdd(x-(0.5*sprite_get_width(_sprite)),0.7*_height,id,3,"quit",_sprite,,"QUIT",,QuitToDesktop,[rHexTest]);
+ButtonAdd(0,-40,id,1,"play",_sprite,,"Restart",,GoToLevel,[rHexTest]);
+ButtonAdd(x-(0.5*sprite_get_width(_sprite)),0,id,2,"play",_sprite,,"Credits",,victory_menu_show_credits,[rHexTest]);
+ButtonAdd(x-(0.5*sprite_get_width(_sprite)),40,id,3,"quit",_sprite,,"QUIT",,QuitToDesktop,[rHexTest]);
 
 controlsList[| 1].enabled = false;
 controlsList[| 2].enabled = false;
