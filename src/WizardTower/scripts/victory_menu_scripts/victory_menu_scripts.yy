@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "victory_menu_show_credits",
+  "name": "victory_menu_scripts",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

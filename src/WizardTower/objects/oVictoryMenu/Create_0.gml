@@ -3,9 +3,10 @@
 event_inherited();
 
 // title fade in variables
-title = "VICTORY!!!\n\nselect an option using \"W\" & \"S\" or [up key] & [down key]\nconfirm option using [spacebar] or [enter]"
+title = "VICTORY!!!";
+title_sub = "select an option using \"W\" & \"S\" or [up key] & [down key]\nconfirm option using [spacebar] or [enter]";
 intro = true;
-intro_time = 1;
+intro_time = 10;
 titleAlpha = 0;
 optionAlpha = 0;
 backdrop_alpha = 0;
@@ -21,15 +22,16 @@ alarm[1] = intro_time;
 var _width = room_width; //display_get_gui_width();
 var _height = room_height; //display_get_gui_height();
 
-LabelAdd(x-(0.6*string_width(title)),0.3*_height,id,0,"title",,title);
+LabelAdd(-(0.5*string_width(title)),-80,id,0,"title",,title);
+LabelAdd(-(0.5*string_width(title_sub)),-60,id,0,"title_sub",,title_sub);
 var _sprite = sBtn40x32;
-ButtonAdd(0,-40,id,1,"play",_sprite,,"Restart",,GoToLevel,[rHexTest]);
-ButtonAdd(x-(0.5*sprite_get_width(_sprite)),0,id,2,"play",_sprite,,"Credits",,victory_menu_show_credits,[rHexTest]);
-ButtonAdd(x-(0.5*sprite_get_width(_sprite)),40,id,3,"quit",_sprite,,"QUIT",,QuitToDesktop,[rHexTest]);
+ButtonAdd(-(0.5*sprite_get_width(_sprite)),-20,id,1,"restart",_sprite,,"RESTART",,GoToLevel,[rHexTest]);
+ButtonAdd(-(0.5*sprite_get_width(_sprite)),20,id,2,"credits",_sprite,,"CREDITS",,victory_menu_scripts,[rHexTest]);
+ButtonAdd(-(0.5*sprite_get_width(_sprite)),60,id,3,"quit",_sprite,,"QUIT",,QuitToDesktop,[rHexTest]);
 
-controlsList[| 1].enabled = false;
-controlsList[| 2].enabled = false;
-controlsList[| 3].enabled = false;
+controlsList[| 1].enabled = 1;
+controlsList[| 2].enabled = 1;
+controlsList[| 3].enabled = 1;
 
 
 

@@ -52,6 +52,7 @@ if(!intro)
 
 if(intro) // intro handling
 {
+	/*
 	// end intro early
 	if(keyUp) || (keyDown) || (keySelect) || (mouse_check_button_pressed(mb_any))
 	{
@@ -60,26 +61,26 @@ if(intro) // intro handling
 		optionAlpha = 1;
 		controlsList[| 1].enabled = true;
 		controlsList[| 2].enabled = true;
+		controlsList[| 3].enabled = true;
 	}
+	*/
 	
 	// fade in the options & title
-	backdrop_alpha = min(0.40, backdrop_alpha+0.009);
-	if(alarm[0] == -1) titleAlpha = min(1,titleAlpha+0.006);
-	if(alarm[1] == -1) optionAlpha = min(1,optionAlpha+0.008);
+	backdrop_alpha = min(0.40, backdrop_alpha+0.010);
+	if(alarm[0] == -1) titleAlpha = min(1,titleAlpha+0.020);
+	if(alarm[1] == -1) optionAlpha = min(1,optionAlpha+0.020);
 	controlsList[| 0].alpha = titleAlpha;
-	image_alpha = optionAlpha;
+	image_alpha = titleAlpha;
 	
 	// end intro when the text is full opacity
 	if(titleAlpha == 1) && (optionAlpha == 1) 
 	{
 		show_debug_message("FADE IN DONE")
 		intro = false;
-		controlsFocus = 1
+		controlsFocus = 1;
 		controlsList[| 1].enabled = true;
 		controlsList[| 2].enabled = true;
 		controlsList[| 3].enabled = true;
 	}
-} else {
-	show_debug_message("image alpha is: {0}", image_alpha);
 }
 

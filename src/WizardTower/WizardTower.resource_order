@@ -330,7 +330,7 @@
     {"name":"snd_summoner_attack","order":12,"path":"sounds/snd_summoner_attack/snd_summoner_attack.yy",},
     {"name":"oBuildingKiller","order":2,"path":"objects/oBuildingKiller/oBuildingKiller.yy",},
     {"name":"player_hurt","order":11,"path":"sounds/player_hurt/player_hurt.yy",},
-    {"name":"victory_menu_show_credits","order":42,"path":"scripts/victory_menu_show_credits/victory_menu_show_credits.yy",},
+    {"name":"victory_menu_scripts","order":42,"path":"scripts/victory_menu_scripts/victory_menu_scripts.yy",},
     {"name":"s_barricade_move","order":4,"path":"sprites/s_barricade_move/s_barricade_move.yy",},
     {"name":"sTextbox","order":21,"path":"sprites/sTextbox/sTextbox.yy",},
     {"name":"GM_FlameIntensity_spr_Fire","order":1,"path":"sprites/GM_FlameIntensity_spr_Fire/GM_FlameIntensity_spr_Fire.yy",},
