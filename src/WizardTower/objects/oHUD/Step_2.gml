@@ -31,3 +31,8 @@ with(global.iEngine.player_actor)
 	// show upgrade points
 	other.player_data_string += "UPGRADE: " + string(upgrade_points) + "\n";
 }
+mouse_position_data_string = "mouse location = [" + string(mouse_x) + ", " + string(mouse_y) + "] [";
+with(o_hex_grid)
+{
+	other.mouse_position_data_string += string(mouse_hex_coord[1]) + ", " + string(mouse_hex_coord[2]) + "]\n";
+}

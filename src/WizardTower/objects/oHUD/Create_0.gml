@@ -36,6 +36,7 @@ minimap_v_spacing = 0;
 
 // player data stuff
 player_data_string = "";
+mouse_position_data_string = "";
 player_data_width = round(display_get_gui_height()*0.75);
 player_data_height = display_get_gui_height() div 4;
 player_data_x = minimap_width+1;
@@ -236,9 +237,8 @@ function draw_player_data(){
 	draw_set_valign(fa_top);
 	draw_set_halign(fa_right);
 	draw_text(player_data_bbox[2], player_data_bbox[1], "camera location = [" + string(global.iCamera.x) + ", " + string(global.iCamera.y) + "] "+string(zoom)+"\n" 
-					+ "mouse location = [" + string(mouse_x) + ", " + string(mouse_y) + "] [" 
-					+ string((mouse_x-global.game_grid_bbox[0]) div GRID_SIZE) + ", " + string((mouse_y-global.game_grid_bbox[1]) div GRID_SIZE) + "]\n mouse focus = " 
-					+ string(global.mouse_focus));
+					+ mouse_position_data_string + 
+					"mouse focus = " + string(global.mouse_focus));
 }
 function draw_wave_data(){
 	// display wave count & enemies remaining
