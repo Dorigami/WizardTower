@@ -28,3 +28,5 @@ if(room != rStartMenu) && (room != rInit) && (room != rShaderTest)
 }
 
 if(instance_exists(global.iHUD)) global.iHUD.Init();
+
+// show_debug_message("HUD DIM: [{0}, {1}]", display_get_gui_width(), display_get_gui_height());
