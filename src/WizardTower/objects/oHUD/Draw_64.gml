@@ -1,5 +1,8 @@
 /// @description 
 draw_set_font(fDefault)
+
+draw_sprite(sMainGameHUD,0,0,0);
+
 if(enable_minimap)
 {
 	draw_minimap();
@@ -35,11 +38,4 @@ if(global.game_state == GameStates.SELLING)
 	draw_set_halign(fa_middle);
 	draw_text(0.5*display_get_gui_width(),0.5*display_get_gui_height(),"press confirm [E] to sell all seslected structures\nSell Value: $"+string(global.iEngine.sell_price));
 }
-var _w = 640;
-var _hw = _w div 2;
-var _h = 360;
-var _hh = _h div 2;
 
-draw_set_alpha(1);
-draw_set_color(c_white);
-draw_rectangle(2,2,_w-4,_h-2,false);

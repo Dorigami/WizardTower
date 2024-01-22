@@ -34,8 +34,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sBtn32x32",
-    "path": "sprites/sBtn32x32/sBtn32x32.yy",
+    "name": "sBtnPlayerAction",
+    "path": "sprites/sBtnPlayerAction/sBtnPlayerAction.yy",
   },
   "spriteMaskId": null,
   "visible": true,

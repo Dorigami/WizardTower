@@ -38,14 +38,14 @@ minimap_v_spacing = 0;
 player_data_string = "";
 mouse_position_data_string = "";
 player_data_width = round(display_get_gui_height()*0.75);
-player_data_height = display_get_gui_height() div 4;
-player_data_x = minimap_width+1;
+player_data_height = display_get_gui_height() - 73;
+player_data_x = 131;
 player_data_y = player_data_height*3;
 
 // action stuff
-abilities_width = display_get_gui_height() / 2.75;
-abilities_height = display_get_gui_height() / 2.75;
-abilities_x = display_get_gui_width() - abilities_width-1; 
+abilities_width = 130;
+abilities_height = 128;
+abilities_x = 0; 
 abilities_y = display_get_gui_height() - abilities_height-1;
 abilities_buttons = array_create(9,0);
 for(var i=0;i<9;i++)
