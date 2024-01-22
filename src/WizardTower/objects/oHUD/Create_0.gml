@@ -22,10 +22,10 @@ my = device_mouse_y_to_gui(0);
 func = hud_minimap_functions;
 xx = 0;
 yy = 0;
-minimap_height = display_get_gui_height() div 3;
-minimap_width = minimap_height;
-minimap_x = 0;
-minimap_y = minimap_height*2;
+minimap_height = 88;
+minimap_width = 122;
+minimap_x = 518;
+minimap_y = 0;
 minimap_tile_ox = 0;
 minimap_tile_oy = 0;
 minimap_tile_size = 4;
@@ -37,16 +37,16 @@ minimap_v_spacing = 0;
 // player data stuff
 player_data_string = "";
 mouse_position_data_string = "";
-player_data_width = round(display_get_gui_height()*0.75);
-player_data_height = display_get_gui_height() - 73;
-player_data_x = 131;
-player_data_y = player_data_height*3;
+player_data_width = 94;
+player_data_height = 73;
+player_data_x = 130;
+player_data_y = 287;
 
 // action stuff
-abilities_width = 130;
+abilities_width = 129;
 abilities_height = 128;
 abilities_x = 0; 
-abilities_y = display_get_gui_height() - abilities_height-1;
+abilities_y = display_get_gui_height()-abilities_height;
 abilities_buttons = array_create(9,0);
 for(var i=0;i<9;i++)
 {
@@ -77,108 +77,69 @@ show_selected_entities = false;
 show_wave_data = false;
 
 function Init(){
-	switch(room)
+	if(room == rDebug) || (room == rHexTest)
 	{
-		case rDebug:
-			// player data stuff
-			enable_player_data = true;
-			player_data_bbox[0] = player_data_x;
-			player_data_bbox[1] = player_data_y;
-			player_data_bbox[2] = player_data_x + player_data_width;
-			player_data_bbox[3] = player_data_y + player_data_height;
-			// abilities stufff
-			enable_abilities = true;
-			abilities_bbox[0] = abilities_x;
-			abilities_bbox[1] = abilities_y;
-			abilities_bbox[2] = abilities_x + abilities_width;
-			abilities_bbox[3] = abilities_y + abilities_height;
-			var _sep = 42;
-			var _cx = ((abilities_bbox[2]+abilities_bbox[0]) div 2) - 1.5*_sep;
-			var _cy = ((abilities_bbox[3]+abilities_bbox[1]) div 2) - 1.5*_sep;
-			for(var i=0;i<9;i++){
-				with(abilities_buttons[i])
-				{
-					x = _cx + i%3*_sep;
-					y = _cy + (i div 3)*_sep;
-					visible = true;
-					enabled = true;
-				}
-			}
-			// minimap stuff
-			enable_minimap = true;
-			ox = minimap_x + (minimap_width div 2) - ((global.game_grid_width*minimap_tile_size) div 2);
-			oy = minimap_y + (minimap_height div 2) - ((global.game_grid_height*minimap_tile_size) div 2);
-			minimap_bbox[0] = minimap_x;
-			minimap_bbox[1] = minimap_y;
-			minimap_bbox[2] = minimap_x + minimap_width;
-			minimap_bbox[3] = minimap_y + minimap_height;
-			break;
-		case rHexTest:
-			// player data stuff
-			enable_player_data = true;
-			player_data_bbox[0] = player_data_x;
-			player_data_bbox[1] = player_data_y;
-			player_data_bbox[2] = player_data_x + player_data_width;
-			player_data_bbox[3] = player_data_y + player_data_height;
-			// abilities stufff
-			enable_abilities = true;
-			abilities_bbox[0] = abilities_x;
-			abilities_bbox[1] = abilities_y;
-			abilities_bbox[2] = abilities_x + abilities_width;
-			abilities_bbox[3] = abilities_y + abilities_height;
-			var _sep = 42;
-			var _cx = ((abilities_bbox[2]+abilities_bbox[0]) div 2) - 1.5*_sep;
-			var _cy = ((abilities_bbox[3]+abilities_bbox[1]) div 2) - 1.5*_sep;
-			for(var i=0;i<9;i++){
-				with(abilities_buttons[i])
-				{
-					x = _cx + i%3*_sep;
-					y = _cy + (i div 3)*_sep;
-					visible = true;
-					enabled = true;
-				}
-			}
-			// minimap stuff
-			enable_minimap = true;
-			ox = minimap_x + (minimap_width div 2) - ((global.game_grid_width*minimap_tile_size) div 2);
-			oy = minimap_y + (minimap_height div 2) - ((global.game_grid_height*minimap_tile_size) div 2);
-			minimap_bbox[0] = minimap_x;
-			minimap_bbox[1] = minimap_y;
-			minimap_bbox[2] = minimap_x + minimap_width;
-			minimap_bbox[3] = minimap_y + minimap_height;
-			with(o_hex_grid)
+		// player data stuff
+		enable_player_data = true;
+		player_data_bbox[0] = player_data_x;
+		player_data_bbox[1] = player_data_y;
+		player_data_bbox[2] = player_data_x + player_data_width;
+		player_data_bbox[3] = player_data_y + player_data_height;
+		// abilities stufff
+		enable_abilities = true;
+		abilities_bbox[0] = abilities_x;
+		abilities_bbox[1] = abilities_y;
+		abilities_bbox[2] = abilities_x + abilities_width;
+		abilities_bbox[3] = abilities_y + abilities_height;
+		var _sep = 39;
+		var _cx = ((abilities_bbox[2]+abilities_bbox[0]) div 2);
+		var _cy = ((abilities_bbox[3]+abilities_bbox[1]) div 2);
+		for(var i=0;i<9;i++){
+			with(abilities_buttons[i])
 			{
-				other.minimap_h_spacing = h_spacing*0.03;
-				other.minimap_v_spacing = v_spacing*0.03;
-				array_copy(other.minimap_hexarr_pos,0,hexarr_positions,0,array_length(hexarr_positions));
+				x = _cx + ((i%3) -1)*_sep;
+				y = _cy + ((i div 3) - 1)*_sep;
+				visible = true;
+				enabled = true;
 			}
-			break;
-		case rShaderTest:
-			// player data stuff
-			enable_player_data = false;
-			// abilities stufff
-			enable_abilities = false;
-			for(var i=0; i<9;i++)
+		}
+		// minimap stuff
+		enable_minimap = true;
+		ox = minimap_x + (minimap_width div 2) - ((global.game_grid_width*minimap_tile_size) div 2);
+		oy = minimap_y + (minimap_height div 2) - ((global.game_grid_height*minimap_tile_size) div 2);
+		minimap_bbox[0] = minimap_x;
+		minimap_bbox[1] = minimap_y;
+		minimap_bbox[2] = minimap_x + minimap_width;
+		minimap_bbox[3] = minimap_y + minimap_height;
+		with(o_hex_grid)
+		{
+			other.minimap_h_spacing = h_spacing*0.03;
+			other.minimap_v_spacing = v_spacing*0.03;
+			array_copy(other.minimap_hexarr_pos,0,hexarr_positions,0,array_length(hexarr_positions));
+		}
+	} else if(room == rShaderTest){
+		// player data stuff
+		enable_player_data = false;
+		// abilities stufff
+		enable_abilities = false;
+		for(var i=0; i<9;i++)
+		{
+			with(abilities_buttons[i])
 			{
-				with(abilities_buttons[i])
-				{
-					enabled = false;
-					visible = false;
-				}
+				enabled = false;
+				visible = false;
 			}
-			// minimap stuff
-			enable_minimap = false;
-
-			break;
-		default:
-			enable_player_data = false;
-			enable_minimap = false;
-			ox = 0;
-			oy = 0;
-			// abilities stufff
-			enable_abilities = false;
-			for(var i=0;i<9;i++){ abilities_buttons[i].visible = false }
-			break;
+		}
+		// minimap stuff
+		enable_minimap = false;
+	} else {
+		enable_player_data = false;
+		enable_minimap = false;
+		ox = 0;
+		oy = 0;
+		// abilities stufff
+		enable_abilities = false;
+		for(var i=0;i<9;i++){ abilities_buttons[i].visible = false }
 	}
 }
 
@@ -219,6 +180,8 @@ function draw_minimap(){
 
 }
 function draw_abilities(){
+	// the abilities are drawn by the button objects
+	
 	draw_set_alpha(0.3*image_alpha);
 	draw_set_color(c_aqua);
 	draw_rectangle(abilities_bbox[0],abilities_bbox[1],abilities_bbox[2],abilities_bbox[3],false);
@@ -231,12 +194,10 @@ function draw_player_data(){
 	draw_set_halign(fa_left);
 	draw_set_color(c_white);
 	draw_set_alpha(1);
-	draw_text(player_data_x+2, player_data_y+2, player_data_string);
+	draw_text(player_data_x+4, player_data_y+4, player_data_string);
 	
 	// display mouse data
-	draw_set_valign(fa_top);
-	draw_set_halign(fa_right);
-	draw_text(player_data_bbox[2], player_data_bbox[1], "camera location = [" + string(global.iCamera.x) + ", " + string(global.iCamera.y) + "] "+string(zoom)+"\n" 
+	draw_text(player_data_bbox[2]+6, player_data_bbox[1]+2, "camera location = [" + string(global.iCamera.x) + ", " + string(global.iCamera.y) + "] "+string(zoom)+"\n" 
 					+ mouse_position_data_string + 
 					"mouse focus = " + string(global.mouse_focus));
 }

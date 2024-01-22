@@ -25,11 +25,7 @@ with(global.iEngine.player_actor)
 	// show unit supply
 	other.player_data_string += "SUPPLY: " + string(supply_current+supply_in_queue) + " / " + string(supply_limit) + "\n";
 	// show available material
-	other.player_data_string += "MATERIAL: [+"+string(material_per_second)+"] "+string(material)+"\n";
-	// show available material
-	other.player_data_string += "EXPERIENCE: "+string(experience_points)+"\n";
-	// show upgrade points
-	other.player_data_string += "UPGRADE: " + string(upgrade_points) + "\n";
+	other.player_data_string += "MONEY: "+string(material)+"\n";
 }
 mouse_position_data_string = "mouse location = [" + string(mouse_x) + ", " + string(mouse_y) + "] [";
 with(o_hex_grid)
