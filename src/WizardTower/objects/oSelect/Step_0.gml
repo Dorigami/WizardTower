@@ -1,5 +1,7 @@
 /// @description Control Selection Painter
 
+exit;
+
 if(!enabled) exit;
 
 len_ = point_distance(x,y,mouse_x,mouse_y);

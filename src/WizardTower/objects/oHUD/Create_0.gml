@@ -34,6 +34,16 @@ minimap_hexarr_pos = [];
 minimap_h_spacing = 0;
 minimap_v_spacing = 0;
 
+// level progress stuff
+level_progress_id = noone;
+level_progress_x = 518;
+level_progress_y = 0;
+
+// inspector stuff
+inspector_id = noone;
+inspector_x = 224;
+inspector_y = 287;
+
 // player data stuff
 player_data_string = "";
 mouse_position_data_string = "";
@@ -117,6 +127,12 @@ function Init(){
 			other.minimap_v_spacing = v_spacing*0.03;
 			array_copy(other.minimap_hexarr_pos,0,hexarr_positions,0,array_length(hexarr_positions));
 		}
+		// create the inspector and the level progress indicator
+		with(oSelectionInspector) instance_destroy();
+		instance_create_depth(inspector_x, inspector_y,depth-1,oSelectionInspector);
+		with(oLevelProgressInspector) instance_destroy();
+		instance_create_depth(level_progress_x, level_progress_y,depth-1,oLevelProgressInspector);
+		
 	} else if(room == rShaderTest){
 		// player data stuff
 		enable_player_data = false;

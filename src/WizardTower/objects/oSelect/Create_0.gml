@@ -38,6 +38,8 @@ function ConfirmSelection(){
 	var _tmp = ds_list_create();
 	var _plist = _player_actor.selected_entities;
 	EmptySelection(_player_actor);
+//**// this is edited to only allow single selection instead of group selection
+/*
 	if(visible){
 		_val = instance_place_list(x,y,pEntity,_tmp,false);
 		if(_val > 0){
@@ -84,8 +86,9 @@ function ConfirmSelection(){
 			}
 		}
 	} else {
+*/
 		// if the selection area is small enough, just get 1 instance at location
-		_ent = instance_place(x,y,pEntity);
+		_ent = instance_place(mouse_x,mouse_y,pEntity);
 		if(_ent != noone) {			
 			if(_ent.object_index == oMarine) || (_ent.object_index == oDrone)
 			{
@@ -105,8 +108,9 @@ function ConfirmSelection(){
 				}
 			}
 		}
+/*
 	}
-
+*/
 	ds_list_destroy(_tmp);
 	enabled = false;
     visible = false;

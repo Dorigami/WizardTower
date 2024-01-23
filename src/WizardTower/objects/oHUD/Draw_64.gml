@@ -1,7 +1,7 @@
 /// @description 
 draw_set_font(fDefault)
 
-draw_sprite(sMainGameHUD,0,0,0);
+draw_sprite_ext(sMainGameHUD, 0, 0, 0, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
 
 if(enable_minimap)
 {

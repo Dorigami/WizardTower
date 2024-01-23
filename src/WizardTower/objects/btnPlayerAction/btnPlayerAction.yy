@@ -11,8 +11,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Buttons",
-    "path": "folders/Objects/Buttons.yy",
+    "name": "Heads-Up-Display",
+    "path": "folders/Objects/Heads-Up-Display.yy",
   },
   "parentObjectId": {
     "name": "pButton",
