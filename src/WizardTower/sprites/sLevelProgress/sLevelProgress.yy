@@ -2,7 +2,7 @@
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
   "name": "sLevelProgress",
-  "bbox_bottom": 28,
+  "bbox_bottom": 31,
   "bbox_left": 0,
   "bbox_right": 33,
   "bbox_top": 0,
@@ -27,8 +27,8 @@
   "nineSlice": null,
   "origin": 9,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "HUD Sprites",
+    "path": "folders/Sprites/HUD Sprites.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

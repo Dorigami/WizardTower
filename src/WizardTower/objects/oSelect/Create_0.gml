@@ -20,6 +20,7 @@ function EmptySelection(_actor){
 	{
 		global.iHUD.show_selected_entities = ds_list_size(_actor.selected_entities);
 	}
+	with(oSelectionInspector) inspect(noone);
 }
 
 function EnableSelection(){
@@ -94,7 +95,7 @@ function ConfirmSelection(){
 			{
 				if(ds_list_find_index(_plist,_ent.creator) == -1){ 
 					_ent.creator.selected = true;
-					ds_list_add(_plist, _ent.creator) 
+					ds_list_add(_plist, _ent.creator); 
 				}
 			} else {
 				_ent.selected = true;
@@ -107,6 +108,7 @@ function ConfirmSelection(){
 					}
 				}
 			}
+			with(oSelectionInspector) inspect(_ent);
 		}
 /*
 	}

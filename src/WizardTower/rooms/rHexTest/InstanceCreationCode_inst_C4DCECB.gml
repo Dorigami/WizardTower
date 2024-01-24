@@ -14,33 +14,33 @@
 	}
 */
 
+level_type = "wave_defense"; // this is needed to format the level progress inspector
+
 level_content = {
 	wave0 : { // the 'key' in this struct is moment in milliseconds, the 'value' is an array of the units to spawn & their spawn location 
 		ms1 : [ 0, [M, 1, 1],[S, 0, 1],[B, 0, 1],[U, 0, 1],[G, 0, 1] ],
 		ms3000 : [ 0, [M, 2, 1],[S, 0, 1],[B, 0, 1],[U, 0, 1],[G, 0, 1] ],
-		ms7000 : [ 0, [M, 2, 1],[S, 0, 1],[B, 0, 1],[U, 0, 1],[G, 0, 1] ],
-		ms12000 : [ 0, [M, 2, 1],[S, 0, 1],[B, 0, 1],[U, 0, 1],[G, 0, 1] ],
-		ms18000 : [] // this is timestamp at which the wave ends
+		ms10000 : [] // this is timestamp at which the wave ends
 	},
-	/*
 	wave1 : {
-		ms1 : [ 0, [M, 1, 1],[S, 1, 1],[B, 0, 1],[U, 0, 1],[G, 0, 1] ],
-		ms5000 : [ 0, [M, 1, 1],[S, 1, 1],[B, 0, 1],[U, 0, 1],[G, 0, 1] ],
-		ms10000 : [ 0, [M, 1, 1],[S, 1, 1],[B, 0, 1],[U, 0, 1],[G, 0, 1] ],
-		ms15000 : [] // this is timestamp at which the wave ends
+		ms1 : [ 0, [M, 0, 1],[S, 1, 1],[B, 0, 1],[U, 0, 1],[G, 0, 1] ],
+		ms3000 : [ 0, [M, 0, 1],[S, 2, 1],[B, 0, 1],[U, 0, 1],[G, 0, 1] ],
+		ms10000 : [] // this is timestamp at which the wave ends
 	},
 	wave2 : {
-		ms1 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 1, 1],[G, 0, 1] ],
-		ms5000 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 1, 1],[G, 0, 1] ],
-		ms10000 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 1, 1],[G, 0, 1] ],
-		ms15000 : [] // this is timestamp at which the wave ends
+		ms1 : [ 0, [M, 0, 1],[S, 0, 1],[B, 1, 1],[U, 0, 1],[G, 0, 1] ],
+		ms3000 : [ 0, [M, 0, 1],[S, 0, 1],[B, 2, 1],[U, 0, 1],[G, 0, 1] ],
+		ms10000 : [] // this is timestamp at which the wave ends
 	},
 	wave3 : {
+		ms1 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 1, 1],[G, 0, 1] ],
+		ms3000 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 2, 1],[G, 0, 1] ],
+		ms10000 : [] // this is timestamp at which the wave ends
+	},
+	wave4 : {
 		ms1 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 0, 1],[G, 1, 1] ],
-		ms5000 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 0, 1],[G, 1, 1] ],
-		ms10000 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 0, 1],[G, 1, 1] ],
-		ms15000 : [] // this is timestamp at which the wave ends
+		ms3000 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 0, 1],[G, 2, 1] ],
+		ms10000 : [] // this is timestamp at which the wave ends
 	}
-	*/
 }
 

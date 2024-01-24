@@ -8,7 +8,4 @@ draw_sprite_part_ext(sprite_index,1,33,0,1,sprite_height,x,y,-middle_length,1,im
 draw_sprite(sprite_index,2,x,y);
 
 // draw the target data
-if(!is_undefined(target_data))
-{
-
-}
+if(draw_script != -1){ script_execute(draw_script) }

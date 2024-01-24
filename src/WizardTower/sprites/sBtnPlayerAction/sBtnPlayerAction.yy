@@ -28,8 +28,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "Buttons",
-    "path": "folders/Sprites/Buttons.yy",
+    "name": "HUD Sprites",
+    "path": "folders/Sprites/HUD Sprites.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

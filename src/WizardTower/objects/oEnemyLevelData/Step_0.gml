@@ -102,6 +102,7 @@ if(global.game_state == GameStates.PLAY)
 		}
 		if(all_waves_complete)
 		{
+			wave_index++
 			set_game_victory();
 			with(oWaveTimeline) instance_destroy();
 		}

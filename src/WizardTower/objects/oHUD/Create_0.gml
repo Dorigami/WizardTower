@@ -40,9 +40,9 @@ level_progress_x = 518;
 level_progress_y = 0;
 
 // inspector stuff
-inspector_id = noone;
-inspector_x = 224;
-inspector_y = 287;
+selection_inspector_id = noone;
+selection_inspector_x = 224;
+selection_inspector_y = 287;
 
 // player data stuff
 player_data_string = "";
@@ -129,9 +129,11 @@ function Init(){
 		}
 		// create the inspector and the level progress indicator
 		with(oSelectionInspector) instance_destroy();
-		instance_create_depth(inspector_x, inspector_y,depth-1,oSelectionInspector);
+		var _struct = {creator : id};
+		selection_inspector_id = instance_create_depth(selection_inspector_x, selection_inspector_y,depth-1,oSelectionInspector, _struct);
 		with(oLevelProgressInspector) instance_destroy();
-		instance_create_depth(level_progress_x, level_progress_y,depth-1,oLevelProgressInspector);
+		_struct = {creator : id, middle_length : 0, middle_length_goal : 200}
+		level_progress_id = instance_create_depth(level_progress_x, level_progress_y,depth-1,oLevelProgressInspector, _struct);
 		
 	} else if(room == rShaderTest){
 		// player data stuff
@@ -216,18 +218,6 @@ function draw_player_data(){
 	draw_text(player_data_bbox[2]+6, player_data_bbox[1]+2, "camera location = [" + string(global.iCamera.x) + ", " + string(global.iCamera.y) + "] "+string(zoom)+"\n" 
 					+ mouse_position_data_string + 
 					"mouse focus = " + string(global.mouse_focus));
-}
-function draw_wave_data(){
-	// display wave count & enemies remaining
-	var _actor = global.iEngine.enemy_actor;
-	var _id = undefined;
-	with(oEnemyLevelData) _id = id;
-	if(is_undefined(_id)) exit;
-	draw_set_alpha(image_alpha)
-	draw_set_valign(fa_bottom);
-	draw_set_halign(fa_right);
-	draw_text(player_data_bbox[2], player_data_bbox[3]-4, 
-	  "WAVE = [" + string(_id.wave_index) + " / " + string(ds_list_size(_id.wave_structs_list)) + "]");
 }
 function Hide(){
 	enable_minimap = false;

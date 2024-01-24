@@ -15,10 +15,6 @@ if(enable_player_data)
 {
 	draw_player_data();
 }
-if(show_wave_data)
-{
-	draw_wave_data();
-}
 with(global.iEngine)
 {
 	if(other.show_selected_entities > 0)
