@@ -213,11 +213,12 @@ function draw_player_data(){
 	draw_set_color(c_white);
 	draw_set_alpha(1);
 	draw_text(player_data_x+4, player_data_y+4, player_data_string);
-	
+	/*
 	// display mouse data
 	draw_text(player_data_bbox[2]+6, player_data_bbox[1]+2, "camera location = [" + string(global.iCamera.x) + ", " + string(global.iCamera.y) + "] "+string(zoom)+"\n" 
 					+ mouse_position_data_string + 
 					"mouse focus = " + string(global.mouse_focus));
+	*/
 }
 function Hide(){
 	enable_minimap = false;
