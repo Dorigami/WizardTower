@@ -1,8 +1,11 @@
 /// @description 
 
 function hud_get_action(){
+	// get the action that has been stored in variable 'my_action'
 	var rtn = my_action;
+	// set 'my_action' to an empty struct
 	my_action = {}
+	// return the action that was retrieved previously
 	return rtn;
 }
 function activate_my_action_ability(_value){

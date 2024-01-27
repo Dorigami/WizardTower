@@ -24,7 +24,8 @@ if(room != rStartMenu) && (room != rInit) && (room != rShaderTest)
 	
 	
 	// start music
-	SoundCommand(The_Verdant_Grove_LOOP,0,0);
+	var _song = choose(The_Verdant_Grove_LOOP, Ludum_Dare_28___Track_4, Pixel_1, Pixel_2,Pixel_3,Pixel_4,Pixel_5,Pixel_6,Pixel_7,Pixel_8,Pixel_9,Pixel_10,Pixel_11,Pixel_12);
+	SoundCommand(_song, 0, 0);
 }
 
 if(instance_exists(global.iHUD)) global.iHUD.Init();
