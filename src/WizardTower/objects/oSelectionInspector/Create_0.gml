@@ -15,8 +15,20 @@ function inspect(_inst){
 		} else if(_inst.entity_type == STRUCTURE){
 			inspect_update_script = _inst.faction == PLAYER_FACTION ? inspect_friendly_structure_step : inspect_enemy_step;
 		}
+		ds_list_clear(inspection_list);
+		// create an array containing all data required to be displayed
+		var _fighter = _inst.fighter;
+		var _data = [
+			[vect2(x+30,y+(inspection_bbox[3]-inspection_bbox[1]) div 2), [_inst.sprite_index, _inst.image_index]],                            // sprite image
+			[vect2(x+60,y+3), _inst.name],                                                        // name
+			[vect2(x+60,y+20), "HP: " + string(_fighter.hp) + " / " + string(_fighter.hp_max)],   // health
+			[vect2(x+60,y+30), "STR: " + string(_fighter.strength)],                              // strength
+			[vect2(x+60,y+40), "RATE: " + string(FRAME_RATE / _fighter.basic_attack.cooldown)],   // attack rate
+			[vect2(x+60,y+50), "DEF: " + string(_fighter.defense)],                               // defense
+		];
+		// add all the data defined previously to the inspection list
+		for(var i=0;i<array_length(_data);i++){ ds_list_add(inspection_list, _data[i]) }
 	}
-	show_debug_message("inspecting: {0}", target);
 }
 function inspect_noone_step(){
 	var  _data = inspection_list[| 0];
@@ -26,18 +38,36 @@ function inspect_noone_step(){
 					"mouse focus = " + string(global.mouse_focus);
 }
 function inspect_friendly_unit_step(){
-	draw_sprite(target.sprite_index,target.image_index,x,y);
+	var _fighter = target.fighter;
+	inspection_list[| 0][1][1] = target.image_index;                                            // sprite image
+//  inspection_list[| 1] 'name' does not need to update
+	inspection_list[| 2][1] = "HP: " + string(_fighter.hp) + " / " + string(_fighter.hp_max);   // health
+	inspection_list[| 3][1] = "STR: " + string(_fighter.strength);                              // strength
+	inspection_list[| 4][1] = "ATK SPD: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
+	inspection_list[| 5][1] = "DEF: " + string(_fighter.defense);                               // defense
 }
 function inspect_friendly_structure_step(){
-	draw_sprite(target.sprite_index,target.image_index,x,y);
+	var _fighter = target.fighter;
+	inspection_list[| 0][1][1] = target.image_index;                                            // sprite image
+//  inspection_list[| 1] 'name' does not need to update
+	inspection_list[| 2][1] = "HP: " + string(_fighter.hp) + " / " + string(_fighter.hp_max);   // health
+	inspection_list[| 3][1] = "STR: " + string(_fighter.strength);                              // strength
+	inspection_list[| 4][1] = "ATK SPD: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
+	inspection_list[| 5][1] = "DEF: " + string(_fighter.defense);                               // defense
 }
 function inspect_enemy_step(){
-	draw_sprite(target.sprite_index,target.image_index,x,y);
+	var _fighter = target.fighter;
+	inspection_list[| 0][1][1] = target.image_index;                                            // sprite image
+//  inspection_list[| 1] 'name' does not need to update
+	inspection_list[| 2][1] = "HP: " + string(_fighter.hp) + " / " + string(_fighter.hp_max);   // health
+	inspection_list[| 3][1] = "STR: " + string(_fighter.strength);                              // strength
+	inspection_list[| 4][1] = "ATK SPD: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
+	inspection_list[| 5][1] = "DEF: " + string(_fighter.defense);                               // defense
 }
 
 // set variables for drawing inspection data
 inspection_list = ds_list_create();
-inspectior_bbox = [x,y,x+223,y+72];
+inspection_bbox = [x,y,x+223,y+72];
 function inspector_draw(){
 	var _pos = undefined;
 	var _data = undefined;

@@ -134,6 +134,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 			sound_death : _snd_death,
 			
 			// misc variables
+			name : _stats.name,
 			material_cost : _stats.material_cost,
 			material_reward : _stats.material_reward,
 			faction : _faction,

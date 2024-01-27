@@ -46,6 +46,7 @@ function ConstructBlueprint(_x, _y, _faction, _type_string){
 			bunker : _bunker_component,
 			ai : _ai_component,
 			interactable : _interactable_component,
+			name : _stats.name,
 			
 			// position data
 			moveable : false,
