@@ -9,6 +9,7 @@ target_level_type = undefined;
 target_level_content = undefined; // target data is what this inspector needs in order to draw to the screen
 step_script = -1;
 draw_script = -1;
+progress_bbox = [0,0,0,0];
 
 // get a target if one exists
 with(oEnemyLevelData)
@@ -56,6 +57,8 @@ function wave_defense_step(){
 	// control alpha of the indicator sprites
 	if(wave_indicators_alpha < 1)
 	{
+		// update the bbox size as it stretches
+		progress_bbox = [x-9-middle_length,y,x,y+sprite_height];
 		// alpha increases as the width of sLevelProgess stretches to its goal length
 		if(middle_length/middle_length_goal > 0.9){
 			wave_indicators_alpha += 0.03;

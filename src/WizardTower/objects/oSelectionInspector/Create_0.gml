@@ -35,7 +35,8 @@ function inspect_noone_step(){
 	if(is_undefined(_data)) exit;
 	_data[1] = "camera location = [" + string(global.iCamera.x) + ", " + string(global.iCamera.y) + "] "+string(global.iEngine.zoom)+"\n" 
 					+ creator.mouse_position_data_string + 
-					"mouse focus = " + string(global.mouse_focus);
+					"mouse focus = " + string(global.mouse_focus) + "\n" +
+					"HUD Focus = " + string(global.hud_focus);
 }
 function inspect_friendly_unit_step(){
 	var _fighter = target.fighter;
