@@ -12,6 +12,7 @@
     {"name":"Particles","order":1,"path":"folders/Particles.yy",},
     {"name":"Unit & Building Construction","order":22,"path":"folders/Scripts/Unit & Building Construction.yy",},
     {"name":"Test Shaders","order":8,"path":"folders/Shaders/Test Shaders.yy",},
+    {"name":"Music","order":37,"path":"folders/Sounds/Music.yy",},
     {"name":"Entity Sprites","order":33,"path":"folders/Sprites/Entity Sprites.yy",},
     {"name":"Barracks","order":21,"path":"folders/Sprites/Entity Sprites/Barracks.yy",},
     {"name":"Barricade","order":19,"path":"folders/Sprites/Entity Sprites/Barricade.yy",},
@@ -27,7 +28,6 @@
     {"name":"HUD Sprites","order":51,"path":"folders/Sprites/HUD Sprites.yy",},
     {"name":"Icons","order":42,"path":"folders/Sprites/Icons.yy",},
     {"name":"Map Stuff","order":36,"path":"folders/Sprites/Map Stuff.yy",},
-    {"name":"Music","order":37,"path":"folders/Sounds/Music.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"s_flameturret_move","order":1,"path":"sprites/s_flameturret_move/s_flameturret_move.yy",},

@@ -5,6 +5,10 @@ function inspect(_inst){
 	inspect_draw_script = inspector_draw;
 	if(_inst == noone){
 		inspect_update_script = inspect_noone_step;
+		ds_list_clear(inspection_list);
+		// create the struct that will allow the data inside to be drawn to the screen
+		var _data = [vect2(x+6,y+2),""];
+		ds_list_add(inspection_list,_data);
 	} else {
 		if(_inst.entity_type == UNIT){
 			inspect_update_script = _inst.faction == PLAYER_FACTION ? inspect_friendly_unit_step : inspect_enemy_step;
@@ -15,14 +19,11 @@ function inspect(_inst){
 	show_debug_message("inspecting: {0}", target);
 }
 function inspect_noone_step(){
-	// display mouse data
-	draw_set_valign(fa_top);
-	draw_set_halign(fa_left);
-	draw_set_color(c_white);
-	draw_set_alpha(1);
-	draw_text(x+6, y+2, "camera location = [" + string(global.iCamera.x) + ", " + string(global.iCamera.y) + "] "+string(creator.zoom)+"\n" 
+	var  _data = inspection_list[| 0];
+	if(is_undefined(_data)) exit;
+	_data[1] = "camera location = [" + string(global.iCamera.x) + ", " + string(global.iCamera.y) + "] "+string(global.iEngine.zoom)+"\n" 
 					+ creator.mouse_position_data_string + 
-					"mouse focus = " + string(global.mouse_focus));
+					"mouse focus = " + string(global.mouse_focus);
 }
 function inspect_friendly_unit_step(){
 	draw_sprite(target.sprite_index,target.image_index,x,y);
@@ -34,16 +35,17 @@ function inspect_enemy_step(){
 	draw_sprite(target.sprite_index,target.image_index,x,y);
 }
 
-
-
-//init the inspector
-inspect(noone);
-
 // set variables for drawing inspection data
 inspection_list = ds_list_create();
+inspectior_bbox = [x,y,x+223,y+72];
 function inspector_draw(){
 	var _pos = undefined;
 	var _data = undefined;
+	draw_set_alpha(image_alpha);
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
+	draw_set_color(c_white);
+	draw_set_font(fDefault);	
 	for(var i=0;i<ds_list_size(inspection_list);i++)
 	{
 		_pos = inspection_list[| i][0];
@@ -57,6 +59,11 @@ function inspector_draw(){
 		}
 	}
 }
+
+
+//init the inspector
+inspect(noone);
+
 
 
 
