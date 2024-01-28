@@ -318,6 +318,7 @@
     {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},},
     {"id":{"name":"rDebug","path":"rooms/rDebug/rDebug.yy",},},
     {"id":{"name":"UnitConstructors","path":"scripts/UnitConstructors/UnitConstructors.yy",},},
+    {"id":{"name":"btnStartNextWave","path":"objects/btnStartNextWave/btnStartNextWave.yy",},},
     {"id":{"name":"oLevelProgressInspector","path":"objects/oLevelProgressInspector/oLevelProgressInspector.yy",},},
     {"id":{"name":"s_summoner_attack","path":"sprites/s_summoner_attack/s_summoner_attack.yy",},},
     {"id":{"name":"s_barracks_attack","path":"sprites/s_barracks_attack/s_barracks_attack.yy",},},

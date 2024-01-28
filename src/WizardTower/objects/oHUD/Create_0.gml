@@ -14,6 +14,13 @@ function activate_my_action_ability(_value){
 		my_action = {use_ability : new global.iEngine.Command("use_ability",_value,0,0)};
 	}
 }
+function activate_start_next_wave(){
+	with(global.iHUD)
+	{
+		show_debug_message("hud start NEXT WAVE::::::")
+		my_action = {start_next_wave : new global.iEngine.Command("start_next_wave",true,0,0)};
+	}
+}
 
 my_action = {};
 
@@ -39,6 +46,7 @@ minimap_v_spacing = 0;
 
 // level progress stuff
 level_progress_id = noone;
+level_progress_start_button = noone;
 level_progress_x = 518;
 level_progress_y = 0;
 
@@ -137,6 +145,17 @@ function Init(){
 		with(oLevelProgressInspector) instance_destroy();
 		_struct = {creator : id, middle_length : 0, middle_length_goal : 200}
 		level_progress_id = instance_create_depth(level_progress_x, level_progress_y,depth-1,oLevelProgressInspector, _struct);
+		var _struct = {
+			text : "",
+			gui : true,
+			leftScript : activate_start_next_wave,
+			leftArgs : [true],
+			rightScript : activate_start_next_wave,
+			rightArgs : [true],
+			creator : id
+		}
+		with(btnStartNextWave) instance_destroy();
+		level_progress_start_button = instance_create_depth(level_progress_x, level_progress_y+33,depth-1,btnStartNextWave,_struct);
 		
 	} else if(room == rShaderTest){
 		// player data stuff

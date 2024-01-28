@@ -149,7 +149,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 			CreateFloatNumber(position[1], 0.5*(position[2] + bbox_top), _damClac, FLOATTYPE.FLARE, 90);
 		}
 		if(_other_fighter.hp <= 0)
-		{
+		{	
 			// deal out rewards
 			var _actor = global.iEngine.actor_list[| owner.faction];
 			_actor.material += _other_fighter.owner.material_reward;

@@ -7,6 +7,7 @@ if(faction_list_index == -1) exit;
 // remove entity from entity list
 var _diff = 0;
 var _actor = global.iEngine.actor_list[| faction];
+var _stats = _actor.fighter_stats[$ type_string];
 var _ind = -1;
 
 // if the entity is a member of a Mob object, remove it from the members list
@@ -35,6 +36,9 @@ if(!is_undefined(blueprint)){
     ds_list_delete(_actor.blueprints, faction_list_index);
     _actor.blueprint_count--;
 	
+	// remove supply from the actor
+	if(!is_undefined(fighter)) && (fighter.hp <= 0) _actor.supply_in_queue -= _stats.supply_cost;
+	
     // clear id from occupy cells
 	with(global.i_hex_grid)
 	{
@@ -50,6 +54,9 @@ if(!is_undefined(unit)) || (!is_undefined(structure)){
 	// delete the hex_path_list
 	if(ds_exists(hex_path_list, ds_type_list)) ds_list_destroy(hex_path_list);
 
+	// remove supply from the actor
+	if(!is_undefined(fighter)) && (fighter.hp <= 0) _actor.supply_current -= _stats.supply_cost;
+	
     // clear id from occupy cells
 	with(global.i_hex_grid)
 	{

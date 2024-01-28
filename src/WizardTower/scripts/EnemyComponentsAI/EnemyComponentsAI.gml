@@ -26,7 +26,7 @@ function marcher_get_target(_inst){
 				for(var i=0; i<ds_list_size(enemies_in_range); i++)
 				{
 					var _enemy = enemies_in_range[| i];
-					if(!is_undefined(_enemy)) && instance_exists(_enemy) && (_enemy.object_index == oBarricade)
+					if(!is_undefined(_enemy)) && instance_exists(_enemy) && ((_enemy.object_index == oBarricade) || !is_undefined(_enemy.blueprint))
 					{
 						// target the closest barricade
 						if(_target == noone) { 

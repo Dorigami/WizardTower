@@ -15,10 +15,11 @@ function ConstructBlueprint(_x, _y, _faction, _type_string){
 		// check arguments for validity
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct blueprint - type string invalid"); exit;}
 		if(is_undefined(_actor)) { show_debug_message("ERROR: construct blueprint - actor for faction {0} invalid", _faction); exit;}
-		if(VerifyBuildingArea(_x, _y) == false) { show_debug_message("ERROR: construct blueprint - one or more of the nodes are occupied"); exit;}
+		if(VerifyBuildingArea(_x, _y, true) == false) { show_debug_message("ERROR: construct blueprint - one or more of the nodes are occupied"); exit;}
 
 		// create blueprint component
 		_blueprint_component = new Blueprint(_stats.build_time);
+		_fighter_component = new Fighter(2, 0, 0, 0, 0, _stats, -1, -1);
 
 		// get the hex that this unit will spawn into
 		with(global.i_hex_grid)
@@ -47,6 +48,14 @@ function ConstructBlueprint(_x, _y, _faction, _type_string){
 			ai : _ai_component,
 			interactable : _interactable_component,
 			name : _stats.name,
+			collision_radius : _stats.collision_radius,
+			material_reward : 0,
+			
+			//sound
+			sound_spawn : snd_empty,
+			sound_move : snd_empty,
+			sound_attack : snd_empty,
+			sound_death : snd_empty,
 			
 			// position data
 			moveable : false,
@@ -70,6 +79,7 @@ function ConstructBlueprint(_x, _y, _faction, _type_string){
 		_blueprint.image_alpha = 0.3;
 		// set component owner
 		if(!is_undefined(_blueprint_component)) _blueprint_component.owner = _blueprint;
+		if(!is_undefined(_fighter_component)) _fighter_component.owner = _blueprint;
 		// give structure to actor
 		ds_list_add(_actor.blueprints, _blueprint);
 		// set index with the actors structure list

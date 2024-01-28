@@ -264,6 +264,7 @@
     {"name":"oCamera","order":17,"path":"objects/oCamera/oCamera.yy",},
     {"name":"rDebug","order":8,"path":"rooms/rDebug/rDebug.yy",},
     {"name":"UnitConstructors","order":2,"path":"scripts/UnitConstructors/UnitConstructors.yy",},
+    {"name":"btnStartNextWave","order":4,"path":"objects/btnStartNextWave/btnStartNextWave.yy",},
     {"name":"oLevelProgressInspector","order":1,"path":"objects/oLevelProgressInspector/oLevelProgressInspector.yy",},
     {"name":"s_summoner_attack","order":3,"path":"sprites/s_summoner_attack/s_summoner_attack.yy",},
     {"name":"s_barracks_attack","order":2,"path":"sprites/s_barracks_attack/s_barracks_attack.yy",},

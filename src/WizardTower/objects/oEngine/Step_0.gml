@@ -44,7 +44,7 @@ left_click = mouse_action[$ "left_click"];
 left_release = mouse_action[$ "left_release"];
 wheel_down = mouse_action[$ "wheel_down"];
 wheel_up = mouse_action[$ "wheel_up"];
-start_next_wave = action[$ "start_next_wave"];
+start_next_wave = action[$ "start_next_wave"]; if(is_undefined(start_next_wave)) start_next_wave = hud_action[$ "start_next_wave"];
 change_build_type = action[$ "change_build_type"];
 confirm_build_action = action[$ "confirm_build_action"];
 confirm_build_action_mouse = mouse_action[$ "confirm_build_action"];
@@ -306,6 +306,9 @@ if(!is_undefined(escape)){
 					show_debug_message("Pause Game");
 					global.game_state_previous = global.game_state;
 					global.game_state = GameStates.PAUSE;
+					with(oEnemyLevelData){
+						if(timeline_running) timeline_running = false;
+					}
 				} else {
 					// remove menu off of the stack
 					show_debug_message("Exit Current Menu");
@@ -316,6 +319,7 @@ if(!is_undefined(escape)){
 	} else {
 		// unpause the game
 		global.game_state = global.game_state_previous;
+		with(oEnemyLevelData){ if(wave_index > -1) timeline_running = true; }
 	}
 }
 time_check_input = current_time - time_check;
