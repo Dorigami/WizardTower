@@ -134,6 +134,7 @@
     {"id":{"name":"_18_Thunder_02","path":"sounds/_18_Thunder_02/_18_Thunder_02.yy",},},
     {"id":{"name":"s_buildingkiller_death","path":"sprites/s_buildingkiller_death/s_buildingkiller_death.yy",},},
     {"id":{"name":"sSelectionIndicator","path":"sprites/sSelectionIndicator/sSelectionIndicator.yy",},},
+    {"id":{"name":"sMinimapBG","path":"sprites/sMinimapBG/sMinimapBG.yy",},},
     {"id":{"name":"oDroneSiloActive","path":"objects/oDroneSiloActive/oDroneSiloActive.yy",},},
     {"id":{"name":"s_marcher_idle","path":"sprites/s_marcher_idle/s_marcher_idle.yy",},},
     {"id":{"name":"set_game_victory","path":"scripts/set_game_victory/set_game_victory.yy",},},

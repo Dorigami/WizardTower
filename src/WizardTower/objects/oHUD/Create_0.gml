@@ -43,6 +43,7 @@ minimap_tile_size = 4;
 minimap_hexarr_pos = [];
 minimap_h_spacing = 0;
 minimap_v_spacing = 0;
+minimap_sprite = undefined;
 
 // level progress stuff
 level_progress_id = noone;
@@ -182,7 +183,24 @@ function Init(){
 		for(var i=0;i<9;i++){ abilities_buttons[i].visible = false }
 	}
 }
-
+function generate_minimap_sprite(){
+	if(!is_undefined(minimap_sprite)){
+		sprite_delete(minimap_sprite);
+		minimap_sprite = undefined;
+	}
+	var _width = global.i_hex_grid.hexgrid_width_max;
+	var _height = global.i_hex_grid.hexgrid_height_max;
+	var surf;
+	surf = surface_create(_width, _height);
+	surface_set_target(surf);
+	draw_clear_alpha(c_black, 0);
+	draw_sprite(spr_Body, 0, 0, 0);
+	draw_sprite(spr_Clothes, 0, 0, 0);
+	draw_sprite(spr_Hair, 0, 0, 0);
+	spr_custom = sprite_create_from_surface(surf, 0, 0, 32, 32, true, true, 16, 16);
+	surface_reset_target();
+	surface_free(surf);
+}
 function draw_minimap(){
 	draw_set_alpha(0.3*image_alpha);
 	draw_set_color(c_black);

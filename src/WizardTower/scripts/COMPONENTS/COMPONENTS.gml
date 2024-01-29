@@ -597,7 +597,7 @@ StructureTiedUnitAI = function() constructor{
 		//	}
 		//} 
 		// if there is no command, check if entity is a fighter and get first enemy in range
-		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		if(!is_undefined(owner.fighter)) && (owner.fighter.basic_attack != -1)
 		{
 			// resolve fighter behavior
 			with(owner.fighter)
@@ -667,7 +667,7 @@ BasicStructureAI = function() constructor{
 			//}
 		} 
 		// if there is no command, check if entity is a fighter and get first enemy in range
-		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		if(!is_undefined(owner.fighter)) && (owner.fighter.basic_attack != -1)
 		{
 			// resolve fighter behavior
 			with(owner.fighter)
@@ -827,7 +827,7 @@ MortarTurretAI = function() constructor{
 			}
 		} 
 		// if there is no command, check if entity is a fighter and get first enemy in range
-		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		if(!is_undefined(owner.fighter)) && (owner.fighter.basic_attack != -1)
 		{
 			// resolve fighter behavior
 			with(owner.fighter)
@@ -906,7 +906,7 @@ DroneSiloAI = function() constructor{
 		} 
 		
 		// if there is no command, check if entity is a fighter and get first enemy in range
-		if(!is_undefined(owner.fighter)) && (!is_undefined(owner.fighter.basic_attack))
+		if(!is_undefined(owner.fighter)) && (owner.fighter.basic_attack != -1)
 		{
 			// resolve fighter behavior
 			with(owner.fighter)
