@@ -22,7 +22,6 @@ if(room != rStartMenu) && (room != rInit) && (room != rShaderTest)
 	
 	InitHexagonalGrid(POINTYTOP, ODD_R, 32, room_width div 2, room_height div 2, 7, 7);
 	
-	
 	// start music
 	var _song = choose(The_Verdant_Grove_LOOP, Ludum_Dare_28___Track_4, Pixel_1, Pixel_2,Pixel_3,Pixel_4,Pixel_5,Pixel_6,Pixel_7,Pixel_8,Pixel_9,Pixel_10,Pixel_11,Pixel_12);
 	SoundCommand(_song, 0, 0);

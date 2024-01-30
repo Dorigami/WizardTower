@@ -1,4 +1,5 @@
 /// @description 
+if(minimap_needed) generate_minimap_sprite();
 
 with(global.iEngine)
 {

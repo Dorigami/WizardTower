@@ -1,5 +1,4 @@
 /// @description 
-
 function hud_get_action(){
 	// get the action that has been stored in variable 'my_action'
 	var rtn = my_action;
@@ -36,13 +35,22 @@ minimap_height = 88;
 minimap_width = 122;
 minimap_x = 518;
 minimap_y = 0;
-minimap_tile_ox = 0;
-minimap_tile_oy = 0;
+minimap_centerx = 0;
+minimap_centery = 0;
+minimap_scale = 3;
 minimap_tile_size = 4;
-
-minimap_hexarr_pos = [];
+minimap_color_background = c_black;
+minimap_color_goal = c_green;
+minimap_color_spawn = c_red;
+minimap_color_neutral = c_teal;
+minimap_color_friendly = c_lime;
+minimap_color_enemy = c_orange;
+minimap_hex_pos = [];
+minimap_hex_colors = [];
+minimap_hex_container_check = [];
 minimap_h_spacing = 0;
 minimap_v_spacing = 0;
+minimap_needed = false; // this flag gets set whenever the HUD is initialized!!!!!!!!!
 minimap_sprite = undefined;
 
 // level progress stuff
@@ -127,8 +135,9 @@ function Init(){
 		}
 		// minimap stuff
 		enable_minimap = true;
-		ox = minimap_x + (minimap_width div 2) - ((global.game_grid_width*minimap_tile_size) div 2);
-		oy = minimap_y + (minimap_height div 2) - ((global.game_grid_height*minimap_tile_size) div 2);
+		minimap_needed = true;
+		minimap_centerx = minimap_x + (minimap_width div 2);
+		minimap_centery = minimap_y + (minimap_height div 2);
 		minimap_bbox[0] = minimap_x;
 		minimap_bbox[1] = minimap_y;
 		minimap_bbox[2] = minimap_x + minimap_width;
@@ -137,7 +146,7 @@ function Init(){
 		{
 			other.minimap_h_spacing = h_spacing*0.03;
 			other.minimap_v_spacing = v_spacing*0.03;
-			array_copy(other.minimap_hexarr_pos,0,hexarr_positions,0,array_length(hexarr_positions));
+			array_copy(other.minimap_hex_pos,0,hexarr_positions,0,array_length(hexarr_positions));
 		}
 		// create the inspector and the level progress indicator
 		with(oSelectionInspector) instance_destroy();
@@ -156,7 +165,7 @@ function Init(){
 			creator : id
 		}
 		with(btnStartNextWave) instance_destroy();
-		level_progress_start_button = instance_create_depth(level_progress_x, level_progress_y+33,depth-1,btnStartNextWave,_struct);
+		level_progress_start_button = instance_create_depth(level_progress_x, level_progress_y+32,depth-1,btnStartNextWave,_struct);
 		
 	} else if(room == rShaderTest){
 		// player data stuff
@@ -184,70 +193,71 @@ function Init(){
 	}
 }
 function generate_minimap_sprite(){
+	minimap_needed = false;
 	if(!is_undefined(minimap_sprite)){
 		sprite_delete(minimap_sprite);
 		minimap_sprite = undefined;
 	}
-	var _width = global.i_hex_grid.hexgrid_width_max;
-	var _height = global.i_hex_grid.hexgrid_height_max;
+	var _width = global.i_hex_grid.hexgrid_width_max*2;
+	var _height = (global.i_hex_grid.hexgrid_height_max*2)-1;
 	var surf;
 	surf = surface_create(_width, _height);
 	surface_set_target(surf);
-	draw_clear_alpha(c_black, 0);
-	draw_sprite(spr_Body, 0, 0, 0);
-	draw_sprite(spr_Clothes, 0, 0, 0);
-	draw_sprite(spr_Hair, 0, 0, 0);
-	spr_custom = sprite_create_from_surface(surf, 0, 0, 32, 32, true, true, 16, 16);
+	draw_clear_alpha(c_white, 0);
+	draw_sprite(sMinimapBG, 0, 0, 0);
+	minimap_sprite = sprite_create_from_surface(surf, 0, 0, _width, _height, false, true, _width div 2, _height div 2);
 	surface_reset_target();
 	surface_free(surf);
 }
 function draw_minimap(){
+	// show the area allocated to the minimap
+	/*
 	draw_set_alpha(0.3*image_alpha);
 	draw_set_color(c_black);
-	// show the area allocated to the minimap
 	draw_rectangle(minimap_bbox[0],minimap_bbox[1],minimap_bbox[2],minimap_bbox[3],false);
+	*/
 	
-	// define colors for each hex node state
-	var color_background = c_black;
-	var color_view = c_black;
-	var color_null = c_white;
-	var color_neutral = c_teal;
-	var color_friendly = c_green;
-	var color_enemy = c_red;
-/*
-	// draw background for the minimap
-	draw_set_alpha(1);
-	draw_set_color(color_background);
-	draw_rectangle(ox-1,oy-1,ox+global.game_grid_width*minimap_tile_size,oy+global.game_grid_height*minimap_tile_size,false);
-
-	// show all the map nodes
-	for(var i=0;i<global.game_grid_width;i++){
-	for(var j=0;j<global.game_grid_height;j++){
-		var _xinc = ox + i*minimap_tile_size;
-		var _yinc = oy + j*minimap_tile_size;
-		var _inst = noone;
-
-		draw_set_color(color_null);
-
-		draw_rectangle(_xinc,_yinc,_xinc+minimap_tile_size-1,_yinc+minimap_tile_size-1,false)
-	}}
-*/
+	if(sprite_exists(minimap_sprite)) 
+	{
+		var my_color = minimap_color_background;
+		
+		// Background sprite
+		draw_sprite_ext(minimap_sprite,0,minimap_centerx,minimap_centery,minimap_scale,minimap_scale,0,my_color,image_alpha);
+		
+		// draw the hex nodes and their respective colors onto the minimap
+		for(var i=0;i<array_length(minimap_hex_pos);i++)
+		{
+			var _pos = minimap_hex_pos[i];
+			if(_pos == -1)
+			{
+				// skip
+			} else {
+				// draw the hex node onto the minimap with a predetermined color
+				my_color = minimap_hex_colors[i];
+				if(my_color != minimap_color_background)
+				{
+					draw_sprite_ext(sSelect,0,_pos[1], _pos[2], minimap_scale, minimap_scale,0,my_color,image_alpha);
+				}
+			}
+		}
+	}
 	// indicate where the view is on the minimap
 	draw_rectangle(minimap_view_bbox[0], minimap_view_bbox[1], minimap_view_bbox[2], minimap_view_bbox[3], true);
-
-
 }
 function draw_abilities(){
+	/*
 	// the abilities are drawn by the button objects
-	
 	draw_set_alpha(0.3*image_alpha);
 	draw_set_color(c_aqua);
 	draw_rectangle(abilities_bbox[0],abilities_bbox[1],abilities_bbox[2],abilities_bbox[3],false);
+	*/
 }
 function draw_player_data(){
+	/*
 	draw_set_alpha(0.3);
 	draw_set_color(c_red);
 	draw_rectangle(player_data_bbox[0],player_data_bbox[1],player_data_bbox[2],player_data_bbox[3],false);
+	*/
 	draw_set_valign(fa_top);
 	draw_set_halign(fa_left);
 	draw_set_color(c_white);

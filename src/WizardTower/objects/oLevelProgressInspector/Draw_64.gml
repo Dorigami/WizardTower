@@ -7,10 +7,13 @@ draw_sprite_part_ext(sprite_index,1,33,0,1,sprite_height,x,y,-middle_length,1,im
 // draw right part
 draw_sprite(sprite_index,2,x,y);
 
+/*
 // draw the bbox
 draw_set_color(c_lime);
 draw_set_alpha(0.5);
 draw_rectangle(progress_bbox[0],progress_bbox[1],progress_bbox[2],progress_bbox[3],false);
+*/
+draw_set_color(c_white);
 draw_set_alpha(1);
 
 // draw the target data
