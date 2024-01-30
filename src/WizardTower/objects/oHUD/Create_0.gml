@@ -16,19 +16,20 @@ function activate_my_action_ability(_value){
 function activate_start_next_wave(){
 	with(global.iHUD)
 	{
-		show_debug_message("hud start NEXT WAVE::::::")
 		my_action = {start_next_wave : new global.iEngine.Command("start_next_wave",true,0,0)};
 	}
 }
 
 my_action = {};
 
+// create a command_queue
+command_queue = ds_queue_create();
+
 // mouse position on gui
 mx = device_mouse_x_to_gui(0);
 my = device_mouse_y_to_gui(0);
 
 // minimap stuff
-func = hud_minimap_functions;
 xx = 0;
 yy = 0;
 minimap_height = 88;
@@ -40,10 +41,10 @@ minimap_centery = 0;
 minimap_scale = 3;
 minimap_tile_size = 4;
 minimap_color_background = c_black;
-minimap_color_goal = c_green;
+minimap_color_goal = c_lime;
 minimap_color_spawn = c_red;
 minimap_color_neutral = c_teal;
-minimap_color_friendly = c_lime;
+minimap_color_friendly = c_aqua;
 minimap_color_enemy = c_orange;
 minimap_hex_pos = [];
 minimap_hex_colors = [];

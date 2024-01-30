@@ -25,3 +25,14 @@ with(global.iEngine)
 		btn.press_override = keyboard_check(ord(ability_hotkeys[i]));
 	}
 }
+
+while(ds_queue_size(command_queue) > 0)
+{
+	var _cmd = ds_queue_dequeue(command_queue);
+	switch(_cmd.type)
+	{
+		case "increase money":
+			CreateFloatNumber();
+			break;
+	}
+}
