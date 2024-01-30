@@ -156,7 +156,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 			// give a command to the HUD to animate increase in moeny
 			with(oHUD)
 			{
-				var _cmd = new global.iEngine.Command("increase money",_other_fighter.owner.material_reward,_other_fighter.x,_other_fighter.y);
+				var _cmd = new global.iEngine.Command("increase money",_other_fighter.owner.material_reward,_other_fighter.owner.x,_other_fighter.owner.y);
 				ds_queue_enqueue(command_queue, _cmd);
 			}
 			

@@ -1,6 +1,6 @@
 /// @description 
 
-if(!gui)
+if(gui)
 {
 	Draw();
 }

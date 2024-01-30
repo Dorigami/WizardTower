@@ -32,7 +32,10 @@ while(ds_queue_size(command_queue) > 0)
 	switch(_cmd.type)
 	{
 		case "increase money":
-			CreateFloatNumber();
+			with(CreateFloatNumber(player_data_x, player_data_y,_cmd.value,FLOATTYPE.TICK,0,-1,0.03,true))
+			{
+				depth = other.depth-2;
+			}
 			break;
 	}
 }
