@@ -23,6 +23,15 @@ if(!is_undefined(value))
 				speed = 1;
 			}
 			break;
+			case FLOATTYPE.TICK:
+				if(!init)
+				{
+					init = true;
+					tick_rate = 0.85;
+					speed = 1.6;
+				}
+				speed *= tick_rate;
+				break;
 	}
 	
 	// fade out when time is up

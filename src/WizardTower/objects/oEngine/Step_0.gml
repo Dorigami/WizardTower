@@ -249,7 +249,7 @@ if(!is_undefined(confirm_sell_action)) || (!is_undefined(confirm_sell_action_mou
 			{
 				other.player_actor.material += material_cost;
 				SellPuffCreate(position[1],position[2]);
-				CreateFloatNumber(x,bbox_top,"+$"+string(material_cost),FLOATTYPE.LINEAR,90,40,0.3);
+				CreateFloatNumber(x,bbox_top,"+$"+string(material_cost),FLOATTYPE.LINEAR,,90,40,0.3);
 				ds_list_delete(other.player_actor.selected_entities, i);
 				instance_destroy();
 			}

@@ -4,14 +4,14 @@ if(gui)
 {
 	var _x = x+0.5*sprite_width;
 	var _y = y+0.5*sprite_height;
-	var _ability = global.iEngine.current_player_abilities[action_index];
 	draw_self();
 
+	if(current_ability.icon == -1) exit;
 	draw_set_font(fDefault);
 	draw_set_color(textColor);
 	draw_set_alpha(image_alpha);
 	draw_set_valign(fa_middle);
-	draw_sprite(_ability.icon,0,x,y);
+	draw_sprite(current_ability.icon,0,x,y);
 	/* i only need the icon drawn don't draw the text included below
 	if(!is_undefined(_ability.values[$ "cost"]))
 	{

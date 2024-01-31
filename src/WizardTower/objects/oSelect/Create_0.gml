@@ -21,6 +21,8 @@ function EmptySelection(_actor){
 		global.iHUD.show_selected_entities = ds_list_size(_actor.selected_entities);
 	}
 	with(oSelectionInspector) inspect(noone);
+	// revert player abilities to their default
+	ability_scheme_set_default();
 }
 
 function EnableSelection(){
@@ -90,25 +92,26 @@ function ConfirmSelection(){
 */
 		// if the selection area is small enough, just get 1 instance at location
 		_ent = instance_place(mouse_x,mouse_y,pEntity);
-		if(_ent != noone) {			
-			if(_ent.object_index == oMarine) || (_ent.object_index == oDrone)
+		if(_ent != noone) {	
+			_ent.selected = true;
+			ds_list_add(_plist, _ent);
+			if(global.game_state == GameStates.SELLING)
 			{
-				if(ds_list_find_index(_plist,_ent.creator) == -1){ 
-					_ent.creator.selected = true;
-					ds_list_add(_plist, _ent.creator); 
-				}
-			} else {
-				_ent.selected = true;
-				ds_list_add(_plist, _ent);
-				if(global.game_state == GameStates.SELLING)
+				if(_ent.faction == PLAYER_FACTION) && (_ent.entity_type == STRUCTURE)
 				{
-					if(_ent.faction == PLAYER_FACTION) && (_ent.entity_type == STRUCTURE)
-					{
-						global.iEngine.sell_price += _ent.material_cost;
-					}
+					global.iEngine.sell_price += _ent.material_cost;
 				}
 			}
 			with(oSelectionInspector) inspect(_ent);
+			if(_ent.faction == ENEMY_FACTION)
+			{
+				ability_scheme_set_default();
+			} else {
+			}
+			switch(_ent.)
+			{
+				case 	
+			}
 		}
 /*
 	}

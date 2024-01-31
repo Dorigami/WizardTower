@@ -121,7 +121,6 @@ function room_start_init_abilities(){
 	}
 }
 
-
 function room_start_init_entities(){
 	with(pEntity)
 	{

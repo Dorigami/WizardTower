@@ -6,6 +6,9 @@ if(gui)
 } else {
 	// do nothing
 }
+current_ability = global.iEngine.current_player_abilities[action_index];
+if(current_ability.type == "null") enabled = false;
+
 if(!enabled)
 {
 	if(image_index != 0) image_index = 0;
@@ -68,7 +71,7 @@ if(!enabled)
 	}
 	
 	// DISPLAY INFORMATION IN A TEXT WINDOW
-	if(text_window_enabled)
+	if(global.iEngine.current_player_abilities[action_index].icon != -1) && (text_window_enabled)
 	{
 		if(focus)
 		{
@@ -80,7 +83,7 @@ if(!enabled)
 					ability : global.iEngine.current_player_abilities[action_index],
 					bg_sprite : sDebugTextWindow9s,
 				}
-				with(global.iHUD) instance_create_depth(ox, oy, depth-2, oTextWindow, _struct);
+				with(global.iHUD) instance_create_depth(mx, my, depth-2, oTextWindow, _struct);
 			} else {
 				// reset the window's target
 				with(oTextWindow)

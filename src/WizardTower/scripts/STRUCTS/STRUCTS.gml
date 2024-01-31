@@ -270,6 +270,15 @@ Ability = function(_type="") constructor{
 		    description = "Enter \'Sell Mode\'.  Click on towers to sell them.  \nline 2\n line 3\nline 4\n line 5";
 		    values = {}; 
 		break;
+		default:
+			name = "null";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+			break;
 	}
 	ds_list_destroy(_structure_list);
 }

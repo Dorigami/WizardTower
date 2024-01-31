@@ -113,6 +113,7 @@
     {"name":"oEnemyLevelData","order":28,"path":"objects/oEnemyLevelData/oEnemyLevelData.yy",},
     {"name":"missile_impact","order":8,"path":"sounds/missile_impact/missile_impact.yy",},
     {"name":"oBarracksBasic","order":5,"path":"objects/oBarracksBasic/oBarracksBasic.yy",},
+    {"name":"AbilityButtonSchemes","order":43,"path":"scripts/AbilityButtonSchemes/AbilityButtonSchemes.yy",},
     {"name":"InitializeDisplay","order":19,"path":"scripts/InitializeDisplay/InitializeDisplay.yy",},
     {"name":"shWhiteFlash","order":5,"path":"shaders/shWhiteFlash/shWhiteFlash.yy",},
     {"name":"snd_enemy_death_default","order":22,"path":"sounds/snd_enemy_death_default/snd_enemy_death_default.yy",},

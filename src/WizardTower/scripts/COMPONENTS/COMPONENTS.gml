@@ -146,7 +146,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		_other_fighter.hp -= _damClac // 1 damage minimum is enforced here
 		with(_other_fighter.owner)
 		{
-			CreateFloatNumber(position[1], 0.5*(position[2] + bbox_top), _damClac, FLOATTYPE.FLARE, 90);
+			CreateFloatNumber(position[1], 0.5*(position[2] + bbox_top), _damClac, FLOATTYPE.FLARE,, 90);
 		}
 		if(_other_fighter.hp <= 0)
 		{	
