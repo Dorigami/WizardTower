@@ -7,7 +7,7 @@ if(gui)
 	// do nothing
 }
 current_ability = global.iEngine.current_player_abilities[action_index];
-if(current_ability.type == "null") enabled = false;
+if(current_ability.name == "null") enabled = false;
 
 if(!enabled)
 {

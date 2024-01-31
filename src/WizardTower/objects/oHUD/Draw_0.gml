@@ -7,7 +7,7 @@ with(global.iEngine)
 	{
 		for(var i=0;i<other.show_selected_entities;i++){
 			var _ent = player_actor.selected_entities[| i];
-			if(!is_undefined(_ent)) && (_ent.visible)
+			if(!is_undefined(_ent)) && (instance_exists(_ent)) && (_ent.visible)
 			{
 				// show structure rally point
 				if(_ent.entity_type == STRUCTURE)

@@ -271,6 +271,7 @@ if(!is_undefined(use_ability))
 		show_debug_message("can't get/run ability, no stored struct");
 		exit;
 	}
+	if(_ability.name = "null") exit;
 	script_execute_array(_ability.script, _ability.args);
 }
 	

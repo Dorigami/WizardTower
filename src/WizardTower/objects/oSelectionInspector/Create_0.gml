@@ -19,13 +19,14 @@ function inspect(_inst){
 		// create an array containing all data required to be displayed
 		var _fighter = _inst.fighter;
 		var _data = [
-			[vect2(x+30,y+(inspection_bbox[3]-inspection_bbox[1]) div 2), [_inst.sprite_index, _inst.image_index]],                            // sprite image
+			[vect2(x+30,y+(inspection_bbox[3]-inspection_bbox[1]) div 2), [_inst.sprite_index, _inst.image_index]],  // sprite image
 			[vect2(x+60,y+3), _inst.name],                                                        // name
 			[vect2(x+60,y+20), "HP: " + string(_fighter.hp) + " / " + string(_fighter.hp_max)],   // health
-			[vect2(x+60,y+30), "STR: " + string(_fighter.strength)],                              // strength
-			[vect2(x+60,y+40), "RATE: " + string(FRAME_RATE / _fighter.basic_attack.cooldown)],   // attack rate
-			[vect2(x+60,y+50), "DEF: " + string(_fighter.defense)],                               // defense
+			[vect2(x+60,y+30), "DEF: " + string(_fighter.defense)],                               // defense
+			[vect2(x+60,y+40), _fighter.basic_attack == -1 ? "STR: ---" : "STR: " + string(_fighter.strength)],                              // strength
+			[vect2(x+60,y+50), _fighter.basic_attack == -1 ? "RATE: ---" : "RATE: "+string(FRAME_RATE / _fighter.basic_attack.cooldown)],   // attack rate
 		];
+
 		// add all the data defined previously to the inspection list
 		for(var i=0;i<array_length(_data);i++){ ds_list_add(inspection_list, _data[i]) }
 	}
@@ -40,30 +41,30 @@ function inspect_noone_step(){
 }
 function inspect_friendly_unit_step(){
 	var _fighter = target.fighter;
-	inspection_list[| 0][1][1] = target.image_index;                                            // sprite image
+	inspection_list[| 0][1][1] = target.image_index;                                                                            // sprite image
 //  inspection_list[| 1] 'name' does not need to update
-	inspection_list[| 2][1] = "HP: " + string(_fighter.hp) + " / " + string(_fighter.hp_max);   // health
-	inspection_list[| 3][1] = "STR: " + string(_fighter.strength);                              // strength
-	inspection_list[| 4][1] = "ATK SPD: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
-	inspection_list[| 5][1] = "DEF: " + string(_fighter.defense);                               // defense
+	inspection_list[| 2][1] = "HP: " + string(_fighter.hp) + " / " + string(_fighter.hp_max);                                   // health
+	inspection_list[| 3][1] = "DEF: " + string(_fighter.defense);                                                               // defense
+	inspection_list[| 4][1] = _fighter.basic_attack == -1 ? "STR: ---" : "STR: " + string(_fighter.strength);                   // strength
+	inspection_list[| 5][1] = _fighter.basic_attack == -1 ? "RATE: ---" : "RATE: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
 }
 function inspect_friendly_structure_step(){
 	var _fighter = target.fighter;
 	inspection_list[| 0][1][1] = target.image_index;                                            // sprite image
 //  inspection_list[| 1] 'name' does not need to update
 	inspection_list[| 2][1] = "HP: " + string(_fighter.hp) + " / " + string(_fighter.hp_max);   // health
-	inspection_list[| 3][1] = "STR: " + string(_fighter.strength);                              // strength
-	inspection_list[| 4][1] = "ATK SPD: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
-	inspection_list[| 5][1] = "DEF: " + string(_fighter.defense);                               // defense
+	inspection_list[| 3][1] = "DEF: " + string(_fighter.defense);                                                               // defense
+	inspection_list[| 4][1] = _fighter.basic_attack == -1 ? "STR: ---" : "STR: " + string(_fighter.strength);                   // strength
+	inspection_list[| 5][1] = _fighter.basic_attack == -1 ? "RATE: ---" : "RATE: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
 }
 function inspect_enemy_step(){
 	var _fighter = target.fighter;
 	inspection_list[| 0][1][1] = target.image_index;                                            // sprite image
 //  inspection_list[| 1] 'name' does not need to update
 	inspection_list[| 2][1] = "HP: " + string(_fighter.hp) + " / " + string(_fighter.hp_max);   // health
-	inspection_list[| 3][1] = "STR: " + string(_fighter.strength);                              // strength
-	inspection_list[| 4][1] = "ATK SPD: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
-	inspection_list[| 5][1] = "DEF: " + string(_fighter.defense);                               // defense
+	inspection_list[| 3][1] = "DEF: " + string(_fighter.defense);                                                               // defense
+	inspection_list[| 4][1] = _fighter.basic_attack == -1 ? "STR: ---" : "STR: " + string(_fighter.strength);                   // strength
+	inspection_list[| 5][1] = _fighter.basic_attack == -1 ? "RATE: ---" : "RATE: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
 }
 
 // set variables for drawing inspection data

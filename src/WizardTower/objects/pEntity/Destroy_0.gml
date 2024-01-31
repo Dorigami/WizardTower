@@ -20,6 +20,14 @@ if(member_of != noone) && (!is_undefined(member_of))
 if(selected){
 	var _pos = ds_list_find_index(_actor.selected_entities, id);
 	if(_pos > -1) ds_list_delete(_actor.selected_entities, _pos);
+	// if this entity does not belong to the player,
+	// it must also be removed from the player's selection 
+	if(faction != PLAYER_FACTION)
+	{
+		var _pos = ds_list_find_index(global.iEngine.player_actor.selected_entities, id);
+		if(_pos > -1) ds_list_delete(global.iEngine.player_actor.selected_entities, _pos);
+	}
+	with(oSelectionInspector){ inspect(noone) }
 }
 
 // if the entity is a blueprint, remove it from that faction's blueprint list

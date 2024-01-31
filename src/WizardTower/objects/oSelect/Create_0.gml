@@ -103,15 +103,28 @@ function ConfirmSelection(){
 				}
 			}
 			with(oSelectionInspector) inspect(_ent);
-			if(_ent.faction == ENEMY_FACTION)
-			{
+			if(_ent.faction != PLAYER_FACTION)
+			{// default abilities if entity doesn't belong to the player
 				ability_scheme_set_default();
 			} else {
+				// set abilities specific to the entity selected
+				switch(_ent.object_index)
+				{
+					case oGunTurret:
+						ability_scheme_set_basictower();
+						break;
+					case oDroneSilo:
+						ability_scheme_set_specialtower();
+						break;
+					case oBarricade:
+						ability_scheme_set_barricade();
+						break;
+					default:
+						ability_scheme_set_default();
+						break;
+				}
 			}
-			switch(_ent.)
-			{
-				case 	
-			}
+
 		}
 /*
 	}
