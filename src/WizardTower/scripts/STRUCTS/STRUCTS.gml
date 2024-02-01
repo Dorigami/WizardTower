@@ -9,6 +9,7 @@ Actor = function(_player=false, _faction=NEUTRAL_FACTION, _apm=0, _ai=undefined)
     supply_limit = 40;
     supply_current = 0;
     supply_in_queue = 0;
+	money_rate = 1;
     material = 0;
     material_per_second = 0;
 	experience_points = 0;
@@ -203,6 +204,7 @@ Ability = function(_type="") constructor{
 	}
 	switch(_type)
 	{
+//------// Builder Abilities
 		case "barricade":
 		    icon = sBarricadeIcon;
 		    script = BuilderCreateBarricade;
@@ -253,7 +255,33 @@ Ability = function(_type="") constructor{
 		    description = "Long range turret with area damage, but fires slowly\nline 2\n line 3\nline 4\n line 5";;     
 		break;
 		
-		// non-structure Abilities
+//------// Upgrade Abilities
+		case "health_up":
+		    icon = sBlankIcon;
+		    script = player_upgrade_health_up;
+		    args = [2];
+		    title = "Health +";
+		    description = "Slightly increase your overall health.";
+		    values = {};  
+		break;
+		case "money_up":
+		    icon = sBlankIcon;
+		    script = player_upgrade_money_up;
+		    args = [0.1];
+		    title = "Money Gain +";
+		    description = "You will earn a greater reward for defeating enemies";
+		    values = {};  
+		break;
+		case "supply_up":
+		    icon = sBlankIcon;
+		    script = player_upgrade_supply_up;
+		    args = [2];
+		    title = "Supply +";
+		    description = "You can support additional towers/units on the field";
+		    values = {};  
+		break;
+		
+//------// Miscelaneous Abilities
 		case "toggle_info":
 		    icon = sInfoIcon;
 		    script = ToggleEntityInfo;

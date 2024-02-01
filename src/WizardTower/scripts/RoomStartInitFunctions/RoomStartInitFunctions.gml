@@ -108,7 +108,7 @@ function room_start_init_abilities(){
 			case 0: _type = "barricade"; break; 
 			case 1: _type = "gunturret"; break; 
 			case 2: _type = "sniperturret"; break; 
-			case 3: _type = "hp_up"; break; 
+			case 3: _type = "health_up"; break; 
 			case 4: _type = "money_up"; break; 
 			case 5: _type = "supply_up"; break; 
 			case 6: _type = ""; break; 

@@ -82,7 +82,27 @@ function ToggleSellMode(){
 			}
 		}
 }
-
+function player_upgrade_health_up(_val=0){
+	with(global.iEngine)
+	{
+		health += _val;
+	}
+}
+function player_upgrade_supply_up(_val=0){
+	with(global.iEngine)
+	{
+		var _actor = player_actor;
+		_actor.supply_limit += _val;
+	}	
+}
+function player_upgrade_money_up(_val=0.1){
+	with(global.iEngine)
+	{
+		var _actor = player_actor;
+		_actor.money_rate += _val;
+		_actor.material += 100;
+	}
+}
 
 // light beam (basic)
 // spread firelight (active)
