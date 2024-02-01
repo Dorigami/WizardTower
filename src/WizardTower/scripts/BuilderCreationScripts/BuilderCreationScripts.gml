@@ -103,10 +103,13 @@ function player_upgrade_money_up(_val=0.1){
 		_actor.material += 100;
 	}
 }
-
-// light beam (basic)
-// spread firelight (active)
-// unit (toggle though units once targeting begins)
-// lamp (sc2 pylon)
-// barricade  (sc2 force field)
-// 
+function increase_money(_val, _faction){
+	var _actor = global.iEngine.actor_list[| _faction];
+	_actor.material += floor(_val*_actor.money_rate);
+	// modify the value by player's money rate
+	_val *= _actor.money_rate;
+	
+	// give a command to the HUD to animate increase in moeny
+	var _cmd = new global.iEngine.Command("increase money",_val,0,0);
+	with(oHUD){ ds_queue_enqueue(command_queue, _cmd) }
+}

@@ -10,6 +10,19 @@ function inspect(_inst){
 		var _data = [vect2(x+6,y+2),""];
 		ds_list_add(inspection_list,_data);
 	} else {
+	//--// check if the entity is a blueprint
+		if(!is_undefined(_inst.blueprint))
+		{
+			ds_list_clear(inspection_list);
+			var _data = [
+				[vect2(x+30,y+(inspection_bbox[3]-inspection_bbox[1]) div 2), [_inst.sprite_index, _inst.image_index]],  // sprite image
+				[vect2(x+60,y+3), _inst.name],                                                        // name
+			];
+
+			// add all the data defined previously to the inspection list
+			for(var i=0;i<array_length(_data);i++){ ds_list_add(inspection_list, _data[i]) }
+		} else {
+	//--// then check if it is anything else
 		if(_inst.entity_type == UNIT){
 			inspect_update_script = _inst.faction == PLAYER_FACTION ? inspect_friendly_unit_step : inspect_enemy_step;
 		} else if(_inst.entity_type == STRUCTURE){
@@ -25,10 +38,12 @@ function inspect(_inst){
 			[vect2(x+60,y+30), "DEF: " + string(_fighter.defense)],                               // defense
 			[vect2(x+60,y+40), _fighter.basic_attack == -1 ? "STR: ---" : "STR: " + string(_fighter.strength)],                              // strength
 			[vect2(x+60,y+50), _fighter.basic_attack == -1 ? "RATE: ---" : "RATE: "+string(FRAME_RATE / _fighter.basic_attack.cooldown)],   // attack rate
+			[vect2(x+120,y+30), "kills: " + string(_fighter.kill_count)] // kill count
 		];
 
 		// add all the data defined previously to the inspection list
 		for(var i=0;i<array_length(_data);i++){ ds_list_add(inspection_list, _data[i]) }
+		}
 	}
 }
 function inspect_noone_step(){
@@ -39,6 +54,10 @@ function inspect_noone_step(){
 					"mouse focus = " + string(global.mouse_focus) + "\n" +
 					"HUD Focus = " + string(global.hud_focus);
 }
+function inspect_blueprint_step(){
+	inspection_list[| 0][1][1] = target.image_index; 
+//  inspection_list[| 1] 'name' does not need to update
+}
 function inspect_friendly_unit_step(){
 	var _fighter = target.fighter;
 	inspection_list[| 0][1][1] = target.image_index;                                                                            // sprite image
@@ -47,6 +66,7 @@ function inspect_friendly_unit_step(){
 	inspection_list[| 3][1] = "DEF: " + string(_fighter.defense);                                                               // defense
 	inspection_list[| 4][1] = _fighter.basic_attack == -1 ? "STR: ---" : "STR: " + string(_fighter.strength);                   // strength
 	inspection_list[| 5][1] = _fighter.basic_attack == -1 ? "RATE: ---" : "RATE: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
+	inspection_list[| 6][1] = "Kills: " + string(_fighter.kill_count);
 }
 function inspect_friendly_structure_step(){
 	var _fighter = target.fighter;
@@ -56,6 +76,7 @@ function inspect_friendly_structure_step(){
 	inspection_list[| 3][1] = "DEF: " + string(_fighter.defense);                                                               // defense
 	inspection_list[| 4][1] = _fighter.basic_attack == -1 ? "STR: ---" : "STR: " + string(_fighter.strength);                   // strength
 	inspection_list[| 5][1] = _fighter.basic_attack == -1 ? "RATE: ---" : "RATE: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
+	inspection_list[| 6][1] = "Kills: " + string(_fighter.kill_count);
 }
 function inspect_enemy_step(){
 	var _fighter = target.fighter;
@@ -65,6 +86,7 @@ function inspect_enemy_step(){
 	inspection_list[| 3][1] = "DEF: " + string(_fighter.defense);                                                               // defense
 	inspection_list[| 4][1] = _fighter.basic_attack == -1 ? "STR: ---" : "STR: " + string(_fighter.strength);                   // strength
 	inspection_list[| 5][1] = _fighter.basic_attack == -1 ? "RATE: ---" : "RATE: " + string(1 / _fighter.basic_attack.cooldown);// attack rate
+	inspection_list[| 6][1] = "Kills: " + string(_fighter.kill_count);
 }
 
 // set variables for drawing inspection data

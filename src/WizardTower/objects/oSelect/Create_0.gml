@@ -94,7 +94,7 @@ function ConfirmSelection(){
 		_ent = instance_place(mouse_x,mouse_y,pEntity);
 		if(_ent != noone) {	
 			_ent.selected = true;
-			ds_list_add(_plist, _ent);
+			if(is_undefined(_ent.blueprint)) ds_list_add(_plist, _ent);
 			if(global.game_state == GameStates.SELLING)
 			{
 				if(_ent.faction == PLAYER_FACTION) && (_ent.entity_type == STRUCTURE)

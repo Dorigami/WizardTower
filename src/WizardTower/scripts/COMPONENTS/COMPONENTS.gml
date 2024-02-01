@@ -151,15 +151,7 @@ Fighter = function(_hp, _strength, _defense, _speed, _range, _tags, _basic_attac
 		if(_other_fighter.hp <= 0)
 		{	
 			// deal out rewards
-			IncreaseMoney();
-			var _actor = global.iEngine.actor_list[| owner.faction];
-			_actor.material += _other_fighter.owner.material_reward;
-			// give a command to the HUD to animate increase in moeny
-			with(oHUD)
-			{
-				var _cmd = new global.iEngine.Command("increase money",_other_fighter.owner.material_reward,_other_fighter.owner.x,_other_fighter.owner.y);
-				ds_queue_enqueue(command_queue, _cmd);
-			}
+			increase_money(_other_fighter.owner.material_reward, owner.faction);
 			
 			// incrememnt kill count
 			kill_count++;
