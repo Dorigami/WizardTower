@@ -1,3 +1,10 @@
+								
+	Barricade			Basic Tower			Special Tower	
+								
+level up #1	level up #2	level up #3	level up #1	level up #2	level up #3	level up #1	level up #2	level up #3
+spike wall	heal beacon	mine dispenser	minigun	sniper	mortar	fire emitter	ice impaler	lightning striker
+
+
 WIZARD TOWER PROTOTYPING
 
 THINGS TO BUILD & THEIR PRIORITY

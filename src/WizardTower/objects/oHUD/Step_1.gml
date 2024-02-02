@@ -29,14 +29,37 @@ with(global.iEngine)
 while(ds_queue_size(command_queue) > 0)
 {
 	var _cmd = ds_queue_dequeue(command_queue);
+	// create visual effects based on the command pass to this HUD object 
 	switch(_cmd.type)
 	{
 		case "increase money":
-			var _money_string = "+$" + string_trim_end(string(_cmd.value),[".00"]);
-			with(CreateFloatNumber(player_data_x+44, player_data_y+53,_money_string,FLOATTYPE.TICK,fDefault,90,30,0.1,true))
+			var _money_string = "+$" + string_trim(string(_cmd.value),[".00","-"]);
+			with(CreateFloatNumber(player_data_x+40, player_data_y+53,_money_string,FLOATTYPE.TICK,fDefault,90,30,0.1,true))
 			{
 				depth = other.depth-2;
 			}
+			break;
+		case "decrease money":
+			var _money_string = "-$" + string_trim(string(_cmd.value),[".00","-"]);
+			with(CreateFloatNumber(player_data_x+40, player_data_y+55,_money_string,FLOATTYPE.TICK,fDefault,270,30,0.1,true))
+			{
+				image_blend = c_red;
+				depth = other.depth-2;
+			}
+			break;
+		case "increase_player_health":
+			with(CreateFloatNumber(player_data_x+40, player_data_y+10,"+"+string_trim(string(_cmd.value),[".00","-"]),FLOATTYPE.TICK,fDefault,90+3*irandom_range(-5,5),30,0.1,true))
+			{
+				image_blend = c_green;
+				depth = other.depth-2;
+			}	
+			break;
+		case "decrease_player_health":
+			with(CreateFloatNumber(player_data_x+40, player_data_y+13,"-"+string_trim(string(_cmd.value),[".00","-"]),FLOATTYPE.TICK,fDefault,270+3*irandom_range(-5,5),30,0.1,true))
+			{
+				image_blend = c_red;
+				depth = other.depth-2;
+			}	
 			break;
 	}
 }

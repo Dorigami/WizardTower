@@ -211,7 +211,7 @@ if(!is_undefined(confirm_build_action)) || (!is_undefined(confirm_build_action_m
 
 			// update supply and material
 			_actor.supply_in_queue += _stats.supply_cost;
-			_actor.material -= _stats.material_cost;
+			increase_money(-_stats.material_cost, PLAYER_FACTION)
 
 			// check if the unit can still be afforded
 			_valid = false;

@@ -17,7 +17,9 @@ if(minimap_needed)
 	var _height = (global.i_hex_grid.hexgrid_height_max*2)-1;
 	// the scale of the tiles displayed on the minimap must also be calculated
 	minimap_scale = min(5.8,minimap_width/_width, minimap_height/_height);
-	show_debug_message("the new scale is = {0}", minimap_scale);
+	// shift the minimap slightly to recenter, after the scaling is calculated
+	minimap_centerx = minimap_x + ((minimap_bbox[0]+minimap_bbox[2]) div 2) - minimap_scale div 2;
+	minimap_centery = minimap_y + ((minimap_bbox[1]+minimap_bbox[3]) div 2) - minimap_scale div 2;;
 	// calculate the top-left position for the minimap tiles
 	var _width_offset = _width div 2;
 	var _height_offset = _height div 2;
@@ -45,8 +47,6 @@ if(minimap_needed)
 			minimap_hex_pos[i] = -1;
 		}
 	}
-
-	
 	// the 'minimap_needed' flag is not set to false until the sprite is created in the draw event
 }
 

@@ -83,10 +83,8 @@ function ToggleSellMode(){
 		}
 }
 function player_upgrade_health_up(_val=0){
-	with(global.iEngine)
-	{
-		health += _val;
-	}
+	if(_val == 0) exit;
+	increase_health(_val, PLAYER_FACTION);
 }
 function player_upgrade_supply_up(_val=0){
 	with(global.iEngine)
@@ -103,13 +101,33 @@ function player_upgrade_money_up(_val=0.1){
 		_actor.material += 100;
 	}
 }
+function increase_health(_val, _faction){
+	if(_faction == PLAYER_FACTION){
+		health += _val;
+		
+		var  _cmd = sign(_val) == 1 ? 
+			new global.iEngine.Command("increase_player_health", _val, 0, 0):
+			new global.iEngine.Command("decrease_player_health", _val, 0, 0);
+			
+		with(global.iHUD){ ds_queue_enqueue(command_queue, _cmd) }
+	} else {
+		// nothing
+	}
+}
 function increase_money(_val, _faction){
+	if(_val == 0) exit;
 	var _actor = global.iEngine.actor_list[| _faction];
-	_actor.material += floor(_val*_actor.money_rate);
 	// modify the value by player's money rate
-	_val *= _actor.money_rate;
+	if(sign(_val) == 1)
+	{
+		_val *= _actor.money_rate;
+		var _cmd = new global.iEngine.Command("increase money", _val, 0, 0);
+	} else {
+		var _cmd = new global.iEngine.Command("decrease money", _val, 0, 0);
+	}
 	
-	// give a command to the HUD to animate increase in moeny
-	var _cmd = new global.iEngine.Command("increase money",_val,0,0);
+	// increment money
+	_actor.material += floor(_val);
+	// let the HUD object know about it
 	with(oHUD){ ds_queue_enqueue(command_queue, _cmd) }
 }
