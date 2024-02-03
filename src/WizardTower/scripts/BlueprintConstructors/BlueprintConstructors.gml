@@ -67,6 +67,7 @@ function ConstructBlueprint(_x, _y, _faction, _type_string){
 			hex : _hex,
 			hex_prev : _hex,
 			hex_path_list : ds_list_create(),
+			abilities : ["","","","","","","","",""], // there are no abilities for blueprints yet
 			
 			//animation
 			spr_idle : _idle,

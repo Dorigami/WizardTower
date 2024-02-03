@@ -204,14 +204,121 @@ Ability = function(_type="") constructor{
 	}
 	switch(_type)
 	{
-//------// Builder Abilities
-		case "barricade":
+		// defense
+		case "barricade":	
+		    name = "Barricade";
 		    icon = sBarricadeIcon;
-		    script = BuilderCreateBarricade;
-		    args = [PLAYER_FACTION];
-		    title = "Basic Barricade";
-		    description = "Build this to keep enemies away from important strucutres\nline 2\n line 3\nline 4\n line 5";
-		break;
+			script = BuilderCreateBarricade;
+			args = [PLAYER_FACTION];
+			title = "Barricade";
+			description = "Build this to keep enemies away from important strucutres";
+		    values = {};
+		    break;
+		case "barricade-spike wall":	
+		    name = "Specialzation - Spike Wall";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+		case "barricade-heal beacon":	
+		    name = "Specialzation - Heal Beacon";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+		case "barricade-mine dispenser":	
+		    name = "Specialzation - Mine Layer";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+
+		// kinetic
+		case "kinetic tower":	
+		    name = "Kinetic Tower";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+		case "kinetic-minigun":	
+		    name = "Specialzation - Minigun";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+		case "kinetic-sniper":	
+		    name = "Specialzation - Sniper";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+		case "kinetic-mortar":	
+		    name = "Specialzation - Mortar";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+
+		//magic
+		case "magic tower":	
+		    name = "Magic Tower";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+		case "magic-fire emitter":
+		    name = "Specialization - Fire Emitter";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+		case "magic-ice impaler":
+		    name = "specialization - Ice Spear";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+		case "magic-lightning striker":
+		    name = "Specialzation - Lighting ";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+		    break;
+
+
 		case "gunturret":
 		    icon = sGunTurretIcon;
 		    script = BuilderCreateGunTurret;
@@ -256,6 +363,15 @@ Ability = function(_type="") constructor{
 		break;
 		
 //------// Upgrade Abilities
+		case "level up":// this is an upgrade for towers on an individual basis
+			name = "LEVEL UP";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+			break;
 		case "health_up":
 		    icon = sBlankIcon;
 		    script = player_upgrade_health_up;
@@ -290,6 +406,15 @@ Ability = function(_type="") constructor{
 		    description = "Show information for anything on screen.  Including health, attack range, enemy levels, etc... \nline 2\n line 3\nline 4\n line 5";
 		    values = {};  
 		break;
+		case "sell_this_tower":
+			name = "null";
+		    icon = -1;
+		    script = -1;
+		    args = [];
+		    title = -1;
+		    description = -1;
+		    values = {}; 
+			break;
 		case "sell_towers":
 		    icon = sSellIcon;
 		    script = ToggleSellMode;

@@ -158,7 +158,7 @@
     {"id":{"name":"oEnemyLevelData","path":"objects/oEnemyLevelData/oEnemyLevelData.yy",},},
     {"id":{"name":"missile_impact","path":"sounds/missile_impact/missile_impact.yy",},},
     {"id":{"name":"oBarracksBasic","path":"objects/oBarracksBasic/oBarracksBasic.yy",},},
-    {"id":{"name":"AbilityButtonSchemes","path":"scripts/AbilityButtonSchemes/AbilityButtonSchemes.yy",},},
+    {"id":{"name":"ability_scheme_set","path":"scripts/ability_scheme_set/ability_scheme_set.yy",},},
     {"id":{"name":"InitializeDisplay","path":"scripts/InitializeDisplay/InitializeDisplay.yy",},},
     {"id":{"name":"s_mortarturret_idle","path":"sprites/s_mortarturret_idle/s_mortarturret_idle.yy",},},
     {"id":{"name":"shWhiteFlash","path":"shaders/shWhiteFlash/shWhiteFlash.yy",},},

@@ -159,6 +159,7 @@ function ConstructUnit(_x, _y, _faction, _type_string){
 			entity_type : _stats.entity_type,
 			attack_direction : 0,
 			creator : noone,
+			abilities : _stats.abilities,
 
 			// polymorphic components
 			blueprint : _blueprint_component, 

@@ -99,7 +99,7 @@ function room_start_init_player_stats(){
 	}
 }
 function room_start_init_abilities(){
-	ability_scheme_set_default();
+	ability_scheme_set();
 	for(var i=0;i<9;i++)
 	{
 		initial_player_abilities[i] = variable_clone(current_player_abilities[i]);

@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "AbilityButtonSchemes",
+  "name": "ability_scheme_set",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
