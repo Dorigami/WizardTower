@@ -284,7 +284,7 @@ Ability = function(_type="") constructor{
 		case "magic tower":	
 		    name = "Magic Tower";
 		    icon = sIconMagic;
-		    script = BuilderCreateBombDrone;
+		    script = BuilderCreateMagicTurret;
 		    args = [PLAYER_FACTION];
 		    title = "Basic Magic Tower";
 		    description = "Produces drones that fly into nearby enemies\nline 2\n line 3\nline 4\n line 5";

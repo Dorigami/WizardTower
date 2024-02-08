@@ -55,6 +55,7 @@ function BuilderCreateGunTurret(_faction) { BuilderCreate("gunturret", _faction)
 function BuilderCreateSniper(_faction) { BuilderCreate("sniperturret", _faction) }
 function BuilderCreateBarracks(_faction) { BuilderCreate("barracks", _faction) }
 function BuilderCreateBombDrone(_faction) { BuilderCreate("dronesilo", _faction) }
+function BuilderCreateMagicTurret(_faction) { BuilderCreate("magicturret", _faction) }
 function BuilderCreateFlameTurret(_faction) { BuilderCreate("flameturret", _faction) }
 function BuilderCreateMortarTurret(_faction) { BuilderCreate("mortarturret", _faction) }
 function ToggleEntityInfo(){

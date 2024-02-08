@@ -260,6 +260,7 @@
     {"name":"SellPuffParticles","order":34,"path":"scripts/SellPuffParticles/SellPuffParticles.yy",},
     {"name":"s_drone_move","order":2,"path":"sprites/s_drone_move/s_drone_move.yy",},
     {"name":"s_barracks_idle","order":1,"path":"sprites/s_barracks_idle/s_barracks_idle.yy",},
+    {"name":"SpecializationCreationScripts","order":4,"path":"scripts/SpecializationCreationScripts/SpecializationCreationScripts.yy",},
     {"name":"s_flameturret_death","order":3,"path":"sprites/s_flameturret_death/s_flameturret_death.yy",},
     {"name":"btnPlayerAction","order":3,"path":"objects/btnPlayerAction/btnPlayerAction.yy",},
     {"name":"sBtn64x32","order":2,"path":"sprites/sBtn64x32/sBtn64x32.yy",},

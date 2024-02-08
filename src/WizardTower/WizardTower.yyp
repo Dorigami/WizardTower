@@ -313,6 +313,7 @@
     {"id":{"name":"s_drone_move","path":"sprites/s_drone_move/s_drone_move.yy",},},
     {"id":{"name":"s_barracks_idle","path":"sprites/s_barracks_idle/s_barracks_idle.yy",},},
     {"id":{"name":"s_dronesilo_idle","path":"sprites/s_dronesilo_idle/s_dronesilo_idle.yy",},},
+    {"id":{"name":"SpecializationCreationScripts","path":"scripts/SpecializationCreationScripts/SpecializationCreationScripts.yy",},},
     {"id":{"name":"s_flameturret_death","path":"sprites/s_flameturret_death/s_flameturret_death.yy",},},
     {"id":{"name":"btnPlayerAction","path":"objects/btnPlayerAction/btnPlayerAction.yy",},},
     {"id":{"name":"sBtn64x32","path":"sprites/sBtn64x32/sBtn64x32.yy",},},
