@@ -173,6 +173,7 @@
     {"id":{"name":"oEnemyGoal","path":"objects/oEnemyGoal/oEnemyGoal.yy",},},
     {"id":{"name":"GPT Scenario","path":"notes/GPT Scenario/GPT Scenario.yy",},},
     {"id":{"name":"sTerrain","path":"sprites/sTerrain/sTerrain.yy",},},
+    {"id":{"name":"KillEntity","path":"scripts/KillEntity/KillEntity.yy",},},
     {"id":{"name":"s_barracks_death","path":"sprites/s_barracks_death/s_barracks_death.yy",},},
     {"id":{"name":"sTowerFrost1","path":"sprites/sTowerFrost1/sTowerFrost1.yy",},},
     {"id":{"name":"snd_empty","path":"sounds/snd_empty/snd_empty.yy",},},

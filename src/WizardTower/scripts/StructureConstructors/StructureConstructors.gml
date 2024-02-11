@@ -1,4 +1,4 @@
-function ConstructStructure(_x, _y, _faction, _type_string){
+function ConstructStructure(_x, _y, _faction, _type_string, _override_verify=false){
 	show_debug_message("Constructing STRUCTURE: x = {0} | y = {1} | faction = {2} | string = {3}", _x, _y, _faction, _type_string);
 	with(global.iEngine)
 	{
@@ -42,7 +42,7 @@ function ConstructStructure(_x, _y, _faction, _type_string){
 		// check arguments for validity
 		if(is_undefined(_stats)) { show_debug_message("ERROR: construct structure - type string invalid"); exit;}
 		if(is_undefined(_actor)) { show_debug_message("ERROR: construct structure - actor for faction {0} invalid", _faction); exit;}
-		if(VerifyBuildingArea(_x, _y) == false) { show_debug_message("ERROR: construct structure - one or more of the nodes are occupied"); exit;}
+		if(!_override_verify)&&(VerifyBuildingArea(_x, _y) == false) { show_debug_message("ERROR: construct structure - one or more of the nodes are occupied"); exit;}
 		
 		_fighter_component = new Fighter(_stats.hp, _stats.strength, _stats.defense, _stats.speed, _stats.range, _stats.tags, _stats.basic_attack, _stats.active_attack);
 		_structure_component = new Structure(_stats.supply_capacity, _x,_y);

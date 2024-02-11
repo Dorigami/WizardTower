@@ -255,8 +255,8 @@ Ability = function(_type="") constructor{
 		case "kinetic-minigun":	
 		    name = "Specialzation - Minigun";
 		    icon = sIconKineticMinigun;
-		    script = BuilderCreateGunTurret;
-		    args = [PLAYER_FACTION];
+		    script = SpecializationCreateMinigun;
+		    args = [];
 		    title = "Specialzation - Minigun";
 		    description = "Verstile, basic turret with moderate range.\nline 2\n line 3\nline 4\n line 5";
 		    values = {}; 
@@ -264,8 +264,8 @@ Ability = function(_type="") constructor{
 		case "kinetic-sniper":	
 		    name = "Specialzation - Sniper";
 		    icon = sIconKineticSniper;
-		    script = BuilderCreateSniper;
-		    args = [PLAYER_FACTION];
+		    script = SpecializationCreateSniper;
+		    args = [];
 		    title = "Specialzation - Sniper";
 		    description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
 		    values = {}; 
@@ -273,8 +273,8 @@ Ability = function(_type="") constructor{
 		case "kinetic-mortar":	
 		    name = "Specialzation - Mortar";
 		    icon = sIconKineticMortar;
-		    script = BuilderCreateMortarTurret;
-		    args = [PLAYER_FACTION];
+		    script = SpecializationCreateMortar;
+		    args = [];
 		    title = "Basic Mortar Turret";
 		    description = "Long range turret with area damage, but fires slowly\nline 2\n line 3\nline 4\n line 5";  
 		    values = {}; 

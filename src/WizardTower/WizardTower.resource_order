@@ -127,6 +127,7 @@
     {"name":"oEnemyGoal","order":1,"path":"objects/oEnemyGoal/oEnemyGoal.yy",},
     {"name":"GPT Scenario","order":2,"path":"notes/GPT Scenario/GPT Scenario.yy",},
     {"name":"sTerrain","order":28,"path":"sprites/sTerrain/sTerrain.yy",},
+    {"name":"KillEntity","order":44,"path":"scripts/KillEntity/KillEntity.yy",},
     {"name":"s_barracks_death","order":4,"path":"sprites/s_barracks_death/s_barracks_death.yy",},
     {"name":"sTowerFrost1","order":36,"path":"sprites/sTowerFrost1/sTowerFrost1.yy",},
     {"name":"snd_empty","order":36,"path":"sounds/snd_empty/snd_empty.yy",},
