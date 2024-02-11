@@ -261,14 +261,14 @@ Ability = function(_type="") constructor{
 		    description = "Verstile, basic turret with moderate range.\nline 2\n line 3\nline 4\n line 5";
 		    values = {}; 
 		    break;
-		case "kinetic-sniper":	
+		case "kinetic-sniper":
 		    name = "Specialzation - Sniper";
 		    icon = sIconKineticSniper;
 		    script = SpecializationCreateSniper;
 		    args = [];
 		    title = "Specialzation - Sniper";
 		    description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
-		    values = {}; 
+		    values = {};
 		    break;
 		case "kinetic-mortar":	
 		    name = "Specialzation - Mortar";
@@ -277,7 +277,7 @@ Ability = function(_type="") constructor{
 		    args = [];
 		    title = "Basic Mortar Turret";
 		    description = "Long range turret with area damage, but fires slowly\nline 2\n line 3\nline 4\n line 5";  
-		    values = {}; 
+		    values = {};
 		    break;
 
 		//magic
