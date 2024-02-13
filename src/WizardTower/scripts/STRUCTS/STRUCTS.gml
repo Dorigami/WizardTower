@@ -259,7 +259,7 @@ Ability = function(_type="") constructor{
 		    args = [];
 		    title = "Specialzation - Minigun";
 		    description = "Verstile, basic turret with moderate range.\nline 2\n line 3\nline 4\n line 5";
-		    values = {}; 
+		    values = {};
 		    break;
 		case "kinetic-sniper":
 		    name = "Specialzation - Sniper";
