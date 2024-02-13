@@ -1,5 +1,3 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function SpecializationCreateMinigun(){
 	 // the instance is needed in order to replace the existing tower with the specialized version
 	 var _inst = global.iEngine.player_actor.selected_entities[| 0];
@@ -11,13 +9,15 @@ function SpecializationCreateMinigun(){
 	 with(ConstructStructure(_inst.x,_inst.y,_inst.faction,"minigunturret",true))
 	 {
 		fighter.kill_count = _inst.fighter.kill_count;
+		global.iEngine.player_actor.selected_entities[| 0] = id;
+		with(oSelectionInspector){ inspect(other.id) }
 	 }
-	 instance_destroy(_inst);
+	 instance_destroy(_inst);	 
 }
-function SpecializationCreateSniper(_inst){
+function SpecializationCreateSniper(){
 
 }
-function SpecializationCreateMortar(_inst){
+function SpecializationCreateMortar(){
 
 }
 
