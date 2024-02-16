@@ -217,8 +217,8 @@ Ability = function(_type="") constructor{
 		case "barricade-spike wall":	
 		    name = "Specialzation - Spike Wall";
 		    icon = sIconBarricadeSpike;
-		    script = -1;
-		    args = [];
+		    script = ChangeEntitySpecialization;
+		    args = ["spikewall"];
 		    title = -1;
 		    description = -1;
 		    values = {}; 
@@ -226,8 +226,8 @@ Ability = function(_type="") constructor{
 		case "barricade-heal beacon":	
 		    name = "Specialzation - Heal Beacon";
 		    icon = sIconBarricadeHeal;
-		    script = -1;
-		    args = [];
+		    script = ChangeEntitySpecialization;
+		    args = ["healbeacon"];
 		    title = -1;
 		    description = -1;
 		    values = {}; 
@@ -235,8 +235,8 @@ Ability = function(_type="") constructor{
 		case "barricade-mine dispenser":	
 		    name = "Specialzation - Mine Layer";
 		    icon = sIconBarricadeMine;
-		    script = -1;
-		    args = [];
+		    script = ChangeEntitySpecialization;
+		    args = ["minelayer"];
 		    title = -1;
 		    description = -1;
 		    values = {}; 
@@ -255,8 +255,8 @@ Ability = function(_type="") constructor{
 		case "kinetic-minigun":	
 		    name = "Specialzation - Minigun";
 		    icon = sIconKineticMinigun;
-		    script = SpecializationCreateMinigun;
-		    args = [];
+		    script = ChangeEntitySpecialization;
+		    args = ["minigunturret"];
 		    title = "Specialzation - Minigun";
 		    description = "Verstile, basic turret with moderate range.\nline 2\n line 3\nline 4\n line 5";
 		    values = {};
@@ -264,8 +264,8 @@ Ability = function(_type="") constructor{
 		case "kinetic-sniper":
 		    name = "Specialzation - Sniper";
 		    icon = sIconKineticSniper;
-		    script = SpecializationCreateSniper;
-		    args = [];
+		    script = ChangeEntitySpecialization;
+		    args = ["sniperturret"];
 		    title = "Specialzation - Sniper";
 		    description = "Build this to avoid losing\nline 2\n line 3\nline 4\n line 5";
 		    values = {};
@@ -273,8 +273,8 @@ Ability = function(_type="") constructor{
 		case "kinetic-mortar":	
 		    name = "Specialzation - Mortar";
 		    icon = sIconKineticMortar;
-		    script = SpecializationCreateMortar;
-		    args = [];
+		    script = ChangeEntitySpecialization;
+		    args = ["mortarturret"];
 		    title = "Basic Mortar Turret";
 		    description = "Long range turret with area damage, but fires slowly\nline 2\n line 3\nline 4\n line 5";  
 		    values = {};
@@ -293,8 +293,8 @@ Ability = function(_type="") constructor{
 		case "magic-fire emitter":
 		    name = "Specialization - Fire Emitter";
 		    icon = sIconMagicFire;
-		    script = BuilderCreateFlameTurret;
-		    args = [PLAYER_FACTION];
+		    script = ChangeEntitySpecialization;
+		    args = ["flameturret"];
 		    title = "Specialization - Fire Emitter";
 		    description = "Deals constant damage to nearby enemies."; 
 		    values = {}; 
@@ -302,8 +302,8 @@ Ability = function(_type="") constructor{
 		case "magic-ice impaler":
 		    name = "Specialization - Ice Spear";
 		    icon = sIconMagicIce;
-		    script = BuilderCreateBarracks;
-		    args = [PLAYER_FACTION];
+		    script = ChangeEntitySpecialization;
+		    args = ["iceturret"];
 		    title = "Specialization - Ice Spear";
 		    description = "This will produce a barracks instead of an ice tower";
 		    values = {}; 
@@ -311,8 +311,8 @@ Ability = function(_type="") constructor{
 		case "magic-lightning striker":
 		    name = "Specialzation - Lighting Strike";
 		    icon = sIconMagicLightning;
-		    script = BuilderCreateBarracks;
-		    args = [PLAYER_FACTION];
+		    script = ChangeEntitySpecialization;
+		    args = ["lightningturret"];
 		    title = "Specialization - Lightning Strike";
 		    description = "This will produce a barracks instead of an lightning tower";
 		    values = {}; 

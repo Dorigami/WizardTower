@@ -7,7 +7,6 @@ if(gui)
 	// do nothing
 }
 current_ability = global.iEngine.current_player_abilities[action_index];
-if(current_ability.name == "null") enabled = false;
 
 if(!enabled)
 {
@@ -21,26 +20,19 @@ if(!enabled)
 		press = false;
 		textColor = baseColor;
 	} else {
-		if(focus)
+		// animate button
+		press = mouse_check_button(mb_any); 
+
+		// register clicks
+		if(mouse_check_button_released(mb_left)) 
 		{
-			// animate button
-			if(mouse_check_button(mb_any)) 
-			{
-				press = true;
-			} else {
-				press = false;
-			}
-			// register clicks
-			if(mouse_check_button_released(mb_left)) 
-			{
-				press = false;
-				leftClick = true;
-			}
-			if(mouse_check_button_released(mb_right)) 
-			{
-				press = false;
-				rightClick = true;
-			}
+			press = false;
+			leftClick = true;
+		}
+		if(mouse_check_button_released(mb_right)) 
+		{
+			press = false;
+			rightClick = true;
 		}
 		textColor = highlightColor;
 		image_index = 1;

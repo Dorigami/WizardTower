@@ -1,7 +1,7 @@
-function script_execute_array(_scr, _args=-1){
-	if(_args == -1) {script_execute(_scr); exit;}
-	switch(array_length_1d(_args))
+function script_execute_array(_scr, _args=[]){
+	switch(array_length(_args))
 	{
+		case 0: return script_execute(_scr);
 		case 1: return script_execute(_scr, _args[0]);
 		case 2: return script_execute(_scr, _args[0],_args[1]);
 		case 3: return script_execute(_scr, _args[0],_args[1],_args[2]);

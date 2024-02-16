@@ -334,7 +334,7 @@ if(global.game_state != GameStates.PAUSE)
 		if(!is_undefined(blueprint)) blueprint.Update();
 
 		// update fighters (this mainly handles attack cooldowns)
-		if(!is_undefined(fighter)) fighter.Update();
+		if(!is_undefined(fighter)) && (global.game_state != GameStates.VICTORY) fighter.Update();
 
 		// update structures (this mainly handles unit build queues)
 		if(!is_undefined(structure)) structure.Update();

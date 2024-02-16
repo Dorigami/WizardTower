@@ -4,7 +4,11 @@
 mouse_hex_coord = pixel_to_hex([2, mouse_x, mouse_y]);
 mouse_hex_pos = hex_to_pixel(mouse_hex_coord, true);
 mouse_hex_index = hex_get_index(mouse_hex_coord);
-
+if(mouse_hex_index != -1)
+{
+	mouse_hex_last_valid_pos = mouse_hex_pos;
+	mouse_hex_last_valid_coord = mouse_hex_coord;
+}
 if(keyboard_check_pressed(vk_alt))
 {
 	instance_create_depth(0,0,depth-1,o_hex_grid_wire_display)

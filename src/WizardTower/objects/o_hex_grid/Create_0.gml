@@ -28,28 +28,6 @@ function axial_neighbor(hex_vect, dir_index){
 	return vect_add(hex_vect, axial_direction_vectors[dir_index]);
 }
 
-//--// distances
-function axial_distance(v0, v1){
-	return (
-		abs(v0[1]-v1[1])
-		+ abs(v0[1]+v0[2] - v1[1]-v1[2])
-		+ abs(v0[2]-v1[2])
-	) / 2;
-}
-function axial_linedraw(p0, p1){
-	// return an array of floating point values, representing points along the line.
-	// p0 & p1 vector2 for the start and end positions respectively
-	var n = axial_distance(p0, p1);
-	var arr = array_create(n+1, 0);
-	var cube0 = axial_to_cube(p0);
-	var cube1 = axial_to_cube(p1);
-	for(var i=0;i<=n;i++)
-	{
-		arr[i] = cube_to_axial(cube_round(cube_lerp(cube0, cube1, i/n)));
-	}
-	return arr;
-}
-
 //--// rounding to nearest hex
 function cube_round(vect){
 	var q = round(vect[1]);

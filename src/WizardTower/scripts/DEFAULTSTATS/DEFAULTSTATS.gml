@@ -215,7 +215,7 @@ FighterStats = function() constructor{
 		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
 	        name : "Minigun Shot",
-	        cooldown : 0.75,       // delay, in seconds, between attacks
+	        cooldown : 0.35,       // delay, in seconds, between attacks
 	        move_penalty : 0.8, // move speed reduced during attack
 	        duration : 0.5,     // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10,  // damage is dealt after this step count
@@ -371,7 +371,7 @@ FighterStats = function() constructor{
 	    speed : 0,
 	    range : 1,
 		abilities : ["level up","","",
-		             "magic-fire emitter","magic-ice impaler","magic-lightning striker",
+		             "","","",
 					 "","","sell_this_tower"], 
 	    tags : [],
 	    obj : oFlameTurret,
@@ -495,6 +495,7 @@ FighterStats = function() constructor{
         defense : 1,
         speed : 1,
         range : 0,
+		abilities : ["","","","","","","","",""], // there are no abilities
         tags : [],
         size : [1,1], // [width , height]
         obj : oSkeleton,
@@ -533,6 +534,7 @@ FighterStats = function() constructor{
         defense : 1,
         speed : 1,
         range : 0,
+		abilities : ["","","","","","","","",""], // there are no abilities
         tags : [],
         size : [1,1], // [width , height]
         obj : oMarcher,
@@ -571,6 +573,7 @@ FighterStats = function() constructor{
         defense : 1,
         speed : 1,
         range : 0,
+		abilities : ["","","","","","","","",""], // there are no abilities
         tags : [],
         size : [1,1], // [width , height]
         obj : oSwarmer,
@@ -609,6 +612,7 @@ FighterStats = function() constructor{
         defense : 1,
         speed : 1,
         range : 0,
+		abilities : ["","","","","","","","",""], // there are no abilities
         tags : [],
         size : [1,1], // [width , height]
         obj : oBuildingKiller,
@@ -647,6 +651,7 @@ FighterStats = function() constructor{
         defense : 1,
         speed : 1,
         range : 0,
+		abilities : ["","","","","","","","",""], // there are no abilities
         tags : [],
         size : [1,1], // [width , height]
         obj : oUnitKiller,
@@ -685,6 +690,7 @@ FighterStats = function() constructor{
         defense : 1,
         speed : 1,
         range : 0,
+		abilities : ["","","","","","","","",""], // there are no abilities
         tags : [],
         size : [1,1], // [width , height]
         obj : oGoliath,
