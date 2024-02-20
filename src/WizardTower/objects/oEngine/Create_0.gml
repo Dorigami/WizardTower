@@ -84,6 +84,7 @@ ParticleSystemsInit();
 SellPuffInit();
 StructureSpawnPuffInit();
 
+
 // fill the unit vector array with unit vectors for each context steering directions
 for(var i=0; i<CS_RESOLUTION; i++){
     cs_unit_vectors[i] = speed_dir_to_vect2(1, i*(360 div CS_RESOLUTION));
