@@ -81,9 +81,6 @@ current_player_abilities = array_create(9, undefined);
 zoom_delay_time = 10;
 sell_price = 0;
 ParticleSystemsInit();
-SellPuffInit();
-StructureSpawnPuffInit();
-
 
 // fill the unit vector array with unit vectors for each context steering directions
 for(var i=0; i<CS_RESOLUTION; i++){

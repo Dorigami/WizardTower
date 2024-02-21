@@ -1,4 +1,4 @@
-function ConstructStructure(_x, _y, _faction, _type_string, _override_verify=false){
+function ConstructStructure(_x, _y, _faction, _type_string, _override_verify=false, _override_effect=false){
 	show_debug_message("Constructing STRUCTURE: x = {0} | y = {1} | faction = {2} | string = {3}", _x, _y, _faction, _type_string);
 	with(global.iEngine)
 	{
@@ -159,7 +159,7 @@ function ConstructStructure(_x, _y, _faction, _type_string, _override_verify=fal
 		CheckNodeChange(_structure);
 
 		// create particle effect on structure
-		StructureSpawnPuffCreate(_pos[1], _pos[2])
+		if(!_override_effect) StructureSpawnPuffCreate(_pos[1], _pos[2]);
 		
 		// set owner for each component
 		if(!is_undefined(_bunker_component)) _bunker_component.owner = _structure;

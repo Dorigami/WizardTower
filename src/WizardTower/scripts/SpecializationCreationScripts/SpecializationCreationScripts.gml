@@ -12,6 +12,9 @@ function ChangeEntitySpecialization(_type){
 		with(oSelectionInspector){ inspect(other.id) }
 	 }
 	 
+	 // visual effect for upgrading
+	 UpgradeEffectCreate(_inst.x,_inst.y);
+	 
 	 // remove old entity
 	 instance_destroy(_inst); 
 }

@@ -3,6 +3,10 @@ function ParticleSystemsInit(){
 	ptsys_structure_spawn_puff = 0;
 	ptsys_upgrade_effect = 0;
 	ptsys_specialization_effect = 0;
+	
+	SellPuffInit();
+	StructureSpawnPuffInit();
+	UpgradeEffectInit();
 }
 function SellPuffInit(){
 	with(global.iEngine)
@@ -69,6 +73,11 @@ function UpgradeEffectInit(){
 function UpgradeEffectCreate(_x,_y){
 	with(global.iEngine)
 	{
-		part_particles_create(ptsys_upgrade_effect,_x,_y,pt_upgrade_effect,20);
+		var _sep = 3;
+		var _wid = 20;
+		var _hgt = 20;
+		repeat(10){
+			part_particles_create(ptsys_upgrade_effect, _x+_sep*random_range(-_wid,_wid), _y+_sep*random_range(-_hgt,_hgt), pt_upgrade_effect, 1);
+		}
 	}
 }
