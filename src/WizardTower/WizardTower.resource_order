@@ -338,6 +338,7 @@
     {"name":"s_unitkiller_attack","order":16,"path":"sprites/s_unitkiller_attack/s_unitkiller_attack.yy",},
     {"name":"oDroneSilo","order":4,"path":"objects/oDroneSilo/oDroneSilo.yy",},
     {"name":"s_swarmer_death","order":13,"path":"sprites/s_swarmer_death/s_swarmer_death.yy",},
+    {"name":"o_hex_grid_line_visualizer","order":32,"path":"objects/o_hex_grid_line_visualizer/o_hex_grid_line_visualizer.yy",},
     {"name":"Pixel_6","order":7,"path":"sounds/Pixel_6/Pixel_6.yy",},
     {"name":"ParticleSystem2","order":3,"path":"particles/ParticleSystem2/ParticleSystem2.yy",},
     {"name":"sTowerSpotter1Top","order":25,"path":"sprites/sTowerSpotter1Top/sTowerSpotter1Top.yy",},

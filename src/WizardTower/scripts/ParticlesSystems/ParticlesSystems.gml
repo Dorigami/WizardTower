@@ -62,8 +62,8 @@ function UpgradeEffectInit(){
 		pt_upgrade_effect = part_type_create();
 		part_type_scale(pt_upgrade_effect,0.03,1.2);
 		part_type_shape(pt_upgrade_effect, pt_shape_square);
-		part_type_speed(pt_upgrade_effect,0.1,1.4,0.605,0);
-		part_type_size(pt_upgrade_effect,0.4,0.5,0.12,0.1);
+		part_type_speed(pt_upgrade_effect,0.1,1.4,0.205,0);
+		part_type_size(pt_upgrade_effect,0.1,0.3,0.05,0);
 		part_type_color3(pt_upgrade_effect,color3,color4,color5);
 		part_type_direction(pt_upgrade_effect,90,90,0,0);
 		part_type_life(pt_upgrade_effect,20,30);
@@ -73,10 +73,10 @@ function UpgradeEffectInit(){
 function UpgradeEffectCreate(_x,_y){
 	with(global.iEngine)
 	{
-		var _sep = 3;
-		var _wid = 20;
-		var _hgt = 20;
-		repeat(10){
+		var _sep = 4;
+		var _wid = 4;
+		var _hgt = 4;
+		repeat(8){
 			part_particles_create(ptsys_upgrade_effect, _x+_sep*random_range(-_wid,_wid), _y+_sep*random_range(-_hgt,_hgt), pt_upgrade_effect, 1);
 		}
 	}

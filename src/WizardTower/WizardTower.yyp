@@ -389,6 +389,7 @@
     {"id":{"name":"s_unitkiller_attack","path":"sprites/s_unitkiller_attack/s_unitkiller_attack.yy",},},
     {"id":{"name":"oDroneSilo","path":"objects/oDroneSilo/oDroneSilo.yy",},},
     {"id":{"name":"s_swarmer_death","path":"sprites/s_swarmer_death/s_swarmer_death.yy",},},
+    {"id":{"name":"o_hex_grid_line_visualizer","path":"objects/o_hex_grid_line_visualizer/o_hex_grid_line_visualizer.yy",},},
     {"id":{"name":"Pixel_6","path":"sounds/Pixel_6/Pixel_6.yy",},},
     {"id":{"name":"ParticleSystem2","path":"particles/ParticleSystem2/ParticleSystem2.yy",},},
     {"id":{"name":"sTowerSpotter1Top","path":"sprites/sTowerSpotter1Top/sTowerSpotter1Top.yy",},},

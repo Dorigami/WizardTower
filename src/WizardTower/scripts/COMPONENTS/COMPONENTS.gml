@@ -830,8 +830,8 @@ MortarTurretAI = function() constructor{
 			// resolve fighter behavior
 			with(owner.fighter)
 			{	
-				// activate attack to spawn a unit
-				if(attack_index == -1) && (basic_cooldown_timer <= 0)
+				// activate attack, only when enemies are spawned in
+				if(attack_index == -1) && (basic_cooldown_timer <= 0) && (ds_list_size(global.iEngine.enemy_actor.units) > 0)
 				{
 					owner.attack_direction = point_direction(owner.position[1], owner.position[2], owner.structure.rally_x, owner.structure.rally_y);
 					UseBasic();

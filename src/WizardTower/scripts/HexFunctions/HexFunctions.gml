@@ -135,6 +135,14 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 		
 		// initialize the node heap for pathfinding using the hex grid
 		other.game_grid_heap.Initialize(hexarr_hexes);
+	
+		// create the line visualizer
+		var _struct = {
+			line_arr : [],
+			position : hexarr_positions[0],
+			mouse_pos : vect2(mouse_x,mouse_y)
+		}
+		instance_create_depth(_struct.position[1], _struct.position[2], depth, o_hex_grid_line_visualizer, _struct);
 	}
 	
 	// load in the default map
@@ -208,12 +216,16 @@ function axial_linedraw(p0, p1){
 	// p0 & p1 vector2 for the start and end positions respectively
 	var n = axial_distance(p0, p1);
 	var arr = array_create(n+1, 0);
-	var cube0 = axial_to_cube(p0);
-	var cube1 = axial_to_cube(p1);
-	for(var i=0;i<=n;i++)
+	with(o_hex_grid)
 	{
-		arr[i] = cube_to_axial(cube_round(cube_lerp(cube0, cube1, i/n)));
+		var cube0 = axial_to_cube(p0);
+		var cube1 = axial_to_cube(p1);
+		for(var i=0;i<=n;i++)
+		{
+			arr[i] = cube_to_axial(cube_round(cube_lerp(cube0, cube1, i/n)));
+		}
 	}
 	show_debug_message("");
 	return arr;
 }
+

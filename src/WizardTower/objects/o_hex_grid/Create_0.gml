@@ -28,6 +28,48 @@ function axial_neighbor(hex_vect, dir_index){
 	return vect_add(hex_vect, axial_direction_vectors[dir_index]);
 }
 
+//--// misc conversion functions
+function hex_to_pixel(hex, _absolute=false){
+	with(o_hex_grid)
+	{
+		if(hex_type == POINTYTOP)
+		{
+			return vect2(x*_absolute + (hex_size*(sqrt(3)*hex[1] + sqrt(3)*hex[2]/2)),
+						 y*_absolute + (hex_size*(3*hex[2]/2)));
+		} else {
+			return vect2(x*_absolute + (hex_size*(3*hex[1]/2)),
+						 y*_absolute + (hex_size*(sqrt(3)*hex[1]/2 + sqrt(3)*hex[2])));
+		}
+	}
+}
+function pixel_to_hex(point){
+	with(o_hex_grid)
+	{
+		var dx = point[1] - x;
+		var dy = point[2] - y;
+		if(hex_type == POINTYTOP)
+		{
+			var v = vect2((sqrt(3)/3*dx - dy/3)/hex_size,
+						 (2*dy)/(3*hex_size));
+		} else {
+			var v = vect2((2*dx) / (hex_size*3),
+						 (-dx/3 + sqrt(3)*dy/3) / hex_size);
+		}
+		return axial_round(v);
+	}
+}
+function cube_to_axial(cube_vect){
+	var q = cube_vect[1];
+	var r = cube_vect[2];
+	return vect2(q, r);
+}
+function axial_to_cube(hex_vect){
+	var q = hex_vect[1];
+	var r = hex_vect[2];
+	var s = -q-r;
+	return vect3(q, r, s);
+}
+
 //--// rounding to nearest hex
 function cube_round(vect){
 	var q = round(vect[1]);
@@ -55,6 +97,7 @@ function cube_lerp(v0, v1, t){
 				 lerp(v0[2], v1[2], t),
 				 lerp(v0[3], v1[3], t));
 }
+
 
 //--// movement range
 function hex_in_radius(vect, rad){
@@ -89,42 +132,6 @@ function hex_in_intersection(vec0, rad0, vec1, rad1){
 		}
 	}
 	return array_length(arr) == 0 ? -1 : arr;
-}
-
-//--// misc conversion functions
-function hex_to_pixel(hex, _absolute=false){
-	if(hex_type == POINTYTOP)
-	{
-		return vect2(x*_absolute + (hex_size*(sqrt(3)*hex[1] + sqrt(3)*hex[2]/2)),
-					 y*_absolute + (hex_size*(3*hex[2]/2)));
-	} else {
-		return vect2(x*_absolute + (hex_size*(3*hex[1]/2)),
-					 y*_absolute + (hex_size*(sqrt(3)*hex[1]/2 + sqrt(3)*hex[2])));
-	}
-}
-function pixel_to_hex(point){
-	var dx = point[1] - x;
-	var dy = point[2] - y;
-	if(hex_type == POINTYTOP)
-	{
-		var v = vect2((sqrt(3)/3*dx - dy/3)/hex_size,
-					 (2*dy)/(3*hex_size));
-	} else {
-		var v = vect2((2*dx) / (hex_size*3),
-					 (-dx/3 + sqrt(3)*dy/3) / hex_size);
-	}
-	return axial_round(v);
-}
-function cube_to_axial(cube_vect){
-	var q = cube_vect[1];
-	var r = cube_vect[2];
-	return vect2(q, r);
-}
-function axial_to_cube(hex_vect){
-	var q = hex_vect[1];
-	var r = hex_vect[2];
-	var s = -q-r;
-	return vect3(q, r, s);
 }
 
 //--// extra functionality, for specific game purpose
