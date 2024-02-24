@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
-  "name": "s_dronesilo_move",
+  "name": "s_magicturret_move",
   "bbox_bottom": 27,
   "bbox_left": 2,
   "bbox_right": 29,
@@ -28,14 +28,14 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "DroneSilo",
-    "path": "folders/Sprites/Entity Sprites/DroneSilo.yy",
+    "name": "MagicTurret",
+    "path": "folders/Sprites/Entity Sprites/MagicTurret.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",
-    "name": "s_dronesilo_move",
+    "name": "s_magicturret_move",
     "autoRecord": true,
     "backdropHeight": 768,
     "backdropImageOpacity": 0.5,
@@ -57,10 +57,10 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a2508d00-e81d-4360-beff-4413faf06b77","path":"sprites/s_dronesilo_move/s_dronesilo_move.yy",},},},"Disabled":false,"id":"69b9b12e-bd92-40a8-b425-ea9e9902c373","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"eff01dea-c951-4af8-a19d-e56aa210046f","path":"sprites/s_dronesilo_move/s_dronesilo_move.yy",},},},"Disabled":false,"id":"cd3e4500-c7b1-4d43-9dea-f45c54d33df1","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a6a10828-38e1-41e8-9b2c-b1438ae6003f","path":"sprites/s_dronesilo_move/s_dronesilo_move.yy",},},},"Disabled":false,"id":"18155a01-11e0-4fe1-835a-b419694394c4","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ac225c02-e0cd-46ef-8d38-84f7a43e9fd5","path":"sprites/s_dronesilo_move/s_dronesilo_move.yy",},},},"Disabled":false,"id":"fc9c2a7d-d1a2-4766-92b3-6520e3a3f8b0","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a2508d00-e81d-4360-beff-4413faf06b77","path":"sprites/s_magicturret_move/s_magicturret_move.yy",},},},"Disabled":false,"id":"69b9b12e-bd92-40a8-b425-ea9e9902c373","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"eff01dea-c951-4af8-a19d-e56aa210046f","path":"sprites/s_magicturret_move/s_magicturret_move.yy",},},},"Disabled":false,"id":"cd3e4500-c7b1-4d43-9dea-f45c54d33df1","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a6a10828-38e1-41e8-9b2c-b1438ae6003f","path":"sprites/s_magicturret_move/s_magicturret_move.yy",},},},"Disabled":false,"id":"18155a01-11e0-4fe1-835a-b419694394c4","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ac225c02-e0cd-46ef-8d38-84f7a43e9fd5","path":"sprites/s_magicturret_move/s_magicturret_move.yy",},},},"Disabled":false,"id":"fc9c2a7d-d1a2-4766-92b3-6520e3a3f8b0","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

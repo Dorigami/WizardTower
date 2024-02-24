@@ -811,17 +811,11 @@ MortarTurretAI = function() constructor{
 			{
 				ds_list_delete(commands, 0);
 				// set rally point
-				var _limit = owner.fighter.range*GRID_SIZE;
-				var _len = point_distance(owner.position[1], owner.position[2], _cmd.x, _cmd.y)
-				if(_len > _limit)
-				{
-					var _dir = point_direction(owner.position[1], owner.position[2], _cmd.x, _cmd.y);
-					owner.structure.rally_x = owner.position[1] + lengthdir_x(_limit,_dir);
-					owner.structure.rally_y = owner.position[2] + lengthdir_y(_limit, _dir);
-				} else {
-					owner.structure.rally_x = _cmd.x;
-					owner.structure.rally_y = _cmd.y;
-				}
+				var _hex_line = get_hexes_in_line(owner.position, vect2(_cmd.x,_cmd.y))
+				var _hex = _hex_line[min(array_length(_hex_line)-1, owner.fighter.range)];
+				var _pos = hex_to_pixel(_hex, true);
+				owner.structure.rally_x = _pos[1];
+				owner.structure.rally_y = _pos[2];
 			}
 		} 
 		// if there is no command, check if entity is a fighter and get first enemy in range
@@ -849,7 +843,7 @@ MortarTurretAI = function() constructor{
 		ds_list_destroy(commands);
 	}
 }
-DroneSiloAI = function() constructor{
+MagicTurretAI = function() constructor{
     commands = ds_list_create();
 	owner = undefined;
 	static Update = function(){

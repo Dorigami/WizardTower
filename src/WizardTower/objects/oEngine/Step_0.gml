@@ -164,29 +164,6 @@ if(!is_undefined(start_next_wave))
 	}
 }
 
-if(!is_undefined(change_build_type))
-{
-	show_debug_message("change build type");
-	if(instance_exists(blueprint_instance))
-	{
-		with(blueprint_instance)
-		{
-			if(other.change_build_type.value < array_length(type_arr))
-			{
-				show_debug_message("value: {0}  is inside the range of available options: [{1}] {2}", other.change_build_type.value, array_length(type_arr), type_arr);
-				var _stats = global.iEngine.actor_list[| PLAYER_FACTION].fighter_stats[$ type_arr[other.change_build_type.value]]
-				type_string = type_arr[other.change_build_type.value];
-				object = _stats.obj;
-				size = _stats.size;
-        		sprite_index = object_get_sprite(_stats.obj);
-				mask_index = object_get_sprite(_stats.obj);
-			} else {
-				show_debug_message("value: {0}  is ouside of the size of available options: [{1}] {2}", other.change_build_type.value, array_length(type_arr), type_arr);
-			}
-		}
-	}
-}
-
 if(!is_undefined(confirm_build_action)) || (!is_undefined(confirm_build_action_mouse))
 {
 	show_debug_message("Confirm Build Action");

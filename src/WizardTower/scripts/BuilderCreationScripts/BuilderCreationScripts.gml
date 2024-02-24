@@ -10,7 +10,6 @@ function BuilderCreate(_type_string, _faction){
 			blueprint_instance = noone;
 		}
 
-		var _type_arr = ["barricade","gunturret","sniperturret","barracks","dronesilo","flameturret","mortarturret"];
 		var _gridlock = true;
 		
 		// clear unit selection
@@ -39,8 +38,7 @@ function BuilderCreate(_type_string, _faction){
 			collision_radius : round(0.6*GRID_SIZE),
 			sprite_index : asset_get_index("s_"+_type_string+"_idle"),
 			mask_index : asset_get_index("s_"+_type_string+"_idle"),
-			faction : _faction,
-			type_arr : _type_arr}
+			faction : _faction}
 		blueprint_instance = instance_create_layer(_pos[1], _pos[2], "Instances", oBlueprint, _struct);
 		show_debug_message("blueprint's type string is: {0}", blueprint_instance.type_string);
 	}

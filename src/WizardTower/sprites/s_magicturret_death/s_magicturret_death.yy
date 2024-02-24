@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
-  "name": "s_dronesilo_death",
+  "name": "s_magicturret_death",
   "bbox_bottom": 27,
   "bbox_left": 2,
   "bbox_right": 29,
@@ -28,14 +28,14 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "DroneSilo",
-    "path": "folders/Sprites/Entity Sprites/DroneSilo.yy",
+    "name": "MagicTurret",
+    "path": "folders/Sprites/Entity Sprites/MagicTurret.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",
-    "name": "s_dronesilo_death",
+    "name": "s_magicturret_death",
     "autoRecord": true,
     "backdropHeight": 768,
     "backdropImageOpacity": 0.5,
@@ -57,10 +57,10 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a91958c0-85f9-4e5c-98c5-c12118aa4e68","path":"sprites/s_dronesilo_death/s_dronesilo_death.yy",},},},"Disabled":false,"id":"0f9c4aa2-7ce2-49eb-8313-8338d61f4009","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"cd5842b6-28f8-4716-8cd8-77d5e4028cd3","path":"sprites/s_dronesilo_death/s_dronesilo_death.yy",},},},"Disabled":false,"id":"e2907940-cf03-4f60-acc1-5b391d8d6f43","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"c2361039-848b-4b5a-a137-c4bf111883bb","path":"sprites/s_dronesilo_death/s_dronesilo_death.yy",},},},"Disabled":false,"id":"39d72f6b-1a77-4f84-9093-d1bdf739e856","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"822b3960-8643-4872-986f-eff6a7fc5e74","path":"sprites/s_dronesilo_death/s_dronesilo_death.yy",},},},"Disabled":false,"id":"83855c3e-e917-492f-859a-f4a133601363","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a91958c0-85f9-4e5c-98c5-c12118aa4e68","path":"sprites/s_magicturret_death/s_magicturret_death.yy",},},},"Disabled":false,"id":"0f9c4aa2-7ce2-49eb-8313-8338d61f4009","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"cd5842b6-28f8-4716-8cd8-77d5e4028cd3","path":"sprites/s_magicturret_death/s_magicturret_death.yy",},},},"Disabled":false,"id":"e2907940-cf03-4f60-acc1-5b391d8d6f43","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"c2361039-848b-4b5a-a137-c4bf111883bb","path":"sprites/s_magicturret_death/s_magicturret_death.yy",},},},"Disabled":false,"id":"39d72f6b-1a77-4f84-9093-d1bdf739e856","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"822b3960-8643-4872-986f-eff6a7fc5e74","path":"sprites/s_magicturret_death/s_magicturret_death.yy",},},},"Disabled":false,"id":"83855c3e-e917-492f-859a-f4a133601363","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

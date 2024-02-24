@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
-  "name": "s_dronesilo_idle",
+  "name": "s_magicturret_idle",
   "bbox_bottom": 27,
   "bbox_left": 2,
   "bbox_right": 29,
@@ -28,14 +28,14 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "DroneSilo",
-    "path": "folders/Sprites/Entity Sprites/DroneSilo.yy",
+    "name": "MagicTurret",
+    "path": "folders/Sprites/Entity Sprites/MagicTurret.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",
-    "name": "s_dronesilo_idle",
+    "name": "s_magicturret_idle",
     "autoRecord": true,
     "backdropHeight": 768,
     "backdropImageOpacity": 0.5,
@@ -57,10 +57,10 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"f99425f9-99e4-4fc7-a3d7-badedf72bdd6","path":"sprites/s_dronesilo_idle/s_dronesilo_idle.yy",},},},"Disabled":false,"id":"e5d30689-e1a6-4dcf-a67e-5be7f8a3d02c","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"c417ed08-4342-4115-abc0-62743c3543a7","path":"sprites/s_dronesilo_idle/s_dronesilo_idle.yy",},},},"Disabled":false,"id":"d4419527-8268-483f-a8d6-c1bc202200b7","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"302b9a8c-5c9f-49e6-9951-bd9392c1f128","path":"sprites/s_dronesilo_idle/s_dronesilo_idle.yy",},},},"Disabled":false,"id":"420ce24d-20ae-4f5a-90ed-4528c64689ce","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"cf295432-83ac-49be-b8fc-bcb5d788df23","path":"sprites/s_dronesilo_idle/s_dronesilo_idle.yy",},},},"Disabled":false,"id":"6c12e83f-31f8-465e-9d05-cc0a1c82087b","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"f99425f9-99e4-4fc7-a3d7-badedf72bdd6","path":"sprites/s_magicturret_idle/s_magicturret_idle.yy",},},},"Disabled":false,"id":"e5d30689-e1a6-4dcf-a67e-5be7f8a3d02c","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"c417ed08-4342-4115-abc0-62743c3543a7","path":"sprites/s_magicturret_idle/s_magicturret_idle.yy",},},},"Disabled":false,"id":"d4419527-8268-483f-a8d6-c1bc202200b7","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"302b9a8c-5c9f-49e6-9951-bd9392c1f128","path":"sprites/s_magicturret_idle/s_magicturret_idle.yy",},},},"Disabled":false,"id":"420ce24d-20ae-4f5a-90ed-4528c64689ce","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"cf295432-83ac-49be-b8fc-bcb5d788df23","path":"sprites/s_magicturret_idle/s_magicturret_idle.yy",},},},"Disabled":false,"id":"6c12e83f-31f8-465e-9d05-cc0a1c82087b","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

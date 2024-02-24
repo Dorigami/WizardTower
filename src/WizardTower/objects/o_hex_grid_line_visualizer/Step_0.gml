@@ -7,7 +7,7 @@ mouse_pos[2] = mouse_y;
 // convert hex indexes to position vectors
 with(global.i_hex_grid)
 {
-	var _line = axial_linedraw(pixel_to_hex(other.position), pixel_to_hex(other.mouse_pos));
+	var _line = get_hexes_in_line(other.position, other.mouse_pos);
 	array_resize(other.line_arr,array_length(_line));
 	
 	for(var i=0; i<array_length(_line); i++)

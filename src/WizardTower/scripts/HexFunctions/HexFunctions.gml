@@ -136,13 +136,9 @@ function InitHexagonalGrid(_tile_type, _offset_type, _size, _ox, _oy, _max_width
 		// initialize the node heap for pathfinding using the hex grid
 		other.game_grid_heap.Initialize(hexarr_hexes);
 	
-		// create the line visualizer
-		var _struct = {
-			line_arr : [],
-			position : hexarr_positions[0],
-			mouse_pos : vect2(mouse_x,mouse_y)
-		}
-		instance_create_depth(_struct.position[1], _struct.position[2], depth, o_hex_grid_line_visualizer, _struct);
+		//// create the line visualizer
+		//var _struct = { line_arr : [], position : hexarr_positions[0], mouse_pos : vect2(mouse_x,mouse_y) }
+		//instance_create_depth(_struct.position[1], _struct.position[2], depth, o_hex_grid_line_visualizer, _struct);
 	}
 	
 	// load in the default map
@@ -211,15 +207,47 @@ function axial_distance(v0, v1){
 		+ abs(v0[2]-v1[2])
 	) / 2;
 }
-function axial_linedraw(p0, p1){
-	// return an array of floating point values, representing points along the line.
-	// p0 & p1 vector2 for the start and end positions respectively
-	var n = axial_distance(p0, p1);
+//--// misc conversion functions
+function hex_to_pixel(hex, _absolute=false){
+	with(o_hex_grid)
+	{
+		if(hex_type == POINTYTOP)
+		{
+			return vect2(x*_absolute + (hex_size*(sqrt(3)*hex[1] + sqrt(3)*hex[2]/2)),
+						 y*_absolute + (hex_size*(3*hex[2]/2)));
+		} else {
+			return vect2(x*_absolute + (hex_size*(3*hex[1]/2)),
+						 y*_absolute + (hex_size*(sqrt(3)*hex[1]/2 + sqrt(3)*hex[2])));
+		}
+	}
+}
+function pixel_to_hex(point){
+	with(o_hex_grid)
+	{
+		var dx = point[1] - x;
+		var dy = point[2] - y;
+		if(hex_type == POINTYTOP)
+		{
+			var v = vect2((sqrt(3)/3*dx - dy/3)/hex_size,
+						 (2*dy)/(3*hex_size));
+		} else {
+			var v = vect2((2*dx) / (hex_size*3),
+						 (-dx/3 + sqrt(3)*dy/3) / hex_size);
+		}
+		return axial_round(v);
+	}
+}
+function get_hexes_in_line(p0, p1){
+	// p0 & p1 are vect2 that contain pixel positions of the start and end points 
+	// return an array of axial coordinates of all hex nodes in the line
+	var hex0 = pixel_to_hex(p0);
+	var hex1 = pixel_to_hex(p1)
+	var n = axial_distance(hex0, hex1);
 	var arr = array_create(n+1, 0);
 	with(o_hex_grid)
 	{
-		var cube0 = axial_to_cube(p0);
-		var cube1 = axial_to_cube(p1);
+		var cube0 = axial_to_cube(hex0);
+		var cube1 = axial_to_cube(hex1);
 		for(var i=0;i<=n;i++)
 		{
 			arr[i] = cube_to_axial(cube_round(cube_lerp(cube0, cube1, i/n)));

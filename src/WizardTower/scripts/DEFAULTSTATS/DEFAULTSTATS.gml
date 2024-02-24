@@ -333,7 +333,7 @@ FighterStats = function() constructor{
 		             "magic-fire emitter","magic-ice impaler","magic-lightning striker",
 					 "","","sell_this_tower"],  
 	    tags : [],
-	    obj : oFlameTurret,
+	    obj : oMagicTurret,
 	    size : [1,1], // [width , height]
 	    bunker_size : 0,
 		collision_radius : round(0.6*GRID_SIZE),
@@ -344,7 +344,7 @@ FighterStats = function() constructor{
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oFlameTurretBasic 
+	        damage_obj : oDroneSiloBasic 
 	    },
 	    active_attack : {
 	        name : "Throw Spear",
@@ -353,8 +353,8 @@ FighterStats = function() constructor{
 	        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oFlameTurretActive 
-	    }
+	        damage_obj : oDroneSiloActive 
+	    }	
 	}	
 	flameturret = {
 		name : "flame turret",

@@ -21,7 +21,7 @@ function ConstructStructure(_x, _y, _faction, _type_string, _override_verify=fal
 		_asset = asset_get_index("snd_"+_type_string+"_spawn");
 		var _snd_spawn = _asset == -1 ? snd_structure_spawn_default : _asset;
 		_asset = asset_get_index("snd_"+_type_string+"_move");
-		var _snd_move = _asset == -1 ? snd_structure_move_defaukt : _asset;
+		var _snd_move = _asset == -1 ? snd_structure_move_default : _asset;
 		_asset = asset_get_index("snd_"+_type_string+"_attack");
 		var _snd_attack = _asset == -1 ? snd_structure_attack_default : _asset;
 		_asset = asset_get_index("snd_"+_type_string+"_death");
@@ -53,23 +53,38 @@ function ConstructStructure(_x, _y, _faction, _type_string, _override_verify=fal
 			case "barricade":
 				_ai_component = new BasicStructureAI();
 				break;
+			case "spikewall":
+				_ai_component = new BasicStructureAI();
+				break;
+			case "healbeacon":
+				_ai_component = new BasicStructureAI();
+				break;
+			case "minelayer":
+				_ai_component = new BasicStructureAI();
+				break;
 			case "gunturret":
+				_ai_component = new BasicStructureAI();
+				break;
+			case "minigunturret":  
 				_ai_component = new BasicStructureAI();
 				break;
 			case "sniperturret":
 				_ai_component = new BasicStructureAI();
 				break;
-			case "barracks":  
-				_ai_component = new BarracksAI();
-				break;
-			case "dronesilo":   
-				_ai_component = new DroneSiloAI();
-				break;
-			case "flameturret": 
-				_ai_component = new BasicStructureAI();
-				break;
 			case "mortarturret":  
 				_ai_component = new MortarTurretAI();
+				break;
+			case "magicturret":   
+				_ai_component = new MagicTurretAI();
+				break;
+			case "flameturret": 
+				_ai_component = new MagicTurretAI();
+				break;
+			case "iceturret":
+				_ai_component = new MagicTurretAI();
+				break;
+			case "lightningturret": 
+				_ai_component = new MagicTurretAI();
 				break;
 			default:
 				_ai_component = new BasicStructureAI();
