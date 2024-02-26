@@ -317,7 +317,7 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 		{
 			// get the build ticket and set timer
 			build_ticket = ds_queue_dequeue(build_queue);
-			build_timer = build_ticket[1];
+			build_timer = build_ticket.step_count;
 			build_timer_set_point = build_timer;
 		}
 		if(build_timer > 0)
@@ -325,28 +325,10 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 			if(--build_timer == 0)
 			{
 				// check for open spot to put the unit
-				show_debug_message("number of open nodes = {0}", CheckSpawnLocations());
-				if(CheckSpawnLocations() > 0) && (!is_undefined(build_ticket))
+				if(!is_undefined(build_ticket))
 				{
-					var _pos = spawn_positions;
-					for(var i=0;i<array_length(_pos);i++)
-					{
-						/*
-						var _node = global.game_grid[# _pos[i][0], _pos[i][1]];
-						if(!is_undefined(_node)) && (instance_exists(_node.occupied_list))
-						{
-							with(global.iEngine)
-							{
-								// create a unit from the build ticket
-								var _entity = ConstructUnit(_pos[i][0], _pos[i][1], other.owner.faction, other.build_ticket[0]);
-								_entity.ai.command = {entity_comm_Amove : [other.rally_xx*GRID_SIZE, other.rally_yy*GRID_SIZE]}
-								_entity.ai.command_timer = 1;
-							}
-							build_ticket = undefined;
-							break;
-						}
-						*/
-					}
+					script_execute_array(build_ticket.script,build_ticket.arguments);
+					build_ticket = undefined;
 				} else {
 					// wait for a spot to open up near the structure
 					build_timer = 10;
@@ -354,23 +336,10 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 			}
 		}
 	}
-	static CheckSpawnLocations = function(){
-		var _count = 0;
-		show_debug_message("spawn location size = "+ string(array_length(spawn_positions)))
-		/*
-		for(var i=0;i<array_length(spawn_positions);i++)
-		{
-			if(!is_undefined(spawn_positions[i]))
-			{
-				var _pos = spawn_positions[i];
-				var _node = global.game_grid[# _pos[0], _pos[1]];
-				if(!is_undefined(_node)) && (!instance_exists(_node.occupied_list)){
-					_count++;
-				}
-			}
-		}
-		*/
-		return _count;
+	static AddBuildTicket = function(_step_count=0, _scr=-1, _args=[]){
+		if(_scr == -1) exit;
+		// turns arguments into a struct and puts the data into build queue
+		ds_queue_enqueue(build_queue, {step_count : _step_count, script : _scr, arguments : _args});
 	}
 	static Destroy = function(){
 		var _diff = 0;
@@ -896,7 +865,9 @@ MagicTurretAI = function() constructor{
 				}
 			}
 		} 
-		
+		// handle the strucutre's build queue to generate attack charges
+		var _structure = owner.structure;
+		if(structure.units)
 		// if there is no command, check if entity is a fighter and get first enemy in range
 		if(!is_undefined(owner.fighter)) && (owner.fighter.basic_attack != -1)
 		{
@@ -904,8 +875,12 @@ MagicTurretAI = function() constructor{
 			with(owner.fighter)
 			{	
 				// activate attack to spawn a unit
-				if(attack_index == -1) && (basic_cooldown_timer <= 0) && (ds_list_size(owner.structure.units) < owner.structure.supply_capacity)
+				if(attack_index == -1) && (basic_cooldown_timer <= 0) && (_structure.supply_current > 0)
 				{
+					var _attack = owner.fighter.basic_attack;
+					// create a new ticket to generate attack charge
+					_structure.AddBuildTicket(_attack.cooldown*FRAME_RATE, )
+					// activate the attack
 					owner.attack_direction = point_direction(owner.position[1], owner.position[2], owner.structure.rally_x, owner.structure.rally_y);
 					UseBasic();
 				}

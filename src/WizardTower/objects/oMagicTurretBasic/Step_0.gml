@@ -23,7 +23,7 @@ if(--damage_point_timer == 0) && (instance_exists(creator.owner))
 	{
 		show_debug_message("adding the marine, supply is at: {0}", _sum)
 		creator.owner.structure.supply_current = _sum;
-		with(instance_create_depth(position[1],position[2],-y-1,oMagicBolt))
+		with(instance_create_depth(x,y,-y-1,oMagicBolt))
 		{
 			ds_list_add(other.creator.owner.structure.units, id);
 			creator = other.creator.owner.id;

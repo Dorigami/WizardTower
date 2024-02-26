@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oMagicBolt",
+  "name": "oMagicBoltCharge",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
   ],
@@ -27,7 +27,10 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": null,
+  "spriteId": {
+    "name": "s_magic_bolt",
+    "path": "sprites/s_magic_bolt/s_magic_bolt.yy",
+  },
   "spriteMaskId": null,
   "visible": true,
 }
