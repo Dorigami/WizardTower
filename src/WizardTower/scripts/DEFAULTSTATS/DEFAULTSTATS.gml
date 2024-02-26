@@ -321,7 +321,7 @@ FighterStats = function() constructor{
 		entity_type : STRUCTURE,
 	    build_time : 1,
 	    supply_cost : 1,
-	    supply_capacity : 0,
+	    supply_capacity : 2,
 	    material_cost : 10,
 		material_reward : 100,
 	    hp : 20,
@@ -338,22 +338,22 @@ FighterStats = function() constructor{
 	    bunker_size : 0,
 		collision_radius : round(0.6*GRID_SIZE),
 	    basic_attack : {
-	        name : "Thrust Spear",
+	        name : "Magic Bolt",
 	        cooldown : 5, // delay, in seconds, between attacks
 	        move_penalty : 0.8, // move speed reduced during attack
 	        duration : 0.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oDroneSiloBasic 
+	        damage_obj : oMagicTurretBasic 
 	    },
 	    active_attack : {
-	        name : "Throw Spear",
+	        name : "Magic Blast",
 	        cooldown : 5, // delay, in seconds, between attacks
 	        move_penalty : 0.8, // move speed reduced during attack
 	        duration : 1.5, // movement is reduced, other attacks cannot be done during this time
 	        damage_point : 10, // damage is dealt after this step count
 	        damage_value : 1,
-	        damage_obj : oDroneSiloActive 
+	        damage_obj : oMagicTurretActive 
 	    }	
 	}	
 	flameturret = {
