@@ -815,6 +815,8 @@ MortarTurretAI = function() constructor{
 MagicTurretAI = function() constructor{
     commands = ds_list_create();
 	owner = undefined;
+	charge_rot_angle = 0;
+	charge_rot_points = [];
 	static Update = function(){
 		var _cmd = undefined;
 		var _target = noone;
@@ -866,7 +868,7 @@ MagicTurretAI = function() constructor{
 				}
 			}
 		} 
-		// handle the strucutre's build queue to generate attack charges
+		// animate the attack charges
 		
 		
 		// if there is no command, check if entity is a fighter and get first enemy in range
@@ -886,6 +888,8 @@ MagicTurretAI = function() constructor{
 					// activate the attack
 					owner.attack_direction = point_direction(owner.position[1], owner.position[2], owner.structure.rally_x, owner.structure.rally_y);
 					UseBasic();
+					// ignore the cooldwon for the attack,  because it is used to replenish attack charges instead
+					basic_cooldown_timer = 15;
 				}
 			}
 		}
