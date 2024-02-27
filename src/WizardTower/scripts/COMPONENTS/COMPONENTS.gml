@@ -818,6 +818,7 @@ MagicTurretAI = function() constructor{
 	static Update = function(){
 		var _cmd = undefined;
 		var _target = noone;
+		var _structure = owner.structure;
 		if(ds_list_size(commands) > 0)
 		{
 			_cmd = commands[| 0];
@@ -866,26 +867,31 @@ MagicTurretAI = function() constructor{
 			}
 		} 
 		// handle the strucutre's build queue to generate attack charges
-		var _structure = owner.structure;
-		if(structure.units)
+		
+		
 		// if there is no command, check if entity is a fighter and get first enemy in range
 		if(!is_undefined(owner.fighter)) && (owner.fighter.basic_attack != -1)
 		{
+			// select a potential target
+			_target = GetAttackTarget();
 			// resolve fighter behavior
 			with(owner.fighter)
 			{	
 				// activate attack to spawn a unit
-				if(attack_index == -1) && (basic_cooldown_timer <= 0) && (_structure.supply_current > 0)
+				if(attack_index == -1) && (basic_cooldown_timer <= 0) && (_structure.supply_current > 0) && (_target != noone)
 				{
 					var _attack = owner.fighter.basic_attack;
 					// create a new ticket to generate attack charge
-					_structure.AddBuildTicket(_attack.cooldown*FRAME_RATE, )
+					_structure.AddBuildTicket(_attack.cooldown*FRAME_RATE, MagicTurretAddCharge);
 					// activate the attack
 					owner.attack_direction = point_direction(owner.position[1], owner.position[2], owner.structure.rally_x, owner.structure.rally_y);
 					UseBasic();
 				}
 			}
 		}
+	}
+	static GetAttackTarget = function(){
+		return noone;
 	}
 	static Destroy = function(){
 		// delete commands
