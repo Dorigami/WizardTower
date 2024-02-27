@@ -328,7 +328,7 @@ FighterStats = function() constructor{
 	    strength : 3,
 	    defense : 1,
 	    speed : 0,
-	    range : 1,
+	    range : 3,
 		abilities : ["level up","","",
 		             "magic-fire emitter","magic-ice impaler","magic-lightning striker",
 					 "","","sell_this_tower"],  

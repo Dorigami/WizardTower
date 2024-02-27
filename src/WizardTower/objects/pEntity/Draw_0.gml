@@ -73,10 +73,8 @@ if(!is_undefined(structure)) || (!is_undefined(blueprint))
 {
 	var _stt = undefined;
 	if(!is_undefined(structure)) _stt = structure;
-	if(!is_undefined(blueprint)) 
-	{
-		_stt = blueprint;
-	}
+	if(!is_undefined(blueprint)) _stt = blueprint;
+
 	if(_stt.build_timer_set_point > 0)
 	{
 		_prog = 100*(_stt.build_timer / _stt.build_timer_set_point);

@@ -39,7 +39,7 @@ level_content = {
 	},
 	wave4 : {
 		ms1 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 0, 1],[G, 1, 1] ],
-		ms3000 : [ 0, [M, 0, 1],[S, 0, 1],[B, 0, 1],[U, 0, 1],[G, 2, 1] ],
+		ms3000 : [ 0, [M, 2, 1],[S, 2, 1],[B, 2, 1],[U, 2, 1],[G, 2, 1] ],
 		ms10000 : [] // this is timestamp at which the wave ends
 	}
 }

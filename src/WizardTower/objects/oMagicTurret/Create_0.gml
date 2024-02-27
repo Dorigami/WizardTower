@@ -22,6 +22,6 @@ with(structure)
 	supply_current = 0;
 	repeat(supply_capacity)
 	{
-		StructureAddAttackCharge(self, oMagicBoltCharge);
+		StructureAddAttackCharge(other.id);
 	}
 }

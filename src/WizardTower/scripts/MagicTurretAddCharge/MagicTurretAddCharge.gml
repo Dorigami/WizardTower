@@ -1,14 +1,33 @@
-function StructureAddAttackCharge(_structure, _object=-1){
-	if(_object != -1){
-		_structure.supply_current++;
-		var _x = _structure.rally_x;
-		var _y = _structure.rally_y;
-		with(instance_create_depth(_x, _y, -_y-1, _object))
+function StructureAddAttackCharge(_entity){
+	var _charge_object = -1;
+	switch(_entity.object_index)
+	{
+		case oMagicTurret:
+			_charge_object = oMagicBoltCharge;
+			break;
+	}
+	if(_charge_object != -1){
+		with(_entity.structure)
 		{
-			ds_list_add(_structure.units, id);
-			creator = _structure.owner;
-			xTo = _x;
-			yTo = _y;
+			// init
+			supply_current++;
+			var _x = rally_x;
+			var _y = rally_y;
+		
+			// create object to represent the attack charge
+			with(instance_create_depth(_x, _y, -_y-1, _charge_object))
+			{
+				ds_list_add(other.units, id);
+				creator = other.owner;
+				xTo = _x;
+				yTo = _y;
+			}
+		
+			// update the data needed by the ai component
+			with(_entity.ai)
+			{
+				array_resize(charge_rot_points,_entity.structure.supply_current);
+			}
 		}
 	}
 }

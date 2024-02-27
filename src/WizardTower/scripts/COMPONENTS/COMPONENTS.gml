@@ -324,15 +324,13 @@ Structure = function(_sup_cap, _rally_x, _rally_y) constructor{
 		{
 			if(--build_timer == 0)
 			{
-				// check for open spot to put the unit
-				if(!is_undefined(build_ticket))
-				{
+				// change the set point to -1 to keep the indicator bar from drawing
+				build_timer_set_point = -1;
+				// execute command stored in the build queue
+				if(!is_undefined(build_ticket)){
 					script_execute_array(build_ticket.script,build_ticket.arguments);
 					build_ticket = undefined;
-				} else {
-					// wait for a spot to open up near the structure
-					build_timer = 10;
-				} 
+				}
 			}
 		}
 	}
@@ -816,61 +814,27 @@ MagicTurretAI = function() constructor{
     commands = ds_list_create();
 	owner = undefined;
 	charge_rot_angle = 0;
+	charge_rot_radius = 16;
 	charge_rot_points = [];
+	charge_rot_speed = 3;
+	charge_rot_origin = undefined;
 	static Update = function(){
 		var _cmd = undefined;
 		var _target = noone;
 		var _structure = owner.structure;
+		// init origin point for attack charge objects
+		if(is_undefined(charge_rot_origin)) charge_rot_origin = vect2(owner.x, owner.y-15);
+		// handle commands
 		if(ds_list_size(commands) > 0)
 		{
 			_cmd = commands[| 0];
 			if(!is_undefined(_cmd))
 			{
 				ds_list_delete(commands, 0);
-				// set rally point
-				with(global.i_hex_grid)
-				{
-					var _nodes = other.owner.nodes_in_range;
-					show_debug_message("NODES: {0}", _nodes);
-					var _shortest_dist = 1000;
-					var _shortest_hex = undefined;
-					var _hex_in_range = vect2(0,0);
-					var _target_hex = pixel_to_hex(vect2(_cmd.x,_cmd.y));
-					var _dist = 0;
-					for(var i=0;i<array_length(_nodes);i++)
-					{
-						_dist = point_distance(_nodes[i][1], _nodes[i][2], _target_hex[1], _target_hex[2]);
-						if(_dist <= _shortest_dist)
-						{
-							// set this hex as the closest to the target hex node
-							_shortest_dist = _dist;
-							_shortest_hex = _nodes[i];
-						}
-					}
-					if(is_undefined(_shortest_hex)){ show_debug_message("shortest hex was undefined for some reason"); exit;}
-					var _hex_pos =  hex_to_pixel(_shortest_hex, true);
-				}
 
-				with(owner.structure)
-				{
-					rally_x = _hex_pos[1];
-					rally_y = _hex_pos[2];
-					// give move command to the units controlled by this structure
-					for(var i=ds_list_size(units); i>0; i--)
-					{
-						var _inst = units[| i-1];
-						if(instance_exists(_inst))
-						{
-							_inst.xTo = rally_x;
-							_inst.yTo = rally_y;
-						}
-					}
-				}
 			}
 		} 
-		// animate the attack charges
-		
-		
+			
 		// if there is no command, check if entity is a fighter and get first enemy in range
 		if(!is_undefined(owner.fighter)) && (owner.fighter.basic_attack != -1)
 		{
@@ -883,19 +847,84 @@ MagicTurretAI = function() constructor{
 				if(attack_index == -1) && (basic_cooldown_timer <= 0) && (_structure.supply_current > 0) && (_target != noone)
 				{
 					var _attack = owner.fighter.basic_attack;
-					// create a new ticket to generate attack charge
-					_structure.AddBuildTicket(_attack.cooldown*FRAME_RATE, MagicTurretAddCharge);
+					// create a new ticket to generate attack charge and reduce charge count
+					_structure.AddBuildTicket(_attack.cooldown*FRAME_RATE, StructureAddAttackCharge, [owner.id]);
+					_structure.supply_current--;
+					instance_destroy(_structure.units[| 0]);
+					ds_list_delete(_structure.units, 0);
+					array_resize(other.charge_rot_points,_structure.supply_current);
+					// reset rotation angle based on the next charge object in the 'units' list
+					if(_structure.supply_current > 0)
+					{
+						var _obj = _structure.units[| 0];
+						other.charge_rot_angle = point_direction(other.charge_rot_origin[1], other.charge_rot_origin[2], _obj.x, _obj.y);
+					}
 					// activate the attack
 					owner.attack_direction = point_direction(owner.position[1], owner.position[2], owner.structure.rally_x, owner.structure.rally_y);
 					UseBasic();
 					// ignore the cooldwon for the attack,  because it is used to replenish attack charges instead
-					basic_cooldown_timer = 15;
+					basic_cooldown_timer = 30;
 				}
+			}
+		}
+		
+		// animate the attack charges (calculate the positions)
+		charge_rot_angle += charge_rot_speed;
+		var _size = _structure.supply_current;
+		if(_size > 0)
+		{
+			var _angle = 360 div _size;
+			for(var i=0;i<_size;i++) 
+			{
+				// calculate goal positions
+				var _obj = _structure.units[| i];
+				var _pos = vect_add( 
+					// center point
+					charge_rot_origin,
+					// offset from center
+					vect2(lengthdir_x(charge_rot_radius,charge_rot_angle+i*_angle),
+						  lengthdir_y(charge_rot_radius,charge_rot_angle+i*_angle)*0.7)
+				);
+				charge_rot_points[i] = _pos
+				// ease charge object poisitions toward goal positions
+				_obj.x += 0.05*(_pos[1] - _obj.x);
+				_obj.y += 0.05*(_pos[2] - _obj.y);
 			}
 		}
 	}
 	static GetAttackTarget = function(){
-		return noone;
+		var _target = noone;
+		with(owner.fighter)
+		{
+			// attack the current attack target, if possible
+			if(attack_target != noone) && (instance_exists(attack_target))
+			{
+				// check if enemy is still in range
+				if(ds_list_find_index(enemies_in_range, attack_target) == -1)
+				{
+					attack_target = noone;
+				} else {
+					_target = attack_target;
+				}
+			} else {
+				attack_target = noone;
+			}
+			// if there is no attack target, attack nearest enemy
+			if(_target == noone)
+			{
+				_target = enemies_in_range[| 0];
+				if(is_undefined(_target))
+				{
+					_target = noone;
+				} else if(!instance_exists(_target)) {
+					_target = noone;
+					ds_list_delete(enemies_in_range, 0);
+				} else {
+					attack_target = _target;
+				}
+			}
+		}
+		return _target;
 	}
 	static Destroy = function(){
 		// delete commands

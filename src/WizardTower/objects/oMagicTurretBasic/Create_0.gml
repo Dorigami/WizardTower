@@ -29,7 +29,3 @@ visible = true;
 image_speed = 0.6;
 image_angle = point_direction(x,y,xend,yend);
 image_blend = c_blue;
-
-// reduce supply of attack charges for the tower
-creator.owner.structure.supply_current--;
-
