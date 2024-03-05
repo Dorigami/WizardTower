@@ -1,5 +1,5 @@
 {
-  "FolderOrderSettings": [
+  "FolderOrderSettings":[
     {"name":"Extensions","order":1,"path":"folders/Extensions.yy",},
     {"name":"Fonts","order":2,"path":"folders/Fonts.yy",},
     {"name":"HexagonalGridSystem","order":15,"path":"folders/HexagonalGridSystem.yy",},
@@ -44,7 +44,7 @@
     {"name":"Tile Sets","order":12,"path":"folders/Tile Sets.yy",},
     {"name":"Timelines","order":13,"path":"folders/Timelines.yy",},
   ],
-  "ResourceOrderSettings": [
+  "ResourceOrderSettings":[
     {"name":"s_flameturret_move","order":1,"path":"sprites/s_flameturret_move/s_flameturret_move.yy",},
     {"name":"s_drone_idle","order":1,"path":"sprites/s_drone_idle/s_drone_idle.yy",},
     {"name":"s_engineer_move_dr","order":3,"path":"sprites/s_engineer_move_dr/s_engineer_move_dr.yy",},

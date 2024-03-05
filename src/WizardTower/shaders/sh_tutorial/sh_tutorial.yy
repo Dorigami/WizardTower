@@ -1,10 +1,12 @@
 {
-  "resourceType": "GMShader",
-  "resourceVersion": "1.0",
-  "name": "sh_tutorial",
-  "parent": {
-    "name": "Test Shaders",
-    "path": "folders/Shaders/Test Shaders.yy",
+  "$GMShader":"",
+  "%Name":"sh_tutorial",
+  "name":"sh_tutorial",
+  "parent":{
+    "name":"Test Shaders",
+    "path":"folders/Shaders/Test Shaders.yy",
   },
-  "type": 1,
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
 }

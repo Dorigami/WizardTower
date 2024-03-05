@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "HexFunctions",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "HexagonalGridSystem",
-    "path": "folders/HexagonalGridSystem.yy",
+  "$GMScript":"",
+  "%Name":"HexFunctions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"HexFunctions",
+  "parent":{
+    "name":"HexagonalGridSystem",
+    "path":"folders/HexagonalGridSystem.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

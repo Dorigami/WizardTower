@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "HexSaveLoad",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "HexagonalGridSystem",
-    "path": "folders/HexagonalGridSystem.yy",
+  "$GMScript":"",
+  "%Name":"HexSaveLoad",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"HexSaveLoad",
+  "parent":{
+    "name":"HexagonalGridSystem",
+    "path":"folders/HexagonalGridSystem.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }
